@@ -1,18 +1,21 @@
 # Create your views here.
 
-from django.http import HttpResponse, HttpResponseRedirect
+from django.http import HttpResponse, HttpResponseRedirect, QueryDict
 from django.core.context_processors import csrf
 from django.conf import settings
 from django.shortcuts import render_to_response
 
-import os
+import os, urllib
 
 from lib import feedparser
 from forms import AddForm
 
 def begin(request):
     def parse(feed):
-        return feedparser.parse(settings.FEED_DIR+feed)
+        feed = feedparser.parse(settings.FEED_DIR+feed)
+        feed.channel.description = feed.channel.description.encode('utf-8')
+        return {'data': feed,
+                'edit_form': AddForm(QueryDict(urllib.urlencode(feed.channel)))}
     
     feeds = map(parse, os.listdir(settings.FEED_DIR))
 

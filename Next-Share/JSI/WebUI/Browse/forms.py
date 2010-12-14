@@ -11,7 +11,7 @@ class AddForm(forms.Form):
     is_interactive_content = forms.BooleanField(required=False, widget=forms.NullBooleanSelect)
     is_commercial_content = forms.BooleanField(required=False, widget=forms.NullBooleanSelect)
     contains_commercial_content = forms.BooleanField(required=False, widget=forms.NullBooleanSelect)
-    bitrate = forms.ChoiceField(required=True, choices=[('44kbps', '44kbps'),
+    bitrate = forms.ChoiceField(required=False, choices=[('44kbps', '44kbps'),
                                                         ('128kbps', '128kbps'),])
     description = forms.CharField(max_length=700, widget=forms.Textarea, required=False)
 
