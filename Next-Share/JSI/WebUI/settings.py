@@ -43,14 +43,16 @@ USE_I18N = True
 # calendars according to the current locale
 USE_L10N = True
 
+ROOT_URL = '/Users/Swizec/Documents/IJS-stuff/Next-Share/JSI/WebUI/'
+
 # Absolute path to the directory that holds media.
 # Example: "/home/media/media.lawrence.com/"
-MEDIA_ROOT = ''
+MEDIA_ROOT = ROOT_URL+'static_media/'
 
 # URL that handles the media served from MEDIA_ROOT. Make sure to use a
 # trailing slash if there is a path component (optional in other cases).
 # Examples: "http://media.lawrence.com", "http://example.com/media/"
-MEDIA_URL = ''
+MEDIA_URL = '/site_media/'
 
 # URL prefix for admin media -- CSS, JavaScript and images. Make sure to use a
 # trailing slash.
@@ -81,6 +83,7 @@ TEMPLATE_DIRS = (
     # Put strings here, like "/home/html/django_templates" or "C:/www/django/templates".
     # Always use forward slashes, even on Windows.
     # Don't forget to use absolute paths, not relative paths.
+    ROOT_URL+'/templates/'
 )
 
 INSTALLED_APPS = (
@@ -95,4 +98,4 @@ INSTALLED_APPS = (
     'Browse'
 )
 
-FEED_DIR = '../feeds/'
+FEED_DIR = ROOT_URL+'../feeds/'

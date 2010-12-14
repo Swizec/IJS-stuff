@@ -1,0 +1,37 @@
+<!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML//EN">
+<html> <head>
+<title>Feed browser</title>
+<link type="text/css" href="{{ MEDIA_URL }}css/ui-lightness/jquery-ui-1.8.7.custom.css" rel="stylesheet" />	
+<script type="text/javascript" src="{{ MEDIA_URL }}js/jquery-1.4.4.min.js"></script>
+<script type="text/javascript"
+src="{{ MEDIA_URL }}js/jquery-ui-1.8.7.custom.min.js"></script>
+
+<script>
+$(function(){
+
+// Accordion
+$("#accordion").accordion({ header: "h3", collapsible: true});
+});
+</script>
+</head>
+
+<body>
+
+<div id="accordion">
+{% for feed in feeds %}
+  <div>
+    <h3><a href="#">{{ feed.channel.title }}</a></h3>
+    <div>
+      <p>{{ feed.channel.description }}</p>
+      <ul>
+	{% for item in feed.items %}
+	<h4><a href="{{ item.guid }}">{{ item.title }}</a></h4>
+	{% endfor %}
+      </ul>
+    </div>
+  </div>
+{% endfor %}
+</div>
+
+</body>
+</html>
