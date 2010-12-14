@@ -11,26 +11,58 @@ $(function(){
 
 // Accordion
 $("#accordion").accordion({ header: "h3", collapsible: true});
+
+$('#tabs').tabs();
 });
 </script>
 </head>
 
 <body>
 
-<div id="accordion">
-{% for feed in feeds %}
-  <div>
-    <h3><a href="#">{{ feed.channel.title }}</a></h3>
-    <div>
-      <p>{{ feed.channel.description }}</p>
-      <ul>
-	{% for item in feed.items %}
-	<h4><a href="{{ item.guid }}">{{ item.title }}</a></h4>
-	{% endfor %}
-      </ul>
+<div id="tabs">
+  <ul>
+    <li><a href="#feeds">Feeds</a></li>
+    <li><a href="#did_base">DID_BASE</a></li>
+    <li><a href="#torrent">Torrent</a></li>
+    <li><a href="#view">View</a></li>
+  </ul>
+
+  <div id="feeds">
+    <div id="accordion">
+
+      <div>
+	<h3><a href="#">Add new</a></h3>
+	<div>
+	  <form action="/">
+	    <ul>
+	      <li><label>Title</label><input type="text" name="title" /></li>
+	      <li><label>Description</label><textarea name="description"></textarea></li>
+	    </ul>
+	  </form>
+	</div>
+      </div>
+      
+    {% for feed in feeds %}
+      <div>
+	<h3><a href="#">{{ feed.channel.title }}</a></h3>
+        <div>
+	  <p>{{ feed.channel.description }}</p>
+	  <ul>
+	    {% for item in feed.items %}
+	    <h4><a href="{{ item.guid }}">{{ item.title }}</a></h4>
+	    {% endfor %}
+	  </ul>
+	</div>
+      </div>
+      {% endfor %}
     </div>
   </div>
-{% endfor %}
+
+  <div id="did_base">Did_base stuff comes here</div>
+
+  <div id="torrent">Torrent stuff comes here</div>
+
+  <div id="view">View stuff comes here</div>
 </div>
 
 </body>
