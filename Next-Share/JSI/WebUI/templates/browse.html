@@ -12,6 +12,10 @@ $(function(){
 // Accordion
 $("#accordion").accordion({ header: "h3", collapsible: true});
 
+if (window.location.href.indexOf('#posted') < 0) {
+$("#accordion h3:first a").click();
+}
+
 $('#tabs').tabs();
 });
 </script>
@@ -33,11 +37,10 @@ $('#tabs').tabs();
       <div>
 	<h3><a href="#">Add new</a></h3>
 	<div>
-	  <form action="/">
-	    <ul>
-	      <li><label>Title</label><input type="text" name="title" /></li>
-	      <li><label>Description</label><textarea name="description"></textarea></li>
-	    </ul>
+	  <form action="/#posted" method="post">
+	    {{ add_form.as_p }}
+	    <input type="submit" value="Submit" />
+	    {% csrf_token %}
 	  </form>
 	</div>
       </div>
