@@ -1,0 +1,599 @@
+K 25
+svn:wc:ra_dav:version-url
+V 71
+/svn/p2p-next/!svn/ver/1678/next-share/tags/M32/Next-Share/BaseLib/Test
+END
+test_magnetlink.py
+K 25
+svn:wc:ra_dav:version-url
+V 90
+/svn/p2p-next/!svn/ver/1678/next-share/tags/M32/Next-Share/BaseLib/Test/test_magnetlink.py
+END
+test_as_server.py
+K 25
+svn:wc:ra_dav:version-url
+V 89
+/svn/p2p-next/!svn/ver/1678/next-share/tags/M32/Next-Share/BaseLib/Test/test_as_server.py
+END
+olconn.py
+K 25
+svn:wc:ra_dav:version-url
+V 81
+/svn/p2p-next/!svn/ver/1678/next-share/tags/M32/Next-Share/BaseLib/Test/olconn.py
+END
+test_connect_overlay.py
+K 25
+svn:wc:ra_dav:version-url
+V 95
+/svn/p2p-next/!svn/ver/1678/next-share/tags/M32/Next-Share/BaseLib/Test/test_connect_overlay.py
+END
+test_video_server.py
+K 25
+svn:wc:ra_dav:version-url
+V 92
+/svn/p2p-next/!svn/ver/1678/next-share/tags/M32/Next-Share/BaseLib/Test/test_video_server.py
+END
+test_proxyservice_as_coord.sh
+K 25
+svn:wc:ra_dav:version-url
+V 101
+/svn/p2p-next/!svn/ver/1678/next-share/tags/M32/Next-Share/BaseLib/Test/test_proxyservice_as_coord.sh
+END
+test_superpeers.py
+K 25
+svn:wc:ra_dav:version-url
+V 90
+/svn/p2p-next/!svn/ver/1678/next-share/tags/M32/Next-Share/BaseLib/Test/test_superpeers.py
+END
+log_parser.py
+K 25
+svn:wc:ra_dav:version-url
+V 85
+/svn/p2p-next/!svn/ver/1678/next-share/tags/M32/Next-Share/BaseLib/Test/log_parser.py
+END
+__init__.py
+K 25
+svn:wc:ra_dav:version-url
+V 83
+/svn/p2p-next/!svn/ver/1678/next-share/tags/M32/Next-Share/BaseLib/Test/__init__.py
+END
+test_channelcast.bat
+K 25
+svn:wc:ra_dav:version-url
+V 92
+/svn/p2p-next/!svn/ver/1678/next-share/tags/M32/Next-Share/BaseLib/Test/test_channelcast.bat
+END
+test_social_overlap.py
+K 25
+svn:wc:ra_dav:version-url
+V 94
+/svn/p2p-next/!svn/ver/1678/next-share/tags/M32/Next-Share/BaseLib/Test/test_social_overlap.py
+END
+test_url.py
+K 25
+svn:wc:ra_dav:version-url
+V 83
+/svn/p2p-next/!svn/ver/1678/next-share/tags/M32/Next-Share/BaseLib/Test/test_url.py
+END
+test_ut_pex.py
+K 25
+svn:wc:ra_dav:version-url
+V 86
+/svn/p2p-next/!svn/ver/1678/next-share/tags/M32/Next-Share/BaseLib/Test/test_ut_pex.py
+END
+test_multicast.py
+K 25
+svn:wc:ra_dav:version-url
+V 89
+/svn/p2p-next/!svn/ver/1678/next-share/tags/M32/Next-Share/BaseLib/Test/test_multicast.py
+END
+test_subtitles_msgs.py
+K 25
+svn:wc:ra_dav:version-url
+V 94
+/svn/p2p-next/!svn/ver/1678/next-share/tags/M32/Next-Share/BaseLib/Test/test_subtitles_msgs.py
+END
+test_buddycast4_stresstest.py
+K 25
+svn:wc:ra_dav:version-url
+V 101
+/svn/p2p-next/!svn/ver/1678/next-share/tags/M32/Next-Share/BaseLib/Test/test_buddycast4_stresstest.py
+END
+test_friendship_crawler.py
+K 25
+svn:wc:ra_dav:version-url
+V 98
+/svn/p2p-next/!svn/ver/1678/next-share/tags/M32/Next-Share/BaseLib/Test/test_friendship_crawler.py
+END
+test_rquery_reply_active.bat
+K 25
+svn:wc:ra_dav:version-url
+V 100
+/svn/p2p-next/!svn/ver/1678/next-share/tags/M32/Next-Share/BaseLib/Test/test_rquery_reply_active.bat
+END
+test_friendship.sh
+K 25
+svn:wc:ra_dav:version-url
+V 90
+/svn/p2p-next/!svn/ver/1678/next-share/tags/M32/Next-Share/BaseLib/Test/test_friendship.sh
+END
+test_g2g.py
+K 25
+svn:wc:ra_dav:version-url
+V 83
+/svn/p2p-next/!svn/ver/1678/next-share/tags/M32/Next-Share/BaseLib/Test/test_g2g.py
+END
+test_rquery_reply_active.sh
+K 25
+svn:wc:ra_dav:version-url
+V 99
+/svn/p2p-next/!svn/ver/1678/next-share/tags/M32/Next-Share/BaseLib/Test/test_rquery_reply_active.sh
+END
+test_remote_query.py
+K 25
+svn:wc:ra_dav:version-url
+V 92
+/svn/p2p-next/!svn/ver/1678/next-share/tags/M32/Next-Share/BaseLib/Test/test_remote_query.py
+END
+test_dialback_reply_active2.py
+K 25
+svn:wc:ra_dav:version-url
+V 102
+/svn/p2p-next/!svn/ver/1678/next-share/tags/M32/Next-Share/BaseLib/Test/test_dialback_reply_active2.py
+END
+test_buddycast_msg8plus.py
+K 25
+svn:wc:ra_dav:version-url
+V 98
+/svn/p2p-next/!svn/ver/1678/next-share/tags/M32/Next-Share/BaseLib/Test/test_buddycast_msg8plus.py
+END
+test_channelcast_plus_subtitles.py
+K 25
+svn:wc:ra_dav:version-url
+V 106
+/svn/p2p-next/!svn/ver/1678/next-share/tags/M32/Next-Share/BaseLib/Test/test_channelcast_plus_subtitles.py
+END
+test_proxyservice.sh
+K 25
+svn:wc:ra_dav:version-url
+V 92
+/svn/p2p-next/!svn/ver/1678/next-share/tags/M32/Next-Share/BaseLib/Test/test_proxyservice.sh
+END
+test_dialback_conn_handler.sh
+K 25
+svn:wc:ra_dav:version-url
+V 101
+/svn/p2p-next/!svn/ver/1678/next-share/tags/M32/Next-Share/BaseLib/Test/test_dialback_conn_handler.sh
+END
+test_secure_overlay.py
+K 25
+svn:wc:ra_dav:version-url
+V 94
+/svn/p2p-next/!svn/ver/1678/next-share/tags/M32/Next-Share/BaseLib/Test/test_secure_overlay.py
+END
+test_vod.py
+K 25
+svn:wc:ra_dav:version-url
+V 83
+/svn/p2p-next/!svn/ver/1678/next-share/tags/M32/Next-Share/BaseLib/Test/test_vod.py
+END
+test_sqlitecachedbhandler.py
+K 25
+svn:wc:ra_dav:version-url
+V 100
+/svn/p2p-next/!svn/ver/1678/next-share/tags/M32/Next-Share/BaseLib/Test/test_sqlitecachedbhandler.py
+END
+test_dlhelp.sh
+K 25
+svn:wc:ra_dav:version-url
+V 86
+/svn/p2p-next/!svn/ver/1678/next-share/tags/M32/Next-Share/BaseLib/Test/test_dlhelp.sh
+END
+test_sqlitecachedb.py
+K 25
+svn:wc:ra_dav:version-url
+V 93
+/svn/p2p-next/!svn/ver/1678/next-share/tags/M32/Next-Share/BaseLib/Test/test_sqlitecachedb.py
+END
+test_overlay_bridge.py
+K 25
+svn:wc:ra_dav:version-url
+V 94
+/svn/p2p-next/!svn/ver/1678/next-share/tags/M32/Next-Share/BaseLib/Test/test_overlay_bridge.py
+END
+test.bat
+K 25
+svn:wc:ra_dav:version-url
+V 80
+/svn/p2p-next/!svn/ver/1678/next-share/tags/M32/Next-Share/BaseLib/Test/test.bat
+END
+test_na_extend_hs.py
+K 25
+svn:wc:ra_dav:version-url
+V 92
+/svn/p2p-next/!svn/ver/1678/next-share/tags/M32/Next-Share/BaseLib/Test/test_na_extend_hs.py
+END
+test_dialback_reply_active.py
+K 25
+svn:wc:ra_dav:version-url
+V 101
+/svn/p2p-next/!svn/ver/1678/next-share/tags/M32/Next-Share/BaseLib/Test/test_dialback_reply_active.py
+END
+test_subtitles.sh
+K 25
+svn:wc:ra_dav:version-url
+V 89
+/svn/p2p-next/!svn/ver/1678/next-share/tags/M32/Next-Share/BaseLib/Test/test_subtitles.sh
+END
+test_osutils.py
+K 25
+svn:wc:ra_dav:version-url
+V 87
+/svn/p2p-next/!svn/ver/1678/next-share/tags/M32/Next-Share/BaseLib/Test/test_osutils.py
+END
+test_dialback_request.py
+K 25
+svn:wc:ra_dav:version-url
+V 96
+/svn/p2p-next/!svn/ver/1678/next-share/tags/M32/Next-Share/BaseLib/Test/test_dialback_request.py
+END
+test_secure_overlay.bat
+K 25
+svn:wc:ra_dav:version-url
+V 95
+/svn/p2p-next/!svn/ver/1678/next-share/tags/M32/Next-Share/BaseLib/Test/test_secure_overlay.bat
+END
+test_buddycast_msg.bat
+K 25
+svn:wc:ra_dav:version-url
+V 94
+/svn/p2p-next/!svn/ver/1678/next-share/tags/M32/Next-Share/BaseLib/Test/test_buddycast_msg.bat
+END
+test_cachingstream.py
+K 25
+svn:wc:ra_dav:version-url
+V 93
+/svn/p2p-next/!svn/ver/1678/next-share/tags/M32/Next-Share/BaseLib/Test/test_cachingstream.py
+END
+test_proxyservice_as_coord.py
+K 25
+svn:wc:ra_dav:version-url
+V 101
+/svn/p2p-next/!svn/ver/1678/next-share/tags/M32/Next-Share/BaseLib/Test/test_proxyservice_as_coord.py
+END
+test_natcheck.py
+K 25
+svn:wc:ra_dav:version-url
+V 88
+/svn/p2p-next/!svn/ver/1678/next-share/tags/M32/Next-Share/BaseLib/Test/test_natcheck.py
+END
+test_permid.py
+K 25
+svn:wc:ra_dav:version-url
+V 86
+/svn/p2p-next/!svn/ver/1678/next-share/tags/M32/Next-Share/BaseLib/Test/test_permid.py
+END
+test_proxyservice.bat
+K 25
+svn:wc:ra_dav:version-url
+V 93
+/svn/p2p-next/!svn/ver/1678/next-share/tags/M32/Next-Share/BaseLib/Test/test_proxyservice.bat
+END
+test_extend_hs.py
+K 25
+svn:wc:ra_dav:version-url
+V 89
+/svn/p2p-next/!svn/ver/1678/next-share/tags/M32/Next-Share/BaseLib/Test/test_extend_hs.py
+END
+test_status.py
+K 25
+svn:wc:ra_dav:version-url
+V 86
+/svn/p2p-next/!svn/ver/1678/next-share/tags/M32/Next-Share/BaseLib/Test/test_status.py
+END
+test_tracker_checking.py
+K 25
+svn:wc:ra_dav:version-url
+V 96
+/svn/p2p-next/!svn/ver/1678/next-share/tags/M32/Next-Share/BaseLib/Test/test_tracker_checking.py
+END
+test_proxyservice_as_coord.bat
+K 25
+svn:wc:ra_dav:version-url
+V 102
+/svn/p2p-next/!svn/ver/1678/next-share/tags/M32/Next-Share/BaseLib/Test/test_proxyservice_as_coord.bat
+END
+test_TimedTaskQueue.py
+K 25
+svn:wc:ra_dav:version-url
+V 94
+/svn/p2p-next/!svn/ver/1678/next-share/tags/M32/Next-Share/BaseLib/Test/test_TimedTaskQueue.py
+END
+test_friendship.py
+K 25
+svn:wc:ra_dav:version-url
+V 90
+/svn/p2p-next/!svn/ver/1678/next-share/tags/M32/Next-Share/BaseLib/Test/test_friendship.py
+END
+test_subtitles.bat
+K 25
+svn:wc:ra_dav:version-url
+V 90
+/svn/p2p-next/!svn/ver/1678/next-share/tags/M32/Next-Share/BaseLib/Test/test_subtitles.bat
+END
+test_rquery_reply_active.py
+K 25
+svn:wc:ra_dav:version-url
+V 99
+/svn/p2p-next/!svn/ver/1678/next-share/tags/M32/Next-Share/BaseLib/Test/test_rquery_reply_active.py
+END
+test_crawler.py
+K 25
+svn:wc:ra_dav:version-url
+V 87
+/svn/p2p-next/!svn/ver/1678/next-share/tags/M32/Next-Share/BaseLib/Test/test_crawler.py
+END
+test_subtitles_isolation.py
+K 25
+svn:wc:ra_dav:version-url
+V 99
+/svn/p2p-next/!svn/ver/1678/next-share/tags/M32/Next-Share/BaseLib/Test/test_subtitles_isolation.py
+END
+test.sh
+K 25
+svn:wc:ra_dav:version-url
+V 79
+/svn/p2p-next/!svn/ver/1678/next-share/tags/M32/Next-Share/BaseLib/Test/test.sh
+END
+test_proxyservice.py
+K 25
+svn:wc:ra_dav:version-url
+V 92
+/svn/p2p-next/!svn/ver/1678/next-share/tags/M32/Next-Share/BaseLib/Test/test_proxyservice.py
+END
+test_url_metadata.py
+K 25
+svn:wc:ra_dav:version-url
+V 92
+/svn/p2p-next/!svn/ver/1678/next-share/tags/M32/Next-Share/BaseLib/Test/test_url_metadata.py
+END
+test_merkle_msg.bat
+K 25
+svn:wc:ra_dav:version-url
+V 91
+/svn/p2p-next/!svn/ver/1678/next-share/tags/M32/Next-Share/BaseLib/Test/test_merkle_msg.bat
+END
+test_dialback_conn_handler.py
+K 25
+svn:wc:ra_dav:version-url
+V 101
+/svn/p2p-next/!svn/ver/1678/next-share/tags/M32/Next-Share/BaseLib/Test/test_dialback_conn_handler.py
+END
+test_channelcast.sh
+K 25
+svn:wc:ra_dav:version-url
+V 91
+/svn/p2p-next/!svn/ver/1678/next-share/tags/M32/Next-Share/BaseLib/Test/test_channelcast.sh
+END
+test_vod.bat
+K 25
+svn:wc:ra_dav:version-url
+V 84
+/svn/p2p-next/!svn/ver/1678/next-share/tags/M32/Next-Share/BaseLib/Test/test_vod.bat
+END
+test_merkle_msg.sh
+K 25
+svn:wc:ra_dav:version-url
+V 90
+/svn/p2p-next/!svn/ver/1678/next-share/tags/M32/Next-Share/BaseLib/Test/test_merkle_msg.sh
+END
+test_friend.py
+K 25
+svn:wc:ra_dav:version-url
+V 86
+/svn/p2p-next/!svn/ver/1678/next-share/tags/M32/Next-Share/BaseLib/Test/test_friend.py
+END
+test_dlhelp.py
+K 25
+svn:wc:ra_dav:version-url
+V 86
+/svn/p2p-next/!svn/ver/1678/next-share/tags/M32/Next-Share/BaseLib/Test/test_dlhelp.py
+END
+test_friendship.bat
+K 25
+svn:wc:ra_dav:version-url
+V 91
+/svn/p2p-next/!svn/ver/1678/next-share/tags/M32/Next-Share/BaseLib/Test/test_friendship.bat
+END
+bak_tribler_sdb.py
+K 25
+svn:wc:ra_dav:version-url
+V 90
+/svn/p2p-next/!svn/ver/1678/next-share/tags/M32/Next-Share/BaseLib/Test/bak_tribler_sdb.py
+END
+test_gui_server.py
+K 25
+svn:wc:ra_dav:version-url
+V 90
+/svn/p2p-next/!svn/ver/1678/next-share/tags/M32/Next-Share/BaseLib/Test/test_gui_server.py
+END
+test_buddycast_msg.sh
+K 25
+svn:wc:ra_dav:version-url
+V 93
+/svn/p2p-next/!svn/ver/1678/next-share/tags/M32/Next-Share/BaseLib/Test/test_buddycast_msg.sh
+END
+test_miscutils.py
+K 25
+svn:wc:ra_dav:version-url
+V 89
+/svn/p2p-next/!svn/ver/1678/next-share/tags/M32/Next-Share/BaseLib/Test/test_miscutils.py
+END
+test_dialback_reply_active.bat
+K 25
+svn:wc:ra_dav:version-url
+V 102
+/svn/p2p-next/!svn/ver/1678/next-share/tags/M32/Next-Share/BaseLib/Test/test_dialback_reply_active.bat
+END
+test_merkle.py
+K 25
+svn:wc:ra_dav:version-url
+V 86
+/svn/p2p-next/!svn/ver/1678/next-share/tags/M32/Next-Share/BaseLib/Test/test_merkle.py
+END
+TESTSUITE.txt
+K 25
+svn:wc:ra_dav:version-url
+V 85
+/svn/p2p-next/!svn/ver/1678/next-share/tags/M32/Next-Share/BaseLib/Test/TESTSUITE.txt
+END
+test_buddycast.py
+K 25
+svn:wc:ra_dav:version-url
+V 89
+/svn/p2p-next/!svn/ver/1678/next-share/tags/M32/Next-Share/BaseLib/Test/test_buddycast.py
+END
+test_bartercast.py
+K 25
+svn:wc:ra_dav:version-url
+V 90
+/svn/p2p-next/!svn/ver/1678/next-share/tags/M32/Next-Share/BaseLib/Test/test_bartercast.py
+END
+test_buddycast2_datahandler.py
+K 25
+svn:wc:ra_dav:version-url
+V 102
+/svn/p2p-next/!svn/ver/1678/next-share/tags/M32/Next-Share/BaseLib/Test/test_buddycast2_datahandler.py
+END
+test_seeding_stats.py
+K 25
+svn:wc:ra_dav:version-url
+V 93
+/svn/p2p-next/!svn/ver/1678/next-share/tags/M32/Next-Share/BaseLib/Test/test_seeding_stats.py
+END
+test_buddycast4_stresstest_queries.txt
+K 25
+svn:wc:ra_dav:version-url
+V 110
+/svn/p2p-next/!svn/ver/1678/next-share/tags/M32/Next-Share/BaseLib/Test/test_buddycast4_stresstest_queries.txt
+END
+test_threadpool.py
+K 25
+svn:wc:ra_dav:version-url
+V 90
+/svn/p2p-next/!svn/ver/1678/next-share/tags/M32/Next-Share/BaseLib/Test/test_threadpool.py
+END
+test_torrentcollecting.py
+K 25
+svn:wc:ra_dav:version-url
+V 97
+/svn/p2p-next/!svn/ver/1678/next-share/tags/M32/Next-Share/BaseLib/Test/test_torrentcollecting.py
+END
+test_searchgridmanager.py
+K 25
+svn:wc:ra_dav:version-url
+V 97
+/svn/p2p-next/!svn/ver/1678/next-share/tags/M32/Next-Share/BaseLib/Test/test_searchgridmanager.py
+END
+test_sqlitecachedbhandler.bat
+K 25
+svn:wc:ra_dav:version-url
+V 101
+/svn/p2p-next/!svn/ver/1678/next-share/tags/M32/Next-Share/BaseLib/Test/test_sqlitecachedbhandler.bat
+END
+test_secure_overlay.sh
+K 25
+svn:wc:ra_dav:version-url
+V 94
+/svn/p2p-next/!svn/ver/1678/next-share/tags/M32/Next-Share/BaseLib/Test/test_secure_overlay.sh
+END
+test_vod.sh
+K 25
+svn:wc:ra_dav:version-url
+V 83
+/svn/p2p-next/!svn/ver/1678/next-share/tags/M32/Next-Share/BaseLib/Test/test_vod.sh
+END
+test_sqlitecachedbhandler.sh
+K 25
+svn:wc:ra_dav:version-url
+V 100
+/svn/p2p-next/!svn/ver/1678/next-share/tags/M32/Next-Share/BaseLib/Test/test_sqlitecachedbhandler.sh
+END
+test_overlay_bridge.sh
+K 25
+svn:wc:ra_dav:version-url
+V 94
+/svn/p2p-next/!svn/ver/1678/next-share/tags/M32/Next-Share/BaseLib/Test/test_overlay_bridge.sh
+END
+test_permid_response1.py
+K 25
+svn:wc:ra_dav:version-url
+V 96
+/svn/p2p-next/!svn/ver/1678/next-share/tags/M32/Next-Share/BaseLib/Test/test_permid_response1.py
+END
+test_na_extend_hs.sh
+K 25
+svn:wc:ra_dav:version-url
+V 92
+/svn/p2p-next/!svn/ver/1678/next-share/tags/M32/Next-Share/BaseLib/Test/test_na_extend_hs.sh
+END
+test_dialback_reply_active.sh
+K 25
+svn:wc:ra_dav:version-url
+V 101
+/svn/p2p-next/!svn/ver/1678/next-share/tags/M32/Next-Share/BaseLib/Test/test_dialback_reply_active.sh
+END
+test_dialback_conn_handler.bat
+K 25
+svn:wc:ra_dav:version-url
+V 102
+/svn/p2p-next/!svn/ver/1678/next-share/tags/M32/Next-Share/BaseLib/Test/test_dialback_conn_handler.bat
+END
+test_upnp.py
+K 25
+svn:wc:ra_dav:version-url
+V 84
+/svn/p2p-next/!svn/ver/1678/next-share/tags/M32/Next-Share/BaseLib/Test/test_upnp.py
+END
+test_channelcast.py
+K 25
+svn:wc:ra_dav:version-url
+V 91
+/svn/p2p-next/!svn/ver/1678/next-share/tags/M32/Next-Share/BaseLib/Test/test_channelcast.py
+END
+test_closedswarm.py
+K 25
+svn:wc:ra_dav:version-url
+V 91
+/svn/p2p-next/!svn/ver/1678/next-share/tags/M32/Next-Share/BaseLib/Test/test_closedswarm.py
+END
+btconn.py
+K 25
+svn:wc:ra_dav:version-url
+V 81
+/svn/p2p-next/!svn/ver/1678/next-share/tags/M32/Next-Share/BaseLib/Test/btconn.py
+END
+test_merkle_msg.py
+K 25
+svn:wc:ra_dav:version-url
+V 90
+/svn/p2p-next/!svn/ver/1678/next-share/tags/M32/Next-Share/BaseLib/Test/test_merkle_msg.py
+END
+test_dlhelp.bat
+K 25
+svn:wc:ra_dav:version-url
+V 87
+/svn/p2p-next/!svn/ver/1678/next-share/tags/M32/Next-Share/BaseLib/Test/test_dlhelp.bat
+END
+usericon-ok.jpg
+K 25
+svn:wc:ra_dav:version-url
+V 87
+/svn/p2p-next/!svn/ver/1678/next-share/tags/M32/Next-Share/BaseLib/Test/usericon-ok.jpg
+END
+test_buddycast_msg.py
+K 25
+svn:wc:ra_dav:version-url
+V 93
+/svn/p2p-next/!svn/ver/1678/next-share/tags/M32/Next-Share/BaseLib/Test/test_buddycast_msg.py
+END

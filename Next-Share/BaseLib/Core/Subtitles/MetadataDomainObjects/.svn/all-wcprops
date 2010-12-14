@@ -1,0 +1,35 @@
+K 25
+svn:wc:ra_dav:version-url
+V 103
+/svn/p2p-next/!svn/ver/1678/next-share/tags/M32/Next-Share/BaseLib/Core/Subtitles/MetadataDomainObjects
+END
+__init__.py
+K 25
+svn:wc:ra_dav:version-url
+V 115
+/svn/p2p-next/!svn/ver/1678/next-share/tags/M32/Next-Share/BaseLib/Core/Subtitles/MetadataDomainObjects/__init__.py
+END
+MetadataExceptions.py
+K 25
+svn:wc:ra_dav:version-url
+V 125
+/svn/p2p-next/!svn/ver/1678/next-share/tags/M32/Next-Share/BaseLib/Core/Subtitles/MetadataDomainObjects/MetadataExceptions.py
+END
+Languages.py
+K 25
+svn:wc:ra_dav:version-url
+V 116
+/svn/p2p-next/!svn/ver/1678/next-share/tags/M32/Next-Share/BaseLib/Core/Subtitles/MetadataDomainObjects/Languages.py
+END
+MetadataDTO.py
+K 25
+svn:wc:ra_dav:version-url
+V 118
+/svn/p2p-next/!svn/ver/1678/next-share/tags/M32/Next-Share/BaseLib/Core/Subtitles/MetadataDomainObjects/MetadataDTO.py
+END
+SubtitleInfo.py
+K 25
+svn:wc:ra_dav:version-url
+V 119
+/svn/p2p-next/!svn/ver/1678/next-share/tags/M32/Next-Share/BaseLib/Core/Subtitles/MetadataDomainObjects/SubtitleInfo.py
+END

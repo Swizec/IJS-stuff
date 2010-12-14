@@ -1,0 +1,481 @@
+                  RichMetadata implementation README
+                  ==================================
+
+Author: dusan
+Date: 2010-11-10 11:01:46 CET
+
+
+This README describes Python based P2P-Next RichMetadata prototype
+implementation and examples of its usage. The implementation has the
+following features:
+   - parses core, advertising, payment and scalability metadata set
+   - build core, advertising, payment and scalability metadata set
+   - supports TVA and Mpeg7 metadata types
+   - parses and builds MPEG 21 DID metadata
+   - provides metagen tool to generate supported metadata 
+   - provides dynamic RichMetadata APIs according to the metadata set
+     for programmable manipulation
+   - integrates core metadata set with the Next-Share core via torrent
+     creation and show tool
+   - supports both ElementTree and cElementTree. Since results are
+     better, of course, using native C library this is a default
+     choice for implementation
+
+The implementation has the following drawbacks:
+   - it has very naive XML parsing/building implementation, based on
+     python ElementTree - but basic mechanisms are there so it is
+     easily extensible. The consequence is that the tool can generate
+     only as much metadata as has been learned from samples.
+   - not all specified tags/attributes are supported in the core since
+     the samples used don't use them
+   - since some tags/attributes are deduced in a programmable way
+     there can be some surprises in the APIs and metagen options
+   - some errors are logged while testing the prototype - some of the
+     issues will need to be fixed with different sets (TVA, MPEG7) of
+     samples provided
+   - some cleanup is required regarding the name spaces in sparse
+     metadata
+   - documentation, specially on metadata settings should be more
+     clear and updated
+   - doesn't support URIPlay metadata
+
+Future work:
+   - include possibility to use UNIKLU implementation for output of
+     the DID base metadata in btshowmetainfo.py:
+     + currently two files are provided, btshowmetainfo-uniklu.py and
+       did.py. The latter is Swig generated wrapper for DID metadata.
+     + it needs to be verified if any other files are missing
+     + meaningful description needs to be provided in this README
+       where and how to get the C libraries needed for UNIKLU support
+       and how the resulting code could be used
+   - clarify and possibly extend the implementation for support of
+     Limo files encoding into the DID additional, see for some more
+     information in section on "Generation of MPEG 21 DID metadata"
+
+Table of Contents
+=================
+1 Implementation content 
+2 Installation 
+3 Implementation 
+4 Example of usage 
+    4.1 metagen tool 
+        4.1.1 Generating core metadata 
+        4.1.2 Generation of optional metadata 
+        4.1.3 Generation of MPEG 21 DID metadata 
+    4.2 Programming interface 
+    4.3 Integration in the core 
+    4.4 Usage of C++ libraries 
+5 Implementation performance 
+6 Changelog 
+
+
+1 Implementation content 
+~~~~~~~~~~~~~~~~~~~~~~~~~
+
+The content of the RichMetadata Python implementation is lay out as
+follows:
+
+   - Implementation:
+     + RichMetadata/RichMetadata.py 
+   - samples, used for learning the structure of the metadata:
+     + RichMetadata/conf/p2p-next_mpeg-21-additional_v0.61.xml
+     + RichMetadata/conf/p2p-next_mpeg-21-base_v0.61.xml
+     + RichMetadata/conf/p2p-next_mpeg7_advertising_v0.61.xml
+     + RichMetadata/conf/p2p-next_mpeg7_payment_v0.61.xml
+     + RichMetadata/conf/p2p-next_mpeg7_scalability_v0.61.xml
+     + RichMetadata/conf/p2p-next_mpeg7_v0.61.xml
+     + RichMetadata/conf/p2p-next_tva_advertising_v0.61.xml
+     + RichMetadata/conf/p2p-next_tva_payment_v0.61.xml
+     + RichMetadata/conf/p2p-next_tva_scalability_v0.61.xml
+     + RichMetadata/conf/p2p-next_tva_v0.61.xml
+     + RichMetadata/conf/p2p-next_uriplay_v0.61.xml
+   - mother of all settings:
+     + RichMetadata/conf/RichMetadataSettings.py
+   - test, including with test of performance:
+     + RichMetadata/test/RichMetadataTest.py
+   - tools for metadata generation and inclusion of the metadata in
+     the torrent file:
+     + RichMetadata/tools/btshowmetainfo.py
+     + RichMetadata/tools/createtorrent.py 
+     + RichMetadata/tools/metagen.py
+   - utils, logging and performance helpers:
+     + RichMetadata/utils/log.py
+     + RichMetadata/utils/TimeSeries.py
+
+2 Installation 
+~~~~~~~~~~~~~~~
+
+Obtain the implementation from the source
+[https://ttuki.vtt.fi/svn/p2p-next/JSI/RichMetadata/] and put it in
+the JSI directory in Next-Share tree. Correct layout:
+
+Next-Share/JSI/RichMetadata
+
+Touch __init__.py in JSI directory if not provided. 
+
+3 Implementation 
+~~~~~~~~~~~~~~~~~
+
+Implementation is based on python native ElementTree module. It is
+centered around P2P-Next defined tags and TVA tags, as defined in
+conf/RichMetadataSettings.py, that map to single RichMetadata class
+for any other format supported (like MPEG7). The implementation then
+allows mapping between various formats.
+
+The core interface for the implementation is RichMetadataGenerator: a
+singleton class that at its initialization learns from the supplied
+XML samples in the conf directory. The samples are of version
+v0.61. Since the implementation depends on samples be careful when
+modifying them. The samples were only in one place slightly extended to
+make the TVA and MPEG7 presentation equal (advertising).
+
+The RichMetadataGenerator provides the following methods:
+   - RichMetadataGenerator.getInstance: returns RichMetadataGenerator
+     singleton instance
+   - RichMetadataGenerator.getRichMetadata: method is a factory for
+     RichMetadata instances, either from scratch or from input source
+   - RichMetadataGenerator.build: builds target metadata XML
+     representation
+   - RichMetadataGenerator.prettyPrint: prints XML representation in
+     human readable fashion - for debugging purposes only
+
+The methods, parameters, and results are further describe via standard
+Python documentation in the code.
+
+RichMetadata instance provides its API dynamically, based on the type
+of metadata set, learning and settings. Please note that since the
+methods are provided dynamically they depends on samples provided and
+settings in RichMetadataSettings.py. 
+
+Since the getters and setters names provided are straightforward no
+other documentation of the API is provided. If in doubt while
+programming consult RichMetadata instance metadataType and use
+getAPIMethods to get the list of API methods of the current
+instance. For scalability metadata attributes SPS and PPS consult
+metagen tool help. An examples of usage of the dynamic APIs is
+thoroughly covered in RichMetadataTest.py.
+
+4 Example of usage 
+~~~~~~~~~~~~~~~~~~~
+
+4.1 metagen tool 
+=================
+
+Example of use of the metagen tool, first export proper PYTHONPATH:
+
+  xyz:~/src/Next-Share:{1}> export PYTHONPATH=$(pwd):.
+
+Use the metagen.py tool to generate XML metadata, cunsult tool help
+for various options:
+
+  xyz:~/src/Next-Share:{1}> python JSI/RichMetadata/tools/metagen.py -h
+
+In the following examples the command lines are intentionally left in
+one line: if you are lucky they can be copied directly as templates to
+the command line. Otherwise use metagen help. The outputs of the
+commands in examples are not shown as well, except in an example
+presented in the section "Integration in the core". The copied
+examples can be used to generate desired output if the Python settings
+are set and the tools installed properly.
+
+4.1.1 Generating core metadata 
+-------------------------------
+
+Metagen tool can generate core metadata of type TVA and MPEG7. For
+example, the following command will generate core metadata of type
+TVA:
+
+
+  xyz:~/src/Next-Share:{1}> python JSI/RichMetadata/tools/metagen.py --aspectRatio=16:9 --audioCoding="MPEG-1 Audio Layer III" --bitRate=80000 --captionLanguage=si --duration=P0Y0M15DT2H1M12S --fileFormat=mp4 --fileSize=12345432 --frameRate=30 --genre=Codatainment --horizontalSize=720 --language=si --minimumAge=3 --numOfChannels=2 --originator=JSI --productionDate=2010-08-16 --productionLocation=SI --publisher=p2p-next --releaseDate=2010-08-17 --signLanguage=si --synopsis="Fine metadata tools" --titleEpisodeTitle="RichMetadata v0.1" --titleMain="P2P-Next code" --titleSeriesTitle="RichMetadata tools" --verticalSize=405 --videoCoding="MPEG-2 Video Main Profile @ Main Level"
+
+And corresponding MPEG7 metadata could be generated by adding an "-f
+Mpeg7" option to the previous command line. The result should be, after
+running the command, an MPEG7 compliant metadata.
+
+4.1.2 Generation of optional metadata 
+--------------------------------------
+
+Optional metadata could be created for the advertising and payments,
+for example the following command will generate advertising metadata
+of type TVA, note the "-a" option, an example of MPEG7 metadata is
+left as an exercise for the reader:
+
+
+  xyz:~/src/Next-Share:{1}> python JSI/RichMetadata/tools/metagen.py -a --businessModel=BM2 --isLiveContent=false --allowAdvertising=true --circularContent="Allow Superdistribution" --adType="Web" --streamingType="In-stream" --adFormat="banner" --age=25 --gender=F --country=SI --aspectRatio="16:9" --verticalSize=405 --horizontalSize=720 --frameRate=30 --publisher="p2p-next"
+
+Similarly for payments, note the "-p" option, an example of MPEG7
+metadata is left as an exercise for the reader:
+
+
+  xyz:~/src/Next-Share:{1}> python JSI/RichMetadata/tools/metagen.py -p --acceptDonations=true --advancedInfos="http://www.p2p-next.org/paymentInformation.html" --currency=EUR --paymentId=xyz --paymentRecipient=me --price=1500 --publisher="JSI"
+
+And on the end, invoking the tool with the following command will
+generate scalability data as specified in the samples. Please note the
+"-s" switch. For specifying the SPS and PPS values consult metagen
+tool help.
+
+
+  xyz:~/src/Next-Share:{1}> python JSI/RichMetadata/tools/metagen.py -s --adaptationOperatorDependencyId="0 1 2 3" --adaptationOperatorQualityLevel="0 0 0 0" --utilityFramerate="25 25 25 25" --utilityHeight="240 240 480 480" --utilityWidth="320 320 640 640" --constraintBitrate="400 800 1200 240" --adaptationOperatorTemporalLevel="0 0 0 0" --pPS="spsId=1,value=23:spsId=2,value=24" --sPS="spsId=1,width=a,height=b,value=cde:spsId=2,width=a,height=b,value=cde"
+
+4.1.3 Generation of MPEG 21 DID metadata 
+-----------------------------------------
+
+The metagen tool can generate the MPEG 21 DID metadata. In the
+following two examples the first invocation of the tool generates the
+core metadata for type TVA in a compact form ("-c" option) and the
+command redirects the standard output to file core-meta.xml. The second
+invocation of the tool the generated file is included into the DID
+with the option "--metaCore=core-meta.xml". The second command
+demonstrates the options of DID base document generation as
+well. Please note that the DID base document gets generated if the
+option "-b" is provided. The second command generates the compact
+version of the XML ("-c") and redirects the output to
+did-base.xml. This file is now ready to be included in the torrent
+file. An example of this will be presented in the next section.
+
+
+  xyz:~/src/Next-Share:{1}> python JSI/RichMetadata/tools/metagen.py --aspectRatio=16:9 --audioCoding="MPEG-1 Audio Layer III" --bitRate=80000 --captionLanguage=si --duration=P0Y0M15DT2H1M12S --fileFormat=mp4 --fileSize=12345432 --frameRate=30 --genre=Codatainment --horizontalSize=720 --language=si --minimumAge=3 --numOfChannels=2 --originator=JSI --productionDate=2010-08-16 --productionLocation=SI --publisher=p2p-next --releaseDate=2010-08-17 --signLanguage=si --synopsis="Fine metadata tools" --titleEpisodeTitle="RichMetadata v0.1" --titleMain="P2P-Next code" --titleSeriesTitle="RichMetadata tools" --verticalSize=405 --videoCoding="MPEG-2 Video Main Profile @ Main Level" -c > core-meta.xml
+
+
+  xyz:~/src/Next-Share:{1}> python JSI/RichMetadata/tools/metagen.py -b --identifier="urn:p2p-next:item:rtv-slo-slo1-xyz" --relatedIdentifier="urn:rtv-slo:slo1-xyz" --contentType="video/ts" --contentReference="URI to video included in the torrent" --advertisementReference="URI to additional MPEG_21 data (advertising)" --limoReference="URI to additional MPEG_21 data (limo)" --paymentReference="URI to additional MPEG_21 data (payment)" --scalabilityReference="URI to additional MPEG_21 data (scalability)" --metaCore=core-meta.xml -c > did-base.xml
+
+Additional MPEG 21 DID metadata, the metadata that is distributed in
+the torrent itself, can be generated in similar fashion as the base
+metadata. Since it can include multiple files first the files need to
+be provided or generated. Metadata file such as payments, advertising
+and scalability can be generated as presented in the previous section
+while redirecting the output of the command to a properly named file.
+
+Additional file files, like logo and limo files (html, javascript and
+css) needs to be provided as well. For the purpose of this example we
+will generate them on the fly, as simple strings:
+
+
+  xyz:~/src/Next-Share:{1}> echo "Limo CSS content, should be included as XML CDATA" > limo.css 
+  xyz:~/src/Next-Share:{1}> echo "Limo HTML content, should be included as XML CDATA" > limo.html
+  xyz:~/src/Next-Share:{1}> echo "Limo Javascript content, should be included as XML CDATA" > limo.js
+  xyz:~/src/Next-Share:{1}> echo "Logo graphics" > logo.png
+
+Otherwise it needs to be noted that the RichMetadata tools at the
+moment don't provide any means to encode these files in XML
+properly. The data in the files, at least Limo related, should be
+provided as XML CDATA. The status of including a binary image file is
+currently not clear. If needed, the tools could be modified to provide
+some support for developers and users to encode the files properly -
+but exact specification needs to be provided.
+
+When all files are available in proper format the additional MPEG 21
+DID metadata can be generated by running the command as presented in
+the next example:
+
+
+  xyz:~/src/Next-Share:{1}> python JSI/RichMetadata/tools/metagen.py -d --relatedIdentifier="urn:rtv-slo:slo1-xyz" --cSSName="Name of the CSS file in Limo" --css=limo.css --html=limo.html --javascript=limo.js --javascriptName="Name of Javascript file in Limo" --logo=logo.png --logoName="Name of the logo file" --logoReference="URI reference to the logo (Needed indeed?)" --logoType="image/png" --metaAdvertisement=advertising-meta.xml --metaPayment=payment-meta.xml --metaScalability=scalability-meta.xml -c > did-additional.xml
+
+It has to be noted that the options that are related to files expect
+the files to be provided. If not the tool will exit with meaningful
+message and help output.
+
+4.2 Programming interface 
+==========================
+
+The same examples as were presented in the previous section on the
+metagen tool can be easily programmed as well. To get some insights
+and inspiration how the RichMetadata APIs can be used see
+RichMetadataTest.py
+
+4.3 Integration in the core 
+============================
+
+The RichMetadata prototype implementation provides modified
+createtorrent.py and btshowmetainfo.py. The modifications are minimal
+to allow to include the metadata into the torrent file via methods as
+provided in Next-Share core API.
+
+First, generate appropriate metadata with metagen tool. While
+generating use comapct option (-c) which provides compact
+representation of the metadata for inclusion into torrent file. The
+commands suitable for this purpose were presented in the section on
+"Generation of MPEG 21 DID metadata" in the case of generating base
+DID data.
+
+The torrent file can be then created as:
+
+
+  xyz:~/src/Next-Share:{1}> python JSI/RichMetadata/tools/createtorrent.py 
+  --source README.txt --meta did-base.xml
+
+The torrent file now includes the base DID metadata.
+
+After running the btshowmetainfo.py its output should show the output
+similar to the following, some debugging information omitted:
+
+  xyz:~/src/Next-Share:{1}> python JSI/RichMetadata/tools/btshowmetainfo.py README.txt.tstream
+  ...
+  Publisher = Tribler
+  Description = 
+  Progressive = 1
+  Title = README.txt
+  Creation Date = 1282075652
+  Content Hash = PT3GQCPW4NPT6WRKKT25IQD4MU5HM4UY
+  Speed Bps = 0.688611090183
+  Revision Date = 1282075652
+  metainfo file.: README.txt.tstream
+  info hash.....: 729c70cf6d03749ea89aec1b07a6bf903b305099
+  info hash.....: 'r\x9cp\xcfm\x03t\x9e\xa8\x9a\xec\x1b\x07\xa6\xbf\x90;0P\x99'
+  file name.....: README.txt
+  file size.....: 2479 (0 * 32768 + 2479)
+  announce url..: http://127.0.0.1:6969/announce
+  ns-metadata...:
+  Publisher = Tribler
+  Description = 
+  Progressive = 1
+  Title = README.txt
+  Creation Date = 1282918421
+  Content Hash = PT3GQCPW4NPT6WRKKT25IQD4MU5HM4UY
+  Speed Bps = 0.688611090183
+  Revision Date = 1282918421
+  metainfo file.: README.txt.tstream
+  info hash.....: 642d0dccd811a60505dfa9cce8687e074739da22
+  info hash.....: 'd-\r\xcc\xd8\x11\xa6\x05\x05\xdf\xa9\xcc\xe8h~\x07G9\xda"'
+  file name.....: README.txt
+  file size.....: 2479 (0 * 32768 + 2479)
+  announce url..: http://127.0.0.1:6969/announce
+  ns-metadata...:
+  <?xml version="1.0" ?>
+  <DIDL xmlns:didl="urn:mpeg:mpeg21:2002:02-DIDL-NS" xmlns:dii="urn:mpeg:mpeg21:2002:01-DII-NS" xmlns:xi="http://www.w3.org/2001/XInclude" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="urn:mpeg:mpeg21:2002:02-DIDL-NS didl.xsd urn:mpeg:mpeg21:2002:01-DII-NS dii.xsd">
+     <Item>
+        <Descriptor>
+           <Statement mimeType="text/xml">
+              <dii:Identifier>
+                 urn:p2p-next:item:rtv-slo-slo1-xyz
+              </dii:Identifier>
+           </Statement>
+        </Descriptor>
+        <Descriptor>
+           <Statement mimeType="text/xml">
+              <dii:RelatedIdentifier relationshipType="urn:mpeg:mpeg21:2002:01-RDD-NS:IsAbstractionOf">
+                 urn:rtv-slo:slo1-xyz
+              </dii:RelatedIdentifier>
+           </Statement>
+        </Descriptor>
+        <Descriptor>
+           <Statement mimeType="text/xml">
+              <dii:Type>
+                 urn:p2p-next:type:item:2009
+              </dii:Type>
+           </Statement>
+        </Descriptor>
+        <Descriptor>
+           <Descriptor>
+              <Statement mimeType="text/xml">
+                 <dii:Type>
+                    urn:p2p-next:type:rm:core:2009
+                 </dii:Type>
+              </Statement>
+           </Descriptor>
+           <xi:include href="URI to additional MPEG_21 data (payment)" xpointer="rm.payment"/>
+           <xi:include href="URI to additional MPEG_21 data (advertising)" xpointer="rm.advertisement"/>
+           <xi:include href="URI to additional MPEG_21 data (scalability)" xpointer="rm.scalability"/>
+           <Statement mimeType="text/xml">
+              &lt;TVAMain publisher=&quot;p2p-next&quot; xmlns=&quot;urn:tva:metadata:2007&quot; xmlns:mpeg7=&quot;urn:mpeg:mpeg7:schema:2001&quot; xmlns:mpeg7_tva=&quot;urn:tva:mpeg7:2005&quot; xmlns:p2pnext=&quot;urn:p2pnext:metadata:2008&quot; xmlns:tva=&quot;urn:tva:metadata:2007&quot; xmlns:xsi=&quot;http://www.w3.org/2001/XMLSchema-instance&quot; xsi:schemaLocation=&quot;urn:tva:metadata:2007 tva_metadata_3-1_v141_p2p.xsd&quot;&gt;&lt;ProgramDescription&gt;&lt;ProgramInformationTable&gt;&lt;ProgramInformation&gt;&lt;BasicDescription type=&quot;p2pnext:BasicP2PDataDescriptionType&quot;&gt;&lt;Title type=&quot;main&quot;&gt;P2P-Next code&lt;/Title&gt;&lt;Title type=&quot;seriesTitle&quot;&gt;RichMetadata tools&lt;/Title&gt;&lt;Title type=&quot;episodeTitle&quot;&gt;RichMetadata v0.1&lt;/Title&gt;&lt;Synopsis&gt;Fine metadata tools&lt;/Synopsis&gt;&lt;Genre href=&quot;urn:mpeg:mpeg7:cs:GenreCS:2001&quot;&gt;&lt;Name&gt;Codatainment&lt;/Name&gt;&lt;/Genre&gt;&lt;ParentalGuidance&gt;&lt;mpeg7_tva:MinimumAge&gt;3&lt;/mpeg7_tva:MinimumAge&gt;&lt;/ParentalGuidance&gt;&lt;Language&gt;si&lt;/Language&gt;&lt;CaptionLanguage&gt;si&lt;/CaptionLanguage&gt;&lt;SignLanguage&gt;si&lt;/SignLanguage&gt;&lt;ProductionDate&gt;&lt;TimePoint&gt;2010-08-16&lt;/TimePoint&gt;&lt;/ProductionDate&gt;&lt;ProductionLocation&gt;SI&lt;/ProductionLocation&gt;&lt;ReleaseInformation&gt;&lt;ReleaseDate&gt;&lt;DayAndYear&gt;2010-08-17&lt;/DayAndYear&gt;&lt;/ReleaseDate&gt;&lt;/ReleaseInformation&gt;&lt;Duration&gt;P0Y0M15DT2H1M12S&lt;/Duration&gt;&lt;p2pnext:Originator&gt;JSI&lt;/p2pnext:Originator&gt;&lt;/BasicDescription&gt;&lt;AVAttributes&gt;&lt;FileFormat href=&quot;urn:mpeg:mpeg7:cs:FileFormatCS:2001&quot;&gt;&lt;Name&gt;mp4&lt;/Name&gt;&lt;/FileFormat&gt;&lt;FileSize&gt;12345432&lt;/FileSize&gt;&lt;BitRate&gt;80000&lt;/BitRate&gt;&lt;AudioAttributes&gt;&lt;Coding href=&quot;urn:mpeg:mpeg7:cs:AudioCodingFormatCS:2001&quot;&gt;&lt;Name&gt;MPEG-1 Audio Layer III&lt;/Name&gt;&lt;/Coding&gt;&lt;NumOfChannels&gt;2&lt;/NumOfChannels&gt;&lt;/AudioAttributes&gt;&lt;VideoAttributes&gt;&lt;Coding href=&quot;urn:mpeg:mpeg7:cs:VisualCodingFormatCS:2001&quot;&gt;&lt;Name&gt;MPEG-2 Video Main Profile @ Main Level&lt;/Name&gt;&lt;/Coding&gt;&lt;HorizontalSize&gt;720&lt;/HorizontalSize&gt;&lt;VerticalSize&gt;405&lt;/VerticalSize&gt;&lt;AspectRatio&gt;16:9&lt;/AspectRatio&gt;&lt;FrameRate&gt;30&lt;/FrameRate&gt;&lt;/VideoAttributes&gt;&lt;/AVAttributes&gt;&lt;/ProgramInformation&gt;&lt;/ProgramInformationTable&gt;&lt;/ProgramDescription&gt;&lt;/TVAMain&gt;
+  
+           </Statement>
+        </Descriptor>
+        <xi:include href="URI to additional MPEG_21 data (limo)" xpointer="limo"/>
+        <Component>
+           <Resource mimeType="video/ts" ref="URI to video included in the torrent"/>
+        </Component>
+     </Item>
+  </DIDL>
+
+4.4 Usage of C++ libraries 
+===========================
+
+The processing of the MPEG-21 DID and Rich Metadata files can also
+be performed using the existing C++ libraries. To use the prototype
+with the C++ libraries, the two libraries need to be downloaded and
+compiled.
+  - The Rich Metadata library is available at 
+    [https://ttuki.vtt.fi/svn/p2p-next/Klagenfurt/RichMetadataAPI\_v0.5/].
+    Detailed building and usage instructions are provided in the
+    library's README-file. In short, the library can be built using
+    the 'make' command and the python bindings for the library are
+    built using the 'make swig' command.
+  - The MPEG-21 DID library is available at
+    [https://ttuki.vtt.fi/svn/p2p-next/Klagenfurt/DIDAPI/].
+    Detailed building and usage instructions are provided in the
+    library's README-file. In short, the library can be built using
+    the 'make' command and the python bindings for the library are
+    built using the 'make swig' command.
+
+To use the C++ libraries for the prototype, please perform the
+following steps:
+  - Copy the files RichMetadataAPI_v0.5/swig/python/_richmetadata.so
+    and DIDAPI/swig/python/_did.so to the RichMetadata/tools
+    directory of the prototype. These files contain the C++ part
+    of the python bindings and need to be in the same directory as the
+    python files for the bindings (richmetadata.py and did.py).
+  - Make sure that both libraries can be found by the dynamic linker.
+    This can be done by, e.g., adding the directories 
+    RichMetadataAPI_v0.5/lib and DIDAPI/lib to the LD_LIBRARY_PATH.
+
+
+    [https://ttuki.vtt.fi/svn/p2p-next/Klagenfurt/RichMetadataAPI\_v0.5/]: https://ttuki.vtt.fi/svn/p2p-next/Klagenfurt/RichMetadataAPI_v0.5/
+
+5 Implementation performance 
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Implementation performance can be estimated by running the
+RichMetadataTest.py on your own machine. For this purpose you need to
+set the variable "runspeed" to true in RichMetadataTest.py. Most of
+the parsing and building tests are based on samples provided in the
+conf directory. The example values, obtained on quite capable machine,
+run as tests on 10 batches, each with 100 iterations of stated test:
+
+  Test                    Time value*100+-std.   Oper/s  
+ -----------------------+----------------------+--------
+  Parsing XML TVA               0.10501+-1.35%    952.3  
+  Parsing XML MPEG7             0.12632+-0.75%    791.6  
+  Building XML TVA              0.14411+-0.72%    693.9  
+  Building XML MPEG7            0.20205+-0.77%    494.9  
+  Sparse build TVA              0.16697+-0.64%    598.9  
+  Sparse build MPEG7            0.16653+-0.37%    600.5  
+  Cross build TVA                 0.3101+-0.6%    322.5  
+  Cross build MPEG7              0.2731+-0.59%    366.2  
+  TVA from scratch               0.18575+-1.0%    538.4  
+  MPEG7 from scratch            0.24513+-0.71%    407.9  
+  Parsing payments TVA          0.03978+-1.15%   2513.7  
+  Parsing advert. TVA           0.06527+-1.46%   1532.2  
+  Parsing scalab. TVA           0.09416+-0.71%   1062.0  
+  Parsing paym. MPEG7              0.033+-2.5%   3030.2  
+  Parsing advert. MPEG7         0.05911+-0.39%   1691.8  
+  Parsing scalab. MPEG7         0.08799+-1.51%   1136.5  
+  Build payments TVA            0.05275+-0.51%   1895.7  
+  Build advert. TVA             0.08734+-1.17%   1145.0  
+  Build scalab. TVA              0.1544+-1.05%    647.7  
+  Build paym. MPEG7             0.03841+-2.54%   2603.5  
+  Build advert. MPEG7           0.08176+-0.76%   1223.1  
+  Build scalab. MPEG7           0.14322+-0.85%    698.2  
+  Parse DID base                0.06628+-2.14%   1508.8  
+  Parse DID addit.              0.09898+-0.29%   1010.3  
+  Build DID base                0.11977+-0.76%    834.9  
+  Build DID addit.              0.15257+-0.49%    655.4  
+
+The default implementation that the tools use is cElementTree. Though
+it is included in the Python core (v2.5 and up) some distributions
+could choose that the package holding cElementTree is distributed
+separately. In such case install the missing package or use
+ElementTree implemented in pure Python (see the import statement in
+RichMetadata.py).
+
+6 Changelog 
+~~~~~~~~~~~~
+
+     - v0.30 initial release
+     - v0.31:
+       + fixed a bug that prevents inclusion of unicode text into
+         metadata output
+       + small utility addons like metadata compare method
+     - v032:
+       + fixed a bug that prevented same treatment of medatada read
+         from network and from a file

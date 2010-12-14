@@ -1,0 +1,35 @@
+K 25
+svn:wc:ra_dav:version-url
+V 52
+/svn/p2p-next/!svn/ver/1908/JSI/ProviderToolbox/test
+END
+test_feed_generator.py
+K 25
+svn:wc:ra_dav:version-url
+V 75
+/svn/p2p-next/!svn/ver/1885/JSI/ProviderToolbox/test/test_feed_generator.py
+END
+test_content_source.py
+K 25
+svn:wc:ra_dav:version-url
+V 75
+/svn/p2p-next/!svn/ver/1900/JSI/ProviderToolbox/test/test_content_source.py
+END
+test_meta_generator.py
+K 25
+svn:wc:ra_dav:version-url
+V 75
+/svn/p2p-next/!svn/ver/1885/JSI/ProviderToolbox/test/test_meta_generator.py
+END
+test_publisher.py
+K 25
+svn:wc:ra_dav:version-url
+V 70
+/svn/p2p-next/!svn/ver/1908/JSI/ProviderToolbox/test/test_publisher.py
+END
+__init__.py
+K 25
+svn:wc:ra_dav:version-url
+V 64
+/svn/p2p-next/!svn/ver/1885/JSI/ProviderToolbox/test/__init__.py
+END

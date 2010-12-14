@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<TVAMain xmlns:p2pnext="urn:p2pnext:metadata:2008" xmlns:tva="urn:tva:metadata:2007" xmlns:mpeg7_tva="urn:tva:mpeg7:2005" xmlns:mpeg7="urn:mpeg:mpeg7:schema:2001" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="urn:tva:metadata:2007" xsi:schemaLocation="urn:tva:metadata:2007 tva_metadata_3-1_v141_p2p.xsd" xml:lang="EN" publisher="$Publisher">
+	<ProgramDescription>
+		<ProgramInformationTable>
+			<ProgramInformation programId="$ProgramId">
+				<BasicDescription xsi:type="p2pnext:BasicP2PDataDescriptionType">
+					<Title type="main">Next-Share Test Stream 1</Title>
+					<Title type="seriesTitle">The Doe Family</Title>
+					<Title type="episodeTitle">John Doe buys a car</Title>
+					<Synopsis>John and Jane Doe visit a car dealer to buy a new car for John</Synopsis>
+					<Genre href="urn:mpeg:mpeg7:cs:GenreCS:2001">
+						<Name>Infotainment</Name>
+					</Genre>
+					<ParentalGuidance>
+						<mpeg7_tva:MinimumAge>12</mpeg7_tva:MinimumAge>
+					</ParentalGuidance>
+					<Language>English</Language>
+					<CaptionLanguage>English</CaptionLanguage>
+					<SignLanguage>English</SignLanguage>
+					<ProductionDate>
+						<TimePoint>2008-07-10T10:00:00+01:00</TimePoint>
+					</ProductionDate>
+					<ProductionLocation>AT</ProductionLocation>
+					<ReleaseInformation>
+						<ReleaseDate>
+							<DayAndYear>2008-07-14</DayAndYear>
+						</ReleaseDate>
+					</ReleaseInformation>
+					<Duration>P0Y0M0DT0H0M35S</Duration>
+					<p2pnext:Originator>p2p-next</p2pnext:Originator>
+				</BasicDescription>
+				<AVAttributes>
+					<FileFormat href="urn:mpeg:mpeg7:cs:FileFormatCS:2001">
+						<Name>mp4</Name>
+					</FileFormat>
+					<FileSize>83191350</FileSize>
+					<BitRate>524288</BitRate>
+					<AudioAttributes>
+						<Coding href="urn:mpeg:mpeg7:cs:AudioCodingFormatCS:2001">
+							<Name>MPEG-1 Audio Layer III</Name>
+						</Coding>
+						<NumOfChannels>2</NumOfChannels>
+					</AudioAttributes>
+					<VideoAttributes>
+						<Coding href="urn:mpeg:mpeg7:cs:VisualCodingFormatCS:2001">
+							<Name>MPEG-2 Video Main Profile @ Main Level</Name>
+						</Coding>
+						<HorizontalSize>640</HorizontalSize>
+						<VerticalSize>480</VerticalSize>
+						<AspectRatio>4:3</AspectRatio>
+						<FrameRate>30</FrameRate>
+					</VideoAttributes>
+				</AVAttributes>
+			</ProgramInformation>
+		</ProgramInformationTable>
+	</ProgramDescription>
+</TVAMain>

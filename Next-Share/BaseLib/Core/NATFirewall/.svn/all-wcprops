@@ -1,0 +1,83 @@
+K 25
+svn:wc:ra_dav:version-url
+V 83
+/svn/p2p-next/!svn/ver/1678/next-share/tags/M32/Next-Share/BaseLib/Core/NATFirewall
+END
+UPnPThread.py
+K 25
+svn:wc:ra_dav:version-url
+V 97
+/svn/p2p-next/!svn/ver/1678/next-share/tags/M32/Next-Share/BaseLib/Core/NATFirewall/UPnPThread.py
+END
+ReturnConnHandler.py
+K 25
+svn:wc:ra_dav:version-url
+V 104
+/svn/p2p-next/!svn/ver/1678/next-share/tags/M32/Next-Share/BaseLib/Core/NATFirewall/ReturnConnHandler.py
+END
+ConnectionCheck.py
+K 25
+svn:wc:ra_dav:version-url
+V 102
+/svn/p2p-next/!svn/ver/1678/next-share/tags/M32/Next-Share/BaseLib/Core/NATFirewall/ConnectionCheck.py
+END
+TimeoutFinder.py
+K 25
+svn:wc:ra_dav:version-url
+V 100
+/svn/p2p-next/!svn/ver/1678/next-share/tags/M32/Next-Share/BaseLib/Core/NATFirewall/TimeoutFinder.py
+END
+UDPPuncture.py
+K 25
+svn:wc:ra_dav:version-url
+V 98
+/svn/p2p-next/!svn/ver/1678/next-share/tags/M32/Next-Share/BaseLib/Core/NATFirewall/UDPPuncture.py
+END
+DialbackMsgHandler.py
+K 25
+svn:wc:ra_dav:version-url
+V 105
+/svn/p2p-next/!svn/ver/1678/next-share/tags/M32/Next-Share/BaseLib/Core/NATFirewall/DialbackMsgHandler.py
+END
+__init__.py
+K 25
+svn:wc:ra_dav:version-url
+V 95
+/svn/p2p-next/!svn/ver/1678/next-share/tags/M32/Next-Share/BaseLib/Core/NATFirewall/__init__.py
+END
+guessip.py
+K 25
+svn:wc:ra_dav:version-url
+V 94
+/svn/p2p-next/!svn/ver/1678/next-share/tags/M32/Next-Share/BaseLib/Core/NATFirewall/guessip.py
+END
+NatCheck.py
+K 25
+svn:wc:ra_dav:version-url
+V 95
+/svn/p2p-next/!svn/ver/1678/next-share/tags/M32/Next-Share/BaseLib/Core/NATFirewall/NatCheck.py
+END
+upnp.py
+K 25
+svn:wc:ra_dav:version-url
+V 91
+/svn/p2p-next/!svn/ver/1678/next-share/tags/M32/Next-Share/BaseLib/Core/NATFirewall/upnp.py
+END
+TimeoutCheck.py
+K 25
+svn:wc:ra_dav:version-url
+V 99
+/svn/p2p-next/!svn/ver/1678/next-share/tags/M32/Next-Share/BaseLib/Core/NATFirewall/TimeoutCheck.py
+END
+NatCheckMsgHandler.py
+K 25
+svn:wc:ra_dav:version-url
+V 105
+/svn/p2p-next/!svn/ver/1678/next-share/tags/M32/Next-Share/BaseLib/Core/NATFirewall/NatCheckMsgHandler.py
+END
+NatTraversal.py
+K 25
+svn:wc:ra_dav:version-url
+V 99
+/svn/p2p-next/!svn/ver/1678/next-share/tags/M32/Next-Share/BaseLib/Core/NATFirewall/NatTraversal.py
+END

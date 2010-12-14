@@ -1,0 +1,53 @@
+K 25
+svn:wc:ra_dav:version-url
+V 82
+/svn/p2p-next/!svn/ver/1678/next-share/tags/M32/Next-Share/BaseLib/UPnP/upnpserver
+END
+upnpserver.py
+K 25
+svn:wc:ra_dav:version-url
+V 96
+/svn/p2p-next/!svn/ver/1678/next-share/tags/M32/Next-Share/BaseLib/UPnP/upnpserver/upnpserver.py
+END
+servicemanager.py
+K 25
+svn:wc:ra_dav:version-url
+V 100
+/svn/p2p-next/!svn/ver/1678/next-share/tags/M32/Next-Share/BaseLib/UPnP/upnpserver/servicemanager.py
+END
+upnpeventdispatcher.py
+K 25
+svn:wc:ra_dav:version-url
+V 105
+/svn/p2p-next/!svn/ver/1678/next-share/tags/M32/Next-Share/BaseLib/UPnP/upnpserver/upnpeventdispatcher.py
+END
+upnpserverconsole.py
+K 25
+svn:wc:ra_dav:version-url
+V 103
+/svn/p2p-next/!svn/ver/1678/next-share/tags/M32/Next-Share/BaseLib/UPnP/upnpserver/upnpserverconsole.py
+END
+__init__.py
+K 25
+svn:wc:ra_dav:version-url
+V 94
+/svn/p2p-next/!svn/ver/1678/next-share/tags/M32/Next-Share/BaseLib/UPnP/upnpserver/__init__.py
+END
+upnpdevice.py
+K 25
+svn:wc:ra_dav:version-url
+V 96
+/svn/p2p-next/!svn/ver/1678/next-share/tags/M32/Next-Share/BaseLib/UPnP/upnpserver/upnpdevice.py
+END
+upnpservice.py
+K 25
+svn:wc:ra_dav:version-url
+V 97
+/svn/p2p-next/!svn/ver/1678/next-share/tags/M32/Next-Share/BaseLib/UPnP/upnpserver/upnpservice.py
+END
+httpserver.py
+K 25
+svn:wc:ra_dav:version-url
+V 96
+/svn/p2p-next/!svn/ver/1678/next-share/tags/M32/Next-Share/BaseLib/UPnP/upnpserver/httpserver.py
+END

@@ -1,0 +1,5 @@
+#!/bin/sh
+NEXT_SHARE_HOME=/home/dusan/delo/src/M32/Next-Share
+cd $NEXT_SHARE_HOME
+export PYTHONPATH=$(pwd):.
+python JSI/ProviderToolbox/tools/getfeed.py -u $1

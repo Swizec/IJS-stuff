@@ -1,0 +1,143 @@
+K 25
+svn:wc:ra_dav:version-url
+V 82
+/svn/p2p-next/!svn/ver/1678/next-share/tags/M32/Next-Share/BaseLib/Core/BitTornado
+END
+clock.py
+K 25
+svn:wc:ra_dav:version-url
+V 91
+/svn/p2p-next/!svn/ver/1678/next-share/tags/M32/Next-Share/BaseLib/Core/BitTornado/clock.py
+END
+subnetparse.py
+K 25
+svn:wc:ra_dav:version-url
+V 97
+/svn/p2p-next/!svn/ver/1678/next-share/tags/M32/Next-Share/BaseLib/Core/BitTornado/subnetparse.py
+END
+PSYCO.py
+K 25
+svn:wc:ra_dav:version-url
+V 91
+/svn/p2p-next/!svn/ver/1678/next-share/tags/M32/Next-Share/BaseLib/Core/BitTornado/PSYCO.py
+END
+bencode.py
+K 25
+svn:wc:ra_dav:version-url
+V 93
+/svn/p2p-next/!svn/ver/1678/next-share/tags/M32/Next-Share/BaseLib/Core/BitTornado/bencode.py
+END
+__init__.py
+K 25
+svn:wc:ra_dav:version-url
+V 94
+/svn/p2p-next/!svn/ver/1678/next-share/tags/M32/Next-Share/BaseLib/Core/BitTornado/__init__.py
+END
+selectpoll.py
+K 25
+svn:wc:ra_dav:version-url
+V 96
+/svn/p2p-next/!svn/ver/1678/next-share/tags/M32/Next-Share/BaseLib/Core/BitTornado/selectpoll.py
+END
+ServerPortHandler.py
+K 25
+svn:wc:ra_dav:version-url
+V 103
+/svn/p2p-next/!svn/ver/1678/next-share/tags/M32/Next-Share/BaseLib/Core/BitTornado/ServerPortHandler.py
+END
+parsedir.py
+K 25
+svn:wc:ra_dav:version-url
+V 94
+/svn/p2p-next/!svn/ver/1678/next-share/tags/M32/Next-Share/BaseLib/Core/BitTornado/parsedir.py
+END
+download_bt1.py
+K 25
+svn:wc:ra_dav:version-url
+V 98
+/svn/p2p-next/!svn/ver/1678/next-share/tags/M32/Next-Share/BaseLib/Core/BitTornado/download_bt1.py
+END
+RateMeasure.py
+K 25
+svn:wc:ra_dav:version-url
+V 97
+/svn/p2p-next/!svn/ver/1678/next-share/tags/M32/Next-Share/BaseLib/Core/BitTornado/RateMeasure.py
+END
+HTTPHandler.py
+K 25
+svn:wc:ra_dav:version-url
+V 97
+/svn/p2p-next/!svn/ver/1678/next-share/tags/M32/Next-Share/BaseLib/Core/BitTornado/HTTPHandler.py
+END
+inifile.py
+K 25
+svn:wc:ra_dav:version-url
+V 93
+/svn/p2p-next/!svn/ver/1678/next-share/tags/M32/Next-Share/BaseLib/Core/BitTornado/inifile.py
+END
+piecebuffer.py
+K 25
+svn:wc:ra_dav:version-url
+V 97
+/svn/p2p-next/!svn/ver/1678/next-share/tags/M32/Next-Share/BaseLib/Core/BitTornado/piecebuffer.py
+END
+CurrentRateMeasure.py
+K 25
+svn:wc:ra_dav:version-url
+V 104
+/svn/p2p-next/!svn/ver/1678/next-share/tags/M32/Next-Share/BaseLib/Core/BitTornado/CurrentRateMeasure.py
+END
+iprangeparse.py
+K 25
+svn:wc:ra_dav:version-url
+V 98
+/svn/p2p-next/!svn/ver/1678/next-share/tags/M32/Next-Share/BaseLib/Core/BitTornado/iprangeparse.py
+END
+RawServer.py
+K 25
+svn:wc:ra_dav:version-url
+V 95
+/svn/p2p-next/!svn/ver/1678/next-share/tags/M32/Next-Share/BaseLib/Core/BitTornado/RawServer.py
+END
+natpunch.py
+K 25
+svn:wc:ra_dav:version-url
+V 94
+/svn/p2p-next/!svn/ver/1678/next-share/tags/M32/Next-Share/BaseLib/Core/BitTornado/natpunch.py
+END
+RateLimiter.py
+K 25
+svn:wc:ra_dav:version-url
+V 97
+/svn/p2p-next/!svn/ver/1678/next-share/tags/M32/Next-Share/BaseLib/Core/BitTornado/RateLimiter.py
+END
+bitfield.py
+K 25
+svn:wc:ra_dav:version-url
+V 94
+/svn/p2p-next/!svn/ver/1678/next-share/tags/M32/Next-Share/BaseLib/Core/BitTornado/bitfield.py
+END
+zurllib.py
+K 25
+svn:wc:ra_dav:version-url
+V 93
+/svn/p2p-next/!svn/ver/1678/next-share/tags/M32/Next-Share/BaseLib/Core/BitTornado/zurllib.py
+END
+torrentlistparse.py
+K 25
+svn:wc:ra_dav:version-url
+V 102
+/svn/p2p-next/!svn/ver/1678/next-share/tags/M32/Next-Share/BaseLib/Core/BitTornado/torrentlistparse.py
+END
+SocketHandler.py
+K 25
+svn:wc:ra_dav:version-url
+V 99
+/svn/p2p-next/!svn/ver/1678/next-share/tags/M32/Next-Share/BaseLib/Core/BitTornado/SocketHandler.py
+END
+parseargs.py
+K 25
+svn:wc:ra_dav:version-url
+V 95
+/svn/p2p-next/!svn/ver/1678/next-share/tags/M32/Next-Share/BaseLib/Core/BitTornado/parseargs.py
+END

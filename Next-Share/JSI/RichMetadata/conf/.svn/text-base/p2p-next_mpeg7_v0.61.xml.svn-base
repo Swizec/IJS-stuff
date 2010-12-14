@@ -1,0 +1,88 @@
+<Mpeg7 xmlns:p2pnext="urn:p2pnext:metadata:2008" xmlns="urn:mpeg:mpeg7:schema:2001" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:mpeg7="urn:mpeg:mpeg7:schema:2001" xsi:schemaLocation="urn:mpeg:mpeg7:schema:2001 mpeg7-v1_p2p.xsd">
+	<Description xsi:type="CreationDescriptionType">
+		<CreationInformation>
+			<Creation>
+				<Title type="main" xml:lang="en">Next-Share Test Stream 1</Title>
+				<Title type="seriesTitle">The Doe Family</Title>
+				<Title type="episodeTitle">John Doe buys a car</Title>
+				<Abstract>
+					<FreeTextAnnotation>John and Jane Doe visit a car dealer to buy a new car for John</FreeTextAnnotation>
+				</Abstract>
+				<Creator>
+					<Role href="urn:mpeg:mpeg7:cs:RoleCS:2001:PRODUCER"/>
+					<Agent xsi:type="OrganizationType">
+						<Name>p2p-next</Name>
+					</Agent>
+				</Creator>
+					<Creator>
+					<Role href="urn:mpeg:mpeg7:cs:RoleCS:2001:DISSEMINATOR"/>
+					<Agent xsi:type="OrganizationType">
+						<Name>p2p-next</Name>
+					</Agent>
+				</Creator>
+				<CreationCoordinates>
+					<Location>
+						<Name>AT</Name>
+					</Location>
+					<Date>
+						<TimePoint>2008-11-17T12:00+01:00</TimePoint>
+					</Date>
+				</CreationCoordinates>
+			</Creation>
+			<Classification>
+				<Genre href="urn:mpeg:mpeg7:cs:GenreCS:2001">
+					<Name>Infotainment</Name>
+				</Genre>
+				<Language>en</Language>
+				<CaptionLanguage>en</CaptionLanguage>
+				<SignLanguage>en</SignLanguage>
+				<ParentalGuidance>
+					<MinimumAge>12</MinimumAge>
+				</ParentalGuidance>
+			</Classification>
+		</CreationInformation>
+	</Description>
+	<Description xsi:type="MediaDescriptionType">
+		<MediaInformation id="$MediaInformation">
+			<MediaIdentification>
+				<EntityIdentifier organization="$Publisher" type="MPEG7ContentSetId">
+						$ProgramId
+					</EntityIdentifier>
+			</MediaIdentification>
+			<MediaProfile>
+				<MediaFormat>
+					<Content href="MPEG7ContentCS">
+						<Name>audiovisual</Name>
+					</Content>
+					<FileFormat href="urn:mpeg:mpeg7:cs:FileFormatCS:2001">
+						<Name>mp4</Name>
+					</FileFormat>
+					<FileSize>83191350</FileSize>
+					<BitRate>524288</BitRate>
+					<VisualCoding>
+						<Format href="urn:mpeg:mpeg7:cs:VisualCodingFormatCS:2001">
+							<Name>MPEG-2 Video Main Profile @ Main Level</Name>
+						</Format>
+						<Frame width="$HorizontalSize" height="$VerticalSize" aspectRatio="$AspectRatio" rate="$FrameRate"/>
+					</VisualCoding>
+					<AudioCoding>
+						<Format href="urn:mpeg:mpeg7:cs:AudioCodingFormatCS:2001">
+							<Name>MPEG-1 Audio Layer III</Name>
+						</Format>
+						<AudioChannels>2</AudioChannels>
+					</AudioCoding>
+				</MediaFormat>
+			</MediaProfile>
+		</MediaInformation>
+	</Description>
+	<Description xsi:type="ContentEntityType">
+		<MultimediaContent xsi:type="VideoType">
+			<Video>
+				<MediaTime>
+					<MediaTimePoint>T00:00:00</MediaTimePoint>
+					<MediaDuration>PT0M35S</MediaDuration>
+				</MediaTime>
+			</Video>
+		</MultimediaContent>
+	</Description>
+</Mpeg7>

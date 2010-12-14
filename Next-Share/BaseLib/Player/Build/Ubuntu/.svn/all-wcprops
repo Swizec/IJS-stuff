@@ -1,0 +1,101 @@
+K 25
+svn:wc:ra_dav:version-url
+V 86
+/svn/p2p-next/!svn/ver/1678/next-share/tags/M32/Next-Share/BaseLib/Player/Build/Ubuntu
+END
+swarmplayer.sh
+K 25
+svn:wc:ra_dav:version-url
+V 101
+/svn/p2p-next/!svn/ver/1678/next-share/tags/M32/Next-Share/BaseLib/Player/Build/Ubuntu/swarmplayer.sh
+END
+control
+K 25
+svn:wc:ra_dav:version-url
+V 94
+/svn/p2p-next/!svn/ver/1678/next-share/tags/M32/Next-Share/BaseLib/Player/Build/Ubuntu/control
+END
+swarmplayer.postinst.debhelper
+K 25
+svn:wc:ra_dav:version-url
+V 117
+/svn/p2p-next/!svn/ver/1678/next-share/tags/M32/Next-Share/BaseLib/Player/Build/Ubuntu/swarmplayer.postinst.debhelper
+END
+swarmplayer.postrm.debhelper
+K 25
+svn:wc:ra_dav:version-url
+V 115
+/svn/p2p-next/!svn/ver/1678/next-share/tags/M32/Next-Share/BaseLib/Player/Build/Ubuntu/swarmplayer.postrm.debhelper
+END
+compat
+K 25
+svn:wc:ra_dav:version-url
+V 93
+/svn/p2p-next/!svn/ver/1678/next-share/tags/M32/Next-Share/BaseLib/Player/Build/Ubuntu/compat
+END
+prerm
+K 25
+svn:wc:ra_dav:version-url
+V 92
+/svn/p2p-next/!svn/ver/1678/next-share/tags/M32/Next-Share/BaseLib/Player/Build/Ubuntu/prerm
+END
+changelog
+K 25
+svn:wc:ra_dav:version-url
+V 96
+/svn/p2p-next/!svn/ver/1678/next-share/tags/M32/Next-Share/BaseLib/Player/Build/Ubuntu/changelog
+END
+swarmplayer_big.xpm
+K 25
+svn:wc:ra_dav:version-url
+V 106
+/svn/p2p-next/!svn/ver/1678/next-share/tags/M32/Next-Share/BaseLib/Player/Build/Ubuntu/swarmplayer_big.xpm
+END
+rules
+K 25
+svn:wc:ra_dav:version-url
+V 92
+/svn/p2p-next/!svn/ver/1678/next-share/tags/M32/Next-Share/BaseLib/Player/Build/Ubuntu/rules
+END
+pycompat
+K 25
+svn:wc:ra_dav:version-url
+V 95
+/svn/p2p-next/!svn/ver/1678/next-share/tags/M32/Next-Share/BaseLib/Player/Build/Ubuntu/pycompat
+END
+swarmplayer.manpages
+K 25
+svn:wc:ra_dav:version-url
+V 107
+/svn/p2p-next/!svn/ver/1678/next-share/tags/M32/Next-Share/BaseLib/Player/Build/Ubuntu/swarmplayer.manpages
+END
+files
+K 25
+svn:wc:ra_dav:version-url
+V 92
+/svn/p2p-next/!svn/ver/1678/next-share/tags/M32/Next-Share/BaseLib/Player/Build/Ubuntu/files
+END
+swarmplayer.1
+K 25
+svn:wc:ra_dav:version-url
+V 100
+/svn/p2p-next/!svn/ver/1678/next-share/tags/M32/Next-Share/BaseLib/Player/Build/Ubuntu/swarmplayer.1
+END
+swarmplayer.xpm
+K 25
+svn:wc:ra_dav:version-url
+V 102
+/svn/p2p-next/!svn/ver/1678/next-share/tags/M32/Next-Share/BaseLib/Player/Build/Ubuntu/swarmplayer.xpm
+END
+swarmplayer.menu
+K 25
+svn:wc:ra_dav:version-url
+V 103
+/svn/p2p-next/!svn/ver/1678/next-share/tags/M32/Next-Share/BaseLib/Player/Build/Ubuntu/swarmplayer.menu
+END
+swarmplayer.desktop
+K 25
+svn:wc:ra_dav:version-url
+V 106
+/svn/p2p-next/!svn/ver/1678/next-share/tags/M32/Next-Share/BaseLib/Player/Build/Ubuntu/swarmplayer.desktop
+END

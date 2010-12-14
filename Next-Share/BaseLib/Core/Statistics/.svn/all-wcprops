@@ -1,0 +1,89 @@
+K 25
+svn:wc:ra_dav:version-url
+V 82
+/svn/p2p-next/!svn/ver/1678/next-share/tags/M32/Next-Share/BaseLib/Core/Statistics
+END
+ChannelCrawler.py
+K 25
+svn:wc:ra_dav:version-url
+V 100
+/svn/p2p-next/!svn/ver/1678/next-share/tags/M32/Next-Share/BaseLib/Core/Statistics/ChannelCrawler.py
+END
+FriendshipCrawler.py
+K 25
+svn:wc:ra_dav:version-url
+V 103
+/svn/p2p-next/!svn/ver/1678/next-share/tags/M32/Next-Share/BaseLib/Core/Statistics/FriendshipCrawler.py
+END
+tribler_friendship_stats_sdb.sql
+K 25
+svn:wc:ra_dav:version-url
+V 115
+/svn/p2p-next/!svn/ver/1678/next-share/tags/M32/Next-Share/BaseLib/Core/Statistics/tribler_friendship_stats_sdb.sql
+END
+SeedingStatsCrawler.py
+K 25
+svn:wc:ra_dav:version-url
+V 105
+/svn/p2p-next/!svn/ver/1678/next-share/tags/M32/Next-Share/BaseLib/Core/Statistics/SeedingStatsCrawler.py
+END
+VideoPlaybackCrawler.py
+K 25
+svn:wc:ra_dav:version-url
+V 106
+/svn/p2p-next/!svn/ver/1678/next-share/tags/M32/Next-Share/BaseLib/Core/Statistics/VideoPlaybackCrawler.py
+END
+Crawler.py
+K 25
+svn:wc:ra_dav:version-url
+V 93
+/svn/p2p-next/!svn/ver/1678/next-share/tags/M32/Next-Share/BaseLib/Core/Statistics/Crawler.py
+END
+Logger.py
+K 25
+svn:wc:ra_dav:version-url
+V 92
+/svn/p2p-next/!svn/ver/1678/next-share/tags/M32/Next-Share/BaseLib/Core/Statistics/Logger.py
+END
+__init__.py
+K 25
+svn:wc:ra_dav:version-url
+V 94
+/svn/p2p-next/!svn/ver/1678/next-share/tags/M32/Next-Share/BaseLib/Core/Statistics/__init__.py
+END
+tribler_seedingstats_sdb.sql
+K 25
+svn:wc:ra_dav:version-url
+V 111
+/svn/p2p-next/!svn/ver/1678/next-share/tags/M32/Next-Share/BaseLib/Core/Statistics/tribler_seedingstats_sdb.sql
+END
+RepexCrawler.py
+K 25
+svn:wc:ra_dav:version-url
+V 98
+/svn/p2p-next/!svn/ver/1678/next-share/tags/M32/Next-Share/BaseLib/Core/Statistics/RepexCrawler.py
+END
+DatabaseCrawler.py
+K 25
+svn:wc:ra_dav:version-url
+V 101
+/svn/p2p-next/!svn/ver/1678/next-share/tags/M32/Next-Share/BaseLib/Core/Statistics/DatabaseCrawler.py
+END
+PunctureCrawler.py
+K 25
+svn:wc:ra_dav:version-url
+V 101
+/svn/p2p-next/!svn/ver/1678/next-share/tags/M32/Next-Share/BaseLib/Core/Statistics/PunctureCrawler.py
+END
+tribler_videoplayback_stats.sql
+K 25
+svn:wc:ra_dav:version-url
+V 114
+/svn/p2p-next/!svn/ver/1678/next-share/tags/M32/Next-Share/BaseLib/Core/Statistics/tribler_videoplayback_stats.sql
+END
+crawler.txt
+K 25
+svn:wc:ra_dav:version-url
+V 94
+/svn/p2p-next/!svn/ver/1678/next-share/tags/M32/Next-Share/BaseLib/Core/Statistics/crawler.txt
+END

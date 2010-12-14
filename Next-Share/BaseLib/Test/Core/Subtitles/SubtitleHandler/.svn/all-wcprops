@@ -1,0 +1,23 @@
+K 25
+svn:wc:ra_dav:version-url
+V 102
+/svn/p2p-next/!svn/ver/1678/next-share/tags/M32/Next-Share/BaseLib/Test/Core/Subtitles/SubtitleHandler
+END
+__init__.py
+K 25
+svn:wc:ra_dav:version-url
+V 114
+/svn/p2p-next/!svn/ver/1678/next-share/tags/M32/Next-Share/BaseLib/Test/Core/Subtitles/SubtitleHandler/__init__.py
+END
+test_SubtitleMsgHandlerIsolation.py
+K 25
+svn:wc:ra_dav:version-url
+V 138
+/svn/p2p-next/!svn/ver/1678/next-share/tags/M32/Next-Share/BaseLib/Test/Core/Subtitles/SubtitleHandler/test_SubtitleMsgHandlerIsolation.py
+END
+test_DiskManager.py
+K 25
+svn:wc:ra_dav:version-url
+V 122
+/svn/p2p-next/!svn/ver/1678/next-share/tags/M32/Next-Share/BaseLib/Test/Core/Subtitles/SubtitleHandler/test_DiskManager.py
+END

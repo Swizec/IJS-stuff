@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<TVAMain xmlns:p2pnext="urn:p2pnext:metadata:2008" xmlns:tva="urn:tva:metadata:2007" xmlns:mpeg7="urn:tva:mpeg7:2005" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="urn:tva:metadata:2007" xsi:schemaLocation="urn:tva:metadata:2007 tva_metadata_3-1_v141_p2p.xsd" xml:lang="EN" publisher="$Publisher">
+	<ProgramDescription>
+		<ProgramInformationTable>
+			<ProgramInformation programId="$ProgramId">
+				<BasicDescription xsi:type="p2pnext:P2POptionalDataDescriptionType">
+					<p2pnext:AdvertisingData>
+						<p2pnext:BusinessModel>BM2</p2pnext:BusinessModel>
+						<p2pnext:IsLiveContent>false</p2pnext:IsLiveContent>
+						<p2pnext:AllowAdvertising>true</p2pnext:AllowAdvertising>
+						<p2pnext:CircularContent>Allow Superdistribution</p2pnext:CircularContent>
+						<p2pnext:AdType>Web</p2pnext:AdType>
+						<p2pnext:StreamingType>In-Stream</p2pnext:StreamingType>
+						<p2pnext:AdFormat>Banner</p2pnext:AdFormat>
+						<p2pnext:TargetGroup>
+							<p2pnext:Age>30</p2pnext:Age>
+							<p2pnext:Gender>W</p2pnext:Gender>
+							<p2pnext:Country>AT</p2pnext:Country>
+						</p2pnext:TargetGroup>
+						<p2pnext:ContentFormat>
+							<VideoAttributes>
+								<AspectRatio>16:9</AspectRatio>
+								<FrameRate>25</FrameRate>
+								<VerticalSize>720</VerticalSize>
+								<HorizontalSize>405</HorizontalSize>
+							</VideoAttributes>
+						</p2pnext:ContentFormat>
+					</p2pnext:AdvertisingData>
+				</BasicDescription>
+			</ProgramInformation>
+		</ProgramInformationTable>
+	</ProgramDescription>
+</TVAMain>

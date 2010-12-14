@@ -1,0 +1,65 @@
+K 25
+svn:wc:ra_dav:version-url
+V 77
+/svn/p2p-next/!svn/ver/1678/next-share/tags/M32/Next-Share/BaseLib/Core/Video
+END
+VideoStatus.py
+K 25
+svn:wc:ra_dav:version-url
+V 92
+/svn/p2p-next/!svn/ver/1678/next-share/tags/M32/Next-Share/BaseLib/Core/Video/VideoStatus.py
+END
+MovieTransport.py
+K 25
+svn:wc:ra_dav:version-url
+V 95
+/svn/p2p-next/!svn/ver/1678/next-share/tags/M32/Next-Share/BaseLib/Core/Video/MovieTransport.py
+END
+VideoOnDemand.py
+K 25
+svn:wc:ra_dav:version-url
+V 94
+/svn/p2p-next/!svn/ver/1678/next-share/tags/M32/Next-Share/BaseLib/Core/Video/VideoOnDemand.py
+END
+PiecePickerStreaming.py
+K 25
+svn:wc:ra_dav:version-url
+V 101
+/svn/p2p-next/!svn/ver/1678/next-share/tags/M32/Next-Share/BaseLib/Core/Video/PiecePickerStreaming.py
+END
+PiecePickerSVC.py
+K 25
+svn:wc:ra_dav:version-url
+V 95
+/svn/p2p-next/!svn/ver/1678/next-share/tags/M32/Next-Share/BaseLib/Core/Video/PiecePickerSVC.py
+END
+SVCTransporter.py
+K 25
+svn:wc:ra_dav:version-url
+V 95
+/svn/p2p-next/!svn/ver/1678/next-share/tags/M32/Next-Share/BaseLib/Core/Video/SVCTransporter.py
+END
+__init__.py
+K 25
+svn:wc:ra_dav:version-url
+V 89
+/svn/p2p-next/!svn/ver/1678/next-share/tags/M32/Next-Share/BaseLib/Core/Video/__init__.py
+END
+LiveSourceAuth.py
+K 25
+svn:wc:ra_dav:version-url
+V 95
+/svn/p2p-next/!svn/ver/1678/next-share/tags/M32/Next-Share/BaseLib/Core/Video/LiveSourceAuth.py
+END
+SVCVideoStatus.py
+K 25
+svn:wc:ra_dav:version-url
+V 95
+/svn/p2p-next/!svn/ver/1678/next-share/tags/M32/Next-Share/BaseLib/Core/Video/SVCVideoStatus.py
+END
+VideoSource.py
+K 25
+svn:wc:ra_dav:version-url
+V 92
+/svn/p2p-next/!svn/ver/1678/next-share/tags/M32/Next-Share/BaseLib/Core/Video/VideoSource.py
+END

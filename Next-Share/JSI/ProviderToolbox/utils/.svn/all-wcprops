@@ -1,0 +1,29 @@
+K 25
+svn:wc:ra_dav:version-url
+V 53
+/svn/p2p-next/!svn/ver/1908/JSI/ProviderToolbox/utils
+END
+utilities.py
+K 25
+svn:wc:ra_dav:version-url
+V 66
+/svn/p2p-next/!svn/ver/1908/JSI/ProviderToolbox/utils/utilities.py
+END
+__init__.py
+K 25
+svn:wc:ra_dav:version-url
+V 65
+/svn/p2p-next/!svn/ver/1885/JSI/ProviderToolbox/utils/__init__.py
+END
+exceptions.py
+K 25
+svn:wc:ra_dav:version-url
+V 67
+/svn/p2p-next/!svn/ver/1885/JSI/ProviderToolbox/utils/exceptions.py
+END
+log.py
+K 25
+svn:wc:ra_dav:version-url
+V 60
+/svn/p2p-next/!svn/ver/1885/JSI/ProviderToolbox/utils/log.py
+END

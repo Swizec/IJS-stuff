@@ -1,0 +1,47 @@
+K 25
+svn:wc:ra_dav:version-url
+V 47
+/svn/p2p-next/!svn/ver/1908/JSI/ProviderToolbox
+END
+FeedGenerator.py
+K 25
+svn:wc:ra_dav:version-url
+V 64
+/svn/p2p-next/!svn/ver/1900/JSI/ProviderToolbox/FeedGenerator.py
+END
+ContentSource.py
+K 25
+svn:wc:ra_dav:version-url
+V 64
+/svn/p2p-next/!svn/ver/1908/JSI/ProviderToolbox/ContentSource.py
+END
+Publisher.py
+K 25
+svn:wc:ra_dav:version-url
+V 60
+/svn/p2p-next/!svn/ver/1908/JSI/ProviderToolbox/Publisher.py
+END
+__init__.py
+K 25
+svn:wc:ra_dav:version-url
+V 59
+/svn/p2p-next/!svn/ver/1885/JSI/ProviderToolbox/__init__.py
+END
+Makefile
+K 25
+svn:wc:ra_dav:version-url
+V 56
+/svn/p2p-next/!svn/ver/1885/JSI/ProviderToolbox/Makefile
+END
+README
+K 25
+svn:wc:ra_dav:version-url
+V 54
+/svn/p2p-next/!svn/ver/1908/JSI/ProviderToolbox/README
+END
+MetadataGenerator.py
+K 25
+svn:wc:ra_dav:version-url
+V 68
+/svn/p2p-next/!svn/ver/1900/JSI/ProviderToolbox/MetadataGenerator.py
+END

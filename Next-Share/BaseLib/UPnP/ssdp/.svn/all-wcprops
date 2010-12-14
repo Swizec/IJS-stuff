@@ -1,0 +1,35 @@
+K 25
+svn:wc:ra_dav:version-url
+V 76
+/svn/p2p-next/!svn/ver/1678/next-share/tags/M32/Next-Share/BaseLib/UPnP/ssdp
+END
+ssdpclient.py
+K 25
+svn:wc:ra_dav:version-url
+V 90
+/svn/p2p-next/!svn/ver/1678/next-share/tags/M32/Next-Share/BaseLib/UPnP/ssdp/ssdpclient.py
+END
+ssdpdaemon.py
+K 25
+svn:wc:ra_dav:version-url
+V 90
+/svn/p2p-next/!svn/ver/1678/next-share/tags/M32/Next-Share/BaseLib/UPnP/ssdp/ssdpdaemon.py
+END
+ssdpmessage.py
+K 25
+svn:wc:ra_dav:version-url
+V 91
+/svn/p2p-next/!svn/ver/1678/next-share/tags/M32/Next-Share/BaseLib/UPnP/ssdp/ssdpmessage.py
+END
+__init__.py
+K 25
+svn:wc:ra_dav:version-url
+V 88
+/svn/p2p-next/!svn/ver/1678/next-share/tags/M32/Next-Share/BaseLib/UPnP/ssdp/__init__.py
+END
+ssdpserver.py
+K 25
+svn:wc:ra_dav:version-url
+V 90
+/svn/p2p-next/!svn/ver/1678/next-share/tags/M32/Next-Share/BaseLib/UPnP/ssdp/ssdpserver.py
+END

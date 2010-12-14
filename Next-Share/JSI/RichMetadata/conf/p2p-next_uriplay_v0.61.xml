@@ -1,0 +1,49 @@
+<!-- Example of a single TV Episode available in various encodings and via various revenue models -->
+<rdf:RDF>
+<po:Episode rdf:about="http://open.bbc.co.uk/rad/uriplay/content/p2pexample/s01e01"> 
+	<dc:title>Example content...</dc:title> 
+	<play:seasonTitle>The First Season</play:seasonTitle> 
+	<dc:description> 
+	...with an example description of the contained content 
+	</dc:description> 
+	<po:position>1</po:position> 
+	<play:seasonPosition>1</play:seasonPosition> 
+	<dcterms:rightsHolder rdf:resource="http://www.bbc.co.uk/"/> 
+	<play:image rdf:resource="http://open.bbc.co.uk/rad/p2p-next/test-content.jpeg"/> 
+	<po:genre rdf:resource="http://www.bbc.co.uk/programmes/genres/news"/> 
+	<po:genre rdf:resource="http://www.bbc.co.uk/programmes/genres/sport"/> 
+	<dcterms:spatial>UK</dcterms:spatial> 
+	<po:version> 
+		<po:Version rdf:about="http://open.bbc.co.uk/rad/uriplay/content/p2pexample/s01e01/main"> 
+		<play:audioLanguage>ENG</play:audioLanguage> 
+		<play:captionLanguage>ENG</play:captionLanguage> 
+		<po:subtitle_language>ENG</po:subtitle_language> 
+		<play:guidance rdf:resource="http://open.bbc.co.uk/rad/guidance/adult-humour"/> 
+		<play:guidance rdf:resource="http://open.bbc.co.uk/rad/guidance/disturbing-scenes"/> 
+		<po:duration>600</po:duration> 
+		<dcterms:hasPart rdf:resource="http://www.bbc.co.uk/content/p2pexample/s01e01/segment-1"/> 
+		<play:manifestedAs> 
+			<play:Encoding rdf:about="http://open.bbc.co.uk/rad/uriplay/content/p2pexample/s01e01/main/h264"> 
+			<!-- various AV attributes here, such as codecs, image size --> 
+				<play:availableAt> 
+					<!-- A Location that requires payment  -->
+					<play:Location rdf:about="http://open.bbc.co.uk/rad/uriplay/content/p2pexample/s01e01/main/avi/p2pnext-payment"> 
+						<!-- various AV attributes here, such as transport details --> 
+						<play:restrictedBy rdf:resource="http://open.bbc.co.uk/rad/uriplay/policy/p2pnext-payment"/> 
+						<play:uri rdf:resource="http://open.bbc.co.uk/rad/p2pnext/test-content-a.mv4"/> 
+						<play:provider rdf:resource="http://www.bbc.co.uk/"/> 
+						<play:originator rdf:resource="http://www.theguardian.co.uk/"/> 
+						<play:quality>8</play:quality> 
+						<play:transportIsLive>true</play:transportIsLive> 
+						<dcterms:dateSubmitted> 
+						2008-08-20T02:14:22Z 
+						</dcterms:dateSubmitted> 
+						<dcterms:created>2008-08-20T01:19:42Z</dcterms:created> 
+					</play:Location> 
+				</play:availableAt>
+			</play:Encoding> 
+		</play:manifestedAs> 
+		</po:Version> 
+	</po:version> 
+</po:Episode> 
+</rdf:RDF>

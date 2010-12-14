@@ -1,0 +1,41 @@
+K 25
+svn:wc:ra_dav:version-url
+V 82
+/svn/p2p-next/!svn/ver/1678/next-share/tags/M32/Next-Share/BaseLib/UPnP/upnpclient
+END
+__init__.py
+K 25
+svn:wc:ra_dav:version-url
+V 94
+/svn/p2p-next/!svn/ver/1678/next-share/tags/M32/Next-Share/BaseLib/UPnP/upnpclient/__init__.py
+END
+upnpclient.py
+K 25
+svn:wc:ra_dav:version-url
+V 96
+/svn/p2p-next/!svn/ver/1678/next-share/tags/M32/Next-Share/BaseLib/UPnP/upnpclient/upnpclient.py
+END
+upnpservicestub.py
+K 25
+svn:wc:ra_dav:version-url
+V 101
+/svn/p2p-next/!svn/ver/1678/next-share/tags/M32/Next-Share/BaseLib/UPnP/upnpclient/upnpservicestub.py
+END
+xmldescriptionparser.py
+K 25
+svn:wc:ra_dav:version-url
+V 106
+/svn/p2p-next/!svn/ver/1678/next-share/tags/M32/Next-Share/BaseLib/UPnP/upnpclient/xmldescriptionparser.py
+END
+upnpclientconsole.py
+K 25
+svn:wc:ra_dav:version-url
+V 103
+/svn/p2p-next/!svn/ver/1678/next-share/tags/M32/Next-Share/BaseLib/UPnP/upnpclient/upnpclientconsole.py
+END
+httpserver.py
+K 25
+svn:wc:ra_dav:version-url
+V 96
+/svn/p2p-next/!svn/ver/1678/next-share/tags/M32/Next-Share/BaseLib/UPnP/upnpclient/httpserver.py
+END

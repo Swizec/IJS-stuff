@@ -1,0 +1,82 @@
+<didl:DIDL xmlns:didl="urn:mpeg:mpeg21:2002:02-DIDL-NS" xmlns:dii="urn:mpeg:mpeg21:2002:01-DII-NS" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="urn:mpeg:mpeg21:2002:02-DIDL-NS didl.xsd urn:mpeg:mpeg21:2002:01-DII-NS dii.xsd">
+  <didl:Item>
+    <didl:Descriptor>
+      <didl:Statement mimeType="text/xml">
+	<dii:RelatedIdentifier relationshipType= "urn:mpeg:mpeg21:2002:01-RDD-NS:IsPartOf">
+	  urn:p2p-next:item:bbc-bbcone-b00n9p5x
+	</dii:RelatedIdentifier>
+      </didl:Statement>
+    </didl:Descriptor>
+    <didl:Descriptor>
+      <didl:Statement mimeType="text/xml">
+	<dii:Type>urn:p2p-next:type:item:additional:2009</dii:Type>
+      </didl:Statement>
+    </didl:Descriptor>
+    <!-- Additional RM -->
+    <didl:Descriptor id="rm.payment">
+      <didl:Descriptor>
+	<didl:Statement mimeType="text/xml">
+	  <dii:Type>urn:p2p-next:type:rm:payment:2009</dii:Type>
+	</didl:Statement>
+      </didl:Descriptor>
+      <didl:Statement mimeType="text/xml">
+	<!-- P2P-Next RM on payment -->
+	$MetaPayment
+      </didl:Statement>
+    </didl:Descriptor>
+    <didl:Descriptor id="rm.advertisement">
+      <didl:Descriptor>
+	<didl:Statement mimeType="text/xml">
+	  <dii:Type>urn:p2p-next:type:rm:advertisement:2009</dii:Type>
+	</didl:Statement>
+      </didl:Descriptor>
+      <didl:Statement mimeType="text/xml">
+	<!-- P2P-Next RM on advertisement -->
+	$MetaAdvertisement
+      </didl:Statement>
+    </didl:Descriptor>
+    <didl:Descriptor id="rm.scalability">
+      <didl:Descriptor>
+	<didl:Statement mimeType="text/xml">
+	  <dii:Type>urn:p2p-next:type:rm:scalability:2009</dii:Type>
+	</didl:Statement>
+      </didl:Descriptor>
+      <didl:Statement mimeType="text/xml">
+	<!-- P2P-Next RM on scalability -->
+	$MetaScalability
+      </didl:Statement>
+    </didl:Descriptor>
+    <didl:Component id="limo">
+      <!-- LIMO content -->
+      <didl:Descriptor>
+	<didl:Statement mimeType="text/xml">
+	  <dii:Type>urn:p2p-next:type:limo:2009</dii:Type>
+	</didl:Statement>
+      </didl:Descriptor>
+      <didl:Descriptor id="$JavascriptName">
+	<didl:Component>
+	  <didl:Resource mimeType="text/javascript" >
+	    $javascript
+	  </didl:Resource>
+	</didl:Component>
+      </didl:Descriptor>
+      <didl:Descriptor id="$CSSName">
+	<didl:Component>
+	  <didl:Resource mimeType="text/css">
+	    $css
+	  </didl:Resource>
+	</didl:Component>
+      </didl:Descriptor>
+      <didl:Descriptor id="$LogoName">
+	<didl:Component>
+	  <didl:Resource mimeType="$LogoType" ref="$LogoReference">
+	    $logo
+	  </didl:Resource>
+	</didl:Component>
+      </didl:Descriptor>
+      <didl:Resource mimeType="text/html">
+	$html
+      </didl:Resource>
+    </didl:Component>
+  </didl:Item>
+</didl:DIDL>

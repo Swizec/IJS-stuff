@@ -1,0 +1,89 @@
+K 25
+svn:wc:ra_dav:version-url
+V 73
+/svn/p2p-next/!svn/ver/1678/next-share/tags/M32/Next-Share/BaseLib/Plugin
+END
+searchpage-ie.html
+K 25
+svn:wc:ra_dav:version-url
+V 92
+/svn/p2p-next/!svn/ver/1678/next-share/tags/M32/Next-Share/BaseLib/Plugin/searchpage-ie.html
+END
+BackgroundProcess.py
+K 25
+svn:wc:ra_dav:version-url
+V 94
+/svn/p2p-next/!svn/ver/1678/next-share/tags/M32/Next-Share/BaseLib/Plugin/BackgroundProcess.py
+END
+searchemulator.py
+K 25
+svn:wc:ra_dav:version-url
+V 91
+/svn/p2p-next/!svn/ver/1678/next-share/tags/M32/Next-Share/BaseLib/Plugin/searchemulator.py
+END
+searchpage-firefox.html
+K 25
+svn:wc:ra_dav:version-url
+V 97
+/svn/p2p-next/!svn/ver/1678/next-share/tags/M32/Next-Share/BaseLib/Plugin/searchpage-firefox.html
+END
+searchpage.html
+K 25
+svn:wc:ra_dav:version-url
+V 89
+/svn/p2p-next/!svn/ver/1678/next-share/tags/M32/Next-Share/BaseLib/Plugin/searchpage.html
+END
+SwarmEngine.py
+K 25
+svn:wc:ra_dav:version-url
+V 88
+/svn/p2p-next/!svn/ver/1678/next-share/tags/M32/Next-Share/BaseLib/Plugin/SwarmEngine.py
+END
+__init__.py
+K 25
+svn:wc:ra_dav:version-url
+V 85
+/svn/p2p-next/!svn/ver/1678/next-share/tags/M32/Next-Share/BaseLib/Plugin/__init__.py
+END
+AtomFeedParser.py
+K 25
+svn:wc:ra_dav:version-url
+V 91
+/svn/p2p-next/!svn/ver/1678/next-share/tags/M32/Next-Share/BaseLib/Plugin/AtomFeedParser.py
+END
+defs.py
+K 25
+svn:wc:ra_dav:version-url
+V 81
+/svn/p2p-next/!svn/ver/1678/next-share/tags/M32/Next-Share/BaseLib/Plugin/defs.py
+END
+examplepage-firefox.html
+K 25
+svn:wc:ra_dav:version-url
+V 98
+/svn/p2p-next/!svn/ver/1678/next-share/tags/M32/Next-Share/BaseLib/Plugin/examplepage-firefox.html
+END
+examplepage.html
+K 25
+svn:wc:ra_dav:version-url
+V 90
+/svn/p2p-next/!svn/ver/1678/next-share/tags/M32/Next-Share/BaseLib/Plugin/examplepage.html
+END
+pluginemulator-http.py
+K 25
+svn:wc:ra_dav:version-url
+V 96
+/svn/p2p-next/!svn/ver/1678/next-share/tags/M32/Next-Share/BaseLib/Plugin/pluginemulator-http.py
+END
+Search.py
+K 25
+svn:wc:ra_dav:version-url
+V 83
+/svn/p2p-next/!svn/ver/1678/next-share/tags/M32/Next-Share/BaseLib/Plugin/Search.py
+END
+pluginemulator.py
+K 25
+svn:wc:ra_dav:version-url
+V 91
+/svn/p2p-next/!svn/ver/1678/next-share/tags/M32/Next-Share/BaseLib/Plugin/pluginemulator.py
+END

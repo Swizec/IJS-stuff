@@ -1,0 +1,83 @@
+K 25
+svn:wc:ra_dav:version-url
+V 83
+/svn/p2p-next/!svn/ver/1678/next-share/tags/M32/Next-Share/BaseLib/Player/Build/Mac
+END
+mkinstalldirs
+K 25
+svn:wc:ra_dav:version-url
+V 97
+/svn/p2p-next/!svn/ver/1678/next-share/tags/M32/Next-Share/BaseLib/Player/Build/Mac/mkinstalldirs
+END
+vlc-macosx-compile.patch
+K 25
+svn:wc:ra_dav:version-url
+V 108
+/svn/p2p-next/!svn/ver/1678/next-share/tags/M32/Next-Share/BaseLib/Player/Build/Mac/vlc-macosx-compile.patch
+END
+SLAResources.rsrc
+K 25
+svn:wc:ra_dav:version-url
+V 101
+/svn/p2p-next/!svn/ver/1678/next-share/tags/M32/Next-Share/BaseLib/Player/Build/Mac/SLAResources.rsrc
+END
+background.png
+K 25
+svn:wc:ra_dav:version-url
+V 98
+/svn/p2p-next/!svn/ver/1678/next-share/tags/M32/Next-Share/BaseLib/Player/Build/Mac/background.png
+END
+TriblerDoc.icns
+K 25
+svn:wc:ra_dav:version-url
+V 99
+/svn/p2p-next/!svn/ver/1678/next-share/tags/M32/Next-Share/BaseLib/Player/Build/Mac/TriblerDoc.icns
+END
+Info.plist
+K 25
+svn:wc:ra_dav:version-url
+V 94
+/svn/p2p-next/!svn/ver/1678/next-share/tags/M32/Next-Share/BaseLib/Player/Build/Mac/Info.plist
+END
+process_libs
+K 25
+svn:wc:ra_dav:version-url
+V 96
+/svn/p2p-next/!svn/ver/1678/next-share/tags/M32/Next-Share/BaseLib/Player/Build/Mac/process_libs
+END
+smart_lipo_merge
+K 25
+svn:wc:ra_dav:version-url
+V 100
+/svn/p2p-next/!svn/ver/1678/next-share/tags/M32/Next-Share/BaseLib/Player/Build/Mac/smart_lipo_merge
+END
+VolumeIcon.icns
+K 25
+svn:wc:ra_dav:version-url
+V 99
+/svn/p2p-next/!svn/ver/1678/next-share/tags/M32/Next-Share/BaseLib/Player/Build/Mac/VolumeIcon.icns
+END
+smart_lipo_thin
+K 25
+svn:wc:ra_dav:version-url
+V 99
+/svn/p2p-next/!svn/ver/1678/next-share/tags/M32/Next-Share/BaseLib/Player/Build/Mac/smart_lipo_thin
+END
+setuptriblermac.py
+K 25
+svn:wc:ra_dav:version-url
+V 102
+/svn/p2p-next/!svn/ver/1678/next-share/tags/M32/Next-Share/BaseLib/Player/Build/Mac/setuptriblermac.py
+END
+Makefile
+K 25
+svn:wc:ra_dav:version-url
+V 92
+/svn/p2p-next/!svn/ver/1678/next-share/tags/M32/Next-Share/BaseLib/Player/Build/Mac/Makefile
+END
+tribler.icns
+K 25
+svn:wc:ra_dav:version-url
+V 96
+/svn/p2p-next/!svn/ver/1678/next-share/tags/M32/Next-Share/BaseLib/Player/Build/Mac/tribler.icns
+END

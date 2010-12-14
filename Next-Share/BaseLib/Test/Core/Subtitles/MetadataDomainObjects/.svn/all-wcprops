@@ -1,0 +1,29 @@
+K 25
+svn:wc:ra_dav:version-url
+V 108
+/svn/p2p-next/!svn/ver/1678/next-share/tags/M32/Next-Share/BaseLib/Test/Core/Subtitles/MetadataDomainObjects
+END
+test_Subtitle.py
+K 25
+svn:wc:ra_dav:version-url
+V 125
+/svn/p2p-next/!svn/ver/1678/next-share/tags/M32/Next-Share/BaseLib/Test/Core/Subtitles/MetadataDomainObjects/test_Subtitle.py
+END
+test_Langugages.py
+K 25
+svn:wc:ra_dav:version-url
+V 127
+/svn/p2p-next/!svn/ver/1678/next-share/tags/M32/Next-Share/BaseLib/Test/Core/Subtitles/MetadataDomainObjects/test_Langugages.py
+END
+__init__.py
+K 25
+svn:wc:ra_dav:version-url
+V 120
+/svn/p2p-next/!svn/ver/1678/next-share/tags/M32/Next-Share/BaseLib/Test/Core/Subtitles/MetadataDomainObjects/__init__.py
+END
+test_MetadataDTO.py
+K 25
+svn:wc:ra_dav:version-url
+V 128
+/svn/p2p-next/!svn/ver/1678/next-share/tags/M32/Next-Share/BaseLib/Test/Core/Subtitles/MetadataDomainObjects/test_MetadataDTO.py
+END

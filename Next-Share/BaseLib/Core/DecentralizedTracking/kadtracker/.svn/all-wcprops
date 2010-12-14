@@ -1,0 +1,281 @@
+K 25
+svn:wc:ra_dav:version-url
+V 104
+/svn/p2p-next/!svn/ver/1678/next-share/tags/M32/Next-Share/BaseLib/Core/DecentralizedTracking/kadtracker
+END
+test_tracker.py
+K 25
+svn:wc:ra_dav:version-url
+V 120
+/svn/p2p-next/!svn/ver/1678/next-share/tags/M32/Next-Share/BaseLib/Core/DecentralizedTracking/kadtracker/test_tracker.py
+END
+logging_conf.py
+K 25
+svn:wc:ra_dav:version-url
+V 120
+/svn/p2p-next/!svn/ver/1678/next-share/tags/M32/Next-Share/BaseLib/Core/DecentralizedTracking/kadtracker/logging_conf.py
+END
+tracker.py
+K 25
+svn:wc:ra_dav:version-url
+V 115
+/svn/p2p-next/!svn/ver/1678/next-share/tags/M32/Next-Share/BaseLib/Core/DecentralizedTracking/kadtracker/tracker.py
+END
+ktracker_example.py.no
+K 25
+svn:wc:ra_dav:version-url
+V 127
+/svn/p2p-next/!svn/ver/1678/next-share/tags/M32/Next-Share/BaseLib/Core/DecentralizedTracking/kadtracker/ktracker_example.py.no
+END
+test_routing_table.py
+K 25
+svn:wc:ra_dav:version-url
+V 126
+/svn/p2p-next/!svn/ver/1678/next-share/tags/M32/Next-Share/BaseLib/Core/DecentralizedTracking/kadtracker/test_routing_table.py
+END
+routing_table.py
+K 25
+svn:wc:ra_dav:version-url
+V 121
+/svn/p2p-next/!svn/ver/1678/next-share/tags/M32/Next-Share/BaseLib/Core/DecentralizedTracking/kadtracker/routing_table.py
+END
+__init__.py
+K 25
+svn:wc:ra_dav:version-url
+V 116
+/svn/p2p-next/!svn/ver/1678/next-share/tags/M32/Next-Share/BaseLib/Core/DecentralizedTracking/kadtracker/__init__.py
+END
+test_minitwisted.py
+K 25
+svn:wc:ra_dav:version-url
+V 124
+/svn/p2p-next/!svn/ver/1678/next-share/tags/M32/Next-Share/BaseLib/Core/DecentralizedTracking/kadtracker/test_minitwisted.py
+END
+run_dht_node_forever.py
+K 25
+svn:wc:ra_dav:version-url
+V 128
+/svn/p2p-next/!svn/ver/1678/next-share/tags/M32/Next-Share/BaseLib/Core/DecentralizedTracking/kadtracker/run_dht_node_forever.py
+END
+minitwisted.py
+K 25
+svn:wc:ra_dav:version-url
+V 119
+/svn/p2p-next/!svn/ver/1678/next-share/tags/M32/Next-Share/BaseLib/Core/DecentralizedTracking/kadtracker/minitwisted.py
+END
+test_lookup_manager.py
+K 25
+svn:wc:ra_dav:version-url
+V 127
+/svn/p2p-next/!svn/ver/1678/next-share/tags/M32/Next-Share/BaseLib/Core/DecentralizedTracking/kadtracker/test_lookup_manager.py
+END
+test_token_manager.py
+K 25
+svn:wc:ra_dav:version-url
+V 126
+/svn/p2p-next/!svn/ver/1678/next-share/tags/M32/Next-Share/BaseLib/Core/DecentralizedTracking/kadtracker/test_token_manager.py
+END
+floodbarrier.py
+K 25
+svn:wc:ra_dav:version-url
+V 120
+/svn/p2p-next/!svn/ver/1678/next-share/tags/M32/Next-Share/BaseLib/Core/DecentralizedTracking/kadtracker/floodbarrier.py
+END
+token_manager.py
+K 25
+svn:wc:ra_dav:version-url
+V 121
+/svn/p2p-next/!svn/ver/1678/next-share/tags/M32/Next-Share/BaseLib/Core/DecentralizedTracking/kadtracker/token_manager.py
+END
+kadtracker.py
+K 25
+svn:wc:ra_dav:version-url
+V 118
+/svn/p2p-next/!svn/ver/1678/next-share/tags/M32/Next-Share/BaseLib/Core/DecentralizedTracking/kadtracker/kadtracker.py
+END
+interactive_dht.py
+K 25
+svn:wc:ra_dav:version-url
+V 123
+/svn/p2p-next/!svn/ver/1678/next-share/tags/M32/Next-Share/BaseLib/Core/DecentralizedTracking/kadtracker/interactive_dht.py
+END
+test_identifier.py
+K 25
+svn:wc:ra_dav:version-url
+V 123
+/svn/p2p-next/!svn/ver/1678/next-share/tags/M32/Next-Share/BaseLib/Core/DecentralizedTracking/kadtracker/test_identifier.py
+END
+controller.py
+K 25
+svn:wc:ra_dav:version-url
+V 118
+/svn/p2p-next/!svn/ver/1678/next-share/tags/M32/Next-Share/BaseLib/Core/DecentralizedTracking/kadtracker/controller.py
+END
+test_node.py
+K 25
+svn:wc:ra_dav:version-url
+V 117
+/svn/p2p-next/!svn/ver/1678/next-share/tags/M32/Next-Share/BaseLib/Core/DecentralizedTracking/kadtracker/test_node.py
+END
+test_const.py
+K 25
+svn:wc:ra_dav:version-url
+V 118
+/svn/p2p-next/!svn/ver/1678/next-share/tags/M32/Next-Share/BaseLib/Core/DecentralizedTracking/kadtracker/test_const.py
+END
+Makefile
+K 25
+svn:wc:ra_dav:version-url
+V 113
+/svn/p2p-next/!svn/ver/1678/next-share/tags/M32/Next-Share/BaseLib/Core/DecentralizedTracking/kadtracker/Makefile
+END
+ktracker_query.py
+K 25
+svn:wc:ra_dav:version-url
+V 122
+/svn/p2p-next/!svn/ver/1678/next-share/tags/M32/Next-Share/BaseLib/Core/DecentralizedTracking/kadtracker/ktracker_query.py
+END
+MDHT_Spec.txt
+K 25
+svn:wc:ra_dav:version-url
+V 118
+/svn/p2p-next/!svn/ver/1678/next-share/tags/M32/Next-Share/BaseLib/Core/DecentralizedTracking/kadtracker/MDHT_Spec.txt
+END
+test_bencode.py
+K 25
+svn:wc:ra_dav:version-url
+V 120
+/svn/p2p-next/!svn/ver/1678/next-share/tags/M32/Next-Share/BaseLib/Core/DecentralizedTracking/kadtracker/test_bencode.py
+END
+bencode.py
+K 25
+svn:wc:ra_dav:version-url
+V 115
+/svn/p2p-next/!svn/ver/1678/next-share/tags/M32/Next-Share/BaseLib/Core/DecentralizedTracking/kadtracker/bencode.py
+END
+test_utils.py
+K 25
+svn:wc:ra_dav:version-url
+V 118
+/svn/p2p-next/!svn/ver/1678/next-share/tags/M32/Next-Share/BaseLib/Core/DecentralizedTracking/kadtracker/test_utils.py
+END
+test_responder.py
+K 25
+svn:wc:ra_dav:version-url
+V 122
+/svn/p2p-next/!svn/ver/1678/next-share/tags/M32/Next-Share/BaseLib/Core/DecentralizedTracking/kadtracker/test_responder.py
+END
+utils.py
+K 25
+svn:wc:ra_dav:version-url
+V 113
+/svn/p2p-next/!svn/ver/1678/next-share/tags/M32/Next-Share/BaseLib/Core/DecentralizedTracking/kadtracker/utils.py
+END
+responder.py
+K 25
+svn:wc:ra_dav:version-url
+V 117
+/svn/p2p-next/!svn/ver/1678/next-share/tags/M32/Next-Share/BaseLib/Core/DecentralizedTracking/kadtracker/responder.py
+END
+lookup_manager.py
+K 25
+svn:wc:ra_dav:version-url
+V 122
+/svn/p2p-next/!svn/ver/1678/next-share/tags/M32/Next-Share/BaseLib/Core/DecentralizedTracking/kadtracker/lookup_manager.py
+END
+server_dht.py
+K 25
+svn:wc:ra_dav:version-url
+V 118
+/svn/p2p-next/!svn/ver/1678/next-share/tags/M32/Next-Share/BaseLib/Core/DecentralizedTracking/kadtracker/server_dht.py
+END
+README
+K 25
+svn:wc:ra_dav:version-url
+V 111
+/svn/p2p-next/!svn/ver/1678/next-share/tags/M32/Next-Share/BaseLib/Core/DecentralizedTracking/kadtracker/README
+END
+test_floodbarrier.py
+K 25
+svn:wc:ra_dav:version-url
+V 125
+/svn/p2p-next/!svn/ver/1678/next-share/tags/M32/Next-Share/BaseLib/Core/DecentralizedTracking/kadtracker/test_floodbarrier.py
+END
+test_kadtracker.py
+K 25
+svn:wc:ra_dav:version-url
+V 123
+/svn/p2p-next/!svn/ver/1678/next-share/tags/M32/Next-Share/BaseLib/Core/DecentralizedTracking/kadtracker/test_kadtracker.py
+END
+test_querier.py
+K 25
+svn:wc:ra_dav:version-url
+V 120
+/svn/p2p-next/!svn/ver/1678/next-share/tags/M32/Next-Share/BaseLib/Core/DecentralizedTracking/kadtracker/test_querier.py
+END
+querier.py
+K 25
+svn:wc:ra_dav:version-url
+V 115
+/svn/p2p-next/!svn/ver/1678/next-share/tags/M32/Next-Share/BaseLib/Core/DecentralizedTracking/kadtracker/querier.py
+END
+version.txt
+K 25
+svn:wc:ra_dav:version-url
+V 116
+/svn/p2p-next/!svn/ver/1678/next-share/tags/M32/Next-Share/BaseLib/Core/DecentralizedTracking/kadtracker/version.txt
+END
+test_rpc_manager.py
+K 25
+svn:wc:ra_dav:version-url
+V 124
+/svn/p2p-next/!svn/ver/1678/next-share/tags/M32/Next-Share/BaseLib/Core/DecentralizedTracking/kadtracker/test_rpc_manager.py
+END
+rpc_manager.py
+K 25
+svn:wc:ra_dav:version-url
+V 119
+/svn/p2p-next/!svn/ver/1678/next-share/tags/M32/Next-Share/BaseLib/Core/DecentralizedTracking/kadtracker/rpc_manager.py
+END
+test_routing_manager.py
+K 25
+svn:wc:ra_dav:version-url
+V 128
+/svn/p2p-next/!svn/ver/1678/next-share/tags/M32/Next-Share/BaseLib/Core/DecentralizedTracking/kadtracker/test_routing_manager.py
+END
+routing_manager.py
+K 25
+svn:wc:ra_dav:version-url
+V 123
+/svn/p2p-next/!svn/ver/1678/next-share/tags/M32/Next-Share/BaseLib/Core/DecentralizedTracking/kadtracker/routing_manager.py
+END
+test_controller.py
+K 25
+svn:wc:ra_dav:version-url
+V 123
+/svn/p2p-next/!svn/ver/1678/next-share/tags/M32/Next-Share/BaseLib/Core/DecentralizedTracking/kadtracker/test_controller.py
+END
+identifier.py
+K 25
+svn:wc:ra_dav:version-url
+V 118
+/svn/p2p-next/!svn/ver/1678/next-share/tags/M32/Next-Share/BaseLib/Core/DecentralizedTracking/kadtracker/identifier.py
+END
+test_message.py
+K 25
+svn:wc:ra_dav:version-url
+V 120
+/svn/p2p-next/!svn/ver/1678/next-share/tags/M32/Next-Share/BaseLib/Core/DecentralizedTracking/kadtracker/test_message.py
+END
+message.py
+K 25
+svn:wc:ra_dav:version-url
+V 115
+/svn/p2p-next/!svn/ver/1678/next-share/tags/M32/Next-Share/BaseLib/Core/DecentralizedTracking/kadtracker/message.py
+END
+node.py
+K 25
+svn:wc:ra_dav:version-url
+V 112
+/svn/p2p-next/!svn/ver/1678/next-share/tags/M32/Next-Share/BaseLib/Core/DecentralizedTracking/kadtracker/node.py
+END

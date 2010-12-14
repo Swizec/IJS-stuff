@@ -1,0 +1,101 @@
+K 25
+svn:wc:ra_dav:version-url
+V 71
+/svn/p2p-next/!svn/ver/1678/next-share/tags/M32/Next-Share/BaseLib/Core
+END
+LiveSourceAuthConfig.py
+K 25
+svn:wc:ra_dav:version-url
+V 95
+/svn/p2p-next/!svn/ver/1678/next-share/tags/M32/Next-Share/BaseLib/Core/LiveSourceAuthConfig.py
+END
+simpledefs.py
+K 25
+svn:wc:ra_dav:version-url
+V 85
+/svn/p2p-next/!svn/ver/1678/next-share/tags/M32/Next-Share/BaseLib/Core/simpledefs.py
+END
+DownloadConfig.py
+K 25
+svn:wc:ra_dav:version-url
+V 89
+/svn/p2p-next/!svn/ver/1678/next-share/tags/M32/Next-Share/BaseLib/Core/DownloadConfig.py
+END
+__init__.py
+K 25
+svn:wc:ra_dav:version-url
+V 83
+/svn/p2p-next/!svn/ver/1678/next-share/tags/M32/Next-Share/BaseLib/Core/__init__.py
+END
+superpeer.txt
+K 25
+svn:wc:ra_dav:version-url
+V 85
+/svn/p2p-next/!svn/ver/1678/next-share/tags/M32/Next-Share/BaseLib/Core/superpeer.txt
+END
+osutils.py
+K 25
+svn:wc:ra_dav:version-url
+V 82
+/svn/p2p-next/!svn/ver/1678/next-share/tags/M32/Next-Share/BaseLib/Core/osutils.py
+END
+Download.py
+K 25
+svn:wc:ra_dav:version-url
+V 83
+/svn/p2p-next/!svn/ver/1678/next-share/tags/M32/Next-Share/BaseLib/Core/Download.py
+END
+defaults.py
+K 25
+svn:wc:ra_dav:version-url
+V 83
+/svn/p2p-next/!svn/ver/1678/next-share/tags/M32/Next-Share/BaseLib/Core/defaults.py
+END
+DownloadState.py
+K 25
+svn:wc:ra_dav:version-url
+V 88
+/svn/p2p-next/!svn/ver/1678/next-share/tags/M32/Next-Share/BaseLib/Core/DownloadState.py
+END
+RequestPolicy.py
+K 25
+svn:wc:ra_dav:version-url
+V 88
+/svn/p2p-next/!svn/ver/1678/next-share/tags/M32/Next-Share/BaseLib/Core/RequestPolicy.py
+END
+SessionConfig.py
+K 25
+svn:wc:ra_dav:version-url
+V 88
+/svn/p2p-next/!svn/ver/1678/next-share/tags/M32/Next-Share/BaseLib/Core/SessionConfig.py
+END
+API.py
+K 25
+svn:wc:ra_dav:version-url
+V 78
+/svn/p2p-next/!svn/ver/1678/next-share/tags/M32/Next-Share/BaseLib/Core/API.py
+END
+Base.py
+K 25
+svn:wc:ra_dav:version-url
+V 79
+/svn/p2p-next/!svn/ver/1678/next-share/tags/M32/Next-Share/BaseLib/Core/Base.py
+END
+TorrentDef.py
+K 25
+svn:wc:ra_dav:version-url
+V 85
+/svn/p2p-next/!svn/ver/1678/next-share/tags/M32/Next-Share/BaseLib/Core/TorrentDef.py
+END
+exceptions.py
+K 25
+svn:wc:ra_dav:version-url
+V 85
+/svn/p2p-next/!svn/ver/1678/next-share/tags/M32/Next-Share/BaseLib/Core/exceptions.py
+END
+Session.py
+K 25
+svn:wc:ra_dav:version-url
+V 82
+/svn/p2p-next/!svn/ver/1678/next-share/tags/M32/Next-Share/BaseLib/Core/Session.py
+END

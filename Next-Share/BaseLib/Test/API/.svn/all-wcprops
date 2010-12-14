@@ -1,0 +1,89 @@
+K 25
+svn:wc:ra_dav:version-url
+V 75
+/svn/p2p-next/!svn/ver/1678/next-share/tags/M32/Next-Share/BaseLib/Test/API
+END
+test_api.sh
+K 25
+svn:wc:ra_dav:version-url
+V 87
+/svn/p2p-next/!svn/ver/1678/next-share/tags/M32/Next-Share/BaseLib/Test/API/test_api.sh
+END
+test_seeding_live.py
+K 25
+svn:wc:ra_dav:version-url
+V 96
+/svn/p2p-next/!svn/ver/1678/next-share/tags/M32/Next-Share/BaseLib/Test/API/test_seeding_live.py
+END
+test_seeding.py
+K 25
+svn:wc:ra_dav:version-url
+V 91
+/svn/p2p-next/!svn/ver/1678/next-share/tags/M32/Next-Share/BaseLib/Test/API/test_seeding.py
+END
+ec.pem
+K 25
+svn:wc:ra_dav:version-url
+V 82
+/svn/p2p-next/!svn/ver/1678/next-share/tags/M32/Next-Share/BaseLib/Test/API/ec.pem
+END
+file.wmv
+K 25
+svn:wc:ra_dav:version-url
+V 84
+/svn/p2p-next/!svn/ver/1678/next-share/tags/M32/Next-Share/BaseLib/Test/API/file.wmv
+END
+test_tdef.py
+K 25
+svn:wc:ra_dav:version-url
+V 88
+/svn/p2p-next/!svn/ver/1678/next-share/tags/M32/Next-Share/BaseLib/Test/API/test_tdef.py
+END
+test_tracking.py
+K 25
+svn:wc:ra_dav:version-url
+V 92
+/svn/p2p-next/!svn/ver/1678/next-share/tags/M32/Next-Share/BaseLib/Test/API/test_tracking.py
+END
+file2.wmv
+K 25
+svn:wc:ra_dav:version-url
+V 85
+/svn/p2p-next/!svn/ver/1678/next-share/tags/M32/Next-Share/BaseLib/Test/API/file2.wmv
+END
+test_seeding_vod.py
+K 25
+svn:wc:ra_dav:version-url
+V 95
+/svn/p2p-next/!svn/ver/1678/next-share/tags/M32/Next-Share/BaseLib/Test/API/test_seeding_vod.py
+END
+test_api.bat
+K 25
+svn:wc:ra_dav:version-url
+V 88
+/svn/p2p-next/!svn/ver/1678/next-share/tags/M32/Next-Share/BaseLib/Test/API/test_api.bat
+END
+ecpub.pem
+K 25
+svn:wc:ra_dav:version-url
+V 85
+/svn/p2p-next/!svn/ver/1678/next-share/tags/M32/Next-Share/BaseLib/Test/API/ecpub.pem
+END
+test_remote_torrent.py
+K 25
+svn:wc:ra_dav:version-url
+V 98
+/svn/p2p-next/!svn/ver/1678/next-share/tags/M32/Next-Share/BaseLib/Test/API/test_remote_torrent.py
+END
+test_vod.py
+K 25
+svn:wc:ra_dav:version-url
+V 87
+/svn/p2p-next/!svn/ver/1678/next-share/tags/M32/Next-Share/BaseLib/Test/API/test_vod.py
+END
+thumb.jpg
+K 25
+svn:wc:ra_dav:version-url
+V 85
+/svn/p2p-next/!svn/ver/1678/next-share/tags/M32/Next-Share/BaseLib/Test/API/thumb.jpg
+END

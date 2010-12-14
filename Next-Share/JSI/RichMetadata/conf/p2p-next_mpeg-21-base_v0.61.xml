@@ -1,0 +1,57 @@
+<didl:DIDL xmlns:didl="urn:mpeg:mpeg21:2002:02-DIDL-NS" xmlns:dii="urn:mpeg:mpeg21:2002:01-DII-NS" xmlns:xi="http://www.w3.org/2001/XInclude" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="urn:mpeg:mpeg21:2002:02-DIDL-NS didl.xsd urn:mpeg:mpeg21:2002:01-DII-NS dii.xsd">
+  <didl:Item>
+    <didl:Descriptor>
+      <didl:Statement mimeType="text/xml">
+	<dii:Identifier>
+	  urn:p2p-next:item:bbc-bbcone-b00n9p5x
+	</dii:Identifier>
+      </didl:Statement>
+    </didl:Descriptor>
+    <didl:Descriptor>
+      <didl:Statement mimeType="text/xml">
+	<dii:RelatedIdentifier relationshipType= "urn:mpeg:mpeg21:2002:01-RDD-NS:IsAbstractionOf">
+	  urn:bbc:bbcone-b00n9p5x
+	</dii:RelatedIdentifier>
+      </didl:Statement>
+    </didl:Descriptor>
+    <didl:Descriptor>
+      <didl:Statement mimeType="text/xml">
+	<dii:Type>urn:p2p-next:type:item:2009</dii:Type>
+      </didl:Statement>
+    </didl:Descriptor>
+    <didl:Descriptor>
+      <!-- rich metadata -->
+      <didl:Descriptor>
+	<didl:Statement mimeType="text/xml">
+	  <dii:Type>urn:p2p-next:type:rm:core:2009</dii:Type>
+	</didl:Statement>
+      </didl:Descriptor>
+      <!-- references to additional RM -->
+      <xi:include href="$PaymentReference" xpointer="rm.payment" />
+      <xi:include href="$AdvertisementReference" xpointer="rm.advertisement" />
+      <xi:include href="$ScalabilityReference" xpointer="rm.scalability" />
+      <didl:Statement mimeType="text/xml">
+	$MetaCore
+      </didl:Statement>
+    </didl:Descriptor>
+    <!-- References to LIMO -->
+    <xi:include href="$LimoReference" xpointer="limo" />
+    <didl:Component>
+      <didl:Descriptor>
+	<didl:Statement mimeType="text/xml">
+	  <dii:Type>urn:p2p-next:type:content:2009</dii:Type>
+	</didl:Statement>
+      </didl:Descriptor>
+      <didl:Descriptor>
+	<didl:Descriptor>
+	  <didl:Statement mimeType="text/xml">
+	    <dii:Type>
+	      urn:p2p-next:type:content:metadata:2009
+	    </dii:Type>
+	  </didl:Statement>
+	</didl:Descriptor>
+      </didl:Descriptor>
+      <didl:Resource mimeType="$ContentType"  ref="$ContentReference"/>
+    </didl:Component>
+  </didl:Item>
+</didl:DIDL>

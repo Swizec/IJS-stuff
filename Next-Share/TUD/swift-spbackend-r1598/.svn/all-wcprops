@@ -1,0 +1,191 @@
+K 25
+svn:wc:ra_dav:version-url
+V 84
+/svn/p2p-next/!svn/ver/1678/next-share/tags/M32/Next-Share/TUD/swift-spbackend-r1598
+END
+bins.h
+K 25
+svn:wc:ra_dav:version-url
+V 91
+/svn/p2p-next/!svn/ver/1678/next-share/tags/M32/Next-Share/TUD/swift-spbackend-r1598/bins.h
+END
+sha1.h
+K 25
+svn:wc:ra_dav:version-url
+V 91
+/svn/p2p-next/!svn/ver/1678/next-share/tags/M32/Next-Share/TUD/swift-spbackend-r1598/sha1.h
+END
+getopt.c
+K 25
+svn:wc:ra_dav:version-url
+V 93
+/svn/p2p-next/!svn/ver/1678/next-share/tags/M32/Next-Share/TUD/swift-spbackend-r1598/getopt.c
+END
+hashtree.cpp
+K 25
+svn:wc:ra_dav:version-url
+V 97
+/svn/p2p-next/!svn/ver/1678/next-share/tags/M32/Next-Share/TUD/swift-spbackend-r1598/hashtree.cpp
+END
+sendrecv.cpp
+K 25
+svn:wc:ra_dav:version-url
+V 97
+/svn/p2p-next/!svn/ver/1678/next-share/tags/M32/Next-Share/TUD/swift-spbackend-r1598/sendrecv.cpp
+END
+BUGS
+K 25
+svn:wc:ra_dav:version-url
+V 89
+/svn/p2p-next/!svn/ver/1678/next-share/tags/M32/Next-Share/TUD/swift-spbackend-r1598/BUGS
+END
+compat.cpp
+K 25
+svn:wc:ra_dav:version-url
+V 95
+/svn/p2p-next/!svn/ver/1678/next-share/tags/M32/Next-Share/TUD/swift-spbackend-r1598/compat.cpp
+END
+datagram.h
+K 25
+svn:wc:ra_dav:version-url
+V 95
+/svn/p2p-next/!svn/ver/1678/next-share/tags/M32/Next-Share/TUD/swift-spbackend-r1598/datagram.h
+END
+SConstruct
+K 25
+svn:wc:ra_dav:version-url
+V 95
+/svn/p2p-next/!svn/ver/1678/next-share/tags/M32/Next-Share/TUD/swift-spbackend-r1598/SConstruct
+END
+bin64.h
+K 25
+svn:wc:ra_dav:version-url
+V 92
+/svn/p2p-next/!svn/ver/1678/next-share/tags/M32/Next-Share/TUD/swift-spbackend-r1598/bin64.h
+END
+bins.cpp
+K 25
+svn:wc:ra_dav:version-url
+V 93
+/svn/p2p-next/!svn/ver/1678/next-share/tags/M32/Next-Share/TUD/swift-spbackend-r1598/bins.cpp
+END
+Makefile
+K 25
+svn:wc:ra_dav:version-url
+V 93
+/svn/p2p-next/!svn/ver/1678/next-share/tags/M32/Next-Share/TUD/swift-spbackend-r1598/Makefile
+END
+sha1.cpp
+K 25
+svn:wc:ra_dav:version-url
+V 93
+/svn/p2p-next/!svn/ver/1678/next-share/tags/M32/Next-Share/TUD/swift-spbackend-r1598/sha1.cpp
+END
+swift.h
+K 25
+svn:wc:ra_dav:version-url
+V 92
+/svn/p2p-next/!svn/ver/1678/next-share/tags/M32/Next-Share/TUD/swift-spbackend-r1598/swift.h
+END
+LICENSE
+K 25
+svn:wc:ra_dav:version-url
+V 92
+/svn/p2p-next/!svn/ver/1678/next-share/tags/M32/Next-Share/TUD/swift-spbackend-r1598/LICENSE
+END
+ChangeLog
+K 25
+svn:wc:ra_dav:version-url
+V 94
+/svn/p2p-next/!svn/ver/1678/next-share/tags/M32/Next-Share/TUD/swift-spbackend-r1598/ChangeLog
+END
+hashtree.h
+K 25
+svn:wc:ra_dav:version-url
+V 95
+/svn/p2p-next/!svn/ver/1678/next-share/tags/M32/Next-Share/TUD/swift-spbackend-r1598/hashtree.h
+END
+channel.cpp
+K 25
+svn:wc:ra_dav:version-url
+V 96
+/svn/p2p-next/!svn/ver/1678/next-share/tags/M32/Next-Share/TUD/swift-spbackend-r1598/channel.cpp
+END
+do_tests.sh
+K 25
+svn:wc:ra_dav:version-url
+V 96
+/svn/p2p-next/!svn/ver/1678/next-share/tags/M32/Next-Share/TUD/swift-spbackend-r1598/do_tests.sh
+END
+README
+K 25
+svn:wc:ra_dav:version-url
+V 91
+/svn/p2p-next/!svn/ver/1678/next-share/tags/M32/Next-Share/TUD/swift-spbackend-r1598/README
+END
+httpgw.cpp
+K 25
+svn:wc:ra_dav:version-url
+V 95
+/svn/p2p-next/!svn/ver/1678/next-share/tags/M32/Next-Share/TUD/swift-spbackend-r1598/httpgw.cpp
+END
+datagram.cpp
+K 25
+svn:wc:ra_dav:version-url
+V 97
+/svn/p2p-next/!svn/ver/1678/next-share/tags/M32/Next-Share/TUD/swift-spbackend-r1598/datagram.cpp
+END
+getopt_long.c
+K 25
+svn:wc:ra_dav:version-url
+V 98
+/svn/p2p-next/!svn/ver/1678/next-share/tags/M32/Next-Share/TUD/swift-spbackend-r1598/getopt_long.c
+END
+bin64.cpp
+K 25
+svn:wc:ra_dav:version-url
+V 94
+/svn/p2p-next/!svn/ver/1678/next-share/tags/M32/Next-Share/TUD/swift-spbackend-r1598/bin64.cpp
+END
+getopt_win.h
+K 25
+svn:wc:ra_dav:version-url
+V 97
+/svn/p2p-next/!svn/ver/1678/next-share/tags/M32/Next-Share/TUD/swift-spbackend-r1598/getopt_win.h
+END
+TODO
+K 25
+svn:wc:ra_dav:version-url
+V 89
+/svn/p2p-next/!svn/ver/1678/next-share/tags/M32/Next-Share/TUD/swift-spbackend-r1598/TODO
+END
+transfer.cpp
+K 25
+svn:wc:ra_dav:version-url
+V 97
+/svn/p2p-next/!svn/ver/1678/next-share/tags/M32/Next-Share/TUD/swift-spbackend-r1598/transfer.cpp
+END
+bingrep.cpp
+K 25
+svn:wc:ra_dav:version-url
+V 96
+/svn/p2p-next/!svn/ver/1678/next-share/tags/M32/Next-Share/TUD/swift-spbackend-r1598/bingrep.cpp
+END
+compat.h
+K 25
+svn:wc:ra_dav:version-url
+V 93
+/svn/p2p-next/!svn/ver/1678/next-share/tags/M32/Next-Share/TUD/swift-spbackend-r1598/compat.h
+END
+send_control.cpp
+K 25
+svn:wc:ra_dav:version-url
+V 101
+/svn/p2p-next/!svn/ver/1678/next-share/tags/M32/Next-Share/TUD/swift-spbackend-r1598/send_control.cpp
+END
+swift.cpp
+K 25
+svn:wc:ra_dav:version-url
+V 94
+/svn/p2p-next/!svn/ver/1678/next-share/tags/M32/Next-Share/TUD/swift-spbackend-r1598/swift.cpp
+END

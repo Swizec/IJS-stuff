@@ -1,0 +1,53 @@
+K 25
+svn:wc:ra_dav:version-url
+V 85
+/svn/p2p-next/!svn/ver/1678/next-share/tags/M32/Next-Share/BaseLib/Plugin/Build/Win32
+END
+SwarmPlugin_IE.inf
+K 25
+svn:wc:ra_dav:version-url
+V 104
+/svn/p2p-next/!svn/ver/1678/next-share/tags/M32/Next-Share/BaseLib/Plugin/Build/Win32/SwarmPlugin_IE.inf
+END
+swarmplugin.nsi
+K 25
+svn:wc:ra_dav:version-url
+V 101
+/svn/p2p-next/!svn/ver/1678/next-share/tags/M32/Next-Share/BaseLib/Plugin/Build/Win32/swarmplugin.nsi
+END
+setupBGexe.py
+K 25
+svn:wc:ra_dav:version-url
+V 99
+/svn/p2p-next/!svn/ver/1678/next-share/tags/M32/Next-Share/BaseLib/Plugin/Build/Win32/setupBGexe.py
+END
+SwarmPlugin.inf
+K 25
+svn:wc:ra_dav:version-url
+V 101
+/svn/p2p-next/!svn/ver/1678/next-share/tags/M32/Next-Share/BaseLib/Plugin/Build/Win32/SwarmPlugin.inf
+END
+heading.bmp
+K 25
+svn:wc:ra_dav:version-url
+V 97
+/svn/p2p-next/!svn/ver/1678/next-share/tags/M32/Next-Share/BaseLib/Plugin/Build/Win32/heading.bmp
+END
+swarmplugin.exe.manifest
+K 25
+svn:wc:ra_dav:version-url
+V 110
+/svn/p2p-next/!svn/ver/1678/next-share/tags/M32/Next-Share/BaseLib/Plugin/Build/Win32/swarmplugin.exe.manifest
+END
+swarmplugin_FX_only.nsi
+K 25
+svn:wc:ra_dav:version-url
+V 109
+/svn/p2p-next/!svn/ver/1678/next-share/tags/M32/Next-Share/BaseLib/Plugin/Build/Win32/swarmplugin_FX_only.nsi
+END
+swarmplugin_IE_only.nsi
+K 25
+svn:wc:ra_dav:version-url
+V 109
+/svn/p2p-next/!svn/ver/1678/next-share/tags/M32/Next-Share/BaseLib/Plugin/Build/Win32/swarmplugin_IE_only.nsi
+END

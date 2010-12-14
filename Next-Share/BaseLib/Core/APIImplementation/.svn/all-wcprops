@@ -1,0 +1,71 @@
+K 25
+svn:wc:ra_dav:version-url
+V 89
+/svn/p2p-next/!svn/ver/1678/next-share/tags/M32/Next-Share/BaseLib/Core/APIImplementation
+END
+LaunchManyCore.py
+K 25
+svn:wc:ra_dav:version-url
+V 107
+/svn/p2p-next/!svn/ver/1678/next-share/tags/M32/Next-Share/BaseLib/Core/APIImplementation/LaunchManyCore.py
+END
+DownloadImpl.py
+K 25
+svn:wc:ra_dav:version-url
+V 105
+/svn/p2p-next/!svn/ver/1678/next-share/tags/M32/Next-Share/BaseLib/Core/APIImplementation/DownloadImpl.py
+END
+SingleDownload.py
+K 25
+svn:wc:ra_dav:version-url
+V 107
+/svn/p2p-next/!svn/ver/1678/next-share/tags/M32/Next-Share/BaseLib/Core/APIImplementation/SingleDownload.py
+END
+UserCallbackHandler.py
+K 25
+svn:wc:ra_dav:version-url
+V 112
+/svn/p2p-next/!svn/ver/1678/next-share/tags/M32/Next-Share/BaseLib/Core/APIImplementation/UserCallbackHandler.py
+END
+maketorrent.py
+K 25
+svn:wc:ra_dav:version-url
+V 104
+/svn/p2p-next/!svn/ver/1678/next-share/tags/M32/Next-Share/BaseLib/Core/APIImplementation/maketorrent.py
+END
+miscutils.py
+K 25
+svn:wc:ra_dav:version-url
+V 102
+/svn/p2p-next/!svn/ver/1678/next-share/tags/M32/Next-Share/BaseLib/Core/APIImplementation/miscutils.py
+END
+SessionRuntimeConfig.py
+K 25
+svn:wc:ra_dav:version-url
+V 113
+/svn/p2p-next/!svn/ver/1678/next-share/tags/M32/Next-Share/BaseLib/Core/APIImplementation/SessionRuntimeConfig.py
+END
+__init__.py
+K 25
+svn:wc:ra_dav:version-url
+V 101
+/svn/p2p-next/!svn/ver/1678/next-share/tags/M32/Next-Share/BaseLib/Core/APIImplementation/__init__.py
+END
+makeurl.py
+K 25
+svn:wc:ra_dav:version-url
+V 100
+/svn/p2p-next/!svn/ver/1678/next-share/tags/M32/Next-Share/BaseLib/Core/APIImplementation/makeurl.py
+END
+DownloadRuntimeConfig.py
+K 25
+svn:wc:ra_dav:version-url
+V 114
+/svn/p2p-next/!svn/ver/1678/next-share/tags/M32/Next-Share/BaseLib/Core/APIImplementation/DownloadRuntimeConfig.py
+END
+ThreadPool.py
+K 25
+svn:wc:ra_dav:version-url
+V 103
+/svn/p2p-next/!svn/ver/1678/next-share/tags/M32/Next-Share/BaseLib/Core/APIImplementation/ThreadPool.py
+END

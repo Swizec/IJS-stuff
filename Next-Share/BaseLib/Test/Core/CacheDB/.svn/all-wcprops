@@ -1,0 +1,23 @@
+K 25
+svn:wc:ra_dav:version-url
+V 84
+/svn/p2p-next/!svn/ver/1678/next-share/tags/M32/Next-Share/BaseLib/Test/Core/CacheDB
+END
+__init__.py
+K 25
+svn:wc:ra_dav:version-url
+V 96
+/svn/p2p-next/!svn/ver/1678/next-share/tags/M32/Next-Share/BaseLib/Test/Core/CacheDB/__init__.py
+END
+SimpleMetadataDB.py
+K 25
+svn:wc:ra_dav:version-url
+V 104
+/svn/p2p-next/!svn/ver/1678/next-share/tags/M32/Next-Share/BaseLib/Test/Core/CacheDB/SimpleMetadataDB.py
+END
+test_MetadataDBHandler.py
+K 25
+svn:wc:ra_dav:version-url
+V 110
+/svn/p2p-next/!svn/ver/1678/next-share/tags/M32/Next-Share/BaseLib/Test/Core/CacheDB/test_MetadataDBHandler.py
+END

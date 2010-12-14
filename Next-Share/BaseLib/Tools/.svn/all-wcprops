@@ -1,0 +1,167 @@
+K 25
+svn:wc:ra_dav:version-url
+V 72
+/svn/p2p-next/!svn/ver/1678/next-share/tags/M32/Next-Share/BaseLib/Tools
+END
+btshowmetainfo.py
+K 25
+svn:wc:ra_dav:version-url
+V 90
+/svn/p2p-next/!svn/ver/1678/next-share/tags/M32/Next-Share/BaseLib/Tools/btshowmetainfo.py
+END
+dirtracker.py
+K 25
+svn:wc:ra_dav:version-url
+V 86
+/svn/p2p-next/!svn/ver/1678/next-share/tags/M32/Next-Share/BaseLib/Tools/dirtracker.py
+END
+proxy-cmdline.py
+K 25
+svn:wc:ra_dav:version-url
+V 89
+/svn/p2p-next/!svn/ver/1678/next-share/tags/M32/Next-Share/BaseLib/Tools/proxy-cmdline.py
+END
+createlivestream-noauth.py
+K 25
+svn:wc:ra_dav:version-url
+V 99
+/svn/p2p-next/!svn/ver/1678/next-share/tags/M32/Next-Share/BaseLib/Tools/createlivestream-noauth.py
+END
+cmdlinedl.py
+K 25
+svn:wc:ra_dav:version-url
+V 85
+/svn/p2p-next/!svn/ver/1678/next-share/tags/M32/Next-Share/BaseLib/Tools/cmdlinedl.py
+END
+createlivestream.py
+K 25
+svn:wc:ra_dav:version-url
+V 92
+/svn/p2p-next/!svn/ver/1678/next-share/tags/M32/Next-Share/BaseLib/Tools/createlivestream.py
+END
+__init__.py
+K 25
+svn:wc:ra_dav:version-url
+V 84
+/svn/p2p-next/!svn/ver/1678/next-share/tags/M32/Next-Share/BaseLib/Tools/__init__.py
+END
+trial_poa_server.py
+K 25
+svn:wc:ra_dav:version-url
+V 92
+/svn/p2p-next/!svn/ver/1678/next-share/tags/M32/Next-Share/BaseLib/Tools/trial_poa_server.py
+END
+createpoa.py
+K 25
+svn:wc:ra_dav:version-url
+V 85
+/svn/p2p-next/!svn/ver/1678/next-share/tags/M32/Next-Share/BaseLib/Tools/createpoa.py
+END
+pipe-babscam-h264-nosound-mencoder.sh
+K 25
+svn:wc:ra_dav:version-url
+V 110
+/svn/p2p-next/!svn/ver/1678/next-share/tags/M32/Next-Share/BaseLib/Tools/pipe-babscam-h264-nosound-mencoder.sh
+END
+seed-njaal.py
+K 25
+svn:wc:ra_dav:version-url
+V 86
+/svn/p2p-next/!svn/ver/1678/next-share/tags/M32/Next-Share/BaseLib/Tools/seed-njaal.py
+END
+pingbackserver.py
+K 25
+svn:wc:ra_dav:version-url
+V 90
+/svn/p2p-next/!svn/ver/1678/next-share/tags/M32/Next-Share/BaseLib/Tools/pingbackserver.py
+END
+bitbucket-live-noauth.py
+K 25
+svn:wc:ra_dav:version-url
+V 97
+/svn/p2p-next/!svn/ver/1678/next-share/tags/M32/Next-Share/BaseLib/Tools/bitbucket-live-noauth.py
+END
+pipe-babscam-h264-aac-gop-sync.sh
+K 25
+svn:wc:ra_dav:version-url
+V 106
+/svn/p2p-next/!svn/ver/1678/next-share/tags/M32/Next-Share/BaseLib/Tools/pipe-babscam-h264-aac-gop-sync.sh
+END
+httpseeder.py
+K 25
+svn:wc:ra_dav:version-url
+V 86
+/svn/p2p-next/!svn/ver/1678/next-share/tags/M32/Next-Share/BaseLib/Tools/httpseeder.py
+END
+bitbucket-live.py
+K 25
+svn:wc:ra_dav:version-url
+V 90
+/svn/p2p-next/!svn/ver/1678/next-share/tags/M32/Next-Share/BaseLib/Tools/bitbucket-live.py
+END
+superpeer.py
+K 25
+svn:wc:ra_dav:version-url
+V 85
+/svn/p2p-next/!svn/ver/1678/next-share/tags/M32/Next-Share/BaseLib/Tools/superpeer.py
+END
+pipe-arnocam-jip.sh
+K 25
+svn:wc:ra_dav:version-url
+V 92
+/svn/p2p-next/!svn/ver/1678/next-share/tags/M32/Next-Share/BaseLib/Tools/pipe-arnocam-jip.sh
+END
+stunserver.py
+K 25
+svn:wc:ra_dav:version-url
+V 86
+/svn/p2p-next/!svn/ver/1678/next-share/tags/M32/Next-Share/BaseLib/Tools/stunserver.py
+END
+createtorrent.py
+K 25
+svn:wc:ra_dav:version-url
+V 89
+/svn/p2p-next/!svn/ver/1678/next-share/tags/M32/Next-Share/BaseLib/Tools/createtorrent.py
+END
+dirtrackerseeder.py
+K 25
+svn:wc:ra_dav:version-url
+V 92
+/svn/p2p-next/!svn/ver/1678/next-share/tags/M32/Next-Share/BaseLib/Tools/dirtrackerseeder.py
+END
+createlivestream-njaal.py
+K 25
+svn:wc:ra_dav:version-url
+V 98
+/svn/p2p-next/!svn/ver/1678/next-share/tags/M32/Next-Share/BaseLib/Tools/createlivestream-njaal.py
+END
+pipe-arnocam-home.sh
+K 25
+svn:wc:ra_dav:version-url
+V 93
+/svn/p2p-next/!svn/ver/1678/next-share/tags/M32/Next-Share/BaseLib/Tools/pipe-arnocam-home.sh
+END
+pipe-babscam-h264-mp3.sh
+K 25
+svn:wc:ra_dav:version-url
+V 97
+/svn/p2p-next/!svn/ver/1678/next-share/tags/M32/Next-Share/BaseLib/Tools/pipe-babscam-h264-mp3.sh
+END
+duration2torrent.py
+K 25
+svn:wc:ra_dav:version-url
+V 92
+/svn/p2p-next/!svn/ver/1678/next-share/tags/M32/Next-Share/BaseLib/Tools/duration2torrent.py
+END
+seeking.py
+K 25
+svn:wc:ra_dav:version-url
+V 83
+/svn/p2p-next/!svn/ver/1678/next-share/tags/M32/Next-Share/BaseLib/Tools/seeking.py
+END
+pipe-babscam-mpeg4-mp3-sync.sh
+K 25
+svn:wc:ra_dav:version-url
+V 103
+/svn/p2p-next/!svn/ver/1678/next-share/tags/M32/Next-Share/BaseLib/Tools/pipe-babscam-mpeg4-mp3-sync.sh
+END

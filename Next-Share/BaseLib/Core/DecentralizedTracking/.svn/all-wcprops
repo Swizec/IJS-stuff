@@ -1,0 +1,35 @@
+K 25
+svn:wc:ra_dav:version-url
+V 93
+/svn/p2p-next/!svn/ver/1678/next-share/tags/M32/Next-Share/BaseLib/Core/DecentralizedTracking
+END
+mainlineDHT.py
+K 25
+svn:wc:ra_dav:version-url
+V 108
+/svn/p2p-next/!svn/ver/1678/next-share/tags/M32/Next-Share/BaseLib/Core/DecentralizedTracking/mainlineDHT.py
+END
+__init__.py
+K 25
+svn:wc:ra_dav:version-url
+V 105
+/svn/p2p-next/!svn/ver/1678/next-share/tags/M32/Next-Share/BaseLib/Core/DecentralizedTracking/__init__.py
+END
+mainlineDHTChecker.py
+K 25
+svn:wc:ra_dav:version-url
+V 115
+/svn/p2p-next/!svn/ver/1678/next-share/tags/M32/Next-Share/BaseLib/Core/DecentralizedTracking/mainlineDHTChecker.py
+END
+repex.py
+K 25
+svn:wc:ra_dav:version-url
+V 102
+/svn/p2p-next/!svn/ver/1678/next-share/tags/M32/Next-Share/BaseLib/Core/DecentralizedTracking/repex.py
+END
+ut_pex.py
+K 25
+svn:wc:ra_dav:version-url
+V 103
+/svn/p2p-next/!svn/ver/1678/next-share/tags/M32/Next-Share/BaseLib/Core/DecentralizedTracking/ut_pex.py
+END

@@ -1,0 +1,71 @@
+K 25
+svn:wc:ra_dav:version-url
+V 72
+/svn/p2p-next/!svn/ver/1678/next-share/tags/M32/Next-Share/BaseLib/Video
+END
+CachingStream.py
+K 25
+svn:wc:ra_dav:version-url
+V 89
+/svn/p2p-next/!svn/ver/1678/next-share/tags/M32/Next-Share/BaseLib/Video/CachingStream.py
+END
+Ogg.py
+K 25
+svn:wc:ra_dav:version-url
+V 79
+/svn/p2p-next/!svn/ver/1678/next-share/tags/M32/Next-Share/BaseLib/Video/Ogg.py
+END
+VideoServer.py
+K 25
+svn:wc:ra_dav:version-url
+V 87
+/svn/p2p-next/!svn/ver/1678/next-share/tags/M32/Next-Share/BaseLib/Video/VideoServer.py
+END
+Buttons.py
+K 25
+svn:wc:ra_dav:version-url
+V 83
+/svn/p2p-next/!svn/ver/1678/next-share/tags/M32/Next-Share/BaseLib/Video/Buttons.py
+END
+__init__.py
+K 25
+svn:wc:ra_dav:version-url
+V 84
+/svn/p2p-next/!svn/ver/1678/next-share/tags/M32/Next-Share/BaseLib/Video/__init__.py
+END
+utils.py
+K 25
+svn:wc:ra_dav:version-url
+V 81
+/svn/p2p-next/!svn/ver/1678/next-share/tags/M32/Next-Share/BaseLib/Video/utils.py
+END
+VideoFrame.py
+K 25
+svn:wc:ra_dav:version-url
+V 86
+/svn/p2p-next/!svn/ver/1678/next-share/tags/M32/Next-Share/BaseLib/Video/VideoFrame.py
+END
+defs.py
+K 25
+svn:wc:ra_dav:version-url
+V 80
+/svn/p2p-next/!svn/ver/1678/next-share/tags/M32/Next-Share/BaseLib/Video/defs.py
+END
+VideoPlayer.py
+K 25
+svn:wc:ra_dav:version-url
+V 87
+/svn/p2p-next/!svn/ver/1678/next-share/tags/M32/Next-Share/BaseLib/Video/VideoPlayer.py
+END
+Progress.py
+K 25
+svn:wc:ra_dav:version-url
+V 84
+/svn/p2p-next/!svn/ver/1678/next-share/tags/M32/Next-Share/BaseLib/Video/Progress.py
+END
+VLCWrapper.py
+K 25
+svn:wc:ra_dav:version-url
+V 86
+/svn/p2p-next/!svn/ver/1678/next-share/tags/M32/Next-Share/BaseLib/Video/VLCWrapper.py
+END

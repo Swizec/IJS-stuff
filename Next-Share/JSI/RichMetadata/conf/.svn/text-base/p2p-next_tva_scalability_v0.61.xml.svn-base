@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<TVAMain xmlns:p2pnext="urn:p2pnext:metadata:2008" xmlns:tva="urn:tva:metadata:2007" xmlns:mpeg7="urn:tva:mpeg7:2005" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="urn:tva:metadata:2007" xmlns:mpeg21="urn:mpeg:mpeg21:2003:01-DIA-NS"  xsi:schemaLocation="urn:tva:metadata:2007 tva_metadata_3-1_v141_p2p.xsd" xml:lang="EN" publisher="$Publisher">
+	<ProgramDescription>
+		<ProgramInformationTable>
+			<ProgramInformation programId="$ProgramId">
+				<BasicDescription xsi:type="p2pnext:P2POptionalDataDescriptionType">
+					<p2pnext:ScalabilityData>
+						<p2pnext:LayerInfos xmlns="urn:mpeg:mpeg21:2003:01-DIA-NS">
+							<Module xsi:type="UtilityFunctionType">
+								<Constraint iOPinRef="Bitrate">
+									<Values xsi:type="IntegerVectorType">
+										<Vector>400 800 1200 2400</Vector>
+									</Values>
+								</Constraint>
+								<AdaptationOperator iOPinRef="QualityLevel">
+									<Values xsi:type="IntegerVectorType">
+										<Vector>0 0 0 0</Vector>
+									</Values>
+								</AdaptationOperator>
+								<AdaptationOperator iOPinRef="DependencyId">
+									<Values xsi:type="IntegerVectorType">
+										<Vector>0 1 2 3</Vector>
+									</Values>
+								</AdaptationOperator>
+								<AdaptationOperator iOPinRef="TemporalLevel">
+									<Values xsi:type="IntegerVectorType">
+										<Vector>0 0 0 0</Vector>
+									</Values>
+								</AdaptationOperator>
+								<Utility iOPinRef="Framerate">
+									<Values xsi:type="IntegerVectorType">
+										<Vector>25 25 25 25</Vector>
+									</Values>
+								</Utility>
+								<Utility iOPinRef="Width">
+									<Values xsi:type="IntegerVectorType">
+										<Vector>320 320 640 640</Vector>
+									</Values>
+								</Utility>
+								<Utility iOPinRef="Height">
+									<Values xsi:type="IntegerVectorType">
+										<Vector>240 240 480 480</Vector>
+									</Values>
+								</Utility>
+							</Module>
+						</p2pnext:LayerInfos>
+						<p2pnext:SPS>
+							<p2pnext:spsId>1</p2pnext:spsId>
+							<p2pnext:width>320</p2pnext:width>
+							<p2pnext:height>240</p2pnext:height>
+							<p2pnext:value>Z1MADUsBBrLCwSyA</p2pnext:value>
+						</p2pnext:SPS>
+						<p2pnext:SPS>
+							<p2pnext:spsId>2</p2pnext:spsId>
+							<p2pnext:width>640</p2pnext:width>
+							<p2pnext:height>480</p2pnext:height>
+							<p2pnext:value>Z02AR7rsFiaq</p2pnext:value>
+						</p2pnext:SPS>
+						<p2pnext:PPS>
+							<p2pnext:spsId>1</p2pnext:spsId>
+							<p2pnext:value>aEngRqA=</p2pnext:value>
+						</p2pnext:PPS>
+						<p2pnext:PPS>
+							<p2pnext:spsId>2</p2pnext:spsId>
+							<p2pnext:value>an4EagrA</p2pnext:value>
+						</p2pnext:PPS>
+					</p2pnext:ScalabilityData>
+				</BasicDescription>
+			</ProgramInformation>
+		</ProgramInformationTable>
+	</ProgramDescription>
+</TVAMain>

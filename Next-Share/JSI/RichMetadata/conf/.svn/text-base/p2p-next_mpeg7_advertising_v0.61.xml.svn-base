@@ -1,0 +1,29 @@
+<Mpeg7 xmlns:p2pnext="urn:p2pnext:metadata:2008" xmlns="urn:mpeg:mpeg7:schema:2001" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:mpeg7="urn:mpeg:mpeg7:schema:2001" xsi:schemaLocation="urn:mpeg:mpeg7:schema:2001 mpeg7-v1_p2p.xsd">
+	<Description xsi:type="p2pnext:P2POptionalDescriptionType">
+		<p2pnext:AdvertisingData>
+			<p2pnext:BusinessModel>BM2</p2pnext:BusinessModel>
+			<p2pnext:IsLiveContent>false</p2pnext:IsLiveContent>
+			<p2pnext:AllowAdvertising>true</p2pnext:AllowAdvertising>
+			<p2pnext:CircularContent>Allow Superdistribution</p2pnext:CircularContent>
+			<p2pnext:AdType>Web</p2pnext:AdType>
+			<p2pnext:StreamingType>In-Stream</p2pnext:StreamingType>
+			<p2pnext:AdFormat>Banner</p2pnext:AdFormat>
+			<p2pnext:TargetGroup>
+				<p2pnext:Age>30</p2pnext:Age>
+				<p2pnext:Gender>W</p2pnext:Gender>
+				<p2pnext:Country>AT</p2pnext:Country>
+			</p2pnext:TargetGroup>
+			<p2pnext:ContentFormat>
+				<Content href="MPEG7ContentCS">
+					<Name>audiovisual</Name>
+				</Content>
+				<VisualCoding>
+					<Format href="urn:mpeg:mpeg7:cs:VisualCodingFormatCS:2001">
+						<Name>MPEG-2 Video Main Profile @ Main Level</Name>
+					</Format>
+					<Frame width="$HorizontalSize" height="$VerticalSize" aspectRatio="$AspectRatio" rate="$FrameRate"/>
+				</VisualCoding>
+			</p2pnext:ContentFormat>
+		</p2pnext:AdvertisingData>
+	</Description>
+</Mpeg7>

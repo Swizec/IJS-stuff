@@ -1,0 +1,35 @@
+K 25
+svn:wc:ra_dav:version-url
+V 66
+/svn/p2p-next/!svn/ver/1678/next-share/tags/M32/Next-Share/BaseLib
+END
+schema_sdb_v5.sql
+K 25
+svn:wc:ra_dav:version-url
+V 84
+/svn/p2p-next/!svn/ver/1678/next-share/tags/M32/Next-Share/BaseLib/schema_sdb_v5.sql
+END
+LICENSE.txt
+K 25
+svn:wc:ra_dav:version-url
+V 78
+/svn/p2p-next/!svn/ver/1678/next-share/tags/M32/Next-Share/BaseLib/LICENSE.txt
+END
+__init__.py
+K 25
+svn:wc:ra_dav:version-url
+V 78
+/svn/p2p-next/!svn/ver/1678/next-share/tags/M32/Next-Share/BaseLib/__init__.py
+END
+binary-LICENSE-postfix.txt
+K 25
+svn:wc:ra_dav:version-url
+V 93
+/svn/p2p-next/!svn/ver/1678/next-share/tags/M32/Next-Share/BaseLib/binary-LICENSE-postfix.txt
+END
+ns-LICENSE.txt
+K 25
+svn:wc:ra_dav:version-url
+V 81
+/svn/p2p-next/!svn/ver/1678/next-share/tags/M32/Next-Share/BaseLib/ns-LICENSE.txt
+END

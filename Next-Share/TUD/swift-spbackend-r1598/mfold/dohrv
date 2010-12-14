@@ -1,0 +1,48 @@
+#!/bin/bash
+#   The script downloads logs in parallel,
+#   feeds them into fifos; sort takes logs
+#   from fifos, merges and gzips them;
+#   the result is put into harvest/
+#
+if [ ! $SERVERS ]; then
+    export SERVERS="servers.txt"
+fi
+
+mv harvest .hrv-old
+rm -rf .hrv-old &
+mkdir harvest
+
+for s in `grep -v '#' $SERVERS`; do
+    mkfifo harvest/$s.fifo
+    # yas, yes, yes
+    ( scp ~/.ssh/config $s:.ssh/config > /dev/null ) &
+done
+wait
+
+for s in `grep -v '#' $SERVERS`; do
+    (if ssh $s \
+        "cd swift/  && \
+        rm -rf harvest && mkdir harvest && \
+        ( zcat lout.gz | ./mfold/logparse $s | gzip )" \
+        | gunzip > harvest/$s.fifo ; then
+
+        ssh $s "cd swift/; tar cz harvest" | tar xz
+        echo $s harvest OK
+
+    else
+        echo $s harvest FAIL
+    fi) &
+done  
+
+# Ensure your version of sort is recent enough
+# batch-size is critical for performance
+LC_ALL=C sort -m -s --batch-size=64 harvest/*.fifo | gzip > harvest/swarm.log.gz &
+wait
+./loggraphs
+./logreport > harvest/index.html
+
+rm harvest/*.fifo
+cp report.css harvest
+scp -rq harvest mfold.libswift.org:/storage/mfold-granary/`date +%d%b_%H:%M`_`whoami` &
+
+echo DONE

@@ -1,0 +1,53 @@
+K 25
+svn:wc:ra_dav:version-url
+V 90
+/svn/p2p-next/!svn/ver/1678/next-share/tags/M32/Next-Share/BaseLib/Test/subtitles_test_res
+END
+fake2.srt
+K 25
+svn:wc:ra_dav:version-url
+V 100
+/svn/p2p-next/!svn/ver/1678/next-share/tags/M32/Next-Share/BaseLib/Test/subtitles_test_res/fake2.srt
+END
+schema_sdb_v5.sql
+K 25
+svn:wc:ra_dav:version-url
+V 108
+/svn/p2p-next/!svn/ver/1678/next-share/tags/M32/Next-Share/BaseLib/Test/subtitles_test_res/schema_sdb_v5.sql
+END
+wrong_subs_languages.1.csv
+K 25
+svn:wc:ra_dav:version-url
+V 117
+/svn/p2p-next/!svn/ver/1678/next-share/tags/M32/Next-Share/BaseLib/Test/subtitles_test_res/wrong_subs_languages.1.csv
+END
+wrong_subs_languages.2.csv
+K 25
+svn:wc:ra_dav:version-url
+V 117
+/svn/p2p-next/!svn/ver/1678/next-share/tags/M32/Next-Share/BaseLib/Test/subtitles_test_res/wrong_subs_languages.2.csv
+END
+subs_languages.csv
+K 25
+svn:wc:ra_dav:version-url
+V 109
+/svn/p2p-next/!svn/ver/1678/next-share/tags/M32/Next-Share/BaseLib/Test/subtitles_test_res/subs_languages.csv
+END
+fake.srt
+K 25
+svn:wc:ra_dav:version-url
+V 99
+/svn/p2p-next/!svn/ver/1678/next-share/tags/M32/Next-Share/BaseLib/Test/subtitles_test_res/fake.srt
+END
+fake0.srt
+K 25
+svn:wc:ra_dav:version-url
+V 100
+/svn/p2p-next/!svn/ver/1678/next-share/tags/M32/Next-Share/BaseLib/Test/subtitles_test_res/fake0.srt
+END
+fake1.srt
+K 25
+svn:wc:ra_dav:version-url
+V 100
+/svn/p2p-next/!svn/ver/1678/next-share/tags/M32/Next-Share/BaseLib/Test/subtitles_test_res/fake1.srt
+END

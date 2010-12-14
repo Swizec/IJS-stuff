@@ -1,0 +1,107 @@
+K 25
+svn:wc:ra_dav:version-url
+V 90
+/svn/p2p-next/!svn/ver/1678/next-share/tags/M32/Next-Share/TUD/swift-spbackend-r1598/tests
+END
+sbittest.cpp
+K 25
+svn:wc:ra_dav:version-url
+V 103
+/svn/p2p-next/!svn/ver/1678/next-share/tags/M32/Next-Share/TUD/swift-spbackend-r1598/tests/sbittest.cpp
+END
+SConscript
+K 25
+svn:wc:ra_dav:version-url
+V 101
+/svn/p2p-next/!svn/ver/1678/next-share/tags/M32/Next-Share/TUD/swift-spbackend-r1598/tests/SConscript
+END
+bintest.cpp
+K 25
+svn:wc:ra_dav:version-url
+V 102
+/svn/p2p-next/!svn/ver/1678/next-share/tags/M32/Next-Share/TUD/swift-spbackend-r1598/tests/bintest.cpp
+END
+congctrltest.cpp
+K 25
+svn:wc:ra_dav:version-url
+V 107
+/svn/p2p-next/!svn/ver/1678/next-share/tags/M32/Next-Share/TUD/swift-spbackend-r1598/tests/congctrltest.cpp
+END
+ledbattest2.cpp
+K 25
+svn:wc:ra_dav:version-url
+V 106
+/svn/p2p-next/!svn/ver/1678/next-share/tags/M32/Next-Share/TUD/swift-spbackend-r1598/tests/ledbattest2.cpp
+END
+binstest2.cpp
+K 25
+svn:wc:ra_dav:version-url
+V 104
+/svn/p2p-next/!svn/ver/1678/next-share/tags/M32/Next-Share/TUD/swift-spbackend-r1598/tests/binstest2.cpp
+END
+freemap.cpp
+K 25
+svn:wc:ra_dav:version-url
+V 102
+/svn/p2p-next/!svn/ver/1678/next-share/tags/M32/Next-Share/TUD/swift-spbackend-r1598/tests/freemap.cpp
+END
+bin64test.cpp
+K 25
+svn:wc:ra_dav:version-url
+V 104
+/svn/p2p-next/!svn/ver/1678/next-share/tags/M32/Next-Share/TUD/swift-spbackend-r1598/tests/bin64test.cpp
+END
+sbit2test.cpp
+K 25
+svn:wc:ra_dav:version-url
+V 104
+/svn/p2p-next/!svn/ver/1678/next-share/tags/M32/Next-Share/TUD/swift-spbackend-r1598/tests/sbit2test.cpp
+END
+pex_test.sh
+K 25
+svn:wc:ra_dav:version-url
+V 102
+/svn/p2p-next/!svn/ver/1678/next-share/tags/M32/Next-Share/TUD/swift-spbackend-r1598/tests/pex_test.sh
+END
+hashtest.cpp
+K 25
+svn:wc:ra_dav:version-url
+V 103
+/svn/p2p-next/!svn/ver/1678/next-share/tags/M32/Next-Share/TUD/swift-spbackend-r1598/tests/hashtest.cpp
+END
+transfertest.cpp
+K 25
+svn:wc:ra_dav:version-url
+V 107
+/svn/p2p-next/!svn/ver/1678/next-share/tags/M32/Next-Share/TUD/swift-spbackend-r1598/tests/transfertest.cpp
+END
+rwtest.cpp
+K 25
+svn:wc:ra_dav:version-url
+V 101
+/svn/p2p-next/!svn/ver/1678/next-share/tags/M32/Next-Share/TUD/swift-spbackend-r1598/tests/rwtest.cpp
+END
+connecttest.cpp
+K 25
+svn:wc:ra_dav:version-url
+V 106
+/svn/p2p-next/!svn/ver/1678/next-share/tags/M32/Next-Share/TUD/swift-spbackend-r1598/tests/connecttest.cpp
+END
+dgramtest.cpp
+K 25
+svn:wc:ra_dav:version-url
+V 104
+/svn/p2p-next/!svn/ver/1678/next-share/tags/M32/Next-Share/TUD/swift-spbackend-r1598/tests/dgramtest.cpp
+END
+ledbattest.cpp
+K 25
+svn:wc:ra_dav:version-url
+V 105
+/svn/p2p-next/!svn/ver/1678/next-share/tags/M32/Next-Share/TUD/swift-spbackend-r1598/tests/ledbattest.cpp
+END
+binstest.cpp
+K 25
+svn:wc:ra_dav:version-url
+V 103
+/svn/p2p-next/!svn/ver/1678/next-share/tags/M32/Next-Share/TUD/swift-spbackend-r1598/tests/binstest.cpp
+END

@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<TVAMain xmlns:p2pnext="urn:p2pnext:metadata:2008" xmlns:tva="urn:tva:metadata:2007" xmlns:mpeg7="urn:tva:mpeg7:2005" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="urn:tva:metadata:2007" xsi:schemaLocation="urn:tva:metadata:2007 tva_metadata_3-1_v141_p2p.xsd" xml:lang="EN" publisher="$Publisher">
+	<ProgramDescription>
+		<ProgramInformationTable>
+			<ProgramInformation programId="$ProgramId">
+				<BasicDescription xsi:type="p2pnext:P2POptionalDataDescriptionType">
+					<PurchaseList>
+						<PurchaseItem xsi:type="p2pnext:P2PPurchaseItemType">
+							<Price currency="$Currency">5.0</Price>
+							<p2pnext:PaymentId>test_payment_id</p2pnext:PaymentId>
+							<p2pnext:PaymentRecipient>provider@p2p-next.org</p2pnext:PaymentRecipient>
+							<p2pnext:AcceptDonations>true</p2pnext:AcceptDonations>
+							<p2pnext:AdvancedInfos>http://www.p2p-next.org/paymentInformation.html</p2pnext:AdvancedInfos>
+						</PurchaseItem>
+					</PurchaseList>
+				</BasicDescription>
+			</ProgramInformation>
+		</ProgramInformationTable>
+	</ProgramDescription>
+</TVAMain>

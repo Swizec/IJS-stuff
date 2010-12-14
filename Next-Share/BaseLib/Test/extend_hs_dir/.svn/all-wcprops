@@ -1,0 +1,17 @@
+K 25
+svn:wc:ra_dav:version-url
+V 85
+/svn/p2p-next/!svn/ver/1678/next-share/tags/M32/Next-Share/BaseLib/Test/extend_hs_dir
+END
+dummydata.merkle.torrent
+K 25
+svn:wc:ra_dav:version-url
+V 110
+/svn/p2p-next/!svn/ver/1678/next-share/tags/M32/Next-Share/BaseLib/Test/extend_hs_dir/dummydata.merkle.torrent
+END
+proxyservice.test.torrent
+K 25
+svn:wc:ra_dav:version-url
+V 111
+/svn/p2p-next/!svn/ver/1678/next-share/tags/M32/Next-Share/BaseLib/Test/extend_hs_dir/proxyservice.test.torrent
+END

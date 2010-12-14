@@ -1,0 +1,29 @@
+K 25
+svn:wc:ra_dav:version-url
+V 86
+/svn/p2p-next/!svn/ver/1678/next-share/tags/M32/Next-Share/BaseLib/Test/Core/Subtitles
+END
+test_SubtitlesHandler.py
+K 25
+svn:wc:ra_dav:version-url
+V 111
+/svn/p2p-next/!svn/ver/1678/next-share/tags/M32/Next-Share/BaseLib/Test/Core/Subtitles/test_SubtitlesHandler.py
+END
+__init__.py
+K 25
+svn:wc:ra_dav:version-url
+V 98
+/svn/p2p-next/!svn/ver/1678/next-share/tags/M32/Next-Share/BaseLib/Test/Core/Subtitles/__init__.py
+END
+test_RichMetadataInterceptor.py
+K 25
+svn:wc:ra_dav:version-url
+V 118
+/svn/p2p-next/!svn/ver/1678/next-share/tags/M32/Next-Share/BaseLib/Test/Core/Subtitles/test_RichMetadataInterceptor.py
+END
+simple_mocks.py
+K 25
+svn:wc:ra_dav:version-url
+V 102
+/svn/p2p-next/!svn/ver/1678/next-share/tags/M32/Next-Share/BaseLib/Test/Core/Subtitles/simple_mocks.py
+END

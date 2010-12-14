@@ -1,0 +1,35 @@
+K 25
+svn:wc:ra_dav:version-url
+V 53
+/svn/p2p-next/!svn/ver/1908/JSI/ProviderToolbox/tools
+END
+discoveryfeed.py
+K 25
+svn:wc:ra_dav:version-url
+V 70
+/svn/p2p-next/!svn/ver/1908/JSI/ProviderToolbox/tools/discoveryfeed.py
+END
+managefeed.py
+K 25
+svn:wc:ra_dav:version-url
+V 67
+/svn/p2p-next/!svn/ver/1908/JSI/ProviderToolbox/tools/managefeed.py
+END
+printxml.py
+K 25
+svn:wc:ra_dav:version-url
+V 65
+/svn/p2p-next/!svn/ver/1908/JSI/ProviderToolbox/tools/printxml.py
+END
+publisher.py
+K 25
+svn:wc:ra_dav:version-url
+V 66
+/svn/p2p-next/!svn/ver/1908/JSI/ProviderToolbox/tools/publisher.py
+END
+getfeed.py
+K 25
+svn:wc:ra_dav:version-url
+V 64
+/svn/p2p-next/!svn/ver/1908/JSI/ProviderToolbox/tools/getfeed.py
+END
