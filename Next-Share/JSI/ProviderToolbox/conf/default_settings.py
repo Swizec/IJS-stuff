@@ -6,7 +6,7 @@ from os.path import sep
 
 # The root directory where the media/content will be stored, one
 # directory per feed
-MEDIA_ROOT = '/home/swizec/media'
+MEDIA_ROOT = '/media/external'
 
 # The directory where all torrent files will be stored for the time of
 # usage. If the torrent files are to be passed to the user through web
@@ -16,11 +16,11 @@ MEDIA_ROOT = '/home/swizec/media'
 EXPORT_TORRENT_DIR = MEDIA_ROOT + sep + "torrents"
 
 # Internal tracker listen port. The port that the tracker listens to.
-INTERNAL_TRACKER_PORT = 8080
+INTERNAL_TRACKER_PORT = 8082
 # Internal tracker IP address. If intended for public change to one of
 # the public addresses of your host in question (0.0.0.0 should work
 # as well, listen on all interfaces?)
-INTERNAL_TRACKER_IP = "127.0.0.1"
+INTERNAL_TRACKER_IP = "193.138.1.106"
 
 # Absolute publishing link for the feeds. The link will appear
 # prepended to all your publications in feeds if not defined per feed
@@ -149,12 +149,12 @@ LIVE_MMM_ITEM = {"title": "setTitleEpisodeTitle",
                  "content:base": None,
                  "genre": "setGenre",
                  "parential": "setMinimumAge",
-                 "scheduled": None,
-                 "live_duration": "setDuration"}
+                 "scheduled": None}
+#                 "live_duration": "setDuration"}
 
     
 MEDIA_RM_MAP = {"container": "setFileFormat",
-                "duration": "setDuration",
+#                "duration": "setDuration",
                 "start": None,
                 "bitrate": "setBitRate",
                 "size": "setFileSize"}
