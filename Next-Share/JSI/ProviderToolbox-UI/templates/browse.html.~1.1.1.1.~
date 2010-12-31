@@ -1,0 +1,76 @@
+<!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML//EN">
+<html> <head>
+<title>Feed browser</title>
+<link type="text/css" href="{{ MEDIA_URL }}css/ui-lightness/jquery-ui-1.8.7.custom.css" rel="stylesheet" />	
+<script type="text/javascript" src="{{ MEDIA_URL }}js/jquery-1.4.4.min.js"></script>
+<script type="text/javascript" src="{{ MEDIA_URL }}js/jquery-ui-1.8.7.custom.min.js"></script>
+<script type="text/javascript" src="{{ MEDIA_URL }}js/browse.js"></script>
+
+
+<style>
+.errorlist { color: red; font-size: 0.7em }
+.form { display: none; position: absolute }
+</style>
+</head>
+
+<body>
+
+<div id="tabs">
+  <ul>
+    <li><a href="#feeds">Feeds</a></li>
+    <li><a href="#did_base">DID_BASE</a></li>
+    <li><a href="#torrent">Torrent</a></li>
+    <li><a href="#view">View</a></li>
+  </ul>
+
+  <div id="feeds">
+    <div id="accordion">
+
+      <div>
+	<h3><a href="#">Add new</a></h3>
+	<div>
+	  <form action="/#posted" method="post">
+	    {{ add_form.as_p }}
+	    <input type="submit" value="Submit" />
+	    {% csrf_token %}
+	  </form>
+	</div>
+      </div>
+      
+    {% for feed in feeds %}
+      <div>
+
+	<h3><a href="#">{{ feed.data.channel.title }}</a></h3>
+        <div class="panel">
+	  <input type="button" value="Edit" class="edit" />
+	  <div class="display">
+	  <p>{{ feed.data.channel.description }}</p>
+	  <ul>
+	    {% for item in feed.data.items %}
+	    <h4><a href="{{ item.guid }}">{{ item.title }}</a></h4>
+	    {% endfor %}
+	  </ul>
+	  </div>
+
+	  <div class="form">
+	    <form action="/change" method="post">
+	      {{ feed.edit_form.as_p }}
+	      <input type="submit" value="Change" />
+	      {% csrf_token %}
+	    </form>
+	  </div>
+	</div>
+      </div>
+      {% endfor %}
+    </div>
+  </div>
+
+  <div id="did_base">Did_base stuff comes here</div>
+
+  <div id="torrent">Torrent stuff comes here</div>
+
+  <div id="view">View stuff comes here</div>
+</div>
+
+</body>
+</html>
