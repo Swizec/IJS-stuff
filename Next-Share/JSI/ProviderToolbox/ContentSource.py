@@ -16,7 +16,7 @@ from JSI.RichMetadata.conf import metadata
 from BaseLib.Core.TorrentDef import TorrentDef
 
 __author__ = 'D. Gabrijelcic (dusan@e5.ijs.si)'
-__revision__ = '0.16'
+__revision__ = '0.21'
 __all__ = ['ContentSource', 'Channel', 'ContentUnit', 
            'RTVVoDContent', 'classpath', '__revision__']
 
@@ -127,7 +127,7 @@ class ContentUnit(Identify):
                              "getPublisher",
                              "getOriginator",
                              "getFileSize",
-                             "getDuration",
+#                             "getDuration",
                              # Content unit attribute
                              "contentFile"]
 
@@ -1244,8 +1244,8 @@ class Channel(ContentSource):
                 source = os.path.join(self.storage, v.contentFile)
                 if os.path.exists(source) and not os.path.isdir(source):
                     tdef = TorrentDef()
-                    if v.metadata and v.metadata.getDuration():
-                        config['duration'] = v.metadata.getDuration()
+#                    if v.metadata and v.metadata.getDuration():
+#                        config['duration'] = v.metadata.getDuration()
                     tdef.add_content(source, playtime=config['duration'])
                     tdef.set_tracker(config['tracker'])
                     tdef.set_piece_length(config['piecesize'])
