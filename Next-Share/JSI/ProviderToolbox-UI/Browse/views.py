@@ -64,12 +64,14 @@ def list_dir(request):
           
         rmg = RichMetadataGenerator.getInstance()
         rich_meta = rmg.getRichMetadata(dir+item+'.xml')
-        for attr in rmg.knownAttributes():
-          print attr, rich_meta[attr]
+        
+        for key, value in rich_meta:
+          print key, value
         
         return {'dir': os.path.isdir(dir),
                 'name': basic_meta['name'],
                 'basic_meta': basic_meta,
+                'rich_meta': rich_meta,
                 'parent': form.cleaned_data['dir'],
                 'id': ''.join([alphanum.sub('', parent) ,alphanum.sub('', item)]).replace('/', '-')}
 

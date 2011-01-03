@@ -799,8 +799,14 @@ class RichMetadata(object):
     def __setitem__(self, key, val):
       return self.__setattr__(name, val)
       
+    def iteritems(self):
+      return [(key, self.__dict__[key]) for key in self.keys()]
+      
+    def __iter__(self):
+      return iter(self.iteritems())
+      
     def keys(self):
-      return self.__dict__.keys()
+      return [key for key in self.__dict__.keys() if key[:3] not in ['get', 'set']]
 
     def __setattr__(self, name, value):
         """
