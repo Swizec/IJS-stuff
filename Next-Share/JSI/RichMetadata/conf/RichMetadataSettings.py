@@ -281,7 +281,10 @@ METADATA_SETS = {METADATA_CORE: P2P_NEXT_TAGS_CORE,
 ############################ Learning
 
 # Learn the structure from the following samples
-ME_DIR = "JSI/RichMetadata/conf"
+
+#ME_DIR = "JSI/RichMetadata/conf"
+# this ensures the ME_DIR is always correct
+ME_DIR = __file__.rsplit('/', 1)[0]
 SEP = sep
 LEARN_BASE_CORE = {TAG_MPEG7: ME_DIR + SEP + "p2p-next_mpeg7_v" + VERSION + ".xml",
                    TAG_TVA_MAIN: ME_DIR + SEP + "p2p-next_tva_v" + VERSION + ".xml"}

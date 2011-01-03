@@ -61,6 +61,11 @@ def list_dir(request):
         for line in open(dir+'.properties'):
           (key, val) = line.split(' = ')
           basic_meta[key] = val
+          
+        rmg = RichMetadataGenerator.getInstance()
+        rich_meta = rmg.getRichMetadata(dir+item+'.xml')
+        for attr in rmg.knownAttributes():
+          print attr, rich_meta[attr]
         
         return {'dir': os.path.isdir(dir),
                 'name': basic_meta['name'],

@@ -792,6 +792,15 @@ class RichMetadata(object):
             return self.__dict__[name]
         except KeyError:
             return None
+            
+    def __getitem__(self, key):
+      return self.__getattr__(key)
+      
+    def __setitem__(self, key, val):
+      return self.__setattr__(name, val)
+      
+    def keys(self):
+      return self.__dict__.keys()
 
     def __setattr__(self, name, value):
         """
