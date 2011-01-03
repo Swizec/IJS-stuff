@@ -43,7 +43,7 @@ USE_I18N = True
 # calendars according to the current locale
 USE_L10N = True
 
-ROOT_URL = '/home/swizec/Documents/IJS-stuff/Next-Share/JSI/ProviderToolbox-UI/'
+ROOT_URL = '/Users/Swizec/Documents/IJS-stuff/Next-Share/JSI/ProviderToolbox-UI/'
 
 # Absolute path to the directory that holds media.
 # Example: "/home/media/media.lawrence.com/"

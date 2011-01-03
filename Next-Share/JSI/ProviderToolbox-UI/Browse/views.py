@@ -51,6 +51,11 @@ def list_dir(request):
 
     def parse(item):
         parent = form.cleaned_data['dir']
+        
+        if os.path.isdir(settings.FEED_DIR+item):
+          if '.properties' not in os.listdir(settings.FEED_DIR+item):
+            return None
+        
         return {'dir': os.path.isdir(settings.FEED_DIR+item),
                 'name': item,
                 'parent': form.cleaned_data['dir'],
@@ -58,7 +63,8 @@ def list_dir(request):
 
     if form.is_valid():
         print form.cleaned_data['dir']
-        items = map(parse, sorted(os.listdir(settings.FEED_DIR+form.cleaned_data['dir'])))
+        items = filter(lambda i: i != None, 
+                       map(parse, sorted(os.listdir(settings.FEED_DIR+form.cleaned_data['dir']))))
         
         context = {'items': items,
                    'parent': form.cleaned_data['dir'],
