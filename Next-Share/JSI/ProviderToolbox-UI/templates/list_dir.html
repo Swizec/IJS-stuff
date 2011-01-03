@@ -9,9 +9,13 @@
   <div class="panel">
     <input type="button" value="Edit" class="edit" />
     <div class="display">
-      <p>
-        <img src="{{ item.basic_meta.image }}" />
-        {{ item.description }}</p>
+      <img src="{{ item.basic_meta.image }}" style="float: left" />
+      <ul>
+        <li><label>Original:</label><a href="{{ item.basic_meta.location }}">{{ item.basic_meta.location }}</a></li>
+        <li><label>Publish:</label><a href="{{ item.basic_meta.publish }}">{{ item.basic_meta.publish }}</a></li>
+        <li><label>Export feed:</label><a href="{{ item.basic_meta.exportFeedLink }}">{{ item.basic_meta.exportFeedLink }}</a></li>
+      </ul>
+      <p>{{ item.description }}</p>
       <ul>
 	{% for item in item.items %}
 	<h4><a href="{{ item.guid }}">{{ item.title }}</a></h4>
