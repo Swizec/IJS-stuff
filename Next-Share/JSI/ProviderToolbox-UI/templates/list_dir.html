@@ -2,14 +2,16 @@
 <div>
 
   {% if item.dir %}
-  <h3><a href="#">+ {{ item.name }}</a></h3>
+  <h3><a href="#">+ <img src="{{ item.basic_meta.image }}" style="height: 1em" /> {{ item.name }}</a></h3>
   {% else %}
   <h3><a href="#">{{ item.name }}</a></h3>
   {% endif %}
   <div class="panel">
     <input type="button" value="Edit" class="edit" />
     <div class="display">
-      <p>{{ item.description }}</p>
+      <p>
+        <img src="{{ item.basic_meta.image }}" />
+        {{ item.description }}</p>
       <ul>
 	{% for item in item.items %}
 	<h4><a href="{{ item.guid }}">{{ item.title }}</a></h4>

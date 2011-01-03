@@ -51,13 +51,20 @@ def list_dir(request):
 
     def parse(item):
         parent = form.cleaned_data['dir']
+        dir = settings.FEED_DIR+item+"/"
         
-        if os.path.isdir(settings.FEED_DIR+item):
+        if os.path.isdir(dir):
           if '.properties' not in os.listdir(settings.FEED_DIR+item):
             return None
         
-        return {'dir': os.path.isdir(settings.FEED_DIR+item),
-                'name': item,
+        basic_meta = {}
+        for line in open(dir+'.properties'):
+          (key, val) = line.split(' = ')
+          basic_meta[key] = val
+        
+        return {'dir': os.path.isdir(dir),
+                'name': basic_meta['name'],
+                'basic_meta': basic_meta,
                 'parent': form.cleaned_data['dir'],
                 'id': ''.join([alphanum.sub('', parent) ,alphanum.sub('', item)]).replace('/', '-')}
 
