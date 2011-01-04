@@ -2,10 +2,12 @@ $(function(){
 
     // Accordion
 
-
-    $('.edit').click(function () {
-	$(this).siblings(".display").fadeOut(function () {
-	    $(this).siblings(".form").fadeIn();
+    $('.edit').live('click', function () {
+	$(this).siblings(".display").animate({opacity: 0}, 500, function () {
+	    $(this).siblings(".form").fadeIn(function () {
+     	  $(this).css('z-index', 1);
+     	  $(this).siblings('.display').css('z-index', 0);
+	    });
 	});
 	
     });
@@ -26,7 +28,7 @@ function make_accordion(selector) {
 
 function add_list (dir, selector) {
     $.get('/list_dir/', {'dir': dir}, function (data) {
-	$(selector).append(data).accordion('destroy');
-	make_accordion(selector);
+      $(selector).accordion('destroy').append(data);
+      make_accordion(selector);
     });
 }

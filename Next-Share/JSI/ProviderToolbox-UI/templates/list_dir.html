@@ -8,6 +8,12 @@
   {% endif %}
   <div class="panel">
     <input type="button" value="Edit" class="edit" />
+    <form action="/" method="post" class="form">
+      <input type="submit" value="Submit" />
+      {{ item.edit_form.as_p }}
+      <input type="submit" value="Submit" />
+      {% csrf_token %}
+    </form>
     <div class="display">
       <img src="{{ item.basic_meta.image }}" style="float: left" />
       <ul>
@@ -31,17 +37,9 @@
 
     {% if item.dir %}
     <script>
-      add_list('{{ item.parent }}{{ item.name }}', '#accordion-{{ item.id }}');
+      add_list('{{ item.parent }}{{ item.dirpath }}', '#accordion-{{ item.id }}');
     </script>
     <div id="accordion-{{ item.id }}">
-    </div>
-    {% else %}
-    <div class="form">
-      <form action="/change" method="post">
-	{{ item.edit_form.as_p }}
-	<input type="submit" value="Change" />
-	{% csrf_token %}
-      </form>
     </div>
     {% endif %}
   </div>

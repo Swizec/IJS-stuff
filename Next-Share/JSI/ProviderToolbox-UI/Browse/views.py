@@ -4,6 +4,7 @@ from django.http import HttpResponse, HttpResponseRedirect, QueryDict
 from django.core.context_processors import csrf
 from django.conf import settings
 from django.shortcuts import render_to_response
+from django.template.loader import render_to_string
 
 import os, urllib, re
 
@@ -26,15 +27,18 @@ def begin(request):
         form = AddForm(request.POST)
         if form.is_valid():
             rmg = RichMetadataGenerator.getInstance()
-            m = rmg.getRichMetadata()
-
-            m.setTitle(form.cleaned_data['title'])
-            #m.setLanguage(form.cleaned_data['language'])
-            #m.setGenre(form.cleaned_data['genre'])
+            meta = rmg.getRichMetadata()
             
-            print rmg.prettyPrint(rmg.build(m))
+            for key in form.cleaned_data.keys():
+              if key != 'filename':
+                meta.__getattr__(key)(form.cleaned_data[key])
+              
+            # TODO: security issue
+            #print form.cleaned_data['filename']
+            f = open(form.cleaned_data['filename'], 'w')
+            f.write(rmg.build(meta))
+            f.close()
             
-
             return HttpResponseRedirect('/')
     else:
         form = AddForm()
@@ -52,34 +56,51 @@ def list_dir(request):
 
     def parse(item):
         parent = form.cleaned_data['dir']
-        dir = settings.FEED_DIR+item+"/"
+        dir = settings.FEED_DIR+parent+"/"+item+"/"
+        basic_meta = {}
+        rmg = RichMetadataGenerator.getInstance()
         
         if os.path.isdir(dir):
           if '.properties' not in os.listdir(settings.FEED_DIR+item):
             return None
         
-        basic_meta = {}
-        for line in open(dir+'.properties'):
-          (key, val) = line.split(' = ')
-          basic_meta[key] = val
+          for line in open(dir+'.properties'):
+            (key, val) = line.split(' = ')
+            basic_meta[key] = val
           
-        rmg = RichMetadataGenerator.getInstance()
-        meta = rmg.getRichMetadata(dir+item+'.xml')
+          meta = rmg.getRichMetadata(dir+parent+item+'.xml')
+          filename = dir+item+'.xml'
+        else:
+          if not item.endswith('.xml') or item[:-4] == parent[1:-1]:
+            return None
+          meta = rmg.getRichMetadata(settings.FEED_DIR+parent+"/"+item)
+          filename = settings.FEED_DIR+parent+"/"+item
+            
         rich_meta = {}
+        formdata = {}
         
         for api in meta.getAPIMethods():
           if api.startswith("get"):
-            rich_meta[metadata.HUMAN_DESCRIPTION.get(meta.method2attrib[api])] = meta[api]()
+            try:
+              entry = meta[api]().encode('utf-8')
+            except AttributeError:
+              entry = ''
+              
+            rich_meta[metadata.HUMAN_DESCRIPTION.get(meta.method2attrib[api])] = entry
+            formdata[api.replace('get', 'set')] = entry
+            
+        formdata['filename'] = filename
             
         return {'dir': os.path.isdir(dir),
-                'name': basic_meta['name'],
+                'dirpath': item,
+                'name': item,
                 'basic_meta': basic_meta,
                 'rich_meta': rich_meta,
                 'parent': form.cleaned_data['dir'],
+                'edit_form': AddForm(QueryDict(urllib.urlencode(formdata))),
                 'id': ''.join([alphanum.sub('', parent) ,alphanum.sub('', item)]).replace('/', '-')}
 
     if form.is_valid():
-        print form.cleaned_data['dir']
         items = filter(lambda i: i != None, 
                        map(parse, sorted(os.listdir(settings.FEED_DIR+form.cleaned_data['dir']))))
         
@@ -87,5 +108,7 @@ def list_dir(request):
                    'parent': form.cleaned_data['dir'],
                    'MEDIA_URL': settings.MEDIA_URL}
         context.update(csrf(request))
+        
+        #print render_to_string('list_dir.html', context)
 
-        return render_to_response('list_dir.html', context)
+        return render_to_response('list_dir.html', context, mimetype="text/html")
