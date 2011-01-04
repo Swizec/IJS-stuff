@@ -11,6 +11,7 @@ from lib import feedparser
 from forms import AddForm, ListDirForm
 
 from JSI.RichMetadata.RichMetadata import RichMetadataGenerator
+from JSI.RichMetadata.conf import metadata
 
 def begin(request):
     def parse(feed):
@@ -63,11 +64,13 @@ def list_dir(request):
           basic_meta[key] = val
           
         rmg = RichMetadataGenerator.getInstance()
-        rich_meta = rmg.getRichMetadata(dir+item+'.xml')
+        meta = rmg.getRichMetadata(dir+item+'.xml')
+        rich_meta = {}
         
-        for key, value in rich_meta:
-          print key, value
-        
+        for api in meta.getAPIMethods():
+          if api.startswith("get"):
+            rich_meta[metadata.HUMAN_DESCRIPTION.get(meta.method2attrib[api])] = meta[api]()
+            
         return {'dir': os.path.isdir(dir),
                 'name': basic_meta['name'],
                 'basic_meta': basic_meta,

@@ -14,8 +14,11 @@
         <li><label>Original:</label><a href="{{ item.basic_meta.location }}">{{ item.basic_meta.location }}</a></li>
         <li><label>Publish:</label><a href="{{ item.basic_meta.publish }}">{{ item.basic_meta.publish }}</a></li>
         <li><label>Export feed:</label><a href="{{ item.basic_meta.exportFeedLink }}">{{ item.basic_meta.exportFeedLink }}</a></li>
-        {% for key, value in item.rich_meta.items %}
-          <li><label>{{ key }}:</label>{{ value }}</li>
+      </ul>
+      <hr />
+      <ul>
+        {% for name, value in item.rich_meta.items %}
+          <li><label>{{ name }}: </label>{{ value }}</li>
         {% endfor %}
       </ul>
       <p>{{ item.description }}</p>
