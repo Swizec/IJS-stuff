@@ -85,8 +85,10 @@ def list_dir(request):
               entry = meta[api]().encode('utf-8')
             except AttributeError:
               entry = ''
+            
+            if entry != '':
+              rich_meta[metadata.HUMAN_DESCRIPTION.get(meta.method2attrib[api])] = entry
               
-            rich_meta[metadata.HUMAN_DESCRIPTION.get(meta.method2attrib[api])] = entry
             formdata[api.replace('get', 'set')] = entry
             
         formdata['filename'] = filename
