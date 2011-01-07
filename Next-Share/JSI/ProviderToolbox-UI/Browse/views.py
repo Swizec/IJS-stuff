@@ -9,7 +9,7 @@ from django.template.loader import render_to_string
 import os, urllib, re
 
 from lib import feedparser
-from forms import AddForm, ListDirForm
+from forms import MetaForm, ListDirForm
 
 from JSI.RichMetadata.RichMetadata import RichMetadataGenerator
 from JSI.RichMetadata.conf import metadata
@@ -19,12 +19,12 @@ def begin(request):
         feed = feedparser.parse(settings.FEED_DIR+feed)
         feed.channel.description = feed.channel.description.encode('utf-8')
         return {'data': feed,
-                'edit_form': AddForm(QueryDict(urllib.urlencode(feed.channel)))}
+                'edit_form': MetaForm(QueryDict(urllib.urlencode(feed.channel)))}
     
     #feeds = map(parse, os.listdir(settings.FEED_DIR))
 
     if request.method == 'POST':
-        form = AddForm(request.POST)
+        form = MetaForm(request.POST)
         if form.is_valid():
             rmg = RichMetadataGenerator.getInstance()
             meta = rmg.getRichMetadata()
@@ -41,7 +41,7 @@ def begin(request):
             
             return HttpResponseRedirect('/')
     else:
-        form = AddForm()
+        form = MetaForm()
 
     context = {'feeds': [],
                'MEDIA_URL': settings.MEDIA_URL,
@@ -70,11 +70,13 @@ def list_dir(request):
           
           meta = rmg.getRichMetadata(dir+parent+item+'.xml')
           filename = dir+item+'.xml'
+          main_meta = True
         else:
           if not item.endswith('.xml') or item[:-4] == parent[1:-1]:
             return None
           meta = rmg.getRichMetadata(settings.FEED_DIR+parent+"/"+item)
           filename = settings.FEED_DIR+parent+"/"+item
+          main_meta = False
             
         rich_meta = {}
         formdata = {}
@@ -88,7 +90,7 @@ def list_dir(request):
             
             if entry != '':
               rich_meta[metadata.HUMAN_DESCRIPTION.get(meta.method2attrib[api])] = entry
-              
+              MetaForm
             formdata[api.replace('get', 'set')] = entry
             
         formdata['filename'] = filename
@@ -99,7 +101,7 @@ def list_dir(request):
                 'basic_meta': basic_meta,
                 'rich_meta': rich_meta,
                 'parent': form.cleaned_data['dir'],
-                'edit_form': AddForm(QueryDict(urllib.urlencode(formdata))),
+                'edit_form': MetaForm(QueryDict(urllib.urlencode(formdata)), main_meta=main_meta),
                 'id': ''.join([alphanum.sub('', parent) ,alphanum.sub('', item)]).replace('/', '-')}
 
     if form.is_valid():
