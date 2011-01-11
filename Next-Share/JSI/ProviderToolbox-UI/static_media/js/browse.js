@@ -9,7 +9,14 @@ $(function(){
      	  $(this).siblings('.display').css('z-index', 0);
 	    });
 	});
-	
+    });
+    
+    $('form').live('submit', function (event) {
+      if ($(this).find("input[name='should_cascade']").val() == 'True') {
+        if (!confirm("Changes will be applied in cascade to all children.")) {
+          event.preventDefault();
+        }
+      }
     });
 
     $('#tabs').tabs();
