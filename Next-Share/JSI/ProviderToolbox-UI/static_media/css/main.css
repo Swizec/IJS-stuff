@@ -28,3 +28,7 @@ label {
   display: inline-block;
   padding-right: 1em;
 }
+
+form {
+  font-size: 0.8em;
+}

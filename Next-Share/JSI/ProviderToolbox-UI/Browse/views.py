@@ -33,9 +33,9 @@ def begin(request):
               if key != 'filename':
                 meta.__getattr__(key)(form.cleaned_data[key])
               
-            # TODO: security issue
-            #print form.cleaned_data['filename']
-            f = open(form.cleaned_data['filename'], 'w')
+            
+            #print settings.FEED_DIR+form.cleaned_data['filename']
+            f = open(settings.FEED_DIR+form.cleaned_data['filename'], 'w')
             f.write(rmg.build(meta))
             f.close()
             
@@ -69,13 +69,13 @@ def list_dir(request):
             basic_meta[key] = val
           
           meta = rmg.getRichMetadata(dir+parent+item+'.xml')
-          filename = dir+item+'.xml'
+          filename = dir.replace(settings.FEED_DIR, '')+parent+item+'.xml'
           main_meta = True
         else:
           if not item.endswith('.xml') or item[:-4] == parent[1:-1]:
             return None
           meta = rmg.getRichMetadata(settings.FEED_DIR+parent+"/"+item)
-          filename = settings.FEED_DIR+parent+"/"+item
+          filename = parent+"/"+item
           main_meta = False
             
         rich_meta = {}
