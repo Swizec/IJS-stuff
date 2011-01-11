@@ -22,6 +22,10 @@ class MetaForm(forms.Form):
         self.fields[api] = forms.CharField(required=False,
                                            label=metadata.HUMAN_DESCRIPTION.get(meta.method2attrib[api]))
     self.fields['filename'] = forms.CharField(required=False, widget=forms.HiddenInput)
+    self.fields['should_cascade'] = forms.ChoiceField(required=False, 
+                                                      widget=forms.HiddenInput, 
+                                                      choices=[('False', 'False'), 
+                                                               ('True', 'True')])
 
 class ListDirForm(forms.Form):
     dir = forms.CharField(max_length=300, required=False)

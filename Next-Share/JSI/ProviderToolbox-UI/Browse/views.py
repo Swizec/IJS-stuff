@@ -26,20 +26,30 @@ def begin(request):
     if request.method == 'POST':
         form = MetaForm(request.POST)
         if form.is_valid():
+          def rewriteWithNew(xml):
             rmg = RichMetadataGenerator.getInstance()
-            meta = rmg.getRichMetadata()
+            meta = rmg.getRichMetadata(open(xml, 'r'))
             
             for key in form.cleaned_data.keys():
-              if key != 'filename':
+              if key not in ['filename', 'should_cascade']:
                 meta.__getattr__(key)(form.cleaned_data[key])
-              
-            
-            #print settings.FEED_DIR+form.cleaned_data['filename']
-            f = open(settings.FEED_DIR+form.cleaned_data['filename'], 'w')
+                
+            f = open(xml, 'w')
             f.write(rmg.build(meta))
             f.close()
+              
+          #print settings.FEED_DIR+form.cleaned_data['filename']
+          feed = settings.FEED_DIR+form.cleaned_data['filename']
+          rewriteWithNew(feed)
             
-            return HttpResponseRedirect('/')
+          if form.cleaned_data['should_cascade'] == 'True':
+            dir = feed.rsplit('/', 1)[0]
+            for file in os.listdir(dir):
+              if file.endswith(".xml"):
+                rewriteWithNew(dir+file)
+                
+            
+          return HttpResponseRedirect('/')
     else:
         form = MetaForm()
 
@@ -54,6 +64,8 @@ def list_dir(request):
     alphanum = re.compile('[^0-9a-zA-Z/]+')
     form = ListDirForm(request.GET)
 
+    #TODO: refactor this very fugly section
+  
     def parse(item):
         parent = form.cleaned_data['dir']
         dir = settings.FEED_DIR+parent+"/"+item+"/"
@@ -94,6 +106,7 @@ def list_dir(request):
             formdata[api.replace('get', 'set')] = entry
             
         formdata['filename'] = filename
+        formdata['should_cascade'] = main_meta
             
         return {'dir': os.path.isdir(dir),
                 'dirpath': item,
