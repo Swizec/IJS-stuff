@@ -8,6 +8,7 @@
   {% endif %}
   <div class="panel">
     <input type="button" value="Edit" class="edit" />
+    <input type="button" value="Update" class="update" path="{{ item.parent }}{{ item.dirpath }}" />
     <form action="/" method="post" class="form">
       <input type="submit" value="Submit" />
       {{ item.edit_form.as_p }}

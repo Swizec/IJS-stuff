@@ -9,7 +9,7 @@ from django.template.loader import render_to_string
 import os, urllib, re
 
 from lib import feedparser
-from forms import MetaForm, ListDirForm, AddFeedForm
+from forms import MetaForm, ListDirForm, AddFeedForm, UpdateFeedForm, CreateFeedForm
 
 from JSI.RichMetadata.RichMetadata import RichMetadataGenerator
 from JSI.RichMetadata.conf import metadata
@@ -55,7 +55,8 @@ def begin(request):
 
     context = {'feeds': [],
                'MEDIA_URL': settings.MEDIA_URL,
-               'add_form': form}
+               'add_form': form,
+               'create_form': CreateFeedForm()}
     context.update(csrf(request))
     
     return render_to_response('browse.html', context)
@@ -71,6 +72,35 @@ def add_feed(request):
                         mimetype="text")
   else:
     return HttpResponseBadRequest("Wrong data posted")
+    
+# TODO: cleanup this crap
+def create_feed(request):
+  form = CreateFeedForm(request.POST)
+  if form.is_valid():
+    dir = settings.FEED_DIR+"created/"
+    if not os.path.isdir(dir):
+      os.mkdir(dir)
+      
+    feed_dir = dir+form.cleaned_data['title'].replace(' ', '_')
+    
+    proc = os.popen(' && '.join(["export PYTHONPATH=$(pwd)/../../",
+                                 "python ../ProviderToolbox/tools/managefeed.py -c -t '%s' -k '%s' -g '%s' -d %s" %
+                                 (form.cleaned_data['title'], 
+                                  form.cleaned_data['description'], 
+                                  form.cleaned_data['originator'],
+                                  feed_dir)]))
+    return HttpResponseRedirect('/')
+  else:
+    return HttpResponseBadRequest("Wrong data posted")
+    
+def update_feed(request):
+  form = UpdateFeedForm(request.GET)
+  if form.is_valid():
+    proc = os.popen(' && '.join(["export PYTHONPATH=$(pwd)/../../",
+                                 "python ../ProviderToolbox/tools/getfeed.py -l '%s'" % form.cleaned_data['path']]))
+    return HttpResponse(proc.read(), mimetype="text/plain")
+  else:
+    return HttpResponseBadRequest("Expected a path")
 
 
 def list_dir(request):

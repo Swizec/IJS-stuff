@@ -22,7 +22,18 @@
   <div id="feeds">
     <div id="accordion">
 
-      <div>
+    <div>
+	<h3><a href="#">Create new</a></h3>
+	<div>
+	  <form action="/create_feed/" method="post">
+	    {{ create_form.as_p }}
+	    <input type="submit" value="Submit" />
+	    {% csrf_token %}
+	  </form>
+	</div>
+    </div>
+
+    <div>
 	<h3><a href="#">Add new</a></h3>
 	<div>
 	  <form action="/add_feed/" method="post">
@@ -31,7 +42,7 @@
 	    {% csrf_token %}
 	  </form>
 	</div>
-      </div>
+    </div>
       
       
     </div>

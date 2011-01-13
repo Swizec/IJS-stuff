@@ -6,7 +6,8 @@ from os.path import sep
 
 # The root directory where the media/content will be stored, one
 # directory per feed
-MEDIA_ROOT = '/media/external'
+#MEDIA_ROOT = '/media/external'
+MEDIA_ROOT = '/Users/Swizec/Documents/IJS-stuff/Next-Share/JSI/feeds/'
 
 # The directory where all torrent files will be stored for the time of
 # usage. If the torrent files are to be passed to the user through web

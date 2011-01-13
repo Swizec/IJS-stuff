@@ -29,6 +29,17 @@ class MetaForm(forms.Form):
 
 class AddFeedForm(forms.Form):
   url = forms.CharField(required=True)
+  
+class UpdateFeedForm(forms.Form):
+  path = forms.CharField(max_length=300, required=True)
+  
+  def clean_path(self):
+    return settings.FEED_DIR+self.cleaned_data['path']
+    
+class CreateFeedForm(forms.Form):
+  title = forms.CharField(required=True, max_length=200)
+  description = forms.CharField(required=False, max_length=600)
+  originator = forms.CharField(required=True, max_length=200)
     
 
 class ListDirForm(forms.Form):

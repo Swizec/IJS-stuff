@@ -11,6 +11,13 @@ $(function(){
 	});
     });
     
+    $('.update').live('click', function () {
+      var path = $(this).attr('path');
+      $.get('/update_feed/?path='+path, function (data) {
+        alert("done updating "+path);
+      });
+    });
+    
     $('form').live('submit', function (event) {
       if ($(this).find("input[name='should_cascade']").val() == 'True') {
         if (!confirm("Changes will be applied in cascade to all children.")) {
