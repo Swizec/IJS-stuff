@@ -19,5 +19,6 @@ urlpatterns = patterns('',
     (r'^site_media/(?P<path>.*)$', 'django.views.static.serve', {'document_root': settings.MEDIA_ROOT}),
 
     (r'^$', 'Browse.views.begin'),
+    (r'^add_feed/$', 'Browse.views.add_feed'),
     (r'^list_dir/$', 'Browse.views.list_dir'),
 )

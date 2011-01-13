@@ -27,6 +27,10 @@ class MetaForm(forms.Form):
                                                       choices=[('False', 'False'), 
                                                                ('True', 'True')])
 
+class AddFeedForm(forms.Form):
+  url = forms.CharField(required=True)
+    
+
 class ListDirForm(forms.Form):
     dir = forms.CharField(max_length=300, required=False)
 

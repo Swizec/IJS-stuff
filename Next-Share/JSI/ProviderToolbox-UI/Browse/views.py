@@ -1,6 +1,6 @@
 # Create your views here.
 
-from django.http import HttpResponse, HttpResponseRedirect, QueryDict
+from django.http import HttpResponse, HttpResponseRedirect, QueryDict, HttpResponseBadRequest
 from django.core.context_processors import csrf
 from django.conf import settings
 from django.shortcuts import render_to_response
@@ -9,7 +9,7 @@ from django.template.loader import render_to_string
 import os, urllib, re
 
 from lib import feedparser
-from forms import MetaForm, ListDirForm
+from forms import MetaForm, ListDirForm, AddFeedForm
 
 from JSI.RichMetadata.RichMetadata import RichMetadataGenerator
 from JSI.RichMetadata.conf import metadata
@@ -38,7 +38,7 @@ def begin(request):
             f.write(rmg.build(meta))
             f.close()
               
-          #print settings.FEED_DIR+form.cleaned_data['filename']
+          print form.cleaned_data['filename']
           feed = settings.FEED_DIR+form.cleaned_data['filename']
           rewriteWithNew(feed)
             
@@ -51,7 +51,7 @@ def begin(request):
             
           return HttpResponseRedirect('/')
     else:
-        form = MetaForm()
+        form = AddFeedForm()
 
     context = {'feeds': [],
                'MEDIA_URL': settings.MEDIA_URL,
@@ -59,6 +59,19 @@ def begin(request):
     context.update(csrf(request))
     
     return render_to_response('browse.html', context)
+
+def add_feed(request):
+  form = AddFeedForm(request.POST)
+  if form.is_valid():
+    proc = os.popen(' && '.join(["export PYTHONPATH=$(pwd)/../../"],
+                                 "python ../ProviderToolbox/tools/getfeed.py -l '%s'" % form.cleaned_data['url']
+                                ]))
+    
+    return HttpResponse(proc.read(),
+                        mimetype="text")
+  else:
+    return HttpResponseBadRequest("Wrong data posted")
+
 
 def list_dir(request):
     alphanum = re.compile('[^0-9a-zA-Z/]+')
