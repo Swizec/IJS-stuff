@@ -63,7 +63,7 @@ def begin(request):
 def add_feed(request):
   form = AddFeedForm(request.POST)
   if form.is_valid():
-    proc = os.popen(' && '.join(["export PYTHONPATH=$(pwd)/../../"],
+    proc = os.popen(' && '.join(["export PYTHONPATH=$(pwd)/../../",
                                  "python ../ProviderToolbox/tools/getfeed.py -l '%s'" % form.cleaned_data['url']
                                 ]))
     
