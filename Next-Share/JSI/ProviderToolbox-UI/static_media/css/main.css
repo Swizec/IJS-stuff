@@ -32,3 +32,25 @@ label {
 form {
   font-size: 0.8em;
 }
+
+h3 a {
+
+}
+
+h3 input[type=button] {
+    float: right;
+}
+
+h3 input[type=button].delete {
+   
+}
+
+h3 input[type=button].update {
+   
+}
+
+form input.first-submit {
+    position: relative;
+    top: -23px;
+    left: 50px;
+}

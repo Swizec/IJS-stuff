@@ -18,6 +18,16 @@ $(function(){
       });
     });
     
+    $('.delete').live('click', function () {
+	var path = $(this).attr('path');
+	alert(path);
+	if (confirm("Item will be permanently removed, there is no restore!")) {
+	    $.get('/delete_feed/?path='+path, function (data) {
+		window.location.reload();
+	    });
+	}
+    });
+
     $('form').live('submit', function (event) {
       if ($(this).find("input[name='should_cascade']").val() == 'True') {
         if (!confirm("Changes will be applied in cascade to all children.")) {

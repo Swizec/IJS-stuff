@@ -2,15 +2,27 @@
 <div>
 
   {% if item.dir %}
-  <h3><a href="#">+ <img src="{{ item.basic_meta.image }}" style="height: 1em" /> {{ item.name }}</a></h3>
+  <h3>
+    <a href="#">
+      + <img src="{{ item.basic_meta.image }}" style="height: 1em" /> {{ item.name }}
+      <input type="button" value="X" class="delete" path="{{ item.parent }}{{ item.dirpath }}" />
+      {% if not item.created_feed %}
+        <input type="button" value="Update" class="update" path="{{ item.parent }}{{ item.dirpath }}" />
+      {% endif %}
+  </a>
+  </h3>
   {% else %}
-  <h3><a href="#">{{ item.name }}</a></h3>
+  <h3>
+     <a href="#">{{ item.name }}
+       <input type="button" value="X" class="delete" path="{{ item.filename }}" />
+     </a>
+  </h3>
   {% endif %}
   <div class="panel">
     <input type="button" value="Edit" class="edit" />
-    <input type="button" value="Update" class="update" path="{{ item.parent }}{{ item.dirpath }}" />
+    
     <form action="/" method="post" class="form">
-      <input type="submit" value="Submit" />
+      <input type="submit" value="Submit" class="first-submit" />
       {{ item.edit_form.as_p }}
       <input type="submit" value="Submit" />
       {% csrf_token %}
@@ -41,6 +53,12 @@
       add_list('{{ item.parent }}{{ item.dirpath }}', '#accordion-{{ item.id }}');
     </script>
     <div id="accordion-{{ item.id }}">
+      {% if item.created_feed %}
+      <h3><a href="#">Ohai add!</a></h3>
+      <div class="panel">
+	meow!
+      </div>
+      {% endif %}
     </div>
     {% endif %}
   </div>

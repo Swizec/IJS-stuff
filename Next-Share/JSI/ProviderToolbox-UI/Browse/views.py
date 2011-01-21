@@ -6,10 +6,10 @@ from django.conf import settings
 from django.shortcuts import render_to_response
 from django.template.loader import render_to_string
 
-import os, urllib, re
+import os, urllib, re, shutil
 
 from lib import feedparser
-from forms import MetaForm, ListDirForm, AddFeedForm, UpdateFeedForm, CreateFeedForm
+from forms import MetaForm, ListDirForm, AddFeedForm, PathForm, CreateFeedForm
 
 from JSI.RichMetadata.RichMetadata import RichMetadataGenerator
 from JSI.RichMetadata.conf import metadata
@@ -38,7 +38,6 @@ def begin(request):
             f.write(rmg.build(meta))
             f.close()
               
-          print form.cleaned_data['filename']
           feed = settings.FEED_DIR+form.cleaned_data['filename']
           rewriteWithNew(feed)
             
@@ -84,23 +83,37 @@ def create_feed(request):
     feed_dir = dir+form.cleaned_data['title'].replace(' ', '_')
     
     proc = os.popen(' && '.join(["export PYTHONPATH=$(pwd)/../../",
-                                 "python ../ProviderToolbox/tools/managefeed.py -c -t '%s' -k '%s' -g '%s' -d %s" %
+                                 "python ../ProviderToolbox/tools/managefeed.py -c -t '%s' -k '%s' -g '%s' -d %s -n %s -j %s" %
                                  (form.cleaned_data['title'], 
                                   form.cleaned_data['description'], 
                                   form.cleaned_data['originator'],
-                                  feed_dir)]))
+                                  feed_dir,
+                                  form.cleaned_data['language'],
+                                  form.cleaned_data['publisher'])]))
     return HttpResponseRedirect('/')
   else:
     return HttpResponseBadRequest("Wrong data posted")
     
 def update_feed(request):
-  form = UpdateFeedForm(request.GET)
+  form = PathForm(request.GET)
   if form.is_valid():
     proc = os.popen(' && '.join(["export PYTHONPATH=$(pwd)/../../",
                                  "python ../ProviderToolbox/tools/getfeed.py -l '%s'" % form.cleaned_data['path']]))
     return HttpResponse(proc.read(), mimetype="text/plain")
   else:
     return HttpResponseBadRequest("Expected a path")
+
+def delete_feed(request):
+    form = PathForm(request.GET)
+    if form.is_valid():
+        path = form.cleaned_data['path']
+        if os.path.isdir(path):
+            shutil.rmtree(path)
+        else:
+            os.unlink(path)
+        return HttpResponse('OK')
+    else:
+        return HttpResponseBadRequest("Expected a path")
 
 
 def list_dir(request):
@@ -150,10 +163,12 @@ def list_dir(request):
             
         formdata['filename'] = filename
         formdata['should_cascade'] = main_meta
-            
+
         return {'dir': os.path.isdir(dir),
                 'dirpath': item,
                 'name': item,
+                'created_feed': basic_meta.get('location', '').startswith("file://"),
+                'filename': filename,
                 'basic_meta': basic_meta,
                 'rich_meta': rich_meta,
                 'parent': form.cleaned_data['dir'],
@@ -163,7 +178,7 @@ def list_dir(request):
     if form.is_valid():
         items = filter(lambda i: i != None, 
                        map(parse, sorted(os.listdir(settings.FEED_DIR+form.cleaned_data['dir']))))
-        
+
         context = {'items': items,
                    'parent': form.cleaned_data['dir'],
                    'MEDIA_URL': settings.MEDIA_URL}

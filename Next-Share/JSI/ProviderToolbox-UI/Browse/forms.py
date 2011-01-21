@@ -30,7 +30,7 @@ class MetaForm(forms.Form):
 class AddFeedForm(forms.Form):
   url = forms.CharField(required=True)
   
-class UpdateFeedForm(forms.Form):
+class PathForm(forms.Form):
   path = forms.CharField(max_length=300, required=True)
   
   def clean_path(self):
@@ -38,8 +38,10 @@ class UpdateFeedForm(forms.Form):
     
 class CreateFeedForm(forms.Form):
   title = forms.CharField(required=True, max_length=200)
-  description = forms.CharField(required=False, max_length=600)
+  description = forms.CharField(required=True, max_length=600)
   originator = forms.CharField(required=True, max_length=200)
+  publisher = forms.CharField(required=True, max_length=200)
+  language = forms.CharField(required=True, max_length=2)
     
 
 class ListDirForm(forms.Form):
