@@ -2,6 +2,7 @@
 
 from django.http import HttpResponse, HttpResponseRedirect, QueryDict, HttpResponseBadRequest
 from django.core.context_processors import csrf
+from django.views.decorators.csrf import csrf_exempt
 from django.conf import settings
 from django.shortcuts import render_to_response
 from django.template.loader import render_to_string
@@ -9,7 +10,7 @@ from django.template.loader import render_to_string
 import os, urllib, re, shutil
 
 from lib import feedparser
-from forms import MetaForm, ListDirForm, AddFeedForm, PathForm, CreateFeedForm
+from forms import MetaForm, ListDirForm, AddFeedForm, PathForm, CreateFeedForm, AddItemForm
 
 from JSI.RichMetadata.RichMetadata import RichMetadataGenerator
 from JSI.RichMetadata.conf import metadata
@@ -115,6 +116,29 @@ def delete_feed(request):
     else:
         return HttpResponseBadRequest("Expected a path")
 
+@csrf_exempt
+def add_item(request):
+    form = AddItemForm(request.POST)
+    if form.is_valid():
+        proc = os.popen(' && '.join(
+            ["export PYTHONPATH=$(pwd)/../../",
+             "python ../ProviderToolbox/tools/managefeed.py -a -d %s -z %s -s '%s' -t '%s'" \
+                                     % (settings.FEED_DIR+form.cleaned_data['feed_dir'],
+                                        form.cleaned_data['file'],
+                                        form.cleaned_data['synopsis'],
+                                        form.cleaned_data['title'])]))
+        print ' && '.join(
+            ["export PYTHONPATH=$(pwd)/../../",
+             "python ../ProviderToolbox/tools/managefeed.py -a -d %s -z %s -s '%s' -t '%s'" \
+                                     % (settings.FEED_DIR+form.cleaned_data['feed_dir'],
+                                        form.cleaned_data['file'],
+                                        form.cleaned_data['synopsis'],
+                                        form.cleaned_data['title'])])
+
+        return HttpResponseRedirect('/')
+    else:
+        return HttpResponseBadRequest("Bad data")
+
 
 def list_dir(request):
     alphanum = re.compile('[^0-9a-zA-Z/]+')
@@ -172,6 +196,7 @@ def list_dir(request):
                 'basic_meta': basic_meta,
                 'rich_meta': rich_meta,
                 'parent': form.cleaned_data['dir'],
+                'item_form': AddItemForm(),
                 'edit_form': MetaForm(QueryDict(urllib.urlencode(formdata)), main_meta=main_meta),
                 'id': ''.join([alphanum.sub('', parent) ,alphanum.sub('', item)]).replace('/', '-')}
 

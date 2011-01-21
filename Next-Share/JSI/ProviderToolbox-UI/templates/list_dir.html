@@ -49,17 +49,24 @@
     </div>
 
     {% if item.dir %}
-    <script>
-      add_list('{{ item.parent }}{{ item.dirpath }}', '#accordion-{{ item.id }}');
-    </script>
+      {% if item.created_feed %}
+      <form method="post" action="/add_item/">
+        {{ item.item_form.as_p }}
+        <input type="text" value="{{ item.parent }}{{ item.dirpath }}" name="feed_dir" />
+        <input type="submit" />
+      </form>
+      {% endif %}
     <div id="accordion-{{ item.id }}">
       {% if item.created_feed %}
       <h3><a href="#">Ohai add!</a></h3>
-      <div class="panel">
-	meow!
+      <div>
+	
       </div>
       {% endif %}
     </div>
+    <script>
+      add_list('{{ item.parent }}{{ item.dirpath }}', '#accordion-{{ item.id }}');
+    </script>
     {% endif %}
   </div>
 </div>

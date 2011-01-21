@@ -52,3 +52,9 @@ class ListDirForm(forms.Form):
         if dir[-1:] != '/':
             dir += '/'
         return dir
+
+class AddItemForm(forms.Form):
+  feed_dir = forms.CharField(required=False, widget=forms.HiddenInput)
+  file = forms.CharField(required=True, max_length=200)
+  synopsis = forms.CharField(required=True, max_length=600)
+  title = forms.CharField(required=True, max_length=100)

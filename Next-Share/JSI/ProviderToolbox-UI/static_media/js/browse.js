@@ -45,9 +45,9 @@ function make_accordion(selector) {
     $(selector).accordion({ header: "h3", 
 			    collapsible: true,
 			    autoHeight: false});
-    if (window.location.href.indexOf('#posted') < 0) {
+    //if (window.location.href.indexOf('#posted') < 0) {
 	$(selector+" h3:first a").click();
-    }
+    //}
 };
 
 function add_list (dir, selector) {
