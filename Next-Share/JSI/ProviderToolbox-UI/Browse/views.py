@@ -27,29 +27,29 @@ def begin(request):
     if request.method == 'POST':
         form = MetaForm(request.POST)
         if form.is_valid():
-          def rewriteWithNew(xml):
-            rmg = RichMetadataGenerator.getInstance()
-            meta = rmg.getRichMetadata(open(xml, 'r'))
+            def rewriteWithNew(xml):
+                rmg = RichMetadataGenerator.getInstance()
+                meta = rmg.getRichMetadata(open(xml, 'r'))
             
-            for key in form.cleaned_data.keys():
-              if key not in ['filename', 'should_cascade']:
-                meta.__getattr__(key)(form.cleaned_data[key])
+                for key in form.cleaned_data.keys():
+                    if key not in ['filename', 'should_cascade']:
+                        meta.__getattr__(key)(form.cleaned_data[key])
                 
-            f = open(xml, 'w')
-            f.write(rmg.build(meta))
-            f.close()
+                f = open(xml, 'w')
+                f.write(rmg.build(meta))
+                f.close()
               
-          feed = settings.FEED_DIR+form.cleaned_data['filename']
-          rewriteWithNew(feed)
+            feed = settings.FEED_DIR+form.cleaned_data['filename']
+            rewriteWithNew(feed)
             
-          if form.cleaned_data['should_cascade'] == 'True':
-            dir = feed.rsplit('/', 1)[0]
-            for file in os.listdir(dir):
-              if file.endswith(".xml"):
-                rewriteWithNew(dir+file)
+            if form.cleaned_data['should_cascade'] == 'True':
+                dir = feed.rsplit('/', 1)[0]
+                for file in os.listdir(dir):
+                    if file.endswith(".xml"):
+                        rewriteWithNew(dir+file)
                 
             
-          return HttpResponseRedirect('/')
+            return HttpResponseRedirect('/')
     else:
         form = AddFeedForm()
 
@@ -64,45 +64,46 @@ def begin(request):
 def add_feed(request):
   form = AddFeedForm(request.POST)
   if form.is_valid():
-    proc = os.popen(' && '.join(["export PYTHONPATH=$(pwd)/../../",
-                                 "python ../ProviderToolbox/tools/getfeed.py -l '%s'" % form.cleaned_data['url']
-                                ]))
+      proc = os.popen(' && '.join(["export PYTHONPATH=$(pwd)/../../",
+                                   "python ../ProviderToolbox/tools/getfeed.py -l '%s'"\
+                                   % form.cleaned_data['url']]))
     
-    return HttpResponse(proc.read(),
-                        mimetype="text")
+      return HttpResponse(proc.read(),
+                          mimetype="text")
   else:
-    return HttpResponseBadRequest("Wrong data posted")
+      return HttpResponseBadRequest("Wrong data posted")
     
 # TODO: cleanup this crap
 def create_feed(request):
   form = CreateFeedForm(request.POST)
   if form.is_valid():
-    dir = settings.FEED_DIR+"created/"
-    if not os.path.isdir(dir):
-      os.mkdir(dir)
+      dir = settings.FEED_DIR+"created/"
+      if not os.path.isdir(dir):
+          os.mkdir(dir)
       
-    feed_dir = dir+form.cleaned_data['title'].replace(' ', '_')
+      feed_dir = dir+form.cleaned_data['title'].replace(' ', '_')
     
-    proc = os.popen(' && '.join(["export PYTHONPATH=$(pwd)/../../",
-                                 "python ../ProviderToolbox/tools/managefeed.py -c -t '%s' -k '%s' -g '%s' -d %s -n %s -j %s" %
-                                 (form.cleaned_data['title'], 
-                                  form.cleaned_data['description'], 
-                                  form.cleaned_data['originator'],
-                                  feed_dir,
-                                  form.cleaned_data['language'],
-                                  form.cleaned_data['publisher'])]))
-    return HttpResponseRedirect('/')
+      proc = os.popen(' && '.join(["export PYTHONPATH=$(pwd)/../../",
+                                   "python ../ProviderToolbox/tools/managefeed.py -c -t '%s' -k '%s' -g '%s' -d %s -n %s -j %s" %
+                                   (form.cleaned_data['title'], 
+                                    form.cleaned_data['description'], 
+                                    form.cleaned_data['originator'],
+                                    feed_dir,
+                                    form.cleaned_data['language'],
+                                    form.cleaned_data['publisher'])]))
+      return HttpResponseRedirect('/')
   else:
-    return HttpResponseBadRequest("Wrong data posted")
+      return HttpResponseBadRequest("Wrong data posted")
     
 def update_feed(request):
   form = PathForm(request.GET)
   if form.is_valid():
-    proc = os.popen(' && '.join(["export PYTHONPATH=$(pwd)/../../",
-                                 "python ../ProviderToolbox/tools/getfeed.py -l '%s'" % form.cleaned_data['path']]))
-    return HttpResponse(proc.read(), mimetype="text/plain")
+      proc = os.popen(' && '.join(["export PYTHONPATH=$(pwd)/../../",
+                                   "python ../ProviderToolbox/tools/getfeed.py -l '%s'"\
+                                   % form.cleaned_data['path']]))
+      return HttpResponse(proc.read(), mimetype="text/plain")
   else:
-    return HttpResponseBadRequest("Expected a path")
+      return HttpResponseBadRequest("Expected a path")
 
 def delete_feed(request):
     form = PathForm(request.GET)
@@ -153,36 +154,36 @@ def list_dir(request):
         rmg = RichMetadataGenerator.getInstance()
         
         if os.path.isdir(dir):
-          if '.properties' not in os.listdir(settings.FEED_DIR+item):
-            return None
+            if '.properties' not in os.listdir(settings.FEED_DIR+item):
+                return None
         
-          for line in open(dir+'.properties'):
-            (key, val) = line.split(' = ')
-            basic_meta[key] = val
+            for line in open(dir+'.properties'):
+                (key, val) = line.split(' = ')
+                basic_meta[key] = val
           
-          meta = rmg.getRichMetadata(dir+parent+item+'.xml')
-          filename = dir.replace(settings.FEED_DIR, '')+parent+item+'.xml'
-          main_meta = True
+            meta = rmg.getRichMetadata(dir+parent+item+'.xml')
+            filename = dir.replace(settings.FEED_DIR, '')+parent+item+'.xml'
+            main_meta = True
         else:
-          if not item.endswith('.xml') or item[:-4] == parent[1:-1]:
-            return None
-          meta = rmg.getRichMetadata(settings.FEED_DIR+parent+"/"+item)
-          filename = parent+"/"+item
-          main_meta = False
+            if not item.endswith('.xml') or item[:-4] == parent[1:-1]:
+                return None
+            meta = rmg.getRichMetadata(settings.FEED_DIR+parent+"/"+item)
+            filename = parent+"/"+item
+            main_meta = False
             
         rich_meta = {}
         formdata = {}
         
         for api in meta.getAPIMethods():
-          if api.startswith("get"):
-            try:
-              entry = meta[api]().encode('utf-8')
-            except AttributeError:
-              entry = ''
+            if api.startswith("get"):
+                try:
+                    entry = meta[api]().encode('utf-8')
+                except AttributeError:
+                    entry = ''
             
             if entry != '':
-              rich_meta[metadata.HUMAN_DESCRIPTION.get(meta.method2attrib[api])] = entry
-              MetaForm
+                rich_meta[metadata.HUMAN_DESCRIPTION.get(meta.method2attrib[api])] = entry
+                MetaForm
             formdata[api.replace('get', 'set')] = entry
             
         formdata['filename'] = filename
@@ -208,7 +209,5 @@ def list_dir(request):
                    'parent': form.cleaned_data['dir'],
                    'MEDIA_URL': settings.MEDIA_URL}
         context.update(csrf(request))
-        
-        #print render_to_string('list_dir.html', context)
 
         return render_to_response('list_dir.html', context, mimetype="text/html")
