@@ -1,0 +1,92 @@
+
+A nonexhaustive README, to give a general idea of what the code does
+and how it is structured.
+
+1. Usage
+   1.1 Running
+   1.2 GUI
+2. Settings
+   2.1 !WARNING!
+3. Dependancies
+4. Code layout
+   4.1 Layout
+   4.2 Runtime
+
+
+1. Usage
+
+1.1 Running
+Using the ProviderToolbox-UI is a lot like running a development django
+server. Everything is pre-configured to give you the best chance of
+JustWorks(tm) out of the box.
+
+In order to run the server use this command:
+
+./manage.py runserver 8080
+
+Then point your favourite browser to localhost:8080 and you're in business.
+
+You can find more manage commands and pointers on hosting externally on
+this link: http://docs.djangoproject.com/en/dev/ref/django-admin/
+
+For example you can run unit tests with ./manage.py test
+
+1.2 GUI
+
+The main GUI represents a list of feeds found on your feed storage directory.
+You can browse through them by clicking on their titles, which opens a pane
+just about that feed.
+
+The feed pane lists any metadata known about the chosen feed, lists its items
+and lets you edit information via the Edit button.
+
+The first two feed panes are reserved for Adding and Creating feeds.
+
+
+2. Settings
+
+Settings reside in the settings.py file. They can mostly be left as is, since
+changes are mostly not needed.
+
+You should make sure to set the ROOT_URL path to the absolute path of the
+directory where ProviderToolbox-UI is stored.
+
+You should also check that FEED_DIR is pointing to the correct directory where
+feeds are stored. 
+
+!WARNING!
+Make sure FEED_DIR points to the same directory as MEDIA_ROOT in ProviderToolbox/conf/default_settings.py
+Otherwise things won't work!
+
+
+3. Dependancies
+
+As django is packaged together with ProviderToolbox-UI there are no known dependancies.
+
+
+4. Code layout
+
+4.1. Layout
+The code layout follows the basic layout of a django project.
+
+HTML is in templates/ and static files for css and javascript are in static_media/.
+
+Most of the real code is in Browse/ where it is divided into views, models, tests and forms.
+Since we are dealing mostly with files and no database is used there are no models. Forms
+do a good job at explaining the API the javascript uses to communicate with the python code
+and views are where most of the magic happens.
+
+It is likely the code will be restructured in the future since views.py is a bit of
+a mess right now.
+
+4.2 Runtime
+
+The basic runtime is as such:
+    1. Django loads browse.html with the basic webpage skeleton
+    2. Javascript calls /list_dir/ for every folder
+    3. Django loads a dir and returns list_dir.html with proper data inserted
+    4. Javascript appends the list
+    5. If needed /list_dir/ is recursively called for every item
+
+Adding, creating, removing and updating feeds and items happens by calling the
+cli utilities in ProviderToolbox with appropriate arguments.
