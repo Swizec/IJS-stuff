@@ -2,7 +2,7 @@
 from django.test import TestCase
 from django.conf import settings
 
-import os
+import os, time
 
 class BasicTest(TestCase):
     def test_begin(self):
@@ -31,3 +31,16 @@ class BasicTest(TestCase):
         for f in os.listdir(settings.FEED_DIR+feed):
             if f.endswith('.xml'):
                 self.assert_(response.content.find(f) >= 0)
+
+    def test_create(self):
+        feed = 'test_feed-%d' % time.time()
+        response = self.client.post('/create_feed/',
+                                    {'title': feed,
+                                     'description': 'blah test',
+                                     'originator': 'A test',
+                                     'publisher': 'Also a test',
+                                     'language': 'en'})
+        
+        self.assertEquals(response.status_code, 302)
+
+        self.assert_(feed in os.listdir(settings.FEED_DIR))

@@ -10,6 +10,7 @@ from django.template.loader import render_to_string
 import os, urllib, re, shutil
 
 from lib import feedparser
+from lib import talk_to_cli as cli
 from forms import MetaForm, ListDirForm, AddFeedForm, PathForm, CreateFeedForm, AddItemForm
 
 from JSI.RichMetadata.RichMetadata import RichMetadataGenerator
