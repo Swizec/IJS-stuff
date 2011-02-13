@@ -114,21 +114,8 @@ def delete_feed(request):
 def add_item(request):
     form = AddItemForm(request.POST)
     if form.is_valid():
-        proc = os.popen(' && '.join(
-            ["export PYTHONPATH=$(pwd)/../../",
-             "python ../ProviderToolbox/tools/managefeed.py -a -d %s -z %s -s '%s' -t '%s'" \
-                                     % (settings.FEED_DIR+form.cleaned_data['feed_dir'],
-                                        form.cleaned_data['file'],
-                                        form.cleaned_data['synopsis'],
-                                        form.cleaned_data['title'])]))
-        print ' && '.join(
-            ["export PYTHONPATH=$(pwd)/../../",
-             "python ../ProviderToolbox/tools/managefeed.py -a -d %s -z %s -s '%s' -t '%s'" \
-                                     % (settings.FEED_DIR+form.cleaned_data['feed_dir'],
-                                        form.cleaned_data['file'],
-                                        form.cleaned_data['synopsis'],
-                                        form.cleaned_data['title'])])
-
+        cli.add_item(form)
+        
         return HttpResponseRedirect('/')
     else:
         return HttpResponseBadRequest("Bad data")

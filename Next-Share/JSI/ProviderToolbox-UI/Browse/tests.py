@@ -54,3 +54,16 @@ class BasicTest(TestCase):
                                     {'path': feed})
 
         self.assertEquals(response.status_code, 200)
+
+    def test_add_item(self):
+        # TODO: wasn't sure how to make an actual test
+
+        feed = os.listdir(settings.FEED_DIR)[0]
+
+        response = self.client.post('/add_item/',
+                                    {'feed_dir': feed,
+                                     'file': '/some/random/file',
+                                     'synopsis': 'A short synopsis',
+                                     'title': 'File title!'})
+
+        self.assertEquals(response.status_code, 302)

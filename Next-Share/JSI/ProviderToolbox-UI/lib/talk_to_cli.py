@@ -1,4 +1,5 @@
 
+from django.conf import settings
 import os
 
 def create_feed(form, feed_dir):
@@ -17,4 +18,16 @@ def update_feed(form):
     proc = os.popen(' && '.join(["export PYTHONPATH=$(pwd)/../../",
                                  "python ../ProviderToolbox/tools/getfeed.py -l '%s'"\
                                  % form.cleaned_data['path']]))
+    return proc
+
+
+def add_item(form):
+    proc = os.popen(' && '.join(
+        ["export PYTHONPATH=$(pwd)/../../",
+         "python ../ProviderToolbox/tools/managefeed.py -a -d %s -z %s -s '%s' -t '%s'" \
+         % (settings.FEED_DIR+form.cleaned_data['feed_dir'],
+            form.cleaned_data['file'],
+            form.cleaned_data['synopsis'],
+            form.cleaned_data['title'])]))
+    
     return proc
