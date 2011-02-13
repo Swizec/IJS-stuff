@@ -84,14 +84,8 @@ def create_feed(request):
       
       feed_dir = dir+form.cleaned_data['title'].replace(' ', '_')
     
-      proc = os.popen(' && '.join(["export PYTHONPATH=$(pwd)/../../",
-                                   "python ../ProviderToolbox/tools/managefeed.py -c -t '%s' -k '%s' -g '%s' -d %s -n %s -j %s" %
-                                   (form.cleaned_data['title'], 
-                                    form.cleaned_data['description'], 
-                                    form.cleaned_data['originator'],
-                                    feed_dir,
-                                    form.cleaned_data['language'],
-                                    form.cleaned_data['publisher'])]))
+      cli.create_feed(form, feed_dir)
+      
       return HttpResponseRedirect('/')
   else:
       return HttpResponseBadRequest("Wrong data posted")
