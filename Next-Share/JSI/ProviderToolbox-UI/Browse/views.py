@@ -25,6 +25,7 @@ def begin(request):
     
     #feeds = map(parse, os.listdir(settings.FEED_DIR))
 
+    # TODO this could do with some refactoring too
     if request.method == 'POST':
         form = MetaForm(request.POST)
         if form.is_valid():
@@ -74,17 +75,10 @@ def add_feed(request):
   else:
       return HttpResponseBadRequest("Wrong data posted")
     
-# TODO: cleanup this crap
 def create_feed(request):
   form = CreateFeedForm(request.POST)
   if form.is_valid():
-      dir = settings.FEED_DIR+"created/"
-      if not os.path.isdir(dir):
-          os.mkdir(dir)
-      
-      feed_dir = dir+form.cleaned_data['title'].replace(' ', '_')
-    
-      cli.create_feed(form, feed_dir)
+      cli.create_feed(form)
       
       return HttpResponseRedirect('/')
   else:
@@ -127,7 +121,7 @@ def list_dir(request):
 
     #TODO: refactor this very fugly section
   
-    def parse(item):
+    def get_data(item):
         parent = form.cleaned_data['dir']
         dir = settings.FEED_DIR+parent+"/"+item+"/"
         basic_meta = {}
@@ -163,7 +157,7 @@ def list_dir(request):
             
             if entry != '':
                 rich_meta[metadata.HUMAN_DESCRIPTION.get(meta.method2attrib[api])] = entry
-                MetaForm
+                
             formdata[api.replace('get', 'set')] = entry
             
         formdata['filename'] = filename
@@ -183,7 +177,8 @@ def list_dir(request):
 
     if form.is_valid():
         items = filter(lambda i: i != None, 
-                       map(parse, sorted(os.listdir(settings.FEED_DIR+form.cleaned_data['dir']))))
+                       map(get_data,
+                           sorted(os.listdir(settings.FEED_DIR+form.cleaned_data['dir']))))
 
         context = {'items': items,
                    'parent': form.cleaned_data['dir'],
