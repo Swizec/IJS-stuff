@@ -44,3 +44,13 @@ class BasicTest(TestCase):
         self.assertEquals(response.status_code, 302)
 
         self.assert_(feed in os.listdir(settings.FEED_DIR))
+
+    def test_update(self):
+        # TODO: wasn't sure how to make an actual test
+
+        feed = os.listdir(settings.FEED_DIR)[0]
+
+        response = self.client.get('/update_feed/',
+                                    {'path': feed})
+
+        self.assertEquals(response.status_code, 200)

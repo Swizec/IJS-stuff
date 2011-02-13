@@ -93,9 +93,7 @@ def create_feed(request):
 def update_feed(request):
   form = PathForm(request.GET)
   if form.is_valid():
-      proc = os.popen(' && '.join(["export PYTHONPATH=$(pwd)/../../",
-                                   "python ../ProviderToolbox/tools/getfeed.py -l '%s'"\
-                                   % form.cleaned_data['path']]))
+      proc = cli.update_feed(form)
       return HttpResponse(proc.read(), mimetype="text/plain")
   else:
       return HttpResponseBadRequest("Expected a path")
