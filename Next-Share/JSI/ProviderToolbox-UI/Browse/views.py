@@ -78,17 +78,28 @@ def add_feed(request):
 def create_feed(request):
   form = CreateFeedForm(request.POST)
   if form.is_valid():
-      cli.create_feed(form)
+      dir = settings.FEED_DIR+"created/"
+      if not os.path.isdir(dir):
+          os.mkdir(dir)
       
-      return HttpResponseRedirect('/')
+      feed_dir = dir+form.cleaned_data['title'].replace(' ', '_')
+    
+      (so,se,rv) = cli.create_feed(form, feed_dir)
+      if rv == 0:
+          return HttpResponseRedirect('/')
+      else:
+          return HttpResponseBadRequest("se")
   else:
       return HttpResponseBadRequest("Wrong data posted")
     
 def update_feed(request):
   form = PathForm(request.GET)
   if form.is_valid():
-      proc = cli.update_feed(form)
-      return HttpResponse(proc.read(), mimetype="text/plain")
+      (so,se,rv) = cli.update_feed(form)
+      if rv == 0:
+          return HttpResponse(so, mimetype="application/atom+xml")
+      else:
+          return HttpResponseBadRequest("se")
   else:
       return HttpResponseBadRequest("Expected a path")
 
@@ -108,9 +119,12 @@ def delete_feed(request):
 def add_item(request):
     form = AddItemForm(request.POST)
     if form.is_valid():
-        cli.add_item(form)
-        
-        return HttpResponseRedirect('/')
+        (so,se,rv) = cli.add_item(form)
+        print se
+        if rv == 0:
+            return HttpResponseRedirect('/')
+        else:
+            return HttpResponseBadRequest("se")
     else:
         return HttpResponseBadRequest("Bad data")
 
@@ -147,19 +161,23 @@ def list_dir(request):
             
         rich_meta = {}
         formdata = {}
-        
+
         for api in meta.getAPIMethods():
+            entry = None
             if api.startswith("get"):
                 try:
-                    entry = meta[api]().encode('utf-8')
+#                    entry = meta[api]().encode('utf-8')
+                    f  = meta.__getattr__(api)
+                    entry = f().encode('utf-8')
                 except AttributeError:
-                    entry = ''
-            
-            if entry != '':
+                    entry = None
+
+            if entry:
                 rich_meta[metadata.HUMAN_DESCRIPTION.get(meta.method2attrib[api])] = entry
-                
-            formdata[api.replace('get', 'set')] = entry
-            
+                formdata[api.replace('get', 'set')] = entry
+            else:
+                formdata[api.replace('get', 'set')] = ''
+
         formdata['filename'] = filename
         formdata['should_cascade'] = main_meta
 
@@ -180,7 +198,22 @@ def list_dir(request):
                        map(get_data,
                            sorted(os.listdir(settings.FEED_DIR+form.cleaned_data['dir']))))
 
-        context = {'items': items,
+        # TODO figuring out if this is a created_feed needs refactoring
+        # this is just a temporary implementation
+        created_feed = False
+
+        try:
+            basic_meta = {}
+            for line in  open(settings.FEED_DIR+form.cleaned_data['dir']+'/.properties'):
+                (key, val) = line.split(' = ')
+                basic_meta[key] = val
+            created_feed = basic_meta['location'].startswith('file://')
+        except IOError:
+            pass
+
+        context = {'created_feed': created_feed,
+                   'item_form': AddItemForm(),
+                   'items': items,
                    'parent': form.cleaned_data['dir'],
                    'MEDIA_URL': settings.MEDIA_URL}
         context.update(csrf(request))

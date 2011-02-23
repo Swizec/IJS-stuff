@@ -66,7 +66,7 @@ class GetFeed(object):
         if message:
             print "\n" + "Reason for failure: " + message + "\n"
         self.parser.print_help()
-        sys.exit(0)
+        sys.exit(1)
 
 if __name__ == "__main__":
 

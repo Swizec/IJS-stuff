@@ -20,7 +20,7 @@ from JSI.RichMetadata.RichMetadata import RichMetadataGenerator
 from JSI.RichMetadata.conf import metadata
 
 _log = log.getLog('TestContentSource')
-log.setLevel(log.DEBUG)
+log.setLevel(log.INFO)
 
 class TestContentSource(unittest.TestCase):
     """ 
@@ -71,6 +71,9 @@ class TestContentSource(unittest.TestCase):
             self.assertTrue(os.path.isdir(channel.storage))
             self.assertTrue(os.path.exists(os.path.join(channel.storage, channel.metaFile)))
             self.assertTrue(os.path.exists(os.path.join(channel.storage, settings.CONTENT_SOURCE_PROPERTIES)))
+            # The reason for failure can be that the channel was
+            # already there before running the test - more items were
+            # stored then there are feed items
             self.assertTrue(len(channel.items) == len(feed.entries))
             for i, v in channel.items.items():
                 self.assertTrue(v.name != None)
@@ -83,6 +86,8 @@ class TestContentSource(unittest.TestCase):
                 self.assertTrue(os.path.exists(os.path.join(channel.storage, v.contentFile)))
                 self.assertTrue(os.path.exists(os.path.join(channel.storage, v.metaFile)))
             restored = channel.restore(channel.storage)
+            _log.debug(restored.toString())
+            _log.debug(channel.toString())
             self.assertTrue(restored == channel)
             new = Channel.getContentSource(f)
             self.assertTrue(new == channel)
@@ -170,26 +175,31 @@ class TestContentSource(unittest.TestCase):
         publish = "http://web.server.of.your.choice/relative"
         for f in feeds:
             channel = Channel.getContentSource(f, publish)
-            _log.debug(rmg.prettyPrint(channel.exportFeed(), 'utf-8'))
             # Get meta, don't identify media, since we can't (yet?)
             meta = Feed.getMetadata(StringIO(channel.exportFeed()), False)
             self.assertTrue(meta.title == channel.name)
-            self.assertTrue(meta.links_href == publish + "/" + textify(channel.name) + settings.METADATA_EXT)
+            self.assertTrue(meta.links_href == channel.getExportFeedLink())
             self.assertTrue(meta.language == channel.metadata.getLanguage())
             self.assertTrue(meta.author == channel.metadata.getPublisher())
-            self.assertTrue(meta.id == channel.getExportFeedLink())
+            self.assertTrue(meta.id == channel.guid)
             self.assertTrue(meta.p2pnext_image_src == channel.image)
             for i, v in channel.items.items():
                 # Find according to link
                 rmi = None
-                for i in meta._items:
-                    if i.links_href == publish + "/" + v.publish:
-                        rmi = i
+                for m in meta._items:
+                    if m.links_href == publish + "/" + v.getPublish():
+                        rmi = m
                 self.assertTrue(rmi != None)
                 self.assertTrue(rmi.title == v.name)
-                self.assertTrue(rmi.links_type == "application/x-bittorrent")
+                if v.getPublish().endswith("/"):
+                    self.assertTrue(rmi.links_type == "text/html")
+                else:
+                    self.assertTrue(rmi.links_type == "application/x-bittorrent")
                 # Id not tested
-                self.assertTrue(rmi.p2pnext_image_src == channel.image)
+                if v.getImage():
+                    self.assertTrue(rmi.p2pnext_image_src == v.getImage())
+                else:
+                    self.assertTrue(rmi.p2pnext_image_src == channel.image)
                 self.assertTrue(rmi.title == v.metadata.getTitleEpisodeTitle())
 
 

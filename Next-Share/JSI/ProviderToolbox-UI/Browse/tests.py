@@ -1,8 +1,12 @@
 
+# -*- coding: utf-8 -*-
+
 from django.test import TestCase
 from django.conf import settings
 
 import os, time
+
+# manjkajo še testi za odstranitev vsebine ter odstranitev vira.
 
 class BasicTest(TestCase):
     def test_begin(self):
@@ -44,9 +48,17 @@ class BasicTest(TestCase):
         self.assertEquals(response.status_code, 302)
 
         self.assert_(feed in os.listdir(settings.FEED_DIR))
+        # Lahko bi še preveril, če direktorij dejansko obstaja, ter da
+        # so lastnosti vira take, kot se je določilo
+
 
     def test_update(self):
         # TODO: wasn't sure how to make an actual test
+
+        # Lahko preveriš, če se je getfeed uspešno izvedel, dobro bi
+        # bilo videti, če se je dodalo kaj vsebine in kdaj je bil
+        # izvedeno zadnje osveževanje vira. Pogledam, kako lahko
+        # zagotovim nekaj več informacije o tem
 
         feed = os.listdir(settings.FEED_DIR)[0]
 
@@ -57,6 +69,10 @@ class BasicTest(TestCase):
 
     def test_add_item(self):
         # TODO: wasn't sure how to make an actual test
+
+        # preveriti je treba, če je bila vsebina doddana, ter da sta
+        # bili narejeni datoteka z metapodatki in torrent datoteka. Je
+        # vsebina dejansko taka, kot je bila podana?
 
         feed = os.listdir(settings.FEED_DIR)[0]
 

@@ -2,7 +2,7 @@
                         ======================
 
 Author: dusan
-Date: 2010-11-29 16:04:13 CET
+Date: 2011-02-07 15:22:52 CET
 
 
 ProviderToolbox provides a set of tools that ease ingest of content
@@ -110,7 +110,7 @@ follows:
 ~~~~~~~~~~~~~~~
 
 Obtain the implementation from the source
-(https://ttuki.vtt.fi/svn/p2p-next/JSI/ProviderToolbox) and put it in
+([https://ttuki.vtt.fi/svn/p2p-next/JSI/ProviderToolbox]) and put it in
 the JSI directory in Next-Share tree. Correct layout:
 
 Next-Share/JSI/ProviderToolbox
@@ -123,7 +123,7 @@ Touch __init__.py in JSI directory if not provided.
 ProviderToolbox depends on JSI RichMetadata implementation and
 existence of ffmpeg tool. RichMetadata implementation can be obtained
 from its repository
-(https://ttuki.vtt.fi/svn/p2p-next/JSI/RichMetadata).  Consult the
+([https://ttuki.vtt.fi/svn/p2p-next/JSI/RichMetadata]).  Consult the
 tool README for installation. If you have already RichMetadata
 implementation installed please update the installation to latest
 release version.
@@ -229,7 +229,6 @@ fixed width font is needed to see the figure properly.)
     publications                                     publication links
 
 
-
 The getfeed and managefeed tools (upper left corner) are used to fill
 the feeds storage. While getting the feed information and feed content
 the torrent files are generated on the fly containing P2P-Next
@@ -309,8 +308,8 @@ system to actually get the www group rights:
 In this section we will refer to this two directories by their names
 and links as well:
 
-- /var/www/publish: http://stream.e5.ijs.si/publish
-- /var/www/feeds: http://stream.e5.ijs.si/feeds
+- /var/www/publish: [http://stream.e5.ijs.si/publish]
+- /var/www/feeds: [http://stream.e5.ijs.si/feeds]
 
 4.2 Adjust default settings 
 ============================
@@ -612,7 +611,7 @@ instructions:
   where the publications could be read as obtained from exported
   P2P-Next feed. If you plan to publish, for example, torrent files of
   the input feed content through a web server
-  http://web.server.of.your.choice/publications, this is the absolute
+  [http://web.server.of.your.choice/publications], this is the absolute
   path that will appear in the feed as a link to publication. The path
   could be not specified as well. To get the final link to publication
   while generating the feed the absolute path is concatenated with the
@@ -1427,4 +1426,7 @@ gracefully.
      - v.21
        + Removed Duration related calls since duration has been
          removed from core metadata in v0.80
-
+     - v.22
+       + Duration is restored
+       + Small interface fixes in ContentSource and corresponding unit
+         test

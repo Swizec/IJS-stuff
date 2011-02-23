@@ -1,3 +1,5 @@
+from os.path import dirname
+
 # Django settings for WebUI project.
 
 DEBUG = True
@@ -43,11 +45,11 @@ USE_I18N = True
 # calendars according to the current locale
 USE_L10N = True
 
-ROOT_URL = '/Users/Swizec/Documents/freelancing/IJS-stuff/Next-Share/JSI/ProviderToolbox-UI/'
+ROOT_URL = dirname(__file__)+"/"
 
 # Absolute path to the directory that holds media.
 # Example: "/home/media/media.lawrence.com/"
-MEDIA_ROOT = ROOT_URL+'static_media/'
+MEDIA_ROOT = ROOT_URL+'/static_media/'
 
 # URL that handles the media served from MEDIA_ROOT. Make sure to use a
 # trailing slash if there is a path component (optional in other cases).
@@ -94,11 +96,11 @@ INSTALLED_APPS = (
     'django.contrib.messages',
     # Uncomment the next line to enable the admin:
     # 'django.contrib.admin',
-
     'Browse'
 )
 
-FEED_DIR = ROOT_URL+'../feeds/'
+#FEED_DIR = '/media/external/' # dusan
+FEED_DIR = ROOT_URL+'../feeds/' # swizec
 
 import sys
 sys.path.append("../../")

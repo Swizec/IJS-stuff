@@ -1,3 +1,16 @@
+{% if created_feed %}
+<div>
+  <h3><a href="#">Ohai add!</a></h3>
+  <div>
+    <form method="post" action="/add_item/">
+      {{ item_form.as_p }}
+      <input type="text" value="{{ item.parent }}{{ item.dirpath }}" name="feed_dir" />
+      <input type="submit" />
+    </form>
+  </div>
+</div>
+{% endif %}
+
 {% for item in items %}
 <div>
 
@@ -20,7 +33,7 @@
   {% endif %}
   <div class="panel">
     <input type="button" value="Edit" class="edit" />
-    
+   
     <form action="/" method="post" class="form">
       <input type="submit" value="Submit" class="first-submit" />
       {{ item.edit_form.as_p }}
@@ -49,23 +62,9 @@
     </div>
 
     {% if item.dir %}
-      {% if item.created_feed %}
-      <form method="post" action="/add_item/">
-        {{ item.item_form.as_p }}
-        <input type="text" value="{{ item.parent }}{{ item.dirpath }}" name="feed_dir" />
-        <input type="submit" />
-      </form>
-      {% endif %}
-    <div id="accordion-{{ item.id }}">
-      {% if item.created_feed %}
-      <h3><a href="#">Ohai add!</a></h3>
-      <div>
-	
-      </div>
-      {% endif %}
-    </div>
+    <div id="accordion-{{ item.id }}-inner">
     <script>
-      add_list('{{ item.parent }}{{ item.dirpath }}', '#accordion-{{ item.id }}');
+      add_list('{{ item.parent }}{{ item.dirpath }}', '#accordion-{{ item.id }}-inner');
     </script>
     {% endif %}
   </div>

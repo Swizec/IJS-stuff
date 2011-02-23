@@ -16,13 +16,13 @@ from JSI.RichMetadata.conf import metadata
 from BaseLib.Core.TorrentDef import TorrentDef
 
 __author__ = 'D. Gabrijelcic (dusan@e5.ijs.si)'
-__revision__ = '0.21'
+__revision__ = '0.22'
 __all__ = ['ContentSource', 'Channel', 'ContentUnit', 
            'RTVVoDContent', 'classpath', '__revision__']
 
 
 _log = log.getLog('ContentSource')
-
+log.setLevel(log.DEBUG)
 # Used to import content unit classes 
 classpath = "JSI.ProviderToolbox.ContentSource"
 
@@ -127,7 +127,7 @@ class ContentUnit(Identify):
                              "getPublisher",
                              "getOriginator",
                              "getFileSize",
-#                             "getDuration",
+                             "getDuration",
                              # Content unit attribute
                              "contentFile"]
 
@@ -396,12 +396,12 @@ class ContentUnit(Identify):
         """
         Per content unit settable image. Define any mapping on content
         unit attributes ta return the image location as a string. If
-        the method returns None content unit image will equal to feed
-        image.
+        the method is not overloaded in inheriting class the image
+        will equal to feed image.
 
-        @return string String or None if not defined.
+        @return string String or None.
         """
-        return None
+        return self.image
 
     def getId(self):
         """
@@ -409,7 +409,7 @@ class ContentUnit(Identify):
         unit attributes ta return the content id as a string. If the
         method returns None content unit id will be equal to its link.
 
-        @return string String or None if not defined.
+        @return string String or None.
         """
         return None
 
@@ -417,13 +417,13 @@ class ContentUnit(Identify):
         """
         Per content unit settable relative publishing link. Define any
         mapping on content unit attributes ta return the content
-        relative publishing link as a string. If the method returns
-        None content unit relative publishing link will be equal to
-        its torrent publication. 
+        relative publishing link as a string. If the method is not
+        overloaded by inheriting class the content unit relative
+        publishing link will be equal to its torrent publication.
 
-        @return string String or None if not defined.
+        @return string String or None.
         """
-        return None
+        return self.publish
 
     def toString(self):
         """
@@ -1235,7 +1235,9 @@ class Channel(ContentSource):
                    "url": False,
                    "url-list": []}
         config.update(kwargs)
-        lock = settings.TORRENT_DIR_LOCK + "-" + self.name
+        # Locks the torrent dir while the torents are created. Looked
+        # for by Publisher, but only by common prefix
+        lock = settings.TORRENT_DIR_LOCK + "-" + asciify(self.name)
         open(lock, 'a').close()
         if not common:
             for i, v in self.items.items():
@@ -1244,8 +1246,8 @@ class Channel(ContentSource):
                 source = os.path.join(self.storage, v.contentFile)
                 if os.path.exists(source) and not os.path.isdir(source):
                     tdef = TorrentDef()
-#                    if v.metadata and v.metadata.getDuration():
-#                        config['duration'] = v.metadata.getDuration()
+                    if v.metadata and v.metadata.getDuration():
+                        config['duration'] = v.metadata.getDuration()
                     tdef.add_content(source, playtime=config['duration'])
                     tdef.set_tracker(config['tracker'])
                     tdef.set_piece_length(config['piecesize'])

@@ -1,6 +1,6 @@
 import logging
 from hashlib import sha1
-from os.path import sep 
+from os.path import sep, dirname, abspath, split
 
 ########## IMPORTANT GENERAL SETTINGS/ CHANGE or ADAPT
 
@@ -51,6 +51,12 @@ LOG_SYSLOG = True
 
 # Shut up other loggers in the system
 SHUT_UP_OTHER_LOGGERS = True
+
+# ProviderToolbox directory
+PT_DIR = split(abspath(dirname(__file__)))[0]
+
+# ProviderToolbox python import directory
+PT_IMPORT_DIR = split(split(PT_DIR)[0])[0]
 
 ########## CONTENT SOURCES SETTINGS
 
@@ -150,12 +156,12 @@ LIVE_MMM_ITEM = {"title": "setTitleEpisodeTitle",
                  "content:base": None,
                  "genre": "setGenre",
                  "parential": "setMinimumAge",
-                 "scheduled": None}
-#                 "live_duration": "setDuration"}
+                 "scheduled": None,
+                 "live_duration": "setDuration"}
 
     
 MEDIA_RM_MAP = {"container": "setFileFormat",
-#                "duration": "setDuration",
+                "duration": "setDuration",
                 "start": None,
                 "bitrate": "setBitRate",
                 "size": "setFileSize"}
