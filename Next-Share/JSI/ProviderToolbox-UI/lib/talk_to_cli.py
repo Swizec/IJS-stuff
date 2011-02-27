@@ -11,7 +11,7 @@ from JSI.ProviderToolbox.conf import settings as pt_settings
 # + -p where the link will be published
 # + -i image of the feed (file selector) 
 def create_feed(form, feed_dir):
-    c = "python %s -c -t '%s' -k '%s' -g '%s' -d %s -n %s -j %s" \
+    c = "python %s -c -t '%s' -k '%s' -g '%s' -d '%s' -n '%s' -j '%s'" \
         % (pt_settings.PT_DIR + "/tools/managefeed.py", 
            form.cleaned_data['title'], 
            form.cleaned_data['description'], 
@@ -31,7 +31,7 @@ def update_feed(form):
 # Needs:
 # + -y mime type
 def add_item(form):
-    c = "python %s -a -d %s -z '%s' -s '%s' -t '%s'" \
+    c = "python %s -a -d '%s' -z '%s' -s '%s' -t '%s'" \
         % (pt_settings.PT_DIR + "/tools/managefeed.py", 
            settings.FEED_DIR+form.cleaned_data['feed_dir'],
            form.cleaned_data['file'],
