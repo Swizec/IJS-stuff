@@ -31,7 +31,15 @@
      </a>
   </h3>
   {% endif %}
-  <div class="panel">
+  <div class="panel" id="tabs-{{ item.id }}">
+    <ul>
+      <li><a href="#tabs-{{ item.id }}-feed">Feed</a></li>
+      <li><a href="#tabs-{{ item.id }}-didbase">DID_BASE</a></li>
+      <li><a href="#tabs-{{ item.id }}-torrent">Torrent</a></li>
+      <li><a href="#tabs-{{ item.id }}-view">View</a></li>
+    </ul>
+
+    <div id="tabs-{{ item.id }}-feed">
     <input type="button" value="Edit" class="edit" />
    
     <form action="/" method="post" class="form">
@@ -64,9 +72,17 @@
     {% if item.dir %}
     <div id="accordion-{{ item.id }}-inner">
     <script>
-      add_list('{{ item.parent }}{{ item.dirpath }}', '#accordion-{{ item.id }}-inner');
+      add_list('{{ item.parent }}{{ item.dirpath }}',
+               '#accordion-{{ item.id }}-inner',
+               '#tabs-{{ item.id }}');
     </script>
     {% endif %}
+
+    </div>
+
+    <div id="tabs-{{ item.id }}-didbase"></div>
+    <div id="tabs-{{ item.id }}-torrent"></div>
+    <div id="tabs-{{ item.id }}-view"></div>
   </div>
 </div>
 {% endfor %}

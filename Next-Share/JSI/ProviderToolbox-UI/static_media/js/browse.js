@@ -50,9 +50,11 @@ function make_accordion(selector) {
     //}
 };
 
-function add_list (dir, selector) {
+function add_list (dir, accordion, tabs) {
+    $(tabs).tabs();
+
     $.get('/list_dir/', {'dir': dir}, function (data) {
-      $(selector).accordion('destroy').append(data);
-      make_accordion(selector);
+      $(accordion).accordion('destroy').append(data);
+      make_accordion(accordion);
     });
 }
