@@ -183,6 +183,7 @@ def list_dir(request):
 
         return {'dir': os.path.isdir(dir),
                 'dirpath': item,
+                'tabs': ['f', 'd', 'v', 't'] if os.path.isdir(dir) else ['f', 'v'],
                 'name': item,
                 'created_feed': basic_meta.get('location', '').startswith("file://"),
                 'filename': filename,

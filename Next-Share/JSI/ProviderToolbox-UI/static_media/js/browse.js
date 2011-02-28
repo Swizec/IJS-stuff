@@ -5,17 +5,17 @@ $(function(){
     $('.edit').live('click', function () {
 	$(this).siblings(".display").animate({opacity: 0}, 500, function () {
 	    $(this).siblings(".form").fadeIn(function () {
-     	  $(this).css('z-index', 1);
-     	  $(this).siblings('.display').css('z-index', 0);
+     		$(this).css('z-index', 1);
+     		$(this).siblings('.display').css('z-index', 0);
 	    });
 	});
     });
     
     $('.update').live('click', function () {
-      var path = $(this).attr('path');
-      $.get('/update_feed/?path='+path, function (data) {
-        alert("done updating "+path);
-      });
+	var path = $(this).attr('path');
+	$.get('/update_feed/?path='+path, function (data) {
+            alert("done updating "+path);
+	});
     });
     
     $('.delete').live('click', function () {
@@ -29,11 +29,11 @@ $(function(){
     });
 
     $('form').live('submit', function (event) {
-      if ($(this).find("input[name='should_cascade']").val() == 'True') {
-        if (!confirm("Changes will be applied in cascade to all children.")) {
-          event.preventDefault();
-        }
-      }
+	if ($(this).find("input[name='should_cascade']").val() == 'True') {
+            if (!confirm("Changes will be applied in cascade to all children.")) {
+		event.preventDefault();
+            }
+	}
     });
 
     $('#tabs').tabs();
@@ -46,7 +46,7 @@ function make_accordion(selector) {
 			    collapsible: true,
 			    autoHeight: false});
     //if (window.location.href.indexOf('#posted') < 0) {
-	$(selector+" h3:first a").click();
+    $(selector+" h3:first a").click();
     //}
 };
 
@@ -54,7 +54,9 @@ function add_list (dir, accordion, tabs) {
     $(tabs).tabs();
 
     $.get('/list_dir/', {'dir': dir}, function (data) {
-      $(accordion).accordion('destroy').append(data);
-      make_accordion(accordion);
+	$(accordion).accordion('destroy').append(data);
+	make_accordion(accordion);
+	
+	$("[class*='tabbed']").tabs();
     });
 }

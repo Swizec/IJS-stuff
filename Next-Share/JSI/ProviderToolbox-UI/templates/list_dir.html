@@ -31,14 +31,23 @@
      </a>
   </h3>
   {% endif %}
-  <div class="panel" id="tabs-{{ item.id }}">
+  <div class="panel tabbed" id="tabs-{{ item.id }}">
     <ul>
+      {% if 'f' in item.tabs %}
       <li><a href="#tabs-{{ item.id }}-feed">Feed</a></li>
+      {% endif %}
+      {% if 'd' in item.tabs %}
       <li><a href="#tabs-{{ item.id }}-didbase">DID_BASE</a></li>
+      {% endif %}
+      {% if 't' in item.tabs %}
       <li><a href="#tabs-{{ item.id }}-torrent">Torrent</a></li>
+      {% endif %}
+      {% if 'v' in item.tabs %}
       <li><a href="#tabs-{{ item.id }}-view">View</a></li>
+      {% endif %}
     </ul>
 
+    {% if 'f' in item.tabs %}
     <div id="tabs-{{ item.id }}-feed">
     <input type="button" value="Edit" class="edit" />
    
@@ -68,6 +77,7 @@
 	{% endfor %}
       </ul>
     </div>
+    {% endif %}
 
     {% if item.dir %}
     <div id="accordion-{{ item.id }}-inner">
@@ -80,9 +90,15 @@
 
     </div>
 
+    {% if 'd' in item.tabs %}
     <div id="tabs-{{ item.id }}-didbase"></div>
+    {% endif %}
+    {% if 't' in item.tabs %}
     <div id="tabs-{{ item.id }}-torrent"></div>
+    {% endif %}
+    {% if 'v' in item.tabs %}
     <div id="tabs-{{ item.id }}-view"></div>
+    {% endif %}
   </div>
 </div>
 {% endfor %}
