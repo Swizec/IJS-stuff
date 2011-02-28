@@ -31,6 +31,7 @@
      </a>
   </h3>
   {% endif %}
+  
   <div class="panel tabbed" id="tabs-{{ item.id }}">
     <ul>
       {% if 'f' in item.tabs %}
@@ -49,56 +50,60 @@
 
     {% if 'f' in item.tabs %}
     <div id="tabs-{{ item.id }}-feed">
-    <input type="button" value="Edit" class="edit" />
+      <input type="button" value="Edit" class="edit" />
    
-    <form action="/" method="post" class="form">
-      <input type="submit" value="Submit" class="first-submit" />
-      {{ item.edit_form.as_p }}
-      <input type="submit" value="Submit" />
-      {% csrf_token %}
-    </form>
-    <div class="display">
-      <img src="{{ item.basic_meta.image }}" class="feed-image" />
-      <ul class="meta-data">
-        <li><label>Original:</label><a href="{{ item.basic_meta.location }}">{{ item.basic_meta.location }}</a></li>
-        <li><label>Publish:</label><a href="{{ item.basic_meta.publish }}">{{ item.basic_meta.publish }}</a></li>
-        <li><label>Export feed:</label><a href="{{ item.basic_meta.exportFeedLink }}">{{ item.basic_meta.exportFeedLink }}</a></li>
-      </ul>
-      <hr />
-      <ul class="meta-data">
-        {% for name, value in item.rich_meta.items %}
-          <li><label>{{ name }}: </label>{{ value }}</li>
-        {% endfor %}
-      </ul>
-      <p>{{ item.description }}</p>
-      <ul>
-	{% for item in item.items %}
-	<h4><a href="{{ item.guid }}">{{ item.title }}</a></h4>
-	{% endfor %}
-      </ul>
+      <form action="/" method="post" class="form">
+        <input type="submit" value="Submit" class="first-submit" />
+        {{ item.edit_form.as_p }}
+        <input type="submit" value="Submit" />
+        {% csrf_token %}
+      </form>
+      
+      <div class="display">
+        <img src="{{ item.basic_meta.image }}" class="feed-image" />
+        <ul class="meta-data">
+          <li><label>Original:</label><a href="{{ item.basic_meta.location }}">{{ item.basic_meta.location }}</a></li>
+          <li><label>Publish:</label><a href="{{ item.basic_meta.publish }}">{{ item.basic_meta.publish }}</a></li>
+          <li><label>Export feed:</label><a href="{{ item.basic_meta.exportFeedLink }}">{{ item.basic_meta.exportFeedLink }}</a></li>
+        </ul>
+        <hr />
+        <ul class="meta-data">
+          {% for name, value in item.rich_meta.items %}
+            <li><label>{{ name }}: </label>{{ value }}</li>
+          {% endfor %}
+        </ul>
+        <p>{{ item.description }}</p>
+        <ul>
+          {% for item in item.items %}
+          <h4><a href="{{ item.guid }}">{{ item.title }}</a></h4>
+          {% endfor %}
+        </ul>
+      </div>
+      
+      {% if item.dir %}
+      <div id="accordion-{{ item.id }}-inner">
+      <script>
+        add_list('{{ item.parent }}{{ item.dirpath }}',
+                 '#accordion-{{ item.id }}-inner',
+                 '#tabs-{{ item.id }}');
+      </script>
+      {% endif %}
+
     </div>
     {% endif %}
-
-    {% if item.dir %}
-    <div id="accordion-{{ item.id }}-inner">
-    <script>
-      add_list('{{ item.parent }}{{ item.dirpath }}',
-               '#accordion-{{ item.id }}-inner',
-               '#tabs-{{ item.id }}');
-    </script>
-    {% endif %}
-
-    </div>
 
     {% if 'd' in item.tabs %}
     <div id="tabs-{{ item.id }}-didbase"></div>
     {% endif %}
+    
     {% if 't' in item.tabs %}
     <div id="tabs-{{ item.id }}-torrent"></div>
     {% endif %}
+    
     {% if 'v' in item.tabs %}
     <div id="tabs-{{ item.id }}-view"></div>
     {% endif %}
   </div>
 </div>
 {% endfor %}
+ 
