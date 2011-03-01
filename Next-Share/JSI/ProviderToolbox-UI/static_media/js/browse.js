@@ -23,8 +23,21 @@ $(function(){
     
     $('.update').live('click', function () {
 	var path = $(this).attr('path');
+	$.blockUI({
+	    message: "Updating "+path,
+	    css: { 
+		border: 'none', 
+		padding: '15px', 
+		backgroundColor: '#000', 
+		'-webkit-border-radius': '10px', 
+		'-moz-border-radius': '10px', 
+		opacity: .5, 
+		color: '#fff' 
+            } });
+
 	$.get('/update_feed/?path='+path, function (data) {
-            alert("done updating "+path);
+	    $.unblockUI();
+	    window.location.reload();
 	});
     });
     

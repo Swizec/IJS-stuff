@@ -180,7 +180,7 @@ def list_dir(request):
 
         formdata['filename'] = filename
         formdata['should_cascade'] = main_meta
-
+        
         return {'dir': os.path.isdir(dir),
                 'dirpath': item,
                 'tabs': ['f', 'd', 'v', 't'] if os.path.isdir(dir) else ['f', 'v'],

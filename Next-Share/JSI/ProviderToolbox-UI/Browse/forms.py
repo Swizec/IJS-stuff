@@ -16,16 +16,22 @@ class MetaForm(forms.Form):
     
     rmg = RichMetadataGenerator.getInstance()
     meta = rmg.getRichMetadata()
+
+    ignored = 0
     
     for api in meta.getAPIMethods():
       if api.startswith("set") and (not main_meta or (main_meta and self.data[api] != '')):
         self.fields[api] = forms.CharField(required=False,
                                            label=metadata.HUMAN_DESCRIPTION.get(meta.method2attrib[api]))
+      else:
+        ignored += 1
     self.fields['filename'] = forms.CharField(required=False, widget=forms.HiddenInput)
     self.fields['should_cascade'] = forms.ChoiceField(required=False, 
                                                       widget=forms.HiddenInput, 
                                                       choices=[('False', 'False'), 
                                                                ('True', 'True')])
+
+    #print len(self.fields), len(meta.getAPIMethods()), ignored, main_meta, self.data.values()
 
 class AddFeedForm(forms.Form):
   url = forms.CharField(required=True)
