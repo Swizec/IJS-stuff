@@ -54,3 +54,11 @@ form input.first-submit {
     top: -23px;
     left: 50px;
 }
+
+label {
+    width: 125px;
+}
+
+input[type='text'] {
+    width: 250px;
+}

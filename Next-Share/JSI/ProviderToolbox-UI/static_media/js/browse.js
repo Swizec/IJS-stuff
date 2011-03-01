@@ -10,6 +10,16 @@ $(function(){
 	    });
 	});
     });
+
+    $('input.cancel').live('click', function (event) {
+	event.preventDefault();
+	$(this).parent(".form").fadeOut(function () {
+	    $(this).siblings(".display").animate({opacity: 1.0}, 500, function () {
+		$(this).css('z-index', 1);
+     		$(this).siblings('.form').css('z-index', 0);
+	    });
+	});
+    });
     
     $('.update').live('click', function () {
 	var path = $(this).attr('path');
