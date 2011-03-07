@@ -1,6 +1,6 @@
 {% if created_feed %}
 <div>
-  <h3><a href="#">Ohai add!</a></h3>
+  <h3><a href="#">Add New Item</a></h3>
   <div>
     <form method="post" action="/add_item/">
       {{ item_form.as_p }}
@@ -49,8 +49,13 @@
     </ul>
 
     {% if 'v' in item.tabs %}
-    <div id="tabs-{{ item.id }}-view">
-       <div>a view is a view is a view</div>
+    <div id="tabs-{{ item.id }}-view" path="{{ item.parent }}{{ item.dirpath }}">
+    </div>
+    {% endif %}
+
+    {% if 't' in item.tabs %}
+    <div id="tabs-{{ item.id }}-torrent">
+      This here is a torrent
     </div>
     {% endif %}
     
@@ -106,10 +111,6 @@
 
     {% if 'd' in item.tabs %}
     <div id="tabs-{{ item.id }}-didbase"></div>
-    {% endif %}
-    
-    {% if 't' in item.tabs %}
-    <div id="tabs-{{ item.id }}-torrent"></div>
     {% endif %}
     
   </div>

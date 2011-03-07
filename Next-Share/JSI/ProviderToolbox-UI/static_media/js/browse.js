@@ -38,9 +38,13 @@ $(function(){
 		color: '#fff' 
             } });
 
-	$.get('/update_feed/?path='+path, function (data) {
-	    $.unblockUI();
-	    window.location.reload();
+	$.ajax({
+	    url: '/update_feed/?path='+path,
+	    dataType: 'text',
+	    success: function (data) {
+		$.unblockUI();
+		window.location.reload();
+	    },
 	});
     });
     
@@ -83,6 +87,38 @@ function add_list (dir, accordion, tabs) {
 	$(accordion).accordion('destroy').append(data);
 	make_accordion(accordion);
 	
-	$("[class*='tabbed']").tabs();
+	$("[class*='tabbed']").tabs({
+	    select: function (event, ui) {
+		var tab = ui.tab.hash.split('-');
+		if (tab[tab.length-1] == 'view') {
+		    var path = $("#"+ui.panel.id).attr('path');
+		    $.blockUI({
+			message: "Fetching atom feed",
+			css: { 
+			    border: 'none', 
+			    padding: '15px', 
+			    backgroundColor: '#000', 
+			    '-webkit-border-radius': '10px', 
+			    '-moz-border-radius': '10px', 
+			    opacity: .5, 
+			    color: '#fff' 
+			} });
+
+		    $.ajax({
+			url: '/fetch_feed/?path='+path,
+			dataType: 'text',
+			success: function (data) {
+			    $.unblockUI();
+			    $("#"+ui.panel.id).html('<pre>'+htmlentities(data)+'</pre>');
+			},
+		    });
+		}
+	    }
+	});
     });
+}
+
+
+function htmlentities(str) {
+    return String(str).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
 }

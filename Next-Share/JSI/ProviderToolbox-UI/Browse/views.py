@@ -12,6 +12,7 @@ import os, urllib, re, shutil
 from lib import feedparser
 from lib import talk_to_cli as cli
 from forms import MetaForm, ListDirForm, AddFeedForm, PathForm, CreateFeedForm, AddItemForm
+from models import AtomFeed
 
 from JSI.RichMetadata.RichMetadata import RichMetadataGenerator
 from JSI.RichMetadata.conf import metadata
@@ -97,11 +98,23 @@ def update_feed(request):
   if form.is_valid():
       (so,se,rv) = cli.update_feed(form)
       if rv == 0:
+          AtomFeed.objects.create(feed=so, path=form.cleaned_data['path'])
           return HttpResponse(so, mimetype="application/atom+xml")
       else:
           return HttpResponseBadRequest("se")
   else:
       return HttpResponseBadRequest("Expected a path")
+
+def fetch_feed(request):
+    form = PathForm(request.GET)
+    if form.is_valid():
+        try:
+            return HttpResponse(AtomFeed.objects.get(path=form.cleaned_data['path']).feed)
+        except AtomFeed.DoesNotExist:
+            return update_feed(request)
+    else:
+        return HttpResponseBadRequest("Expected a path")
+                
 
 def delete_feed(request):
     form = PathForm(request.GET)

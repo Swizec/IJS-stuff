@@ -59,3 +59,13 @@ def command(command, env=None):
 
 def asciify(string):
     return unicodedata.normalize('NFKD', string).encode('ascii','ignore')
+
+
+#def torrent_info(file):
+#    c = "python %s %s" \
+#        % (pt_settings.PT_DIR + "/tools/managefeed.py", 
+#           settings.FEED_DIR+form.cleaned_data['feed_dir'],
+#           form.cleaned_data['file'],
+#           form.cleaned_data['synopsis'],
+#           form.cleaned_data['title'])
+#    return command(asciify(c), env={"PYTHONPATH":pt_settings.PT_IMPORT_DIR})

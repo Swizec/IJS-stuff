@@ -23,6 +23,7 @@ urlpatterns = patterns('',
     (r'^create_feed/$', 'Browse.views.create_feed'),
     (r'^list_dir/$', 'Browse.views.list_dir'),
     (r'^update_feed/$', 'Browse.views.update_feed'),
+    (r'^fetch_feed/$', 'Browse.views.fetch_feed'),
     (r'^delete_feed/$', 'Browse.views.delete_feed'),
     (r'^add_item/$', 'Browse.views.add_item'),
 )
