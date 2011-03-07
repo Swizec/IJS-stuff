@@ -48,11 +48,21 @@
       {% endif %}
     </ul>
 
+    {% if 'v' in item.tabs %}
+    <div id="tabs-{{ item.id }}-view">
+       <div>a view is a view is a view</div>
+    </div>
+    {% endif %}
+    
     {% if 'f' in item.tabs %}
     <div id="tabs-{{ item.id }}-feed">
       <input type="button" value="Edit" class="edit" />
-   
+
+      {% if item.dir %}
+      <form action="/" method="post" class="form dir">
+      {% else %}
       <form action="/" method="post" class="form">
+      {% endif %}
         <input type="submit" value="Submit" class="first-submit" />
         <input type="submit" value="Cancel" class="cancel first-cancel" />
         {{ item.edit_form.as_p }}
@@ -102,9 +112,6 @@
     <div id="tabs-{{ item.id }}-torrent"></div>
     {% endif %}
     
-    {% if 'v' in item.tabs %}
-    <div id="tabs-{{ item.id }}-view"></div>
-    {% endif %}
   </div>
 </div>
 {% endfor %}

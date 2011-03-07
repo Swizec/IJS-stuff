@@ -21,8 +21,15 @@ class MetaForm(forms.Form):
     
     for api in meta.getAPIMethods():
       if api.startswith("set") and (not main_meta or (main_meta and self.data[api] != '')):
+        widget = forms.Textarea if api in ['setSynopsis',
+                                           'setTitleEpisodeTitle',
+                                           'setTitleSeriesTitle'] \
+                 else forms.TextInput
+                 
         self.fields[api] = forms.CharField(required=False,
-                                           label=metadata.HUMAN_DESCRIPTION.get(meta.method2attrib[api]))
+                                           widget=widget,
+                                           label=metadata.HUMAN_DESCRIPTION.get(
+                                             meta.method2attrib[api]))
       else:
         ignored += 1
     self.fields['filename'] = forms.CharField(required=False, widget=forms.HiddenInput)

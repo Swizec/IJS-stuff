@@ -172,18 +172,18 @@ def list_dir(request):
                 except AttributeError:
                     entry = None
 
-            if entry:
-                rich_meta[metadata.HUMAN_DESCRIPTION.get(meta.method2attrib[api])] = entry
-                formdata[api.replace('get', 'set')] = entry
-            else:
-                formdata[api.replace('get', 'set')] = ''
+                if entry:
+                    rich_meta[metadata.HUMAN_DESCRIPTION.get(meta.method2attrib[api])] = entry
+                    formdata[api.replace('get', 'set')] = entry
+                else:
+                    formdata[api.replace('get', 'set')] = ''
 
         formdata['filename'] = filename
         formdata['should_cascade'] = main_meta
         
         return {'dir': os.path.isdir(dir),
                 'dirpath': item,
-                'tabs': ['f', 'd', 'v', 't'] if os.path.isdir(dir) else ['f', 'v'],
+                'tabs': ['f', 'v'] if os.path.isdir(dir) else ['f', 't', 'v'],
                 'name': item,
                 'created_feed': basic_meta.get('location', '').startswith("file://"),
                 'filename': filename,

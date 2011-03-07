@@ -8,6 +8,12 @@
   position: absolute;
 }
 
+.form.dir {
+    height: 200px;
+    overflow: auto;
+    width: 90%;
+}
+
 ul {
   padding-left: 160px;
 }
@@ -49,11 +55,11 @@ h3 input[type=button].update {
    
 }
 
-form input.first-submit {
+/*form input.first-submit {
     position: relative;
     top: -23px;
     left: 50px;
-}
+}*/
 
 label {
     width: 125px;
@@ -61,4 +67,9 @@ label {
 
 input[type='text'] {
     width: 250px;
+}
+
+textarea {
+    width: 250px;
+    height: 60px;
 }

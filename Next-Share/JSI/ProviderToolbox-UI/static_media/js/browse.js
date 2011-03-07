@@ -3,10 +3,12 @@ $(function(){
     // Accordion
 
     $('.edit').live('click', function () {
+	var $edit = $(this);
 	$(this).siblings(".display").animate({opacity: 0}, 500, function () {
 	    $(this).siblings(".form").fadeIn(function () {
-     		$(this).css('z-index', 1);
-     		$(this).siblings('.display').css('z-index', 0);
+     		$(this).css('z-index', 1)
+     		    .siblings('.display').css('z-index', 0);
+		$edit.fadeOut();
 	    });
 	});
     });
@@ -15,8 +17,9 @@ $(function(){
 	event.preventDefault();
 	$(this).parent(".form").fadeOut(function () {
 	    $(this).siblings(".display").animate({opacity: 1.0}, 500, function () {
-		$(this).css('z-index', 1);
-     		$(this).siblings('.form').css('z-index', 0);
+		$(this).css('z-index', 1)
+		    .siblings('.form').css('z-index', 0)
+		    .siblings('.edit').fadeIn();
 	    });
 	});
     });
