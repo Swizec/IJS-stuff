@@ -8,6 +8,8 @@ from django.shortcuts import render_to_response
 from django.template.loader import render_to_string
 
 import os, urllib, re, shutil
+import lxml
+from lxml import etree
 
 from lib import feedparser
 from lib import talk_to_cli as cli
@@ -108,10 +110,29 @@ def update_feed(request):
 def fetch_feed(request):
     form = PathForm(request.GET)
     if form.is_valid():
-        try:
-            return HttpResponse(AtomFeed.objects.get(path=form.cleaned_data['path']).feed)
-        except AtomFeed.DoesNotExist:
-            return update_feed(request)
+        path = form.cleaned_data['path']
+
+        def get_feed(path):
+            try:
+                return AtomFeed.objects.get(path=path)
+            except AtomFeed.DoesNotExist:
+                update_feed(PathForm(QueryDict(urllib.urlencode({'path': path}))))
+                return AtomFeed.objects.get(path=path)
+        
+        if path.endswith('.xml'):
+            (feed, item) = path.rsplit('/', 1)
+            item = item.split('.')[0]
+
+            tree = etree.fromstring(get_feed(feed).feed.encode('utf-8'))
+            for child in tree:
+                if child.tag == '{http://www.w3.org/2005/Atom}entry':
+                    href = child.find('{http://www.w3.org/2005/Atom}link').attrib.get('href')
+                    if href.rsplit('/', 1)[1].split('.')[0] == item:
+                        return HttpResponse(etree.tostring(child, pretty_print=True))
+                
+            return HttpResponse("Couldn't find item in feed")
+        else:
+            return HttpResponse(get_feed(path).feed)
     else:
         return HttpResponseBadRequest("Expected a path")
                 

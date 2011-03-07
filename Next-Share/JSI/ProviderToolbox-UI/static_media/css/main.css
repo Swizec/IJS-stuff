@@ -73,3 +73,10 @@ textarea {
     width: 250px;
     height: 60px;
 }
+
+pre {
+    overlow: auto;
+    height: 200px;
+    width: 90%;
+    display: block;
+}

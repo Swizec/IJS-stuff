@@ -26,18 +26,7 @@ $(function(){
     
     $('.update').live('click', function () {
 	var path = $(this).attr('path');
-	$.blockUI({
-	    message: "Updating "+path,
-	    css: { 
-		border: 'none', 
-		padding: '15px', 
-		backgroundColor: '#000', 
-		'-webkit-border-radius': '10px', 
-		'-moz-border-radius': '10px', 
-		opacity: .5, 
-		color: '#fff' 
-            } });
-
+	blockUI("Updating "+path);
 	$.ajax({
 	    url: '/update_feed/?path='+path,
 	    dataType: 'text',
@@ -80,6 +69,20 @@ function make_accordion(selector) {
     //}
 };
 
+function blockUI(s) {
+    $.blockUI({
+	message: s,
+	css: { 
+	    border: 'none', 
+	    padding: '15px', 
+	    backgroundColor: '#000', 
+	    '-webkit-border-radius': '10px', 
+	    '-moz-border-radius': '10px', 
+	    opacity: .5, 
+	    color: '#fff' 
+	} });
+}
+
 function add_list (dir, accordion, tabs) {
     $(tabs).tabs();
 
@@ -90,19 +93,9 @@ function add_list (dir, accordion, tabs) {
 	$("[class*='tabbed']").tabs({
 	    select: function (event, ui) {
 		var tab = ui.tab.hash.split('-');
+		var path = $("#"+ui.panel.id).attr('path');
 		if (tab[tab.length-1] == 'view') {
-		    var path = $("#"+ui.panel.id).attr('path');
-		    $.blockUI({
-			message: "Fetching atom feed",
-			css: { 
-			    border: 'none', 
-			    padding: '15px', 
-			    backgroundColor: '#000', 
-			    '-webkit-border-radius': '10px', 
-			    '-moz-border-radius': '10px', 
-			    opacity: .5, 
-			    color: '#fff' 
-			} });
+		    blockUI('Fetching atom feed');
 
 		    $.ajax({
 			url: '/fetch_feed/?path='+path,
