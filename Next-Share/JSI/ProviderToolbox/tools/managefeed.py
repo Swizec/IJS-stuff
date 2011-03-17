@@ -132,7 +132,7 @@ class ManageFeed(object):
             cu.fresh = True
             channel.items[cu.identifier] = cu
             channel.exportTorrent()
-        # Removes the item
+        # Removes the item, add the removing of the feed as well!
         elif options.removeitem:
             if not options.feeddir:
                 self.exitOnInputError("For removing the feed item feed directory needs to be\n                        specified (-d option)!")
@@ -171,8 +171,23 @@ class ManageFeed(object):
                             _log.warn("Programmable error: identifier in sorter that does not exists in source")
             else:
                 self.exitOnInputError("Feed directory is missing in path or is not a directory:\n                    " + options.list)                
+        elif options.feed:
+            if not os.path.exists(os.path.join(options.feed, settings.CONTENT_SOURCE_PROPERTIES)):
+                self.exitOnInputError("Feed directory specified seems not to be populated.\n                    Feed properties file is missing in path: " + options.feed)
+            c = Channel()
+            channel = c.getCSFromDir(options.feed)
+            print self.rmg.prettyPrint(channel.exportFeed(options.id, options.image))
+        elif options.fileName:
+            if not options.feeddir:
+                self.exitOnInputError("For removing the feed item feed directory needs to be\n                        specified (-d option)!")
+            if os.path.exists(options.feeddir) and os.path.isdir(options.feeddir):
+                c = Channel()
+                channel = c.getCSFromDir(options.feeddir)
+                print ",".join(channel.getItemIdentifier(options.fileName))
+            else:
+                self.exitOnInputError("Feed directory is missing in path or is not a directory:\n                    " + options.feeddir) 
         else:
-            self.exitOnInputError("None of the main options -c, -a, -r or -l specified!")
+            self.exitOnInputError("None of the main options -c, -a, -r, -l, -f or --identifier specified!")
 
     def exitOnInputError(self, message=None):
         if message:
@@ -185,13 +200,16 @@ if __name__ == "__main__":
     usage = "usage: %prog [options]\n\n  Creates a feed from scratch or manages the feed. Consult tool help (-h)\n  for more options."
 
     # Command line options
+    # abcdefghijklmnoprstvuxyz
+    # xxxxxxxxxxxxxxxxxxxxxxxx
     parser = OptionParser(usage, version="%prog v" + settings.VERSION)
     parser.add_option("-v", "--verbose", help = "Be verbose", action="store_true", dest="verbose", default = False)
     parser.add_option("-c", "--create-feed", help = "Create or modify feed metadata or parameters", action="store_true", dest="feedmod", default = False)
     parser.add_option("-a", "--add-item", help = "Add feed item", action="store_true", dest="additem", default = False)
     parser.add_option("-r", "--remove-item", help = "Remove feed item by identifier (use list to find the right one)", action="store", dest="removeitem", default = None)
-    parser.add_option("-l", "--list", help = "List the feed storage", action="store", dest="list", default = False)
+    parser.add_option("-l", "--list", help = "List the feed storage", action="store", dest="list", default = None)
     parser.add_option("--long", help = "List the feed storage in detail", action="store_true", dest="listlong", default = False)
+    parser.add_option("-f", "--feed", help = "Get the feed specified by the feed storage directory. Feed guid (-u) or image (-i) can be specified on the command line as well. Result is the same as running getfeed.py -u dir -f", action="store", dest="feed", default = None)
     parser.add_option("-m", "--media-root", help = "Location of feeds storage, other then media root (settings.MEDIA_ROOT)", action="store", dest="mediaroot", default = None)
     parser.add_option("-t", "--title-name", help = "Name of the title, feed or item", action="store", dest="title", default = None)
     parser.add_option("-k", "--series-title", help = "Feed series title (description)", action="store", dest="description", default = None)
@@ -209,6 +227,7 @@ if __name__ == "__main__":
     parser.add_option("-y", "--mime-type", help = "Item mime type", action="store", dest="mimetype", default = None)
     parser.add_option("-s", "--synopsis", help = "Item synopsis", action="store", dest="synopsis", default = None)
     parser.add_option("-z", "--content", help = "Content file pointed to in an item", action="store", dest="content", default = None)
+    parser.add_option("--identifier", help = "Return an identifier list (comma separated) according to specified file name, either content or torrent file. Requires an option feed storage (-d) as well.", action="store", dest="fileName", default = None)
     (options, args) = parser.parse_args()
 
     managefeed = ManageFeed()

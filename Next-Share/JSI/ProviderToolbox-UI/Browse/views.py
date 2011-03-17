@@ -1,6 +1,7 @@
 # Create your views here.
 
-from django.http import HttpResponse, HttpResponseRedirect, QueryDict, HttpResponseBadRequest
+from django.http import HttpResponse, HttpResponseRedirect, HttpResponseBadRequest
+from django.http import QueryDict, HttpRequest
 from django.core.context_processors import csrf
 from django.views.decorators.csrf import csrf_exempt
 from django.conf import settings
@@ -95,17 +96,19 @@ def create_feed(request):
   else:
       return HttpResponseBadRequest("Wrong data posted")
     
-def update_feed(request):
-  form = PathForm(request.GET)
-  if form.is_valid():
-      (so,se,rv) = cli.update_feed(form)
-      if rv == 0:
-          AtomFeed.objects.create(feed=so, path=form.cleaned_data['path'])
-          return HttpResponse(so, mimetype="application/atom+xml")
-      else:
-          return HttpResponseBadRequest("se")
-  else:
-      return HttpResponseBadRequest("Expected a path")
+def update_feed(request, form=None):
+    if form == None:
+        form = PathForm(request.GET)
+        
+    if form.is_valid():
+        (so,se,rv) = cli.update_feed(form)
+        if rv == 0:
+            AtomFeed.objects.create(feed=so, path=form.cleaned_data['path'])
+            return HttpResponse(so, mimetype="application/atom+xml")
+        else:
+            return HttpResponseBadRequest("se")
+    else:
+        return HttpResponseBadRequest("Expected a path")
 
 def fetch_feed(request):
     form = PathForm(request.GET)
@@ -116,7 +119,7 @@ def fetch_feed(request):
             try:
                 return AtomFeed.objects.get(path=path)
             except AtomFeed.DoesNotExist:
-                update_feed(PathForm(QueryDict(urllib.urlencode({'path': path}))))
+                update_feed(request, form)
                 return AtomFeed.objects.get(path=path)
         
         if path.endswith('.xml'):

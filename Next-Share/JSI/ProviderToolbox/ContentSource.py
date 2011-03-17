@@ -544,7 +544,6 @@ class ContentSource(Identify):
             for i, v in self.items.items():
                 if other.items.get(i):
                     if v != other.items[i]:
-                        _log.debug("Here")
                         return -1
                 else:
                     _log.debug("Mismatch in identifiers, %s not present in other.", i)
@@ -999,6 +998,21 @@ class ContentSource(Identify):
                     for r in tbr:
                         self.removeContentUnit(r)
         return
+
+    def getItemIdentifier(self, fileName):
+        """
+        Gets item identifier by a content or torrent file name
+
+        @param string Name of the content or torrent file 
+        @return list A list of identifiers of the content units, if
+                     there is no match an empty list is returned.
+        """
+        ret = []
+        for k, v in self.items.items():
+            tf = v.findTorrentFile()
+            if fileName == v.contentFile or fileName == tf:
+                ret.append(v.identifier)
+        return ret
 
     def toString(self):
         """
