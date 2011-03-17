@@ -64,9 +64,9 @@
       <input type="button" value="Edit" class="edit" />
 
       {% if item.dir %}
-      <form action="/" method="post" class="form dir">
+      <form action="/#tabs-{{ item.id }}-feed" method="post" class="form dir">
       {% else %}
-      <form action="/" method="post" class="form">
+      <form action="/#tabs-{{ item.id }}-feed" method="post" class="form">
       {% endif %}
         <input type="submit" value="Submit" class="first-submit" />
         <input type="submit" value="Cancel" class="cancel first-cancel" />
