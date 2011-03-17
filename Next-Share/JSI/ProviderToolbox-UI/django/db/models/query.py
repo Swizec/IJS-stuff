@@ -367,9 +367,13 @@ class QuerySet(object):
         assert kwargs, \
                 'get_or_create() must be passed at least one keyword argument'
         defaults = kwargs.pop('defaults', {})
+        lookup = kwargs.copy()
+        for f in self.model._meta.fields:
+            if f.attname in lookup:
+                lookup[f.name] = lookup.pop(f.attname)
         try:
             self._for_write = True
-            return self.get(**kwargs), False
+            return self.get(**lookup), False
         except self.model.DoesNotExist:
             try:
                 params = dict([(k, v) for k, v in kwargs.items() if '__' not in k])
@@ -382,7 +386,7 @@ class QuerySet(object):
             except IntegrityError, e:
                 transaction.savepoint_rollback(sid, using=self.db)
                 try:
-                    return self.get(**kwargs), False
+                    return self.get(**lookup), False
                 except self.model.DoesNotExist:
                     raise e
 
@@ -413,6 +417,7 @@ class QuerySet(object):
             return {}
         qs = self._clone()
         qs.query.add_filter(('pk__in', id_list))
+        qs.query.clear_ordering(force_empty=True)
         return dict([(obj._get_pk_val(), obj) for obj in qs.iterator()])
 
     def delete(self):
@@ -627,17 +632,18 @@ class QuerySet(object):
         """
         for arg in args:
             if arg.default_alias in kwargs:
-                raise ValueError("The %s named annotation conflicts with the "
+                raise ValueError("The named annotation '%s' conflicts with the "
                                  "default name for another annotation."
                                  % arg.default_alias)
             kwargs[arg.default_alias] = arg
 
-        names = set(self.model._meta.get_all_field_names())
+        names = getattr(self, '_fields', None)
+        if names is None:
+            names = set(self.model._meta.get_all_field_names())
         for aggregate in kwargs:
             if aggregate in names:
-                raise ValueError("The %s annotation conflicts with a field on "
+                raise ValueError("The annotation '%s' conflicts with a field on "
                     "the model." % aggregate)
-
 
         obj = self._clone()
 

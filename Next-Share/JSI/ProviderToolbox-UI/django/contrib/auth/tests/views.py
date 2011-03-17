@@ -88,6 +88,12 @@ class PasswordResetTest(AuthViewsTestCase):
         self.assertEquals(response.status_code, 200)
         self.assert_("The password reset link was invalid" in response.content)
 
+    def test_confirm_overflow_user(self):
+        # Ensure that we get a 200 response for a base36 user id that overflows int
+        response = self.client.get('/reset/zzzzzzzzzzzzz-1-1/')
+        self.assertEquals(response.status_code, 200)
+        self.assert_("The password reset link was invalid" in response.content)
+
     def test_confirm_invalid_post(self):
         # Same as test_confirm_invalid, but trying
         # to do a POST instead.
@@ -185,10 +191,13 @@ class LoginTest(AuthViewsTestCase):
     def test_current_site_in_context_after_login(self):
         response = self.client.get(reverse('django.contrib.auth.views.login'))
         self.assertEquals(response.status_code, 200)
-        site = Site.objects.get_current()
-        self.assertEquals(response.context['site'], site)
-        self.assertEquals(response.context['site_name'], site.name)
-        self.assert_(isinstance(response.context['form'], AuthenticationForm), 
+        if Site._meta.installed:
+            site = Site.objects.get_current()
+            self.assertEquals(response.context['site'], site)
+            self.assertEquals(response.context['site_name'], site.name)
+        else:
+            self.assertTrue(isinstance(response.context['site'], RequestSite))
+        self.assert_(isinstance(response.context['form'], AuthenticationForm),
                      'Login form is not an AuthenticationForm')
 
     def test_security_check(self, password='password'):
@@ -230,7 +239,7 @@ class LoginTest(AuthViewsTestCase):
             self.assertEquals(response.status_code, 302)
             self.assertTrue('/view/?param=%s' % url_ in response['Location'], "/view/?param=%s should be allowed" % url_)
 
-        
+
 class LogoutTest(AuthViewsTestCase):
     urls = 'django.contrib.auth.tests.urls'
 
@@ -261,7 +270,7 @@ class LogoutTest(AuthViewsTestCase):
         response = self.client.get('/logout/')
         self.assertTrue('site' in response.context)
 
-    def test_logout_with_next_page_specified(self): 
+    def test_logout_with_next_page_specified(self):
         "Logout with next_page option given redirects to specified resource"
         self.login()
         response = self.client.get('/logout/next_page/')
