@@ -11,6 +11,7 @@ from django.template.loader import render_to_string
 import os, urllib, re, shutil
 import lxml
 from lxml import etree
+from datetime import datetime
 
 from lib import feedparser
 from lib import talk_to_cli as cli
@@ -103,7 +104,9 @@ def update_feed(request, form=None):
     if form.is_valid():
         (so,se,rv) = cli.update_feed(form)
         if rv == 0:
-            AtomFeed.objects.create(feed=so, path=form.cleaned_data['path'])
+            (feed, created) = AtomFeed.objects.get_or_create(path=form.cleaned_data['path'])
+            feed.feed = so
+            feed.save()
             return HttpResponse(so, mimetype="application/atom+xml")
         else:
             return HttpResponseBadRequest("se")
@@ -116,11 +119,17 @@ def fetch_feed(request):
         path = form.cleaned_data['path']
 
         def get_feed(path):
+            print path
             try:
-                return AtomFeed.objects.get(path=path)
+                feed = AtomFeed.objects.get(path=path)
             except AtomFeed.DoesNotExist:
                 update_feed(request, form)
-                return AtomFeed.objects.get(path=path)
+                feed = AtomFeed.objects.get(path=path)
+                
+            if (datetime.now()-feed.time).days > settings.MAX_FEED_AGE:
+                update_feed(request, form)
+                feed = AtomFeed.objects.get(path=path)
+            return feed
         
         if path.endswith('.xml'):
             (feed, item) = path.rsplit('/', 1)

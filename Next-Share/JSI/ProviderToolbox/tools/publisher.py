@@ -65,7 +65,7 @@ if __name__ == "__main__":
     signal.signal(signal.SIGTERM,sigTerm)
     signal.signal(signal.SIGHUP,sigHup)
 
-    usage = "usage: %prog [options]\n\n  Runs publisher tool, and serves continusly the torrent files in\n  default torrent directory (" + settings.EXPORT_TORRENT_DIR + ")."
+    usage = "usage: %prog [options]\n\n  Runs publisher tool, and serves continusly the torrent files in\n  default torrent directory (" + settings.TORRENT_DIR + ")."
 
     # Command line options
     parser = OptionParser(usage, version="%prog v" + settings.VERSION)

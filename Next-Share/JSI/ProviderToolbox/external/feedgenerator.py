@@ -253,8 +253,10 @@ class SyndicationFeed(object):
                  author_email=None, author_name=None, author_link=None, 
                  pubdate=None, comments=None, enclosure=None, 
                  categories=(), item_copyright=None, ttl=None, 
-                 image=None, content=None, link_type = None,
-                 description_type = None, **kwargs):
+                 image=None, content=None, link_type=None,
+                 description_type=None, broadcast_type=None, 
+                 media_uri=None, time_point=None, media_duration=None, 
+                 **kwargs):
         """
         Adds an item to the feed. All args are expected to be Python Unicode
         objects except pubdate, which is a datetime.datetime object, and
@@ -287,6 +289,10 @@ class SyndicationFeed(object):
             'item_copyright': to_unicode(item_copyright),
             'ttl': ttl,
             'image': image,
+            'broadcast_type': broadcast_type,
+            'media_uri': media_uri,
+            'time_point': time_point,
+            'media_duration': media_duration,
             # RSS
             'comments': to_unicode(comments),
         }

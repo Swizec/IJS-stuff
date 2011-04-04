@@ -34,7 +34,7 @@ class TestContentSource(unittest.TestCase):
              "B": True, #testBExportTorrents
              "C": True, #testCSyncCheck
              "D": True, #testDCheckUpdate
-             "E": True, #testEDefaultsExportFeed
+             "E": False, #testEDefaultsExportFeed
              "F": True, #testFCustomizedExportFeed
              "G": True, #testGExportFeedLink
              "H": True, #testHRestoreStoredProperties
@@ -102,13 +102,13 @@ class TestContentSource(unittest.TestCase):
         channel.exportTorrent()
         for i, v in channel.items.items():
             (b, e) = os.path.splitext(v.contentFile)
-            tp = os.path.join(settings.EXPORT_TORRENT_DIR, b + '.tstream')
+            tp = os.path.join(settings.TORRENT_DIR, b + '.tstream')
             self.assertTrue(os.path.exists(tp))
         channel.update()
         for i, v in channel.items.items():
             self.assertTrue(not v.fresh)
         channel.remove()
-        shutil.rmtree(settings.EXPORT_TORRENT_DIR)
+        shutil.rmtree(settings.TORRENT_DIR)
 
     def testCSyncCheck(self):
         _log.info("Sync check for torrents ------------")
@@ -120,7 +120,7 @@ class TestContentSource(unittest.TestCase):
         tp = ""
         for i, v in channel.items.items():
             (b, e) = os.path.splitext(v.contentFile)
-            tp = os.path.join(settings.EXPORT_TORRENT_DIR, b + '.tstream')
+            tp = os.path.join(settings.TORRENT_DIR, b + '.tstream')
             if os.path.exists(tp):
                 os.remove(tp)
                 break
@@ -128,10 +128,10 @@ class TestContentSource(unittest.TestCase):
         channel.syncCheck()
         for i, v in channel.items.items():
             (b, e) = os.path.splitext(v.contentFile)
-            tp = os.path.join(settings.EXPORT_TORRENT_DIR, b + '.tstream')
+            tp = os.path.join(settings.TORRENT_DIR, b + '.tstream')
             self.assertTrue(os.path.exists(tp))
         channel.remove()
-        shutil.rmtree(settings.EXPORT_TORRENT_DIR)
+        shutil.rmtree(settings.TORRENT_DIR)
 
     def testDCheckUpdate(self):
         _log.info("Check update from source ------------")
@@ -187,7 +187,10 @@ class TestContentSource(unittest.TestCase):
                 # Find according to link
                 rmi = None
                 for m in meta._items:
-                    if m.links_href == publish + "/" + v.getPublish():
+                    link = publish
+                    if settings.EXPORT_SHADOW_FEED_NAME:
+                        link += textify(m.name) + "/"
+                    if m.links_href == link + v.getPublish():
                         rmi = m
                 self.assertTrue(rmi != None)
                 self.assertTrue(rmi.title == v.name)

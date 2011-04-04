@@ -7,7 +7,7 @@ from xml.etree.cElementTree import iterparse
 
 from JSI.ProviderToolbox.external import feedparser
 from JSI.ProviderToolbox.utils import log
-from JSI.ProviderToolbox.utils.utilities import asciify, command
+from JSI.ProviderToolbox.utils.utilities import asciify, command, time2duration
 from JSI.ProviderToolbox.conf import settings
 from JSI.RichMetadata.RichMetadata import RichMetadataGenerator
 
@@ -384,11 +384,18 @@ class Media(MetaGen):
             if dur.find(",") != -1:
                 ds = dur.split(",")
                 media.duration = ds[0].lstrip("  Duration: ")
+                media.duration = time2duration(media.duration)
                 media.start = ds[1].lstrip(" start: ")
                 if len(ds) < 3:
                     _log.debug("Too few elements to determine file in path '%s' duration parameters - bitrate!", media.path)
                 else:
-                    media.bitrate = ds[2].lstrip(" bitrate: ")
+                    b = ds[2].lstrip(" bitrate: ")
+                    mb = b.rstrip(" kb/s").strip()
+                    try:
+                        mbi = int(mb)
+                        media.bitrate = str(mbi*1024)
+                    except Exception, e:
+                        media.bitrate = b
             else:
                 _log.warn("Getting media metadata has failed with since bad Duration line was provided: '%s'", dur) 
                 return None

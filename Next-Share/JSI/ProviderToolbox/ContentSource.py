@@ -1,3 +1,4 @@
+from base64 import encodestring
 from datetime import datetime
 import os 
 import shutil
@@ -8,16 +9,17 @@ from urlparse import urlparse
 from JSI.ProviderToolbox.MetadataGenerator import Feed
 from JSI.ProviderToolbox.FeedGenerator import P2PNextAtomFeed, P2PNextLiveAtomFeed
 from JSI.ProviderToolbox.utils import log
-from JSI.ProviderToolbox.utils.utilities import textify, asciify, classImport, Fetch, TimeSorter
+from JSI.ProviderToolbox.utils.utilities import textify, asciify, classImport, Fetch, TimeSorter, time2duration
 from JSI.ProviderToolbox.conf import settings
 from JSI.RichMetadata.RichMetadata import RichMetadataGenerator
 from JSI.RichMetadata.conf import metadata
 
 from BaseLib.Core.TorrentDef import TorrentDef
+from BaseLib.Core.ClosedSwarm import ClosedSwarm
 
 __author__ = 'D. Gabrijelcic (dusan@e5.ijs.si)'
-__revision__ = '0.22'
-__all__ = ['ContentSource', 'Channel', 'ContentUnit', 
+__revision__ = '0.24'
+__all__ = ['ContenSource', 'Channel', 'ContentUnit', 
            'RTVVoDContent', 'classpath', '__revision__']
 
 
@@ -97,8 +99,8 @@ class ContentUnit(Identify):
         self.identifier = None
         # Rich metadata
         self.metadata = None
-        # Relative link in export (to publish in a feed) 
-        self.publish = None
+        # Torrent file
+        self.torrent = None
         # Image
         self.image = None
         # Location of per cu DID base file (template)
@@ -111,6 +113,8 @@ class ContentUnit(Identify):
         self.contentFile = None
         # Metadata file of the unit - name of the file
         self.metaFile = None
+        # Shadow file
+        self.shadow = None
         # Time of fetch - creation time - or time of metadata file
         # creation - restore
         self.timestamp = None
@@ -118,6 +122,8 @@ class ContentUnit(Identify):
         self.stored = False
         # Fresh ?
         self.fresh = False
+        # ClosedSwarm ? 
+        self.cskeyfile = None
         # Acquire content? Alwayse defined per CS settings 
         self.acquire = False
         # Identify attributes are based on rich metadata specification
@@ -384,12 +390,20 @@ class ContentUnit(Identify):
         """
         if self.contentFile:
             (b, e) = os.path.splitext(self.contentFile)
-            u = os.path.join(settings.EXPORT_TORRENT_DIR, b + '.url')
-            t = os.path.join(settings.EXPORT_TORRENT_DIR, b + '.tstream')
+            u = os.path.join(settings.TORRENT_DIR, b + '.url')
+            t = os.path.join(settings.TORRENT_DIR, b + '.tstream')
             if os.path.exists(u):
                 return b + '.url'
             if os.path.exists(t):
                 return b + '.tstream'
+        return None
+
+    def findCSFile(self):
+        tdef = TorrentDef.load(os.path.join(settings.TORRENT_DIR, self.torrent))
+        kfile =  encodestring(tdef.infohash).replace("\n","").replace("/","").replace("\\","")
+        cs_key_file = os.path.join(settings.CS_PUBLISH_DIR, kfile + ".tkey")
+        if os.path.exists(cs_key_file):
+            return kfile + ".tkey"
         return None
 
     def getImage(self):
@@ -423,7 +437,49 @@ class ContentUnit(Identify):
 
         @return string String or None.
         """
-        return self.publish
+        if settings.XML_EXPORT:
+            return self.shadow
+        return self.torrent
+
+    def exportShadow(self, path, relative_name=None):
+        """
+        Exports core rich metadata XML representation as a content,
+        store in the path.
+        """
+        assert os.path.isdir(path)
+        if relative_name != None:
+            self.shadow = relative_name
+        else:
+            self.shadow = self.getShadow()
+        if not os.path.isfile(os.path.join(path, self.shadow)):
+            xmlpath = os.path.join(path, self.shadow)
+            xmlfile = open(xmlpath, 'w')
+            rmg = RichMetadataGenerator.getInstance()
+            # Backward compatible
+            if self.metadata.getDuration():
+                d = self.metadata.getDuration()
+                if not d.startswith("P"):
+                    self.metadata.setDuration(time2duration(d))
+            if self.metadata.getBitRate():
+                try:
+                    br = int(self.metadata.getBitRate())
+                except Exception, e:
+                    br = self.metadata.getBitRate()
+                    br = br.rstrip(" kb/s").strip()
+                    try:
+                        br = int(br)
+                        self.metadata.setBitRate(str(br*1024))
+                    except Exception, e:
+                        pass
+            xmlfile.write(rmg.build(self.metadata, metadata.TAG_MPEG7))
+            xmlfile.close()
+
+    def getShadow(self):
+        if self.shadow:
+            return self.shadow
+        else:
+            assert self.metaFile != None
+            return os.path.splitext(self.metaFile)[0]
 
     def toString(self):
         """
@@ -454,11 +510,20 @@ class RTVVoDContent(ContentUnit):
     def getId(self):
         return settings.URN + settings.P2P_NEXT + settings.COLON + settings.RTV_SLO + settings.COLON + self.identifier
 
-    def getPublish(self):
-        return self.publish.rstrip(".tstream") + "/"
+    def exportShadow(self, path, relative_name=None):
+        # Changes the name from unit name to identifier.
+        super(RTVVoDContent, self).exportShadow(path, self.identifier)        
 
+    def getShadow(self):
+        return self.identifier
+
+    # Sets the image per content unit. But some needs to generate the
+    # images on the end. Assumed that the images are in the same
+    # exported dir as the shadows. If the complete link is provided it
+    # won't get overwritten - otherwise the return valu will be
+    # relative to feed publishing link
     def getImage(self):
-        return self.publish + ".png"
+        return self.getPublish() + ".png"
 
 class ContentSource(Identify):
     """
@@ -477,10 +542,15 @@ class ContentSource(Identify):
         self.guid = None
         # Rich metadata
         self.metadata = None
+        # CS storage
         self.storage = None
         self.metaFile = None
+        # CS shadow (XML exports)
+        self.shadow = None
         # The items
         self.items = {}
+        # Holds the list of last fresh content units identifiers
+        self.lastFreshList = []
         # Acquire content?
         self.acquire = True
         # Exist already?
@@ -720,24 +790,31 @@ class ContentSource(Identify):
                     (base, e) = os.path.splitext(f)
                     tmp = list()
                     for c in lf:
-                        if c.startswith(base):
+                        (n, ne) = os.path.splitext(c)
+                        if n == base:
                             tmp.append(c)
                     tmp.remove(f)
                     if len(tmp) == 1: # content exists
                         cu.contentFile = tmp[0]
                         (base, e) = os.path.splitext(cu.contentFile)
-                        u = os.path.join(settings.EXPORT_TORRENT_DIR, base + '.url')
-                        t = os.path.join(settings.EXPORT_TORRENT_DIR, base + '.tstream')
+                        u = os.path.join(settings.TORRENT_DIR, base + '.url')
+                        t = os.path.join(settings.TORRENT_DIR, base + '.tstream')
                         if os.path.exists(u):
-                            cu.publish = base + '.url'
+                            cu.torrent = base + '.url'
                         elif os.path.exists(t):
-                            cu.publish = base + '.tstream'
+                            cu.torrent = base + '.tstream'
+                        if cu.torrent:
+                            cu.cskeyfile = cu.findCSFile()
                     cu.identifier = cu.identify()
                     cs.timesort.fill((cu.timestamp, cu.identifier))
                     cu.feedStore = cs.storage
                     cu.metaFile = f
                     cu.stored = True
                     cu.acquire = cs.acquire
+                    if settings.XML_EXPORT:
+                        # Backward compatibility
+                        cs.exportShadow()
+                        cu.shadow = cu.getShadow()
                     if cu.identifier != None:
                         cs.items[cu.identifier] = cu
             return cs
@@ -884,7 +961,7 @@ class ContentSource(Identify):
             _log.debug("Specified DID base file '%s' does not exists, failed to set didbase attribute", didbasefile)
 
     def exportTorrent(self, tracker, common=False, 
-                      path=settings.EXPORT_TORRENT_DIR, **kwargs):
+                      path=settings.TORRENT_DIR, **kwargs):
         """
         Exports content sorce content and metadata as torrents
 
@@ -899,7 +976,30 @@ class ContentSource(Identify):
             except Exception, e:
                 _log.error("Failed to make directory for torrent storage in path %s, exception was raised: %s", path, str(e))
                 return
-      
+
+    def exportShadow(self, path=settings.SHADOW_DIR):
+        """
+        Exports content source items in a shadow dir as xml files
+        containing a link to a torrent as MediaUri. The shadow is
+        placed in the path. The content source directory under the
+        source name will hold the XML represenations of the content.
+
+        @param path Sets the shadow dir
+        """
+        if not os.path.isdir(path):
+            try:
+                os.mkdir(path)
+                _log.debug("Shadow directory created in path '%s'", path)
+            except Exception, e:
+                _log.error("Failed to make directory for shadow storage in path %s, exception was raised: %s", path, str(e))
+        self.shadow = os.path.join(path, textify(self.name))
+        if not os.path.isdir(self.shadow):
+            try:
+                os.mkdir(self.shadow)
+                _log.debug("Shadow directory for the content source '%s' created in path '%s'", self.name, self.shadow)
+            except Exception, e:
+                _log.error("Failed to make directory for content source shadow storage in path %s, exception was raised: %s", self.shadow, str(e))
+
     def syncCheck(self):
         """
         Checks if all content units in the feed have torrents
@@ -925,11 +1025,16 @@ class ContentSource(Identify):
             t = v.findTorrentFile()
             if t:
                 try:
-                    os.remove(os.path.join(settings.EXPORT_TORRENT_DIR, t))
+                    os.remove(os.path.join(settings.TORRENT_DIR, t))
                 except Exception, e:
                     _log.error("Exception raised while removing a torrent file %s: %s", t, e)
             else:
                 _log.error("Programmable error, content unit with name '%s' has no torrent file", v.name)
+        if settings.XML_EXPORT and os.path.isdir(self.shadow):
+            try:
+                shutil.rmtree(self.shadow)
+            except Exception, e:
+                _log.error("Exception raised wile removing content source named '%s' shadow '%s': %s", self.name, self.shadow, e )
         if os.path.isdir(self.storage):
             try:
                 shutil.rmtree(self.storage)
@@ -953,15 +1058,22 @@ class ContentSource(Identify):
             if self.storage:
                 if item.contentFile:
                     os.remove(os.path.join(self.storage, item.contentFile))
+                if item.torrent:
+                    os.remove(os.path.join(settings.TORRENT_DIR, item.torrent))
+                else:
                     (b, e) = os.path.splitext(item.contentFile)
-                    u = os.path.join(settings.EXPORT_TORRENT_DIR, b + '.url')
-                    t = os.path.join(settings.EXPORT_TORRENT_DIR, b + '.tstream')
+                    u = os.path.join(settings.TORRENT_DIR, b + '.url')
+                    t = os.path.join(settings.TORRENT_DIR, b + '.tstream')
                     if os.path.exists(t):
                         os.remove(t)
                     elif os.path.exists(u):
                         os.remove(u)
                 if item.metaFile:
                     os.remove(os.path.join(self.storage, item.metaFile))
+                if item.cskeyfile:
+                    os.remove(os.path.join(settings.CS_PUBLISH_DIR, item.cskeyfile))
+                if settings.XML_EXPORT and item.shadow:
+                    os.remove(os.path.join(self.shadow, item.shadow))
                 del self.items[identifier]
                 self.timesort.remove((ct, identifier))
                 _log.debug("Content unit with name '%s' and identifier %s removed from source '%s'", name, ident, self.name)
@@ -981,8 +1093,6 @@ class ContentSource(Identify):
                 l = self.window
             else: # If negative set to default
                 self.window = None
-                return
-            _log.debug(l)
             if l:
                 sorteditems = self.timesort.sort() # Descending, identifiers
                 for i in sorteditems:
@@ -994,7 +1104,6 @@ class ContentSource(Identify):
                         c += 1
                         if c > l:
                             tbr.append(i)
-                    _log.debug(tbr)
                     for r in tbr:
                         self.removeContentUnit(r)
         return
@@ -1009,10 +1118,82 @@ class ContentSource(Identify):
         """
         ret = []
         for k, v in self.items.items():
-            tf = v.findTorrentFile()
-            if fileName == v.contentFile or fileName == tf:
+            if fileName == v.contentFile or fileName == v.torrent or fileName == v.metaFile:
                 ret.append(v.identifier)
         return ret
+
+    def getFresh(self, content=False, meta=False):
+        """
+        Return a list of fresh content file names or identifiers
+
+        @param boolean Controls if the content names are returned or
+                       identifiers, default False (return identifiers)
+        @return list A list of identifiers of the fresh content units
+                     or a list of content names
+        """
+        if content:
+            ret = []
+            for i in self.lastFreshList:
+                ret.append(self.items[i].contentFile)
+            return ret
+        elif meta:
+            ret = []
+            for i in self.lastFreshList:
+                ret.append(self.items[i].metaFile)
+            return ret
+        return self.lastFreshList
+
+    def listJson(self):
+        """
+        Provides a short list as a dict, suitable to be exported in
+        json format.
+
+        @return dict A dictionary holding the feed list in short format
+        """
+        l = {}
+        for k, v in self.items.items():
+            d = {}
+            d["content"] = v.contentFile
+            d["meta"] = v.metaFile
+            d["torrent"] = v.torrent
+            if v.cskeyfile:
+                d["cskeys"] = v.cskeyfile
+            l[k] = d
+        return l
+
+    def getJsonExports(self):
+        """
+        Provides a dict for exporting feed data in json format. To be
+        sure that the data is as in exported feed run before
+        exportFeed with all the parameters as were originally
+        provided.
+
+        @return dict A dictionary holding the feed data
+        """
+        e = {}
+        e["fresh"] = self.getFresh(False, True)
+        rmg = RichMetadataGenerator.getInstance()
+        # Get raw feed
+        feed = self.exportFeed(None, None, False)
+        e["feed"] = rmg.prettyPrint(feed.writeString(), 'utf-8')
+        e["maps"] = {}
+        for k, v in self.items.items():
+            cudata = {}
+            cudata["content"] = v.contentFile 
+            cudata["identifier"] = v.identifier
+            cudata["torrent"] = v.torrent
+            if v.cskeyfile:
+                cudata["cskeys"] = v.cskeyfile
+            if v.getId():
+                cudata["id"] = v.getId()
+            else:
+                for i in feed.items:
+                    if i["identifier"] == v.identifier:
+                        feed._generate_item_id(i)
+                        cudata["id"] = i["unique_id"]
+                        break
+            e["maps"][v.metaFile] = cudata
+        return e
 
     def toString(self):
         """
@@ -1190,6 +1371,7 @@ class Channel(ContentSource):
                 self.sourceMeta = Feed.getMetadata(self.location)
             else:
                 return 
+        self.lastFreshList = []
         # start from teh back of the list so the oldest items get
         # oldest timestamp
         self.sourceMeta._items.reverse()
@@ -1208,6 +1390,7 @@ class Channel(ContentSource):
             content.store(i.link)
             if content.stored:
                 content.fresh = True
+                self.lastFreshList.append(content.identifier)
                 content.timestamp = content.createTime()
                 self.timesort.fill((content.timestamp, content.identifier))
                 self.items[content.identifier] = content
@@ -1215,14 +1398,15 @@ class Channel(ContentSource):
                 _log.warn("Content unit and metadata related to the item '%s' haven't been stored on the node, content not registred.", content.name)
         self.checkWindow()
         self.syncCheck()
+        self.exportShadow()
         self.sourceMeta = None
 
     def exportTorrent(self, tracker=None, common=False, 
-                      path=settings.EXPORT_TORRENT_DIR, **kwargs):
+                      path=settings.TORRENT_DIR, **kwargs):
         """
         Creates torrents for all fresh content units. All other
         parameters for the torrent file creation can be specified via
-        **kwargs parameter.
+        **kwargs.
 
         @param tracker The tracker to use to track the torrent
         @param common Common reference to content (live stream)
@@ -1231,6 +1415,21 @@ class Channel(ContentSource):
         # Part of the code has been mercilessly taken from createtorrent.py
         # Closed Swarm not supported yet
         super(Channel, self).exportTorrent(common, path)
+        config = self.getTorrentConfig(tracker, path, **kwargs)
+        # Locks the torrent dir while the torents are created. Looked
+        # for by Publisher, but only by common prefix
+        lock = settings.TORRENT_DIR_LOCK + "-" + asciify(self.name)
+        open(lock, 'a').close()
+        if not common:
+            for i, v in self.items.items():
+                if not v.fresh:
+                    continue
+                self.createTorrent(v, config)
+                v.fresh = False
+        os.remove(lock)
+
+    def getTorrentConfig(self, tracker=None, path=settings.TORRENT_DIR, 
+                         **kwargs):
         if not tracker:
             tracker = "http://"
             if settings.INTERNAL_TRACKER_IP:
@@ -1247,52 +1446,108 @@ class Channel(ContentSource):
                    "piecesize": 32768,
                    "duration": "1:00:00",
                    "url": False,
-                   "url-list": []}
+                   "url-list": [],
+                   "generate_cs": "no"}
         config.update(kwargs)
-        # Locks the torrent dir while the torents are created. Looked
-        # for by Publisher, but only by common prefix
-        lock = settings.TORRENT_DIR_LOCK + "-" + asciify(self.name)
-        open(lock, 'a').close()
-        if not common:
-            for i, v in self.items.items():
-                if not v.fresh:
-                    continue
-                source = os.path.join(self.storage, v.contentFile)
-                if os.path.exists(source) and not os.path.isdir(source):
-                    tdef = TorrentDef()
-                    if v.metadata and v.metadata.getDuration():
-                        config['duration'] = v.metadata.getDuration()
-                    tdef.add_content(source, playtime=config['duration'])
-                    tdef.set_tracker(config['tracker'])
-                    tdef.set_piece_length(config['piecesize'])
-                    if len(config['url-list']) > 0:
-                        urllist = [config['url-list']]
-                        tdef.set_urllist(urllist)
-                    if config['url']:
-                        tdef.set_create_merkle_torrent(1)
-                        tdef.set_url_compat(1)
-                    else:
-                        if config.get('thumb'):
-                            tdef.set_thumbnail(config['thumb'])
-                    tdef.set_metadata(v.buildDIDBaseXMLData())
-                    tdef.finalize()            
-                    (b, e) = os.path.splitext(v.contentFile)
-                    publish = None
-                    if config['url']:
-                        urlbasename = b + '.url'
-                        publish = urlbasename
-                        urlfilename = os.path.join(config['destdir'],urlbasename)
-                        f = open(urlfilename,"wb")
-                        f.write(tdef.get_url())
-                        f.close()
-                    else:
-                        torrentbasename = b + '.tstream'
-                        publish = torrentbasename
-                        torrentfilename = os.path.join(config['destdir'],torrentbasename)
-                        tdef.save(torrentfilename)                       
-                    v.publish = publish
-                    v.fresh = False
-        os.remove(lock)
+        return config
+
+    def createTorrent(self, cu, config=None, tracker=None, 
+                      path=settings.TORRENT_DIR, **kwargs):
+        """
+        Creates a torrent file for specified content unit. Allows
+        specifying a config dict as an argument or a default is
+        provided. The tracker, path and kwargs arguments will be used
+        only if the config is not specified.
+        """
+        if config == None:
+            super(Channel, self).exportTorrent(False, path)
+            config = self.getTorrentConfig(tracker, path, **kwargs)
+        source = os.path.join(self.storage, cu.contentFile)
+        if os.path.exists(source) and not os.path.isdir(source):
+            tdef = TorrentDef()
+            if cu.metadata and cu.metadata.getDuration():
+                config['duration'] = cu.metadata.getDuration()
+            config['source'] = source
+            tdef.add_content(source, playtime=config['duration'])
+            tdef.set_tracker(config['tracker'])
+            tdef.set_piece_length(config['piecesize'])
+            if len(config['url-list']) > 0:
+                urllist = [config['url-list']]
+                tdef.set_urllist(urllist)
+            if config['url']:
+                tdef.set_create_merkle_torrent(1)
+                tdef.set_url_compat(1)
+            else:
+                if config.get('thumb'):
+                    tdef.set_thumbnail(config['thumb'])
+            tdef.set_metadata(cu.buildDIDBaseXMLData())
+            # Closed Swarm
+            cs_keypair = self.closed_swarm(config, tdef)
+            tdef.finalize()            
+            (b, e) = os.path.splitext(cu.contentFile)
+            publish = None
+            if config['url']:
+                urlbasename = b + '.url'
+                torrent = urlbasename
+                urlfilename = os.path.join(config['destdir'],urlbasename)
+                f = open(urlfilename,"wb")
+                f.write(tdef.get_url())
+                f.close()
+            else:
+                torrentbasename = b + '.tstream'
+                torrent = torrentbasename
+                torrentfilename = os.path.join(config['destdir'],torrentbasename)
+                tdef.save(torrentfilename)                       
+            cu.torrent = torrent
+            if cs_keypair:
+                self.publish_key(torrentfilename, cs_keypair)
+
+    def closed_swarm(self, config, tdef):
+        cs_keypair = None
+        if config.get('generate_cs').lower() == "yes":
+            if config.get('cs_keys'):
+                _log.error("Refusing to generate keys when key is given for content unit '%s'", config['source'])
+            cs_keypair, cs_pubkey = self.generate_key(config)
+            tdef.set_cs_keys([cs_pubkey])
+        elif config.get('cs_keys'):
+            config['cs_keys'] = config['cs_keys'].split(";")
+        return cs_keypair
+
+    def generate_key(self, config):
+        """
+        Generate and a closed swarm key matching the config.  Source is the 
+        source of the torrent
+        """
+        if 'target' in config and config['target']:
+            target = os.path.join(params['target'], split(normpath(file))[1])
+        else:
+            a, b = os.path.split(config['source'])
+            if b == '':
+                target = a
+            else:
+                target = os.path.join(a, b)
+        target += ".torrent"
+        _log.debug("Generating key to '%s.tkey' and '%s.pub'", target, target)
+        keypair, pubkey = ClosedSwarm.generate_cs_keypair(target + ".tkey",
+                                                          target + ".pub")
+    
+        return keypair,pubkey
+
+    def publish_key(self, torrent, keypair, target_directory = settings.CS_PUBLISH_DIR):
+        if not os.path.isdir(target_directory):
+            try:
+                os.mkdir(target_directory)
+                _log.debug("ClosedSwarm directory created in path '%s'", target_directory)
+            except Exception, e:
+                _log.error("Failed to make ClosedSwarm directory in path %s, exception was raised: %s", target_directory, str(e))
+                return
+        t = TorrentDef.load(torrent)
+        filename = encodestring(t.infohash).replace("\n","")
+        filename = filename.replace("/","")
+        filename = filename.replace("\\","")
+        key_file = os.path.join(target_directory, filename + ".tkey")
+        ClosedSwarm.save_cs_keypair(keypair, key_file)
+        _log.debug("Key saved to: '%s'", key_file)
 
     def syncCheck(self):
         """
@@ -1302,13 +1557,13 @@ class Channel(ContentSource):
         for i, v in self.items.items():
             if v.contentFile:
                 (b, e) = os.path.splitext(v.contentFile)
-                u = os.path.join(settings.EXPORT_TORRENT_DIR, b + '.url')
-                t = os.path.join(settings.EXPORT_TORRENT_DIR, b + '.tstream')
+                u = os.path.join(settings.TORRENT_DIR, b + '.url')
+                t = os.path.join(settings.TORRENT_DIR, b + '.tstream')
                 if not os.path.exists(u) and not os.path.exists(t):
                     v.fresh = True
         self.exportTorrent()
 
-    def exportFeed(self, guid=None, image=None):
+    def exportFeed(self, guid=None, image=None, export=True):
         if guid != None:
             self.guid = guid
         if self.guid == None:
@@ -1332,45 +1587,64 @@ class Channel(ContentSource):
                 continue
             publish = None
             if v.getPublish(): # Item getPublish has been defined
-                (bd, ed) = os.path.splitext(v.getPublish())
-                ed = ed.lstrip(".")
-                if ed == '': # but has no extension
-                    mime_type = 'text/html'
-                elif settings.MIME_TYPES_MAP.get(ed) != None: # mapped
-                    mime_type = settings.MIME_TYPES_MAP[ed]
-                else: # not yet defined in map
-                    mime_type = "text/plain"
-                publish = self.getPublish() + "/" + v.getPublish()
-            else: # No getPublish is defined
-                if v.publish != None:
-                    (b, e) = os.path.splitext(v.publish)
-                    e = e.lstrip(".")
-                    if settings.MIME_TYPES_MAP.get(e) != None:
-                        mime_type = settings.MIME_TYPES_MAP[e]
+                if settings.XML_EXPORT:
+                    mime_type = "application/xml"
+                else:
+                    (bd, ed) = os.path.splitext(v.getPublish())
+                    ed = ed.lstrip(".")
+                    if ed == '': # but has no extension
+                        mime_type = 'text/html'
+                    elif settings.MIME_TYPES_MAP.get(ed) != None: # mapped
+                        mime_type = settings.MIME_TYPES_MAP[ed]
                     else: # not yet defined in map
                         mime_type = "text/plain"
-                    publish = self.getPublish() + "/" + v.publish
-                else: # You are on your own, forgot to exportTorrent?
-                    publish = self.getPublish()
-                    mime_type = "text/plain"
+                publish = self.getPublish() + "/" 
+                if settings.EXPORT_SHADOW_FEED_NAME:
+                    publish += textify(self.name) + "/"
+                publish += v.getPublish()
+            else: # No getPublish is defined
+                publish = self.getPublish()
+                mime_type = "text/plain"
             image = None
             if v.getImage() != None:
                 image = v.getImage()
+                if urlparse(image)[0] == '':
+                    image = self.getPublish() + "/" + image
             else:
                 image = self.image
             iid = None
             if v.getId() != None:
                 iid = v.getId()
+            media_uri = self.getPublish() + "/" + settings.EXPORT_TORRENT_LINK + "/" + v.torrent
+            media_duration = None
+            if v.metadata and v.metadata.getDuration():
+                media_duration = v.metadata.getDuration()
+                # Backward compatible
+                if not media_duration.startswith("P"):
+                    media_duration = time2duration(media_duration)
+            kwargs = {"identifier": v.identifier}
             feed.add_item(title=v.name, 
                           link=publish, 
                           link_type=mime_type, 
                           unique_id=iid, 
                           description=v.metadata.getSynopsis(), 
-                          image=image)
-            # Store if the guid or image has been specified for future use
+                          image=image,
+                          broadcast_type='vod',
+                          media_uri=media_uri,
+                          media_duration=media_duration, 
+                          **kwargs)
+        # Store if the guid or image has been specified for future use
         if guid != None or image != None:
             self.store(True)
-        return feed.writeString()
+        if export:
+            return feed.writeString()
+        return feed
+
+    def exportShadow(self, path=settings.SHADOW_DIR):
+        if settings.XML_EXPORT:
+            super(Channel, self).exportShadow(path)            
+            for i, c in self.items.items():
+                c.exportShadow(self.shadow)
 
     def getExportFeedLink(self):
         """

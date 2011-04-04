@@ -128,6 +128,23 @@ class P2PNextAtomFeed(Atom1Feed):
         if item['image'] is not None:
             handler.addQuickElement(u"p2pnext:image", "", {u"src": item['image']})
 
+        # Broadcast type (live or ?)
+        if item['broadcast_type'] is not None:
+            handler.addQuickElement(u"p2pnext:broadcastType", item['broadcast_type'])
+
+        # MediaUri, link to a torrent file
+        if item['media_uri'] is not None:
+            handler.addQuickElement(u"p2pnext:mediaUri", item['media_uri'])
+
+        # Time point
+        if item['time_point'] is not None:
+            handler.addQuickElement(u"p2pnext:timePoint", item['time_point'])
+
+        # Media duration
+        if item['media_duration'] is not None:
+            handler.addQuickElement(u"p2pnext:mediaDuration", item['media_duration'])
+
+
 class P2PNextLiveAtomFeed(P2PNextAtomFeed):
 
        def _generate_item_id(self, item):

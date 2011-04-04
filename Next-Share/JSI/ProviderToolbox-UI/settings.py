@@ -104,3 +104,5 @@ FEED_DIR = ROOT_URL+'../feeds/' # swizec
 
 import sys
 sys.path.append("../../")
+
+MAX_FEED_AGE = 3 #days

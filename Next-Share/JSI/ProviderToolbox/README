@@ -2,7 +2,7 @@
                         ======================
 
 Author: dusan
-Date: 2011-02-07 15:22:52 CET
+Date: 2011-04-04 16:58:04 CEST
 
 
 ProviderToolbox provides a set of tools that ease ingest of content
@@ -26,6 +26,10 @@ Currently the toolbox provides the following features:
 - a tool for continuous publishing (ingest, seeding) of generated VoD
   torrent files, automated updates, additions and removals are
   supported
+- rudimentary ClosedSwarm support: closed swarm keys and corresponding
+  torrent files are generated for manually added items
+- Json output: meaningful commands now provide Json output on stdout
+  for integration with other systems (portal, etc.)
 
 Though the toolbox aims at simplification of the implementation the
 implementation is still complex. The reason for this are diverse
@@ -37,6 +41,9 @@ work on Mac OSX.
 A number of things needs still to be provided for the ProviderToolbox
 to be fully functional:
 - on the fly generation of P2P-Next Live feeds
+
+For up to date changelog please read the last section of this
+document.
 
 Table of Contents
 =================
@@ -63,13 +70,18 @@ Table of Contents
         5.2.1 Command line options and their details 
         5.2.2 Quick summary 
     5.3 Managefeed tool 
+        5.3.1 Create a feed 
+        5.3.2 Add item to the feed 
+        5.3.3 Getting the atom feed 
+        5.3.4 Obtaining the discovery feed 
+        5.3.5 ClosedSwarm items 
     5.4 Publisher 
         5.4.1 Controlling the publisher 
 6 Changelog 
 
 
 1 Implementation content 
-~~~~~~~~~~~~~~~~~~~~~~~~~
+-------------------------
 
 The content of the ProviderToolbox implementation is lay out as
 follows:
@@ -107,7 +119,7 @@ follows:
      + utils/utilities.py
 
 2 Installation 
-~~~~~~~~~~~~~~~
+---------------
 
 Obtain the implementation from the source
 ([https://ttuki.vtt.fi/svn/p2p-next/JSI/ProviderToolbox]) and put it in
@@ -135,7 +147,7 @@ All other Next-Share dependencies valid for your platform, consult
 Next-Share/README.txt for details.
 
 3 Before using the toolbox, important 
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+--------------------------------------
 
 Before using the toolbox some adjustments and decisions need to be
 made to default settings. The settings are defined in file
@@ -144,11 +156,11 @@ JSI/ProviderToolbox/conf/default_settings.py.
   via variable MEDIA_ROOT (default '/media/external'). The directory
   needs to be writable and readable by the user running the toolbox.
 - decide where the fetched and added content torrent files will be
-  stored via variable EXPORT_TORRENT_DIR (default
+  stored via variable TORRENT_DIR (default
   /media/external/torrents). If the torrent files will be served via
-  web server the directory should reside in web server root. The
-  directory needs to be writable and readable by the user running the
-  toolbox.
+  web server the directory should reside in (or it is linked to) web
+  server root. The directory needs to be writable and readable by the
+  user running the toolbox.
 - decide internal tracker port and IP via INTERNAL_TRACKER_PORT and
   INTERNAL_TRACKER_IP variables. The variables needs to be defined
   before creating any torrents (and fetching or adding any content).
@@ -159,6 +171,13 @@ useful will be to change the following:
   feeds publications (items). The link will be prepend to all your
   publications in your exported feeds if not defined per feed via
   command line
+- SHADOW_DIR variable controls where the rich metadata in Mpeg7 format
+  of the content is stored. The metadata will apear either as a link
+  or as a content in the feeds exported. To export it as a link (only
+  automated option) the shadow directory should be accessible through
+  the publishing web server (in web server space, copied, linked,
+  etc.). Shadow inner directory structure is directly appended to
+  CONTENT_PUBLISHING_LINK
 - EXPORT_FEED_LINK variable that defines absolute link for publishing
   the feeds xml files. The link will be prepend to all exported feeds
   xml files, including discovery feed, if the link is not defined per
@@ -170,7 +189,7 @@ To understand how the variables are used read about the feed life
 cycle management in the next section.
 
 4 Feed lifecycle management 
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+----------------------------
 
 All the content managed via ProviderToolbox is related to one or more
 feeds. The feeds and their content could be acquired with getfeed tool
@@ -196,8 +215,8 @@ fixed width font is needed to see the figure properly.)
 | cRED            |       /----+-------+----\       | cYEL            |
 +-----------------+       |                 |       +--------+--------+
                           |                 |                |
-                          |      Feeds      |                |
-     +----------=---------+     Storage     +                |
+          Content         |      Feeds      |   Mpeg7 RM     | Feeds
+     +----------=---------+     Storage     +----------------+
      |                    |                 |                |
      |                    |                 |                |
      |                    | cBLU            |                |
@@ -207,14 +226,14 @@ fixed width font is needed to see the figure properly.)
      |                    /--------+--------\                |
      |                    |                 |                |
      |                    |                 |                |
-     |                    |     Torrents    |                |
+     |          Torrents  |     Torrents    |                |
      |       +------------+     Storage     +                |
      |       |            |                 |                |
      v       v            |                 |                v
 +----+-------+----+       |  cBLU           |       +--------+--------+
 |                 |       \--------+--------/       |                 |
 |                 |                |                |                 |
-|     Torrent     |                |                |       Web       |
+|     Torrent     |                |    Torrents    |       Web       |
 |     Server      |                +--------=------>+      Server     |
 |   (publisher)   |                                 |                 |
 |                 |                                 |                 |
@@ -228,7 +247,6 @@ fixed width font is needed to see the figure properly.)
       content/                                             feeds
     publications                                     publication links
 
-
 The getfeed and managefeed tools (upper left corner) are used to fill
 the feeds storage. While getting the feed information and feed content
 the torrent files are generated on the fly containing P2P-Next
@@ -240,7 +258,7 @@ feeds should be stored in a file system as a file, suitable to be
 served through web server for user consumption. When the feed are
 obtained the discoveryfeed tool can be used to generate a discovery
 feed from stored feeds; the tool again outputs the feed on standard
-output, which should be stored in a filesystem accessible and served
+output, which should be stored in a file system accessible and served
 by web server.
 
 The feeds accessed through the web server should be available at url
@@ -387,7 +405,7 @@ If you add the path to bin directory to your PATH in shell environment
 the command can be called from where ever you want.
 
 4.4.1 Updating the feed from the cron 
---------------------------------------
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 After putting the getfeed command in the user running the toolbox PATH
 the feeds can be add to the users crontab to be run regularly. For
@@ -501,7 +519,7 @@ the missing file(s). This information could be helpful if some files
 torrent files have been forgotten to be deleted.
 
 5 Tools documentation and examples of usage 
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+--------------------------------------------
 
 For documentation consult this README file, standard python
 documentation in the code and the code itself.
@@ -514,18 +532,15 @@ metadata, stores feed content, generates P2P-Next compliant torrent
 files and outputs on stdout P2P-Next compliant VoD feed.
 
 5.1.1 Command line options and their details 
----------------------------------------------
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 The getfeed toll command line help provides the following
 instructions:
 
 
-  xyz:~/src/Next-Share:{1}> python JSI/ProviderToolbox/tools/getfeed.py
+  xyz:~/src/Next-Share:{1}> python JSI/ProviderToolbox/tools/getfeed.py -h
 
 
-  Reason for failure: Neither location (-l) nor update directory (-u)
-                      were specified.
-  
   Usage: getfeed.py [options]
   
     Gets a feed content and metadata, creates torrent files and outputs P2P-Next
@@ -559,6 +574,19 @@ instructions:
     -u DIRECTORY, --update=DIRECTORY
                           Update the feed in specified directory and print fresh
                           feed on std out
+    -f FEEDDIR, --feed=FEEDDIR
+                          Print the feed of the specified feed directory. Feed
+                          guid (-g) or image (-i) can be specified on the
+                          command line as well
+    -r, --fresh           Return instead of the feed the identifiers of the
+                          fresh content units are returned, requires update
+                          option (-u). The feed can be then obtained with feed
+                          option (-f).
+    -c, --fresh-content   Return instead of the feed the content files of the
+                          fresh content units, requires update option (-u). The
+                          feed can be then obtained with feed option (-f).
+    -j, --json            Returns a feed data in json format. Used only with
+                          location (-l), update (-u) and feed (-f) option.
 
 * Location option 
   
@@ -745,11 +773,43 @@ instructions:
   just the update option (-u), followed by the directory storage of the
   feed. The feed will be updated, using the same parameters or defaults,
   as when they were created. The resulting feed will be directed to
-  proces standard output.
+  proces standard output. If fresh option (-r) or fresh content option
+  (-c) are specified the output will be fresh content units item
+  identifiers or content files. Use feed option (-f) to get the atom
+  feed or specify the update with Json option (-j) and get all the
+  specified data on standard output. See Json option section for
+  details.
+  
+* Feed option 
+  
+  Feed option outputs the feed as atom feed on standard output. 
+  
+* Json outputs 
+  
+  Json output can ease using the getfeed tool wrapped as a shell
+  script. The Json output provides the following data, when used with
+  update (-u), location (-l) or feed option (-f):
+  
+  
+    {"feed": atom feed,
+     "fresh": fresh items,
+     "maps": { metadata_file_name: { "content": content,
+                                     "torrent": torrent file,
+                                     "id": id of the item in atom feed,
+                                     "identifier": identifier of the item,
+                                     "cskeys": ClosedSwarm keys}
+  
+  The maps value is a dictionary of metadata file names as keys and
+  dictionaries about the item details as specified above as a value.
+  Fresh items will be available only when Json output is used with
+  update or location option. ClosedSwarm keys will be listed in the
+  output if the content distribution is protected with ClosedSwarm
+  technology. Similar Json outputs could be provided by managefeed tool
+  as well.
   
 
 5.1.2 Quick summary 
---------------------
+~~~~~~~~~~~~~~~~~~~~
 
 To obtain a feed from location and publish it on a web server of your
 choice:
@@ -787,7 +847,7 @@ Discoveryfeed tool creates P2P-Next compliant discovery feed from the
 stored feeds and outputs it on stdout.
 
 5.2.1 Command line options and their details 
----------------------------------------------
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 The discoveryfeed toll command line help provides the following
 instructions:
@@ -822,7 +882,7 @@ items information is based on stored feed information. If there is no
 feeds stored the tool will return only the feed head.
 
 5.2.2 Quick summary 
---------------------
+~~~~~~~~~~~~~~~~~~~~
 
 An example of usage:
 
@@ -845,9 +905,9 @@ meaningful management) by the tool is significantly increased. The
 command line help for the tool returns:
 
 
-    xyz:~/src/Next-Share:{1}> python JSI/ProviderToolbox/tools/managefeed.py
+    xyz:~/src/Next-Share:{1}> python JSI/ProviderToolbox/tools/managefeed.py -h
   
-  Reason for failure: None of the main options -c, -a, -r or -l specified!
+  Reason for failure: None of the main options -c, -a, -r, -l, -f or --identifier specified!
   
   Usage: managefeed.py [options]
   
@@ -858,55 +918,96 @@ command line help for the tool returns:
     --version             show program's version number and exit
     -h, --help            show this help message and exit
     -v, --verbose         Be verbose
-    -c, --create-feed     Create or modify feed metadata or parameters
-    -a, --add-item        Add feed item
-    -r REMOVEITEM, --remove-item=REMOVEITEM
+  
+    Main options:
+      One of this options needs to be specified
+  
+      -c, --create-feed   Create or modify feed metadata or parameters, the feed
+                          directory should be specified as option argument
+      -a, --add-item      Add feed item. The feed should be specified with feed
+                          dir option (-d)
+      -r REMOVEITEM, --remove-item=REMOVEITEM
                           Remove feed item by identifier (use list to find the
-                          right one)
-    -l LIST, --list=LIST  List the feed storage
-    --long                List the feed storage in detail
-    -m MEDIAROOT, --media-root=MEDIAROOT
-                          Location of feeds storage, other then media root
-                          (settings.MEDIA_ROOT)
-    -t TITLE, --title-name=TITLE
+                          right one and specify the feed directory with -d)
+      -l LIST, --list=LIST
+                          List the feed storage directory as specified in option
+      -f FEED, --feed=FEED
+                          Get the feed specified by the feed storage directory.
+                          Feed guid (-u) or image (-i) can be specified on the
+                          command line as well
+      -d FEEDDIR, --feed-storage=FEEDDIR
+                          Feed storage. Not usable on its own but needs to be
+                          specified together with other options (-r, -a,
+                          --identifier, ---find-cs-key)
+  
+    Metadata options:
+      Options used for specifying the feed or item metadata
+  
+      -t TITLE, --title-name=TITLE
                           Name of the title, feed or item
-    -k DESCRIPTION, --series-title=DESCRIPTION
+      -k DESCRIPTION, --series-title=DESCRIPTION
                           Feed series title (description)
-    -n LANGUAGE, --language=LANGUAGE
+      -n LANGUAGE, --language=LANGUAGE
                           Feed language
-    -g ORIGINATOR, --originator=ORIGINATOR
+      -g ORIGINATOR, --originator=ORIGINATOR
                           Feed originator
-    -d FEEDDIR, --feed-storage=FEEDDIR
-                          Feed storage
-    -e EXPORTURL, --feed-export-url=EXPORTURL
-                          URL where the feed will be accessible, default
-                          http://stream.e5.ijs.si/feeds appended with the name
-                          of the feed (directory) with xml extension
-    -j PUBLISHER, --author=PUBLISHER
+      -j PUBLISHER, --author=PUBLISHER
                           Publisher of the feed
-    -u ID, --id=ID        Unique identifier of the feed
-    -i IMAGE, --image=IMAGE
-                          Image of the feed
-    -p PUBLISH, --publish-link=PUBLISH
-                          Publish link of the feed (absolute), default
-                          http://stream.e5.ijs.si/publish
-    -o CUCI, --cu-class-instance=CUCI
-                          Content unit class instance used in an export of the
-                          feed. Enables customization of the export per unit
-    -b DIDBASE, --did-base=DIDBASE
-                          Feed DID base file
-    -x COREMETAFILE, --core-metadata=COREMETAFILE
+      -x COREMETAFILE, --core-metadata=COREMETAFILE
                           Core metadata file used as template for the feed or an
                           item. Caution: if used with the item the channel
                           metadata gets overwritten by this metadata. In this
                           case the item metadata should specify the channel
                           metadata as well.
-    -y MIMETYPE, --mime-type=MIMETYPE
-                          Item mime type
-    -s SYNOPSIS, --synopsis=SYNOPSIS
+      -s SYNOPSIS, --synopsis=SYNOPSIS
                           Item synopsis
-    -z CONTENT, --content=CONTENT
+  
+    Publishing options:
+      Options used for publishing the content
+  
+      -e EXPORTURL, --feed-export-url=EXPORTURL
+                          URL where the feed will be accessible, default
+                          http://stream.e5.ijs.si/feeds appended with the name
+                          of the feed (directory) with xml extension
+      -u ID, --id=ID      Unique identifier of the feed
+      -i IMAGE, --image=IMAGE
+                          Image of the feed
+      -p PUBLISH, --publish-link=PUBLISH
+                          Publish link of the feed (absolute), default
+                          http://stream.e5.ijs.si/publish
+      -o CUCI, --cu-class-instance=CUCI
+                          Content unit class instance used in an export of the
+                          feed. Enables custumization of the export per unit
+      -b DIDBASE, --did-base=DIDBASE
+                          Feed DID base file
+      -y MIMETYPE, --mime-type=MIMETYPE
+                          Item mime type
+      -z CONTENT, --content=CONTENT
                           Content file pointed to in an item
+  
+    ClosedSwarm options:
+      --cs                Protect the item with the closed swarm. Used only with
+                          add item (-a)
+      --cs-keys=CSKEYS    Specify a comma separated list of keys to be used with
+                          closed swarm. Used only with add item (-a). Not tested
+                          yet.
+      --find-cs-key=IDENTIFIER
+                          Find CS key file for specified content unit
+                          identifyer, if any. Use with feed directory (-d)
+  
+    Miscellaneous options:
+      --long              List the feed storage in detail
+      -m MEDIAROOT, --media-root=MEDIAROOT
+                          Location of feeds storage, other then media root
+                          (settings.MEDIA_ROOT)
+      --identifier=FILENAME
+                          Return an identifier list (comma separated) according
+                          to specified file name, either content, metadata or
+                          torrent file. Requires an option feed storage (-d) as
+                          well.
+      --json              Output feed data in json format. Makes sense only in
+                          combination with list feed (-l), feed (-f),
+                          --identifier and --find-cs-key.
 
 The first line warns us why the failure has occurred and then the tool
 help is returned. One of the main modes of the tool needs to be
@@ -915,8 +1016,13 @@ specified:
  + '-a': add a new item to the feed
  + '-r': remove the item from the feed, or
  + '-l': list the feed information
+ + '-f': gets the feed atom feed without an update
+ + '--identifier': utility option
 
 The other parameters usage will be explained through examples.
+
+5.3.1 Create a feed 
+~~~~~~~~~~~~~~~~~~~~
 
 The feed can be created as is presented in the following example. The
 content feed for FAB channel is created with suitable title and
@@ -976,6 +1082,9 @@ The xml file holds the feed RichMetadata information and the
 
 If the same feed with the same name is created with another '-c'
 command the feed information is simply overwritten.
+
+5.3.2 Add item to the feed 
+~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 Then the items of the feed can be added to the feed. Lets say that we
 would like add the FAB channel content as is available in the
@@ -1194,8 +1303,11 @@ be used for removing the items from the feed:
 
 would remove the Missippi item from the feed.
 
-The P2P-Next compliant feed could then be obtained from created with
-getfeed tool:
+5.3.3 Getting the atom feed 
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+The P2P-Next compliant feed could then be obtained from created feed with
+getfeed or managefeed tool:
 
 
     xyz:~/src/Next-Share:{1}> python JSI/ProviderToolbox/tools/getfeed.py -l /media/external/FAB_Channel_feed
@@ -1204,12 +1316,12 @@ getfeed tool:
      <title>
         FAB Channel feed
      </title>
-     <link href="http://stream.e5.ijs.si/feeds/fab.xml" rel="self"/>
+     <link href="http://stream.e5.ijs.si/feeds/FAB_Channel_feed.xml" rel="self"/>
      <id>
-        http://stream.e5.ijs.si/feeds/fab.xml
+        http://stream.e5.ijs.si/feeds/FAB_Channel_feed.xml
      </id>
      <updated>
-        2010-11-22T12:19:27Z
+        2011-04-04T16:37:40Z
      </updated>
      <author>
         <name>
@@ -1219,35 +1331,53 @@ getfeed tool:
      <p2pnext:image src="http://stream.e5.ijs.si/images/p2p-next-logo.jpg"/>
      <entry>
         <title>
-           Monokino live performance in Paradiso, Amsterdam, 2005
+           Misippi live performance in Paradiso, Amsterdam, 2008
         </title>
-        <link href="http://stream.e5.ijs.si/torrents/20050526_monokino.tstream" rel="alternate" type="application/x-bittorrent"/>
+        <link href="http://stream.e5.ijs.si/publish/FAB_Channel_feed/20081213_gpnl_missippi_hdv" rel="alternate" type="application/xml"/>
         <updated>
-           2010-11-22T12:19:27Z
+           2011-04-04T16:37:40Z
         </updated>
         <id>
-           urn:p2p-next:item:tag:stream.e5.ijs.si:/torrents/20050526_monokino.tstream/
+           urn:p2p-next:item:tag:stream.e5.ijs.si:/publish/FAB_Channel_feed/20081213_gpnl_missippi_hdv/
+        </id>
+        <summary>
+           Mississipi concert
+        </summary>
+        <p2pnext:image src="http://stream.e5.ijs.si/images/p2p-next-logo.jpg"/>
+        <p2pnext:broadcastType>
+           vod
+        </p2pnext:broadcastType>
+        <p2pnext:mediaUri>
+           http://stream.e5.ijs.si/publish/torrents/20081213_gpnl_missippi_hdv.tstream
+        </p2pnext:mediaUri>
+        <p2pnext:mediaDuration>
+           PT00H16M40S
+        </p2pnext:mediaDuration>
+     </entry>
+     <entry>
+        <title>
+           Monokino live performance in Paradiso, Amsterdam, 2005
+        </title>
+        <link href="http://stream.e5.ijs.si/publish/FAB_Channel_feed/20050526_monokino" rel="alternate" type="application/xml"/>
+        <updated>
+           2011-04-04T16:37:40Z
+        </updated>
+        <id>
+           urn:p2p-next:item:tag:stream.e5.ijs.si:/publish/FAB_Channel_feed/20050526_monokino/
         </id>
         <summary>
            Monokino whatever synopsis
         </summary>
         <p2pnext:image src="http://stream.e5.ijs.si/images/p2p-next-logo.jpg"/>
-     </entry>
-     <entry>
-        <title>
-           Misippi live performance in Paradiso, Amsterdam, 2008
-        </title>
-        <link href="http://stream.e5.ijs.si/torrents/20081213_gpnl_missippi_hdv.tstream" rel="alternate" type="application/x-bittorrent"/>
-        <updated>
-           2010-11-22T12:19:27Z
-        </updated>
-        <id>
-           urn:p2p-next:item:tag:stream.e5.ijs.si:/torrents/20081213_gpnl_missippi_hdv.tstream/
-        </id>
-        <summary>
-           Missippi whatever synopsis
-        </summary>
-        <p2pnext:image src="http://stream.e5.ijs.si/images/p2p-next-logo.jpg"/>
+        <p2pnext:broadcastType>
+           vod
+        </p2pnext:broadcastType>
+        <p2pnext:mediaUri>
+           http://stream.e5.ijs.si/publish/torrents/20050526_monokino.tstream
+        </p2pnext:mediaUri>
+        <p2pnext:mediaDuration>
+           PT00H22M03S
+        </p2pnext:mediaDuration>
      </entry>
   </feed>
 
@@ -1255,6 +1385,9 @@ From the feed output can be seen how the export url parameter (-e) and
 absolute publishing link (-p), defined while creating the feed) are
 used. The feed id, item id and item images get the default treatment
 as it is explained in the section on getfeed tool.
+
+5.3.4 Obtaining the discovery feed 
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 Of course the discovery feed, when created, will include the FAB
 channel feed as well, besides three other feeds:
@@ -1350,6 +1483,19 @@ channel feed as well, besides three other feeds:
      </entry>
   </feed>
 
+5.3.5 ClosedSwarm items 
+~~~~~~~~~~~~~~~~~~~~~~~~
+
+Current implementation (v3.0) can generate ClosedSwarm (CS) keys and
+corresponding torrent files if the closed swarm option (--cs) is
+specified on the command line when creating (adding) the item. The CS
+key is generated automatically. If the item is protected with CS the
+listing of the feed (-l option) or Json exports will specify item
+corresponding CS key file in its output. A miscellaneous option
+'--find-cs-key' with an argument of an item identifier can be used to
+find the CS keys of the item directly (the feed directory option '-d'
+needs to be specified for this)
+
 5.4 Publisher 
 ==============
 
@@ -1379,7 +1525,7 @@ should be detached (disown?) from the terminal so the terminal closure
 wouldn't affect the running process.
 
 5.4.1 Controlling the publisher 
---------------------------------
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 The publisher can be controlled through process signals, send to the
 publisher proces:
@@ -1392,7 +1538,7 @@ When running in the terminal CTR-C will shutdown the publisher
 gracefully.
 
 6 Changelog 
-~~~~~~~~~~~~
+------------
 
      - v0.1 initial release
      - v0.12:
@@ -1423,10 +1569,29 @@ gracefully.
            setting can be used for feeds publishing needs
        + documentation update (README) sections on "Before using the
          toolbox" and "Feed lifecycle management" were added
-     - v.21
+     - v0.21
        + Removed Duration related calls since duration has been
          removed from core metadata in v0.80
-     - v.22
+     - v0.22
        + Duration is restored
        + Small interface fixes in ContentSource and corresponding unit
          test
+     - v0.3
+       + some refactoring and bugfixing of ContentSource implementation
+       + rudimentary support for ClosedSwarms
+       + Json outputs for getfeed and managedfeed tools
+     - v0.32
+       + content feeds now support the second version of the P2P-Next
+         specification (with mediaUri, broadcastType, mediaDuration
+         and the link to the Mpeg7 rich metadata)
+       + the Mpeg7 rich metadata gets exported per feed to shadow
+         directory so it can be directly or indirectly included into
+         the web server space
+       + duration in the rich metadata should be now correctly
+         specified
+       + bit rate in rich metadata is now included as bits (calculated
+         from ffmpeg bitrate, which is slightly different as a sum of
+         video and audio bit rate)
+       + if the feeds and metadata are already stored on the node the
+         exported feeds will have correct duration and bitrate on its
+         output and in Mpeg7 metadata

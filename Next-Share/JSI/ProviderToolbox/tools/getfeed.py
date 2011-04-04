@@ -1,3 +1,4 @@
+import json
 import os
 import sys
 from optparse import OptionParser, OptionGroup
@@ -24,6 +25,7 @@ class GetFeed(object):
         Runs the getfeed tool, fetches the content, generate torrents
         and provides P2P-Next compliant feed on std out
         """
+        channel = None
         if options.location != None:
             template = None
             if options.template:
@@ -38,26 +40,42 @@ class GetFeed(object):
             _log.info("Feed is stored in path: %s",
                       channel.storage)
             _log.info("Resulting torrent files reside in path: %s",
-                      settings.EXPORT_TORRENT_DIR)
+                      settings.TORRENT_DIR)
             _log.info("DID Base used path: %s", options.didbaseFile)
             _log.info("Resulting feed should be published at location: %s",
                       channel.getExportFeedLink())
-            print self.rmg.prettyPrint(channel.exportFeed(options.guid, options.image), 'utf-8')
         elif options.directory != None:
-            if os.path.isdir(options.directory):
-                if os.path.exists(os.path.join(options.directory, settings.CONTENT_SOURCE_PROPERTIES)):
-                    channel = Channel.getContentSource(options.directory)
-                    if channel.location.startswith("file"):
-                        _log.debug("Mannually created feed in the directory %s, won't update", options.directory)
-                    else:
-                        channel.update()
-                    print self.rmg.prettyPrint(channel.exportFeed(), 'utf-8')
-                else:
-                    self.exitOnInputError("Directory " + options.directory + " specified but does not hold a feed.")
+            self.checkFeedDir(options.directory)
+            c = Channel()
+            channel = c.getCSFromDir(options.directory)
+            if channel.location.startswith("file"):
+                _log.debug("Mannually created feed in the directory %s, won't update", options.directory)
             else:
-                self.exitOnInputError("Specified path '" + options.directory + "' is not a directory")
+                channel.update()
+                if options.fresh or options.contentfresh:
+                    print ",".join(channel.getFresh(options.contentfresh))
+                    self.exit()
+        elif options.feeddir != None:
+            self.checkFeedDir(options.feeddir)
+            c = Channel()
+            channel = c.getCSFromDir(options.feeddir)
         else:
-            self.exitOnInputError("Neither location (-l) nor update directory (-u)\n                    were specified.")
+            self.exitOnInputError("Neither location (-l), update directory (-u)\n                    or feed directory (-f) were specified.")
+        # When all is done decide for std out
+        if channel:
+            if not options.json:
+                print self.rmg.prettyPrint(channel.exportFeed(options.guid, options.image), 'utf-8')
+            else:
+                channel.exportFeed(options.guid, options.image)
+                e = channel.getJsonExports()
+                print json.dumps(e)
+
+
+    def checkFeedDir(self, feedDir):
+        if not os.path.exists(feedDir) or not os.path.isdir(feedDir):
+            self.exitOnInputError("Feed directory is missing in path or is not a directory:\n                    " + feedDir) 
+        if not os.path.exists(os.path.join(feedDir, settings.CONTENT_SOURCE_PROPERTIES)):
+            self.exitOnInputError("Feed directory specified seems not to be populated.\n                    Feed properties file is missing in path: " + feedDir)
 
     def exit(self):
         sys.exit(0)
@@ -84,6 +102,10 @@ if __name__ == "__main__":
     parser.add_option("-d", "--did-base-file", help = "Common feed DID base file", action="store", dest="didbaseFile", default = None)
     parser.add_option("-w", "--window", help = "A number of content units to keep, None (default) collect, 0 same as source", action="store", dest="window", default = None)
     parser.add_option("-u", "--update", help = "Update the feed in specified directory and print fresh feed on std out", action="store", dest="directory", default = None)
+    parser.add_option("-f", "--feed", help = "Print the feed of the specified feed directory. Feed guid (-g) or image (-i) can be specified on the command line as well", action="store", dest="feeddir", default = None)
+    parser.add_option("-r", "--fresh", help = "Return instead of the feed the identifiers of the fresh content units are returned, requires update option (-u). The feed can be then obtained with feed option (-f).", action="store_true", dest="fresh", default = False)
+    parser.add_option("-c", "--fresh-content", help = "Return instead of the feed the content files of the fresh content units, requires update option (-u). The feed can be then obtained with feed option (-f).", action="store_true", dest="contentfresh", default = False)
+    parser.add_option("-j", "--json", help = "Returns a feed data in json format. Used only with location (-l), update (-u) and feed (-f) option.", action="store_true", dest="json", default = False)
     (options, args) = parser.parse_args()
 
     getfeed = GetFeed()

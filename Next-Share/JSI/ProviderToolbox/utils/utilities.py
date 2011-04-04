@@ -388,3 +388,21 @@ def strtime(seconds):
         days = int(seconds/(3600*24))
         rest = seconds%(3600*24)
         return str(days) + "d:" + strtime(rest)
+
+def time2duration(dtime):
+    try:
+        seconds = int(dtime)
+        hours = seconds/3600
+        mins = (seconds/60)%60
+        secs = seconds%60
+        return 'PT%02.0fH%02.0fM%02.0fS' % (hours,mins,secs)
+    except (ValueError, TypeError, IndexError):
+        try:
+            t = dtime.split(":")
+            if len(t) != 3:
+                return dtime
+            s = t[2].split(".")[0]
+            return 'PT%sH%sM%sS' % (t[0],t[1],s)
+        except Exception, e:
+            return dtime
+    

@@ -14,7 +14,7 @@ MEDIA_ROOT = '/Users/Swizec/Documents/freelancing/IJS-stuff/Next-Share/JSI/feeds
 # server, the directory and the content should reside in web server
 # accessible part of the file system. The directory should be
 # writtable by the user, running the toolbox
-EXPORT_TORRENT_DIR = MEDIA_ROOT + sep + "torrents"
+TORRENT_DIR = MEDIA_ROOT + sep + "torrents"
 
 # Internal tracker listen port. The port that the tracker listens to.
 INTERNAL_TRACKER_PORT = 8082
@@ -22,6 +22,17 @@ INTERNAL_TRACKER_PORT = 8082
 # the public addresses of your host in question (0.0.0.0 should work
 # as well, listen on all interfaces?)
 INTERNAL_TRACKER_IP = "193.138.1.106"
+
+# Export XML representation of rich metadata including with the
+# torrent link instead torrent files itself. The representations are
+# collected, channel wise, in shadow directory. The shadow inner
+# layout is appended to CONTEN_PUBLISHING_LINK by default, see
+# EXPORT_SHADOW_FEED_NAME variable, so the shadow content should be in
+# this case reflected in the web server (linked, copied or in it,
+# etc.). The web server should have siutable permissions to access the
+# representation content.
+XML_EXPORT = True
+SHADOW_DIR = MEDIA_ROOT + sep + "shadow"
 
 # Absolute publishing link for the feeds. The link will appear
 # prepended to all your publications in feeds if not defined per feed
@@ -33,6 +44,12 @@ CONTENT_PUBLISHING_LINK = "http://stream.e5.ijs.si/publish"
 # link is not defined per feed via command line.
 EXPORT_FEED_LINK = "http://stream.e5.ijs.si/feeds"
 
+# Controls the torrent relative link to publishing link in exports 
+EXPORT_TORRENT_LINK = 'torrents'
+# Controls if the the feed name is appended to the publishing link for
+# XML exports
+EXPORT_SHADOW_FEED_NAME = True
+
 # Update interval of the torrent server - how often (in seconds) the
 # server checks for new content
 UPDATE_INTERVAL = 60
@@ -40,7 +57,7 @@ UPDATE_INTERVAL = 60
 ########## GENERAL SETTINGS
 
 # Version
-VERSION = "0.2"
+VERSION = "0.32"
 
 # Logging level, see ProviderToolbox.util.log for details
 LOG_LEVEL = logging.INFO
@@ -66,6 +83,10 @@ CONTENT_SOURCE_PROPERTIES = ".properties"
 # Content sources types; channel, whatever eats feedparser
 CS_TYPE_CHANNEL = 'channel'
 
+########## CLOSED SWARM SETTINGS
+
+CS_PUBLISH_DIR = MEDIA_ROOT + sep + 'ClosedSwarm'
+
 ########## CONTENT SETTINGS
 
 IDENTIFY_PROGRAM = "ffmpeg"
@@ -81,7 +102,7 @@ METADATA_EXT = ".xml"
 # torrents are being created - used in ContentSource/per feed and in
 # Publisher
 LOCK = ".alock"
-TORRENT_DIR_LOCK = EXPORT_TORRENT_DIR + sep + LOCK
+TORRENT_DIR_LOCK = TORRENT_DIR + sep + LOCK
 
 # Feed metadata and assumed mappings to core RichMetadata. Mapping is
 # done to core RichMetadata instance attributes. Note mapping to
@@ -120,7 +141,7 @@ MMM_ITEM = {"title": "setTitleEpisodeTitle",
             "content:base": None,
             "links:type": None,
             "links:rel": None,
-            "updated": "setReleaseDate",
+            "updated": "setProductionDate",
             "author": "setPublisher",
             # Atom category, only first one
             "tags:term": None,
@@ -136,7 +157,7 @@ MMM_ITEM = {"title": "setTitleEpisodeTitle",
 
 # Live feed
 LIVE_MMM_FEED = {"publisher": "setPublisher",
-                "updated": "setReleaseDate",
+                "updated": "setProductionDate",
                 "link": None,
                 "author": "setPublisher",
                 "title": "setTitleMain",
@@ -149,7 +170,7 @@ LIVE_MMM_ITEM = {"title": "setTitleEpisodeTitle",
                  "subtitle": "setTitleSeriesTitle",
                  "synopsis" : "setSynopsis",
                  "id": None,
-                 "updated": "setReleaseDate",
+                 "updated": "setProductionDate",
                  "author": "setPublisher",
                  "rights": "setOriginator",
                  "media_content:type": None,
@@ -311,7 +332,7 @@ TORRENT_SERVER_DEFAULT_DIRECTORY = MEDIA_ROOT + sep + 'torrent_server'
 SERVER_SLEEP_ON_EXIT = 8
 
 # Torrent store directory
-TORRENT_DIRECTORY = EXPORT_TORRENT_DIR
+TORRENT_DIRECTORY = TORRENT_DIR
 
 # Torrent server settings
 MEGACACHE = True
