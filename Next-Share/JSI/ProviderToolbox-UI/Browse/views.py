@@ -115,7 +115,7 @@ def fetch_feed(request):
                 
             return HttpResponse("Couldn't find item in feed")
         else:
-            return HttpResponse(get_feed(path).feed)
+            return HttpResponse(AtomFeed.objects.get(path).feed)
     else:
         return HttpResponseBadRequest("Expected a path")
                 
@@ -137,7 +137,6 @@ def add_item(request):
     form = AddItemForm(request.POST)
     if form.is_valid():
         (so,se,rv) = cli.add_item(form)
-        print se
         if rv == 0:
             return HttpResponseRedirect('/')
         else:

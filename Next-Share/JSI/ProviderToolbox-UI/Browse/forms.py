@@ -47,7 +47,10 @@ class PathForm(forms.Form):
   path = forms.CharField(max_length=300, required=True)
   
   def clean_path(self):
-    return settings.FEED_DIR+self.cleaned_data['path']
+    if not self.cleaned_data['path'].startswith(settings.FEED_DIR):
+      return settings.FEED_DIR+self.cleaned_data['path']
+    else:
+      return self.cleaned_data['path']
     
 class CreateFeedForm(forms.Form):
   title = forms.CharField(required=True, max_length=200)
