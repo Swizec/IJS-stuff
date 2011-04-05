@@ -4,7 +4,7 @@
   <div>
     <form method="post" action="/add_item/">
       {{ item_form.as_p }}
-      <input type="text" value="{{ item.parent }}{{ item.dirpath }}" name="feed_dir" />
+      <input type="hidden" value="{{ item.parent }}{{ item.dirpath }}" name="feed_dir" />
       <input type="submit" />
     </form>
   </div>
