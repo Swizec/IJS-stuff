@@ -102,8 +102,15 @@ function add_list (dir, accordion, tabs) {
 			dataType: 'text',
 			success: function (data) {
 			    $.unblockUI();
-			    $("#"+ui.panel.id).html('<pre>'+htmlentities(data)+'</pre>');
+			    $("#"+ui.panel.id).append(
+				$('<div></div>').addClass('pre')
+				    .html('<pre>'+htmlentities(data)+'</pre>')
+				    .css('overflow', 'auto'));
 			},
+			error: function (data) {
+			    $.unblockUI();
+			    alert("Sorry, something went wrong.");
+			}
 		    });
 		}
 	    }

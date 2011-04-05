@@ -106,7 +106,7 @@ def fetch_feed(request):
             (feed, item) = path.rsplit('/', 1)
             item = item.split('.')[0]
 
-            tree = etree.fromstring(AtomFeed.get(feed).feed.encode('utf-8'))
+            tree = etree.fromstring(AtomFeed.objects.get(feed).feed.encode('utf-8'))
             for child in tree:
                 if child.tag == '{http://www.w3.org/2005/Atom}entry':
                     href = child.find('{http://www.w3.org/2005/Atom}link').attrib.get('href')

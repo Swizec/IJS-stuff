@@ -74,9 +74,7 @@ textarea {
     height: 60px;
 }
 
-pre {
-    overlow: auto;
-    height: 200px;
-    width: 90%;
-    display: block;
+div.panel div.ui-tabs-panel div.pre {
+    height: 350px;
+    width: 100%;
 }
