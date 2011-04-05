@@ -12,7 +12,7 @@
 {% endif %}
 
 {% for item in items %}
-<div>
+<div id="accordion-{{ item.id }}">
 
   {% if item.dir %}
   <h3>
@@ -49,8 +49,7 @@
     </ul>
 
     {% if 'v' in item.tabs %}
-    <div id="tabs-{{ item.id }}-view" path="{{ item.parent }}{{ item.dirpath }}">
-    </div>
+    <div id="tabs-{{ item.id }}-view" path="{{ item.parent }}{{ item.dirpath }}"></div>
     {% endif %}
 
     {% if 't' in item.tabs %}
@@ -98,11 +97,11 @@
       </div>
       
       {% if item.dir %}
-      <div id="accordion-{{ item.id }}-inner">
+      <div id="accordion-{{ item.id }}-inner"></div>
       <script>
-        add_list('{{ item.parent }}{{ item.dirpath }}',
-                 '#accordion-{{ item.id }}-inner',
-                 '#tabs-{{ item.id }}');
+        add_list2('{{ item.parent }}{{ item.dirpath }}',
+                  '#accordion-{{ item.id }}',
+                  '#tabs-{{ item.id }}');
       </script>
       {% endif %}
 

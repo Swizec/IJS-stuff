@@ -63,7 +63,16 @@ $(function(){
 function make_accordion(selector) {
     $(selector).accordion({ header: "h3", 
 			    collapsible: true,
-			    autoHeight: false});
+			    autoHeight: false,
+			    change: function (event, ui) {
+				var $accordion = ui.newHeader.parent();
+				if ($accordion.attr('listed') == 'false') {
+				    $accordion.attr('listed', true);
+				    add_list($accordion.attr('dir'),
+					     '#'+$accordion.attr('id')+'-inner',
+					     $accordion.attr('tabs'));
+				}
+			    }});
     //if (window.location.href.indexOf('#posted') < 0) {
     $(selector+" h3:first a").click();
     //}
@@ -116,6 +125,15 @@ function add_list (dir, accordion, tabs) {
 	    }
 	});
     });
+}
+
+function add_list2(dir, accordion, tabs) {
+    $(tabs).tabs();
+
+    $(accordion)
+	.attr('dir', dir)
+  	.attr('tabs', tabs)
+	.attr('listed', false);
 }
 
 
