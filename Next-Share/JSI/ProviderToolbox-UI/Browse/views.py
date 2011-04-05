@@ -96,46 +96,17 @@ def create_feed(request):
           return HttpResponseBadRequest("se")
   else:
       return HttpResponseBadRequest("Wrong data posted")
-    
-def update_feed(request, form=None):
-    if form == None:
-        form = PathForm(request.GET)
-        
-    if form.is_valid():
-        (so,se,rv) = cli.update_feed(form)
-        if rv == 0:
-            (feed, created) = AtomFeed.objects.get_or_create(path=form.cleaned_data['path'])
-            feed.feed = so
-            feed.save()
-            return HttpResponse(so, mimetype="application/atom+xml")
-        else:
-            return HttpResponseBadRequest("se")
-    else:
-        return HttpResponseBadRequest("Expected a path")
 
 def fetch_feed(request):
     form = PathForm(request.GET)
     if form.is_valid():
         path = form.cleaned_data['path']
 
-        def get_feed(path):
-            print path
-            try:
-                feed = AtomFeed.objects.get(path=path)
-            except AtomFeed.DoesNotExist:
-                update_feed(request, form)
-                feed = AtomFeed.objects.get(path=path)
-                
-            if (datetime.now()-feed.time).days > settings.MAX_FEED_AGE:
-                update_feed(request, form)
-                feed = AtomFeed.objects.get(path=path)
-            return feed
-        
         if path.endswith('.xml'):
             (feed, item) = path.rsplit('/', 1)
             item = item.split('.')[0]
 
-            tree = etree.fromstring(get_feed(feed).feed.encode('utf-8'))
+            tree = etree.fromstring(AtomFeed.get(feed).feed.encode('utf-8'))
             for child in tree:
                 if child.tag == '{http://www.w3.org/2005/Atom}entry':
                     href = child.find('{http://www.w3.org/2005/Atom}link').attrib.get('href')
@@ -266,3 +237,17 @@ def list_dir(request):
         context.update(csrf(request))
 
         return render_to_response('list_dir.html', context, mimetype="text/html")
+
+
+def update_feed(request):
+    form = PathForm(request.GET)
+    if form.is_valid():
+        path = form.cleaned_data['path']
+
+        feed = AtomFeed.objects.get(path)
+        if (datetime.now()-feed.time).seconds > 100:
+            feed.update()
+        
+        return HttpResponse('OK')
+    else:
+        return HttpResponseBadRequest("Expected a path")
