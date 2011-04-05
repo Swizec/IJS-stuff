@@ -28,6 +28,13 @@ def update_feed(form):
     # shlex is not unicode ready
     return command(asciify(c), env={"PYTHONPATH":pt_settings.PT_IMPORT_DIR})
 
+def refetch_feed(form):
+    path = abspath(form.cleaned_data['path'])
+    c = "python %s -f '%s'" % (pt_settings.PT_DIR + "/tools/getfeed.py", 
+                               path)
+    # shlex is not unicode ready
+    return command(asciify(c), env={"PYTHONPATH":pt_settings.PT_IMPORT_DIR})
+
 # Needs:
 # + -y mime type
 def add_item(form):

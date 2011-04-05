@@ -9,13 +9,14 @@ class AtomFeedManager(models.Manager):
     def get(self, path, *args, **kwargs):
         try:
             feed = super(AtomFeedManager, self).get(path=path, *args, **kwargs)
-            needs_update = (datetime.now()-feed.time).days > settings.MAX_FEED_AGE or feed.feed == ''
         except ObjectDoesNotExist:
             feed = super(AtomFeedManager, self).create(path=path)
-            needs_update = True
 
-        if needs_update:
+        if (datetime.now()-feed.time).days > settings.MAX_FEED_AGE:
             feed.update()
+
+        if feed.feed == '':
+            feed.refetch()
 
         return feed
         

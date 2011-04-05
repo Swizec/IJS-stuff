@@ -26,3 +26,15 @@ class AtomFeed(models.Model):
                 raise Exception(se)
         else:
             raise Exception("This should never happen!")
+
+    def refetch(self):
+        form = PathForm(QueryDict(urllib.urlencode({'path': self.path})))
+        if form.is_valid():
+            (so,se,rv) = cli.refetch_feed(form)
+            if rv == 0:
+                self.feed = so
+                self.save()
+            else:
+                raise Exception(se)
+        else:
+            raise Exception("This should never happen!")
