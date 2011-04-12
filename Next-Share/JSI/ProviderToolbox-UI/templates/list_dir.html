@@ -18,9 +18,6 @@
   <h3>
     <a href="#">
       + <img src="{{ item.basic_meta.image }}" style="height: 1em" />{{ item.name }}
-         {% if item.fresh %}
-            -- fresh
-         {% endif %}
       <input type="button" value="X" class="delete" path="{{ item.parent }}{{ item.dirpath }}" />
       {% if not item.created_feed %}
         <input type="button" value="Update" class="update" path="{{ item.parent }}{{ item.dirpath }}" accordion="#accordion-{{ item.id }}" tabs="#tabs-{{ item.id }}" />
@@ -30,6 +27,9 @@
   {% else %}
   <h3>
      <a href="#">{{ item.name }}
+         {% if item.fresh %}
+            -- <em>FRESH</em>
+         {% endif %}
        <input type="button" value="X" class="delete" path="{{ item.filename }}" />
      </a>
   </h3>
@@ -102,9 +102,9 @@
       {% if item.dir %}
       <div id="accordion-{{ item.id }}-inner"></div>
       <script>
-        add_list2('{{ item.parent }}{{ item.dirpath }}',
-                  '#accordion-{{ item.id }}',
-                  '#tabs-{{ item.id }}');
+        metafy_accordion('{{ item.parent }}{{ item.dirpath }}',
+                         '#accordion-{{ item.id }}',
+                         '#tabs-{{ item.id }}');
       </script>
       {% endif %}
 

@@ -200,7 +200,6 @@ def list_dir(request):
         return {'dir': os.path.isdir(dir),
                 'dirpath': item,
                 'fresh': item in request.session.get('fresh_items', []),
-                #'fresh': True,
                 'tabs': ['f', 'v'] if os.path.isdir(dir) else ['f', 't', 'v'],
                 'name': item,
                 'created_feed': basic_meta.get('location', '').startswith("file://"),
@@ -231,8 +230,7 @@ def list_dir(request):
             pass
 
         # fresh data is only valid once
-        print request.session['fresh_items']
-        #request.session['fresh_items'] = []
+        request.session['fresh_items'] = []
 
         context = {'created_feed': created_feed,
                    'item_form': AddItemForm(),
@@ -252,7 +250,8 @@ def update_feed(request):
         feed = AtomFeed.objects.get(path)
         if (datetime.now()-feed.time).seconds > 10:
             diff = feed.update()
-            request.session['fresh_items'] = [u'gospodarsko_sodelovanje__z_trgi_nekdanje_jugoslavije_05-04-2011_0907.xml', u'begunci_iz_severne_afrike_06-04-2011_1646.xml', u'zadnje_soocenje_pred_referendumom_o_malem_delu_07-04-2011_1646.xml', u'svetovni_dan_romov_08-04-2011_1647.xml', u'malo_delo_-_kako_po_referendumu_11-04-2011_1646.xml']
+            request.session['fresh_items'] = diff['fresh']
+            print diff['fresh']
 
         
         return HttpResponse('OK')

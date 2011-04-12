@@ -71,8 +71,7 @@ function make_accordion(selector) {
 			    autoHeight: false,
 			    change: function (event, ui) {
 				var $accordion = ui.newHeader.parent();
-				alert('bu');
-				if ($accordion.attr('listed') != 'true') {
+				if ($accordion.attr('listed') == 'false') {
 				    $accordion.attr('listed', 'true');
 				    add_list($accordion.attr('dir'),
 					     '#'+$accordion.attr('id')+'-inner',
@@ -99,8 +98,6 @@ function blockUI(s) {
 
 function add_list (dir, accordion, tabs) {
     $(tabs).tabs();
-
-    alert(dir);alert(accordion);
 
     $.get('/list_dir/', {'dir': dir}, function (data) {
 	$(accordion).accordion('destroy').append(data);
@@ -132,6 +129,15 @@ function add_list (dir, accordion, tabs) {
 	    }
 	});
     });
+}
+
+function metafy_accordion(dir, accordion, tabs) {
+    $(tabs).tabs();
+
+    $(accordion)
+	.attr('dir', dir)
+  	.attr('tabs', tabs)
+	.attr('listed', 'false');
 }
 
 function htmlentities(str) {
