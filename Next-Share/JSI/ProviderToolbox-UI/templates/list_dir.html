@@ -17,7 +17,10 @@
   {% if item.dir %}
   <h3>
     <a href="#">
-      + <img src="{{ item.basic_meta.image }}" style="height: 1em" /> {{ item.name }}
+      + <img src="{{ item.basic_meta.image }}" style="height: 1em" />{{ item.name }}
+         {% if item.fresh %}
+            -- fresh
+         {% endif %}
       <input type="button" value="X" class="delete" path="{{ item.parent }}{{ item.dirpath }}" />
       {% if not item.created_feed %}
         <input type="button" value="Update" class="update" path="{{ item.parent }}{{ item.dirpath }}" accordion="#accordion-{{ item.id }}" tabs="#tabs-{{ item.id }}" />

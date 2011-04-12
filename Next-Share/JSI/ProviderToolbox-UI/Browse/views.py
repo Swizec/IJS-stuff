@@ -196,9 +196,11 @@ def list_dir(request):
 
         formdata['filename'] = filename
         formdata['should_cascade'] = main_meta
-        
+
         return {'dir': os.path.isdir(dir),
                 'dirpath': item,
+                'fresh': item in request.session.get('fresh_items', []),
+                #'fresh': True,
                 'tabs': ['f', 'v'] if os.path.isdir(dir) else ['f', 't', 'v'],
                 'name': item,
                 'created_feed': basic_meta.get('location', '').startswith("file://"),
@@ -228,12 +230,9 @@ def list_dir(request):
         except IOError:
             pass
 
-        print 'BLA'
-        print 'fresh_items::'+settings.FEED_DIR+form.cleaned_data['dir']
-        try:
-            print request.session['fresh_items::'+settings.FEED_DIR+form.cleaned_data['dir']]
-        except KeyError:
-            pass
+        # fresh data is only valid once
+        print request.session['fresh_items']
+        #request.session['fresh_items'] = []
 
         context = {'created_feed': created_feed,
                    'item_form': AddItemForm(),
@@ -251,12 +250,9 @@ def update_feed(request):
         path = form.cleaned_data['path']
 
         feed = AtomFeed.objects.get(path)
-        if (datetime.now()-feed.time).seconds > 100:
+        if (datetime.now()-feed.time).seconds > 10:
             diff = feed.update()
-            #request.session['fresh_items::'+path] = diff['fresh']
-            print "MEW"
-            print 'fresh_items::'+path
-            request.session['fresh_items::'+path] = [u'gospodarsko_sodelovanje__z_trgi_nekdanje_jugoslavije_05-04-2011_0907.xml', u'begunci_iz_severne_afrike_06-04-2011_1646.xml', u'zadnje_soocenje_pred_referendumom_o_malem_delu_07-04-2011_1646.xml', u'svetovni_dan_romov_08-04-2011_1647.xml', u'malo_delo_-_kako_po_referendumu_11-04-2011_1646.xml']
+            request.session['fresh_items'] = [u'gospodarsko_sodelovanje__z_trgi_nekdanje_jugoslavije_05-04-2011_0907.xml', u'begunci_iz_severne_afrike_06-04-2011_1646.xml', u'zadnje_soocenje_pred_referendumom_o_malem_delu_07-04-2011_1646.xml', u'svetovni_dan_romov_08-04-2011_1647.xml', u'malo_delo_-_kako_po_referendumu_11-04-2011_1646.xml']
 
         
         return HttpResponse('OK')

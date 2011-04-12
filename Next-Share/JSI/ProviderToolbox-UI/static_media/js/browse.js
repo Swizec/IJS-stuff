@@ -35,7 +35,7 @@ $(function(){
 	    dataType: 'text',
 	    success: function (data) {
 		$.unblockUI();
-		add_list(path, $this.attr('tabs'), $this.attr('accordion'));
+		//add_list(path, $this.attr('tabs'), $this.attr('accordion'));
 		
 		//window.location.reload();
 	    },
@@ -71,8 +71,9 @@ function make_accordion(selector) {
 			    autoHeight: false,
 			    change: function (event, ui) {
 				var $accordion = ui.newHeader.parent();
-				if ($accordion.attr('listed') == 'false') {
-				    $accordion.attr('listed', true);
+				alert('bu');
+				if ($accordion.attr('listed') != 'true') {
+				    $accordion.attr('listed', 'true');
 				    add_list($accordion.attr('dir'),
 					     '#'+$accordion.attr('id')+'-inner',
 					     $accordion.attr('tabs'));
@@ -98,6 +99,8 @@ function blockUI(s) {
 
 function add_list (dir, accordion, tabs) {
     $(tabs).tabs();
+
+    alert(dir);alert(accordion);
 
     $.get('/list_dir/', {'dir': dir}, function (data) {
 	$(accordion).accordion('destroy').append(data);
