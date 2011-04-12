@@ -46,6 +46,20 @@ def add_item(form):
            form.cleaned_data['title'])
     return command(asciify(c), env={"PYTHONPATH":pt_settings.PT_IMPORT_DIR})
 
+def get_identifier(form):
+    c = "python %s -d '%s' --identifier '%s'" \
+        % (pt_settings.PT_DIR + "/tools/managefeed.py",
+           form.cleaned_data['path'],
+           form.cleaned_data['item'])
+    return command(asciify(c), env={"PYTHONPATH":pt_settings.PT_IMPORT_DIR})
+
+def remove_item(path, item):
+    c = "python %s -d '%s' -r '%s'" \
+        % (pt_settings.PT_DIR + "/tools/managefeed.py",
+           path,
+           item)
+    return command(asciify(c), env={"PYTHONPATH":pt_settings.PT_IMPORT_DIR})
+
 def command(command, env=None):
     """
     Excecutes a command as a process and returns its stdout. 

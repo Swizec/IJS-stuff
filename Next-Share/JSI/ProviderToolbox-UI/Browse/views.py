@@ -1,6 +1,6 @@
 # Create your views here.
 
-from django.http import HttpResponse, HttpResponseRedirect, HttpResponseBadRequest
+from django.http import HttpResponse, HttpResponseRedirect, HttpResponseBadRequest, HttpResponseServerError
 from django.http import QueryDict, HttpRequest
 from django.core.context_processors import csrf
 from django.views.decorators.csrf import csrf_exempt
@@ -15,7 +15,7 @@ from datetime import datetime
 
 from lib import feedparser
 from lib import talk_to_cli as cli
-from forms import MetaForm, ListDirForm, AddFeedForm, PathForm, CreateFeedForm, AddItemForm
+from forms import MetaForm, ListDirForm, AddFeedForm, PathForm, CreateFeedForm, AddItemForm, DeleteItemForm
 from models import AtomFeed
 
 from JSI.RichMetadata.RichMetadata import RichMetadataGenerator
@@ -120,15 +120,20 @@ def fetch_feed(request):
         return HttpResponseBadRequest("Expected a path")
                 
 
-def delete_feed(request):
-    form = PathForm(request.GET)
+def delete_item(request):
+    form = DeleteItemForm(request.GET)
     if form.is_valid():
-        path = form.cleaned_data['path']
-        if os.path.isdir(path):
-            shutil.rmtree(path)
+        (identifier,se,rv) = cli.get_identifier(form)
+        if rv == 0:
+            print 'ID', identifier
+            (so,se,rv) = cli.remove_item(form.cleaned_data['path'], identifier)
+            if rv == 0:
+                return HttpResponse('OK')
+            else:
+                print 'ERROR', se, identifier
+                return HttpResponseServerError('Something went wrong')
         else:
-            os.unlink(path)
-        return HttpResponse('OK')
+            return HttpResponseServerError('Something went wrong')
     else:
         return HttpResponseBadRequest("Expected a path")
 

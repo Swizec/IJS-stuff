@@ -18,7 +18,7 @@
   <h3>
     <a href="#">
       + <img src="{{ item.basic_meta.image }}" style="height: 1em" />{{ item.name }}
-      <input type="button" value="X" class="delete" path="{{ item.parent }}{{ item.dirpath }}" />
+      <input type="button" value="X" class="delete" path="{{ item.parent }}{{ item.dirpath }}" item="{{item.name }}" />
   </a>
   </h3>
   {% else %}
@@ -27,7 +27,7 @@
          {% if item.fresh %}
             -- <em>FRESH</em>
          {% endif %}
-       <input type="button" value="X" class="delete" path="{{ item.filename }}" />
+       <input type="button" value="X" class="delete" path="{{ item.parent }}{{ item.dirpath }}" item="{{item.name }}" />
      </a>
   </h3>
   {% endif %}

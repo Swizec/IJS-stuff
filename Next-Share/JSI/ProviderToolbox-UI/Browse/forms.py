@@ -74,3 +74,24 @@ class AddItemForm(forms.Form):
   file = forms.CharField(required=True, max_length=200)
   synopsis = forms.CharField(required=True, max_length=600)
   title = forms.CharField(required=True, max_length=100)
+
+class DeleteItemForm(forms.Form):
+  path = forms.CharField(max_length=300, required=True)
+  item = forms.CharField(max_length=300, required=True)
+  
+  def clean_path(self):
+    if not self.cleaned_data['path'].startswith(settings.FEED_DIR):
+      dir = settings.FEED_DIR+self.cleaned_data['path']
+    else:
+      dir = self.cleaned_data['path']
+
+    if dir.endswith('.xml'):
+      dir = dir.rsplit('/', 1)[0]
+
+    return dir
+
+  def clean_item(self):
+    if not self.cleaned_data['item'].endswith('.xml'):
+      return self.cleaned_data['item']+'.xml'
+    else:
+      return self.cleaned_data['item']

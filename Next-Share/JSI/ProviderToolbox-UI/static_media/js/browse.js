@@ -25,13 +25,10 @@ $(function(){
     });
     
     $('.update').live('click', function (event) {
-	//event.preventPropagation();
-
 	var $this = $(this);
 	var $meta = $this.parent().parent().parent();
 
 	$('#'+$meta.attr('id')+'-inner').accordion('destroy').html('');
-//	return;
 
 	var path = $meta.attr('dir');
 	blockUI("Updating "+path);
@@ -48,9 +45,9 @@ $(function(){
     
     $('.delete').live('click', function () {
 	var path = $(this).attr('path');
-	alert(path);
+	var item = $(this).attr('item');
 	if (confirm("Item will be permanently removed, there is no restore!")) {
-	    $.get('/delete_feed/?path='+path, function (data) {
+	    $.get('/delete_item/?path='+path+'&item='+item, function (data) {
 		window.location.reload();
 	    });
 	}
