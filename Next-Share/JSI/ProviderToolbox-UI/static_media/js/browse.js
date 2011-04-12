@@ -24,15 +24,20 @@ $(function(){
 	});
     });
     
-    $('.update').live('click', function () {
-	var path = $(this).attr('path');
+    $('.update').live('click', function (event) {
+	//event.preventPropagation();
+
+	var $this = $(this);
+	var path = $this.attr('path');
 	blockUI("Updating "+path);
 	$.ajax({
 	    url: '/update_feed/?path='+path,
 	    dataType: 'text',
 	    success: function (data) {
 		$.unblockUI();
-		window.location.reload();
+		add_list(path, $this.attr('tabs'), $this.attr('accordion'));
+		
+		//window.location.reload();
 	    },
 	});
     });
@@ -73,9 +78,8 @@ function make_accordion(selector) {
 					     $accordion.attr('tabs'));
 				}
 			    }});
-    //if (window.location.href.indexOf('#posted') < 0) {
+
     $(selector+" h3:first a").click();
-    //}
 };
 
 function blockUI(s) {
@@ -126,16 +130,6 @@ function add_list (dir, accordion, tabs) {
 	});
     });
 }
-
-function add_list2(dir, accordion, tabs) {
-    $(tabs).tabs();
-
-    $(accordion)
-	.attr('dir', dir)
-  	.attr('tabs', tabs)
-	.attr('listed', false);
-}
-
 
 function htmlentities(str) {
     return String(str).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');

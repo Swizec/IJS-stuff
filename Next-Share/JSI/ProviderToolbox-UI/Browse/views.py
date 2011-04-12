@@ -8,7 +8,7 @@ from django.conf import settings
 from django.shortcuts import render_to_response
 from django.template.loader import render_to_string
 
-import os, urllib, re, shutil
+import os, urllib, re, shutil, json
 import lxml
 from lxml import etree
 from datetime import datetime
@@ -228,6 +228,13 @@ def list_dir(request):
         except IOError:
             pass
 
+        print 'BLA'
+        print 'fresh_items::'+settings.FEED_DIR+form.cleaned_data['dir']
+        try:
+            print request.session['fresh_items::'+settings.FEED_DIR+form.cleaned_data['dir']]
+        except KeyError:
+            pass
+
         context = {'created_feed': created_feed,
                    'item_form': AddItemForm(),
                    'items': items,
@@ -245,7 +252,12 @@ def update_feed(request):
 
         feed = AtomFeed.objects.get(path)
         if (datetime.now()-feed.time).seconds > 100:
-            feed.update()
+            diff = feed.update()
+            #request.session['fresh_items::'+path] = diff['fresh']
+            print "MEW"
+            print 'fresh_items::'+path
+            request.session['fresh_items::'+path] = [u'gospodarsko_sodelovanje__z_trgi_nekdanje_jugoslavije_05-04-2011_0907.xml', u'begunci_iz_severne_afrike_06-04-2011_1646.xml', u'zadnje_soocenje_pred_referendumom_o_malem_delu_07-04-2011_1646.xml', u'svetovni_dan_romov_08-04-2011_1647.xml', u'malo_delo_-_kako_po_referendumu_11-04-2011_1646.xml']
+
         
         return HttpResponse('OK')
     else:

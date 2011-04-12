@@ -23,8 +23,8 @@ def create_feed(form, feed_dir):
 
 def update_feed(form):
     path = abspath(form.cleaned_data['path'])
-    c = "python %s -u '%s'" % (pt_settings.PT_DIR + "/tools/getfeed.py", 
-                               path)
+    c = "python %s -j -u '%s'" % (pt_settings.PT_DIR + "/tools/getfeed.py", 
+                                     path)
     # shlex is not unicode ready
     return command(asciify(c), env={"PYTHONPATH":pt_settings.PT_IMPORT_DIR})
 
