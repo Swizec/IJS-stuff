@@ -251,8 +251,6 @@ def update_feed(request):
         if (datetime.now()-feed.time).seconds > 10:
             diff = feed.update()
             request.session['fresh_items'] = diff['fresh']
-            print diff['fresh']
-
         
         return HttpResponse('OK')
     else:

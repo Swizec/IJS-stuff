@@ -28,16 +28,20 @@ $(function(){
 	//event.preventPropagation();
 
 	var $this = $(this);
-	var path = $this.attr('path');
+	var $meta = $this.parent().parent().parent();
+
+	$('#'+$meta.attr('id')+'-inner').accordion('destroy').html('');
+//	return;
+
+	var path = $meta.attr('dir');
 	blockUI("Updating "+path);
 	$.ajax({
 	    url: '/update_feed/?path='+path,
 	    dataType: 'text',
 	    success: function (data) {
 		$.unblockUI();
-		//add_list(path, $this.attr('tabs'), $this.attr('accordion'));
 		
-		//window.location.reload();
+		add_list(path, $meta.attr('tabs'), '#'+$meta.attr('id'));
 	    },
 	});
     });
