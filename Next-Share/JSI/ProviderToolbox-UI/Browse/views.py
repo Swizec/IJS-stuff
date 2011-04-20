@@ -217,9 +217,13 @@ def list_dir(request):
                 'id': ''.join([alphanum.sub('', parent) ,alphanum.sub('', item)]).replace('/', '-')}
 
     if form.is_valid():
+        dir = form.cleaned_data['dir']
         items = filter(lambda i: i != None, 
                        map(get_data,
-                           sorted(os.listdir(settings.FEED_DIR+form.cleaned_data['dir']))))
+                           sorted(os.listdir(settings.FEED_DIR+dir),
+                                  key=lambda p: os.path.getmtime(
+                                      ''.join([settings.FEED_DIR ,dir, p])) if dir != '/' else dir.lower(),
+                                  reverse=dir != '/')))
 
         # TODO figuring out if this is a created_feed needs refactoring
         # this is just a temporary implementation
