@@ -78,3 +78,7 @@ div.panel div.ui-tabs-panel div.pre {
     height: 350px;
     width: 100%;
 }
+
+h3.fresh {
+    border: 1px solid red;
+}

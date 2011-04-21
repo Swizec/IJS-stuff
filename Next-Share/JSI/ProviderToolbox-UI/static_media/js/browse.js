@@ -44,11 +44,17 @@ $(function(){
     });
     
     $('.delete').live('click', function () {
-	var path = $(this).attr('path');
-	var item = $(this).attr('item');
+	var $this = $(this);
+	var path = $this.attr('path');
+	var item = $this.attr('item');
 	if (confirm("Item will be permanently removed, there is no restore!")) {
+	    blockUI("Removing item");
 	    $.get('/delete_item/?path='+path+'&item='+item, function (data) {
-		window.location.reload();
+		var $accordion = $this.parents('h3').parent().parent();
+		$this.parents('h3').parent().remove();
+		$accordion.accordion('destroy');
+		make_accordion('#'+$accordion.attr('id'));
+		$.unblockUI();
 	    });
 	}
     });

@@ -22,7 +22,11 @@
   </a>
   </h3>
   {% else %}
+  {% if item.fresh %}
+  <h3 class="fresh">
+  {% else %}
   <h3>
+  {% endif %}
      <a href="#">{{ item.name }}
          {% if item.fresh %}
             -- <em>FRESH</em>
