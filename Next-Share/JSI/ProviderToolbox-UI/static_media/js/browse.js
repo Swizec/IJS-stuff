@@ -113,19 +113,25 @@ function add_list (dir, accordion, tabs) {
 	$("[class*='tabbed']").tabs({
 	    select: function (event, ui) {
 		var tab = ui.tab.hash.split('-');
-		var path = $("#"+ui.panel.id).attr('path');
+		var $panel = $("#"+ui.panel.id);
+		var path = $panel.attr('path');
 		if (tab[tab.length-1] == 'view') {
 		    blockUI('Fetching atom feed');
 
 		    $.ajax({
-			url: '/fetch_feed/?path='+path,
+			url: '/fetch_feed/?path='+$panel.attr('path'),
 			dataType: 'text',
 			success: function (data) {
 			    $.unblockUI();
-			    $("#"+ui.panel.id).append(
-				$('<div></div>').addClass('pre')
-				    .html('<pre>'+htmlentities(data)+'</pre>')
-				    .css('overflow', 'auto'));
+			    var $pre = $panel.find('.pre');
+			    if ($pre.size() > 0) {
+				$pre.html('<pre>'+htmlentities(data)+'</pre>');
+			    }else{
+				$panel.append(
+				    $('<div></div>').addClass('pre')
+					.html('<pre>'+htmlentities(data)+'</pre>')
+					.css('overflow', 'auto'));
+			    }
 			},
 			error: function (data) {
 			    $.unblockUI();

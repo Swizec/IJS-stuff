@@ -133,6 +133,7 @@ def delete_item(request):
                 print 'ERROR', se, identifier
                 return HttpResponseServerError('Something went wrong')
         else:
+            print "ERROR", se, identifier
             return HttpResponseServerError('Something went wrong')
     else:
         return HttpResponseBadRequest("Expected a path")
@@ -213,8 +214,10 @@ def list_dir(request):
                 'rich_meta': rich_meta,
                 'parent': form.cleaned_data['dir'],
                 'item_form': AddItemForm(),
-                'edit_form': MetaForm(QueryDict(urllib.urlencode(formdata)), main_meta=main_meta),
-                'id': ''.join([alphanum.sub('', parent) ,alphanum.sub('', item)]).replace('/', '-')}
+                'edit_form': MetaForm(QueryDict(urllib.urlencode(formdata)), 
+                                      main_meta=main_meta),
+                'id': ''.join([alphanum.sub('', parent), 
+                               alphanum.sub('', item)]).replace('/', '-')}
 
     if form.is_valid():
         dir = form.cleaned_data['dir']
@@ -222,7 +225,9 @@ def list_dir(request):
                        map(get_data,
                            sorted(os.listdir(settings.FEED_DIR+dir),
                                   key=lambda p: os.path.getmtime(
-                                      ''.join([settings.FEED_DIR ,dir, p])) if dir != '/' else dir.lower(),
+                                      ''.join([settings.FEED_DIR, 
+                                               dir, 
+                                               p])) if dir != '/' else dir.lower(),
                                   reverse=dir != '/')))
 
         # TODO figuring out if this is a created_feed needs refactoring
@@ -231,7 +236,9 @@ def list_dir(request):
 
         try:
             basic_meta = {}
-            for line in  open(settings.FEED_DIR+form.cleaned_data['dir']+'/.properties'):
+            for line in  open(''.join([settings.FEED_DIR,
+                                       form.cleaned_data['dir'],
+                                       '/.properties'])):
                 (key, val) = line.split(' = ')
                 basic_meta[key] = val
             created_feed = basic_meta['location'].startswith('file://')
