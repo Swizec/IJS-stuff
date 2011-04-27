@@ -106,12 +106,15 @@ def fetch_feed(request):
             (feed, item) = path.rsplit('/', 1)
             item = item.split('.')[0]
 
+            (identifier,se,rv) = cli.get_identifier(feed, item+'.xml')
+            
             tree = etree.fromstring(AtomFeed.objects.get(feed).feed.encode('utf-8'))
             for child in tree:
                 if child.tag == '{http://www.w3.org/2005/Atom}entry':
                     href = child.find('{http://www.w3.org/2005/Atom}link').attrib.get('href')
-                    if href.rsplit('/', 1)[1].split('.')[0] == item:
-                        return HttpResponse(etree.tostring(child, pretty_print=True))
+                    part = href.rsplit('/', 1)[1].split('.')[0]
+                    if any([candidate == part for candidate in [item, identifier]]):
+                           return HttpResponse(etree.tostring(child, pretty_print=True))
                 
             return HttpResponse("Couldn't find item in feed")
         else:
@@ -123,7 +126,8 @@ def fetch_feed(request):
 def delete_item(request):
     form = DeleteItemForm(request.GET)
     if form.is_valid():
-        (identifier,se,rv) = cli.get_identifier(form)
+        (identifier,se,rv) = cli.get_identifier(form.cleaned_data['path'],
+                                                form.cleaned_data['item'])
         if rv == 0:
             print 'ID', identifier
             (so,se,rv) = cli.remove_item(form.cleaned_data['path'], identifier)
