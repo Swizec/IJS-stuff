@@ -2,6 +2,7 @@ from django.conf import settings
 import subprocess
 import shlex
 import unicodedata
+import json
 from os.path import abspath
 
 from JSI.ProviderToolbox.conf import settings as pt_settings
@@ -52,6 +53,15 @@ def get_identifier(path, item):
            path,
            item)
     return command(asciify(c), env={"PYTHONPATH":pt_settings.PT_IMPORT_DIR})
+
+def get_info(path):
+    c = "python %s -f '%s' --json" \
+        % (pt_settings.PT_DIR + "/tools/managefeed.py",
+           path)
+    (so,se,rv) = command(asciify(c), env={"PYTHONPATH":pt_settings.PT_IMPORT_DIR})
+    so = json.loads(so) if rv == 0 else so
+    return (so,se,rv)
+        
 
 def remove_item(path, item):
     c = "python %s -d '%s' -r '%s'" \

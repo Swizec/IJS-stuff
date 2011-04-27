@@ -57,7 +57,7 @@
     {% endif %}
 
     {% if 't' in item.tabs %}
-    <div id="tabs-{{ item.id }}-torrent">
+    <div id="tabs-{{ item.id }}-torrent" path="{{ item.parent }}{{ item.dirpath }}">
       This here is a torrent
     </div>
     {% endif %}

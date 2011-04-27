@@ -138,6 +138,29 @@ function add_list (dir, accordion, tabs) {
 			    alert("Sorry, something went wrong.");
 			}
 		    });
+		}else if (tab[tab.length-1] == 'torrent') {
+		    blockUI('Fetching torrent file');
+
+		    $.ajax({
+			url: '/fetch_torrent/?path='+$panel.attr('path'),
+			dataType: 'text',
+			success: function (data) {
+			    $.unblockUI();
+			    var $pre = $panel.find('.pre');
+			    if ($pre.size() > 0) {
+				$pre.html('<pre>'+htmlentities(data)+'</pre>');
+			    }else{
+				$panel.append(
+				    $('<div></div>').addClass('pre')
+					.html('<pre>'+htmlentities(data)+'</pre>')
+					.css('overflow', 'auto'));
+			    }
+			},
+			error: function (data) {
+			    $.unblockUI();
+			    alert("Sorry, something went wrong.");
+			}
+		    });
 		}
 	    }
 	});

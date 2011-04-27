@@ -121,7 +121,20 @@ def fetch_feed(request):
             return HttpResponse(AtomFeed.objects.get(path).feed)
     else:
         return HttpResponseBadRequest("Expected a path")
-                
+
+def fetch_torrent(request):
+    form = PathForm(request.GET)
+    if form.is_valid():
+        (path, item) = form.cleaned_data['path'].rsplit('/', 1)
+        
+        (info,se,rv) = cli.get_info(path)
+        
+        torrent =  open('/'.join([settings.FEED_DIR, 
+                                  'torrents', 
+                                  info['maps'][item]['torrent']])).read()
+        return HttpResponse(torrent)
+    else:
+        return HttpResponseBadRequest("Expected a path")
 
 def delete_item(request):
     form = DeleteItemForm(request.GET)

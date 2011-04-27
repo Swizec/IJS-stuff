@@ -24,6 +24,7 @@ urlpatterns = patterns('',
     (r'^list_dir/$', 'Browse.views.list_dir'),
     (r'^update_feed/$', 'Browse.views.update_feed'),
     (r'^fetch_feed/$', 'Browse.views.fetch_feed'),
+    (r'^fetch_torrent/$', 'Browse.views.fetch_torrent'),
     (r'^delete_item/$', 'Browse.views.delete_item'),
     (r'^add_item/$', 'Browse.views.add_item'),
 )
