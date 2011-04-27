@@ -61,7 +61,11 @@ def get_info(path):
     (so,se,rv) = command(asciify(c), env={"PYTHONPATH":pt_settings.PT_IMPORT_DIR})
     so = json.loads(so) if rv == 0 else so
     return (so,se,rv)
-        
+
+def get_id(path):
+    (path, item) = path.rsplit('/', 1)
+    (info,se,rv) = get_info(path)
+    return (info['maps'][item]['id'], se, rv)
 
 def remove_item(path, item):
     c = "python %s -d '%s' -r '%s'" \

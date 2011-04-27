@@ -106,15 +106,14 @@ def fetch_feed(request):
             (feed, item) = path.rsplit('/', 1)
             item = item.split('.')[0]
 
-            (identifier,se,rv) = cli.get_identifier(feed, item+'.xml')
+            (id,se,rv) = cli.get_id(path)
             
             tree = etree.fromstring(AtomFeed.objects.get(feed).feed.encode('utf-8'))
             for child in tree:
                 if child.tag == '{http://www.w3.org/2005/Atom}entry':
-                    href = child.find('{http://www.w3.org/2005/Atom}link').attrib.get('href')
-                    part = href.rsplit('/', 1)[1].split('.')[0]
-                    if any([candidate == part for candidate in [item, identifier]]):
-                           return HttpResponse(etree.tostring(child, pretty_print=True))
+                    item_id = child.find('{http://www.w3.org/2005/Atom}id')
+                    if item_id.text.strip() == id:
+                        return HttpResponse(etree.tostring(child, pretty_print=True))
                 
             return HttpResponse("Couldn't find item in feed")
         else:
