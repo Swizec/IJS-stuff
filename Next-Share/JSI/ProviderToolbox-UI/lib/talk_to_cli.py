@@ -46,11 +46,11 @@ def add_item(form):
            form.cleaned_data['title'])
     return command(asciify(c), env={"PYTHONPATH":pt_settings.PT_IMPORT_DIR})
 
-def get_identifier(form):
+def get_identifier(path, item):
     c = "python %s -d '%s' --identifier '%s'" \
         % (pt_settings.PT_DIR + "/tools/managefeed.py",
-           form.cleaned_data['path'],
-           form.cleaned_data['item'])
+           path,
+           item)
     return command(asciify(c), env={"PYTHONPATH":pt_settings.PT_IMPORT_DIR})
 
 def remove_item(path, item):
