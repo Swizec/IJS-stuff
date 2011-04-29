@@ -222,7 +222,7 @@ def list_dir(request):
         return {'dir': os.path.isdir(dir),
                 'dirpath': item,
                 'fresh': item in request.session.get('fresh_items', []),
-                'tabs': ['f', 'v'] if os.path.isdir(dir) else ['f', 't', 'v'],
+                'tabs': ['f', 'v'] if os.path.isdir(dir) else ['f', 'v', 't', 'p'],
                 'name': item,
                 'created_feed': basic_meta.get('location', '').startswith("file://"),
                 'filename': filename,
@@ -285,5 +285,17 @@ def update_feed(request):
             request.session['fresh_items'] = diff['fresh']
         
         return HttpResponse('OK')
+    else:
+        return HttpResponseBadRequest("Expected a path")
+
+
+def content(request):
+    form = PathForm(request.GET)
+    if form.is_valid():
+        (path, item) = form.cleaned_data['path'].rsplit('/', 1)
+        
+        (info,se,rv) = cli.get_info(path)
+        
+        return HttpResponse(open(path+'/'+info['maps'][item]['content'], 'r').read())
     else:
         return HttpResponseBadRequest("Expected a path")

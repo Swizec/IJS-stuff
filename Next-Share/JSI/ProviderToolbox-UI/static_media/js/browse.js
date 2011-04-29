@@ -161,6 +161,11 @@ function add_list (dir, accordion, tabs) {
 			    alert("Sorry, something went wrong.");
 			}
 		    });
+		}else if (tab[tab.length-1] == 'preview') {
+		    $panel.append($('<iframe></iframe>')
+				  .attr('src', '/content/?path='+$panel.attr('path'))
+				  .attr('width', 320)
+				  .attr('height', 240));
 		}
 	    }
 	});

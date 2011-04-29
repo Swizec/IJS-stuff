@@ -27,4 +27,5 @@ urlpatterns = patterns('',
     (r'^fetch_torrent/$', 'Browse.views.fetch_torrent'),
     (r'^delete_item/$', 'Browse.views.delete_item'),
     (r'^add_item/$', 'Browse.views.add_item'),
+    (r'^content/$', 'Browse.views.content'),
 )

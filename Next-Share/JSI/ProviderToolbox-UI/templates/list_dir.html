@@ -50,6 +50,9 @@
       {% if 'v' in item.tabs %}
       <li><a href="#tabs-{{ item.id }}-view">View</a></li>
       {% endif %}
+      {% if 'p' in item.tabs %}
+      <li><a href="#tabs-{{ item.id }}-preview">Preview</a></li>
+      {% endif %}
     </ul>
 
     {% if 'v' in item.tabs %}
@@ -59,6 +62,12 @@
     {% if 't' in item.tabs %}
     <div id="tabs-{{ item.id }}-torrent" path="{{ item.parent }}{{ item.dirpath }}">
       This here is a torrent
+    </div>
+    {% endif %}
+
+    {% if 'p' in item.tabs %}
+    <div id="tabs-{{ item.id }}-preview" path="{{ item.parent }}{{ item.dirpath }}">
+      This here is a preview.
     </div>
     {% endif %}
     
