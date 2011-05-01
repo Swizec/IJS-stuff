@@ -67,7 +67,8 @@
 
     {% if 'p' in item.tabs %}
     <div id="tabs-{{ item.id }}-preview" path="{{ item.parent }}{{ item.dirpath }}">
-      This here is a preview.
+      <p>The preview loads in an iframe hoping your browser knows how
+      to play the file.</p><p>If it doesn't work, try a different browser.</p>
     </div>
     {% endif %}
     
