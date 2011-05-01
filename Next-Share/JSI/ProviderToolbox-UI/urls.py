@@ -5,7 +5,8 @@ from django.conf import settings
 # from django.contrib import admin
 # admin.autodiscover()
 
-urlpatterns = patterns('',
+urlpatterns = patterns(
+    '',
     # Example:
     # (r'^WebUI/', include('WebUI.foo.urls')),
 
@@ -17,7 +18,7 @@ urlpatterns = patterns('',
     # (r'^admin/', include(admin.site.urls)),
 
     (r'^site_media/(?P<path>.*)$', 'django.views.static.serve', {'document_root': settings.MEDIA_ROOT}),
-
+   
     (r'^$', 'Browse.views.begin'),
     (r'^add_feed/$', 'Browse.views.add_feed'),
     (r'^create_feed/$', 'Browse.views.create_feed'),
@@ -27,5 +28,6 @@ urlpatterns = patterns('',
     (r'^fetch_torrent/$', 'Browse.views.fetch_torrent'),
     (r'^delete_item/$', 'Browse.views.delete_item'),
     (r'^add_item/$', 'Browse.views.add_item'),
+    (r'^content/static/(?P<path>.*)$', 'django.views.static.serve', {'document_root': settings.FEED_DIR}),
     (r'^content/$', 'Browse.views.content'),
 )

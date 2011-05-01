@@ -295,7 +295,10 @@ def content(request):
         (path, item) = form.cleaned_data['path'].rsplit('/', 1)
         
         (info,se,rv) = cli.get_info(path)
+
+        path = path.replace(settings.FEED_DIR, "")
         
-        return HttpResponse(open(path+'/'+info['maps'][item]['content'], 'r').read())
+        return HttpResponseRedirect('/content/static/'+path+'/'+info['maps'][item]['content'])
+        #return HttpResponse(open(path+'/'+info['maps'][item]['content'], 'r').read())
     else:
         return HttpResponseBadRequest("Expected a path")
