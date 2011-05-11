@@ -27,7 +27,7 @@ def begin(request):
         feed.channel.description = feed.channel.description.encode('utf-8')
         return {'data': feed,
                 'edit_form': MetaForm(QueryDict(urllib.urlencode(feed.channel)))}
-    
+
     #feeds = map(parse, os.listdir(settings.FEED_DIR))
 
     # TODO this could do with some refactoring too
@@ -37,25 +37,25 @@ def begin(request):
             def rewriteWithNew(xml):
                 rmg = RichMetadataGenerator.getInstance()
                 meta = rmg.getRichMetadata(open(xml, 'r'))
-            
+
                 for key in form.cleaned_data.keys():
                     if key not in ['filename', 'should_cascade']:
                         meta.__getattr__(key)(form.cleaned_data[key])
-                
+
                 f = open(xml, 'w')
                 f.write(rmg.build(meta))
                 f.close()
-              
+
             feed = settings.FEED_DIR+form.cleaned_data['filename']
             rewriteWithNew(feed)
-            
+
             if form.cleaned_data['should_cascade'] == 'True':
                 dir = feed.rsplit('/', 1)[0]
                 for file in os.listdir(dir):
                     if file.endswith(".xml"):
                         rewriteWithNew(dir+file)
-                
-            
+
+
             return HttpResponseRedirect('/')
     else:
         form = AddFeedForm()
@@ -65,7 +65,7 @@ def begin(request):
                'add_form': form,
                'create_form': CreateFeedForm()}
     context.update(csrf(request))
-    
+
     return render_to_response('browse.html', context)
 
 def add_feed(request):
@@ -74,21 +74,21 @@ def add_feed(request):
       proc = os.popen(' && '.join(["export PYTHONPATH=$(pwd)/../../",
                                    "python ../ProviderToolbox/tools/getfeed.py -l '%s'"\
                                    % form.cleaned_data['url']]))
-    
+
       return HttpResponse(proc.read(),
                           mimetype="text")
   else:
       return HttpResponseBadRequest("Wrong data posted")
-    
+
 def create_feed(request):
   form = CreateFeedForm(request.POST)
   if form.is_valid():
       dir = settings.FEED_DIR+"created/"
       if not os.path.isdir(dir):
           os.mkdir(dir)
-      
+
       feed_dir = dir+form.cleaned_data['title'].replace(' ', '_')
-    
+
       (so,se,rv) = cli.create_feed(form, feed_dir)
       if rv == 0:
           return HttpResponseRedirect('/')
@@ -107,14 +107,14 @@ def fetch_feed(request):
             item = item.split('.')[0]
 
             (id,se,rv) = cli.get_id(path)
-            
+
             tree = etree.fromstring(AtomFeed.objects.get(feed).feed.encode('utf-8'))
             for child in tree:
                 if child.tag == '{http://www.w3.org/2005/Atom}entry':
                     item_id = child.find('{http://www.w3.org/2005/Atom}id')
                     if item_id.text.strip() == id:
                         return HttpResponse(etree.tostring(child, pretty_print=True))
-                
+
             return HttpResponse("Couldn't find item in feed")
         else:
             return HttpResponse(AtomFeed.objects.get(path).feed)
@@ -125,11 +125,11 @@ def fetch_torrent(request):
     form = PathForm(request.GET)
     if form.is_valid():
         (path, item) = form.cleaned_data['path'].rsplit('/', 1)
-        
+
         (info,se,rv) = cli.get_info(path)
-        
-        torrent =  open('/'.join([settings.FEED_DIR, 
-                                  'torrents', 
+
+        torrent =  open('/'.join([settings.FEED_DIR,
+                                  'torrents',
                                   info['maps'][item]['torrent']])).read()
         return HttpResponse(torrent)
     else:
@@ -172,21 +172,21 @@ def list_dir(request):
     form = ListDirForm(request.GET)
 
     #TODO: refactor this very fugly section
-  
+
     def get_data(item):
         parent = form.cleaned_data['dir']
         dir = settings.FEED_DIR+parent+"/"+item+"/"
         basic_meta = {}
         rmg = RichMetadataGenerator.getInstance()
-        
+
         if os.path.isdir(dir):
             if '.properties' not in os.listdir(settings.FEED_DIR+item):
                 return None
-        
+
             for line in open(dir+'.properties'):
                 (key, val) = line.split(' = ')
                 basic_meta[key] = val
-          
+
             meta = rmg.getRichMetadata(dir+parent+item+'.xml')
             filename = dir.replace(settings.FEED_DIR, '')+parent+item+'.xml'
             main_meta = True
@@ -196,7 +196,7 @@ def list_dir(request):
             meta = rmg.getRichMetadata(settings.FEED_DIR+parent+"/"+item)
             filename = parent+"/"+item
             main_meta = False
-            
+
         rich_meta = {}
         formdata = {}
 
@@ -230,19 +230,19 @@ def list_dir(request):
                 'rich_meta': rich_meta,
                 'parent': form.cleaned_data['dir'],
                 'item_form': AddItemForm(),
-                'edit_form': MetaForm(QueryDict(urllib.urlencode(formdata)), 
+                'edit_form': MetaForm(QueryDict(urllib.urlencode(formdata)),
                                       main_meta=main_meta),
-                'id': ''.join([alphanum.sub('', parent), 
+                'id': ''.join([alphanum.sub('', parent),
                                alphanum.sub('', item)]).replace('/', '-')}
 
     if form.is_valid():
         dir = form.cleaned_data['dir']
-        items = filter(lambda i: i != None, 
+        items = filter(lambda i: i != None,
                        map(get_data,
                            sorted(os.listdir(settings.FEED_DIR+dir),
                                   key=lambda p: os.path.getmtime(
-                                      ''.join([settings.FEED_DIR, 
-                                               dir, 
+                                      ''.join([settings.FEED_DIR,
+                                               dir,
                                                p])) if dir != '/' else dir.lower(),
                                   reverse=dir != '/')))
 
@@ -283,22 +283,27 @@ def update_feed(request):
         if (datetime.now()-feed.time).seconds > 10:
             diff = feed.update()
             request.session['fresh_items'] = diff['fresh']
-        
+
         return HttpResponse('OK')
     else:
         return HttpResponseBadRequest("Expected a path")
 
 
-def content(request):
+def preview(request):
     form = PathForm(request.GET)
     if form.is_valid():
         (path, item) = form.cleaned_data['path'].rsplit('/', 1)
-        
+
         (info,se,rv) = cli.get_info(path)
 
+        if rv != 0:
+            return HttpResponseServerError("This error usually means path configurations are wrong in ProviderToolbox/conf")
+
         path = path.replace(settings.FEED_DIR, "")
-        
-        return HttpResponseRedirect('/content/static/'+path+'/'+info['maps'][item]['content'])
+
+        return render_to_response('preview.html', mimetype="text/html")
+
+        #return HttpResponseRedirect('/content/static/'+path+'/'+info['maps'][item]['content'])
         #return HttpResponse(open(path+'/'+info['maps'][item]['content'], 'r').read())
     else:
         return HttpResponseBadRequest("Expected a path")

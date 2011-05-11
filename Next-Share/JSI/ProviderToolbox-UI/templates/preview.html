@@ -1,0 +1,105 @@
+<div id="videoContent">
+      <div id="scrollWrapper">
+        <ul>
+          <!-- Home Section -->
+          <li id="video" class="section">
+            <h1>Channel: Slo 1</h1>
+
+            <!-- end #home -->
+            <p><!-- Activate Plugin -->
+			<!-- Activate Plugin -->
+	<script type="text/javascript">
+	if (navigator.appName == "Netscape")
+	{
+		document.write('<span id="wrapper">');
+		document.write('<embed type="application/x-ns-stream"');
+		document.write('name="vlcName"');
+		document.write('id="vlc"');
+		document.write('autoplay="yes" loop="no" width="620" height="380"');
+		document.write('target="/slo1.mpegts.tstream" />');
+		document.write('</span>');
+	}
+	else
+	{
+		document.write('<div id="wrapper_ie">');
+		document.write('<object classid="clsid:1800B8AF-4E33-43C0-AFC7-894433C13538" ');
+		document.write('codebase="http://trial.p2p-next.org/download/SwarmPlugin_IE_1.0.2rc17.cab"');
+		document.write('width="620" height="380" id="vlc" name="vlc" events="True" target="">');
+		document.write('<param name="Src" value="/slo1.mpegts.tstream" />');
+		document.write('<param name="ShowDisplay" value="True" />');
+		document.write('<param name="Loop" value="False" />');
+		document.write('<param name="AutoPlay" value="True" />');
+		document.write('<param name="Toolbar" value="True" />');
+		document.write('</object>');
+		document.write('</div>');
+	}
+	</script>
+
+	<!-- Line for BackgroundProcess status output -->
+
+	<p class="status" id="p2pstatusline"></p>
+
+
+	<script language="Javascript">
+	var vlc = document.getElementById("vlc");
+
+	function debugonclick()
+	{
+	    newwindow2=window.open('','name','height=400,width=640,scrollbars=1,resizable=1');
+	    var tmp = newwindow2.document;
+	    tmp.write('<html><head><title>popup</title>');
+	    tmp.write('</head><body><p>SwarmPlugin Debugging Popup</p>');
+
+	    tmp.write("Number of log messages "+document.vlc.log.messages.count);
+
+	    var iter = document.vlc.log.messages.iterator();
+	    while(iter.hasNext)
+	    {
+	        msg = iter.next();
+	        tmp.write(msg.message+"<br>");
+	    }
+
+	    tmp.write('</body></html>');
+	    tmp.close();
+
+	}
+
+
+	function updatep2pstatus()
+	{
+	    if (document.vlc.input != null)
+	    {
+	        line = document.vlc.input.p2pstatus
+	        var p2pstatusline = document.getElementById("p2pstatusline");
+	        p2pstatusline.innerHTML = line
+	    }
+	}
+
+
+
+	function activatePeriodicReport()
+	{
+	    setInterval(updatep2pstatus,100);
+	}
+
+
+	function seek(percentage)
+	{
+	    document.vlc.input.position = percentage
+	}
+	</script>
+
+	<script language="Javascript">
+	// Somehow calling setInterval only works in Firefox when called from
+	// a function that is triggered externally???
+	activatePeriodicReport();
+	</script>
+            <input value="Play" onclick="document.vlc.playlist.play();" type="button"> <input value="Pause" onclick="document.vlc.playlist.togglePause();" type="button">	<input value="Stop" onclick="document.vlc.playlist.stop();" type="button"> <input value="Fullscreen" onclick="document.vlc.video.toggleFullscreen();" type="button">
+            </p>
+          </li>
+        </ul>
+
+        <!-- end #scrollWrapper -->
+      </div>
+      <!-- end #content -->
+    </div>

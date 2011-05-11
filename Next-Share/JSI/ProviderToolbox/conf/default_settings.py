@@ -8,7 +8,7 @@ from os.path import sep, dirname, abspath, split
 # directory per feed
 #MEDIA_ROOT = '/media/external'
 MEDIA_ROOT = '/home/swizec/Documents/freelancing/IJS-stuff/Next-Share/JSI/feeds/'
-#MEDIA_ROOT = '/Users/Swizec/Documents/freelancing/IJS-stuff/Next-Share/JSI/feeds/'
+MEDIA_ROOT = '/Users/Swizec/Documents/freelancing/IJS-stuff/Next-Share/JSI/feeds/'
 
 # The directory where all torrent files will be stored for the time of
 # usage. If the torrent files are to be passed to the user through web
@@ -37,7 +37,7 @@ SHADOW_DIR = MEDIA_ROOT + sep + "shadow"
 
 # Absolute publishing link for the feeds. The link will appear
 # prepended to all your publications in feeds if not defined per feed
-# via command line. 
+# via command line.
 CONTENT_PUBLISHING_LINK = "http://stream.e5.ijs.si/publish"
 
 # Absolute export link for the feed links. This link will be prepend
@@ -45,7 +45,7 @@ CONTENT_PUBLISHING_LINK = "http://stream.e5.ijs.si/publish"
 # link is not defined per feed via command line.
 EXPORT_FEED_LINK = "http://stream.e5.ijs.si/feeds"
 
-# Controls the torrent relative link to publishing link in exports 
+# Controls the torrent relative link to publishing link in exports
 EXPORT_TORRENT_LINK = 'torrents'
 # Controls if the the feed name is appended to the publishing link for
 # XML exports
@@ -65,7 +65,7 @@ LOG_LEVEL = logging.INFO
 
 # Besides logging to consol log to syslog? Watch for unicode character
 # going to the syslog, TODO
-LOG_SYSLOG = True 
+LOG_SYSLOG = True
 
 # Shut up other loggers in the system
 SHUT_UP_OTHER_LOGGERS = True
@@ -181,7 +181,7 @@ LIVE_MMM_ITEM = {"title": "setTitleEpisodeTitle",
                  "scheduled": None,
                  "live_duration": "setDuration"}
 
-    
+
 MEDIA_RM_MAP = {"container": "setFileFormat",
                 "duration": "setDuration",
                 "start": None,
@@ -304,7 +304,7 @@ CATEGORY_TV = "tv"
 CATEGORY_RADIO = "radio"
 CATEGORY_DISCOVERY = "discovery"
 P2P_NEXT_IMAGE = "http://stream.e5.ijs.si/image/p2p-next-logo.jpg"
-RTV_SLO = "rtv-slo" 
+RTV_SLO = "rtv-slo"
 RTV_SLO_MMC = RTV_SLO + "-mmc"
 RELATED_RTV_SLO_MMC = URN + RTV_SLO_MMC + ":"
 PUBLISHER_RTV_SLO_MMC = "MMC RTV Slo"
@@ -342,11 +342,11 @@ BUDDYCAST = True
 START_RECOMMENDER = False
 DOWNLOAD_HELP = True
 TORRENT_COLLECTING = True
-TORRENT_CHECKING = True 
+TORRENT_CHECKING = True
 DIALBACK = False
-SOCIAL_NETWORKING = False 
+SOCIAL_NETWORKING = False
 REMOTE_QUERY = False
-BARTERCAST = False 
+BARTERCAST = False
 INTERNAL_TRACKER = True
 DHT = True
 SUPERPEER = False

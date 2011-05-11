@@ -10,7 +10,7 @@ urlpatterns = patterns(
     # Example:
     # (r'^WebUI/', include('WebUI.foo.urls')),
 
-    # Uncomment the admin/doc line below and add 'django.contrib.admindocs' 
+    # Uncomment the admin/doc line below and add 'django.contrib.admindocs'
     # to INSTALLED_APPS to enable admin documentation:
     # (r'^admin/doc/', include('django.contrib.admindocs.urls')),
 
@@ -18,7 +18,7 @@ urlpatterns = patterns(
     # (r'^admin/', include(admin.site.urls)),
 
     (r'^site_media/(?P<path>.*)$', 'django.views.static.serve', {'document_root': settings.MEDIA_ROOT}),
-   
+
     (r'^$', 'Browse.views.begin'),
     (r'^add_feed/$', 'Browse.views.add_feed'),
     (r'^create_feed/$', 'Browse.views.create_feed'),
@@ -29,5 +29,5 @@ urlpatterns = patterns(
     (r'^delete_item/$', 'Browse.views.delete_item'),
     (r'^add_item/$', 'Browse.views.add_item'),
     (r'^content/static/(?P<path>.*)$', 'django.views.static.serve', {'document_root': settings.FEED_DIR}),
-    (r'^content/$', 'Browse.views.content'),
+    (r'^preview/$', 'Browse.views.preview'),
 )

@@ -23,7 +23,7 @@ $(function(){
 	    });
 	});
     });
-    
+
     $('.update').live('click', function (event) {
 	var $this = $(this);
 	var $meta = $this.parent().parent().parent();
@@ -37,12 +37,12 @@ $(function(){
 	    dataType: 'text',
 	    success: function (data) {
 		$.unblockUI();
-		
+
 		add_list(path, $meta.attr('tabs'), '#'+$meta.attr('id'));
 	    },
 	});
     });
-    
+
     $('.delete').live('click', function () {
 	var $this = $(this);
 	var path = $this.attr('path');
@@ -73,7 +73,7 @@ $(function(){
 });
 
 function make_accordion(selector) {
-    $(selector).accordion({ header: "h3", 
+    $(selector).accordion({ header: "h3",
 			    collapsible: true,
 			    autoHeight: false,
 			    change: function (event, ui) {
@@ -92,14 +92,14 @@ function make_accordion(selector) {
 function blockUI(s) {
     $.blockUI({
 	message: s,
-	css: { 
-	    border: 'none', 
-	    padding: '15px', 
-	    backgroundColor: '#000', 
-	    '-webkit-border-radius': '10px', 
-	    '-moz-border-radius': '10px', 
-	    opacity: .5, 
-	    color: '#fff' 
+	css: {
+	    border: 'none',
+	    padding: '15px',
+	    backgroundColor: '#000',
+	    '-webkit-border-radius': '10px',
+	    '-moz-border-radius': '10px',
+	    opacity: .5,
+	    color: '#fff'
 	} });
 }
 
@@ -109,7 +109,7 @@ function add_list (dir, accordion, tabs) {
     $.get('/list_dir/', {'dir': dir}, function (data) {
 	$(accordion).accordion('destroy').append(data);
 	make_accordion(accordion);
-	
+
 	$("[class*='tabbed']").tabs({
 	    select: function (event, ui) {
 		var tab = ui.tab.hash.split('-');
@@ -162,10 +162,12 @@ function add_list (dir, accordion, tabs) {
 			}
 		    });
 		}else if (tab[tab.length-1] == 'preview') {
-		    $panel.append($('<iframe></iframe>')
-				  .attr('src', '/content/?path='+$panel.attr('path'))
-				  .attr('width', 320)
-				  .attr('height', 240));
+		    if ($panel.find('iframe').size() < 1) {
+			$panel.append($('<iframe></iframe>')
+				      .attr('src', '/preview/?path='+$panel.attr('path'))
+				      .attr('width', 460)
+				      .attr('height', 320));
+		    }
 		}
 	    }
 	});
