@@ -28,6 +28,6 @@ urlpatterns = patterns(
     (r'^fetch_torrent/$', 'Browse.views.fetch_torrent'),
     (r'^delete_item/$', 'Browse.views.delete_item'),
     (r'^add_item/$', 'Browse.views.add_item'),
-    (r'^content/static/(?P<path>.*)$', 'django.views.static.serve', {'document_root': settings.FEED_DIR}),
+    (r'^tstreams/(?P<path>.*)$', 'django.views.static.serve', {'document_root': settings.FEED_DIR}),
     (r'^preview/$', 'Browse.views.preview'),
 )

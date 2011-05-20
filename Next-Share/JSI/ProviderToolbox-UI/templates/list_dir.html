@@ -35,7 +35,7 @@
      </a>
   </h3>
   {% endif %}
-  
+
   <div class="panel tabbed" id="tabs-{{ item.id }}">
     <ul>
       {% if 'f' in item.tabs %}
@@ -67,11 +67,9 @@
 
     {% if 'p' in item.tabs %}
     <div id="tabs-{{ item.id }}-preview" path="{{ item.parent }}{{ item.dirpath }}">
-      <p>The preview loads in an iframe hoping your browser knows how
-      to play the file.</p><p>If it doesn't work, try a different browser.</p>
-    </div>
+   </div>
     {% endif %}
-    
+
     {% if 'f' in item.tabs %}
     <div id="tabs-{{ item.id }}-feed">
       <input type="button" value="Edit" class="edit" />
@@ -93,7 +91,7 @@
         <input type="submit" value="Cancel" class="cancel" />
         {% csrf_token %}
       </form>
-      
+
       <div class="display">
         <img src="{{ item.basic_meta.image }}" class="feed-image" />
         <ul class="meta-data">
@@ -114,7 +112,7 @@
           {% endfor %}
         </ul>
       </div>
-      
+
       {% if item.dir %}
       <div id="accordion-{{ item.id }}-inner"></div>
       <script>
@@ -130,8 +128,8 @@
     {% if 'd' in item.tabs %}
     <div id="tabs-{{ item.id }}-didbase"></div>
     {% endif %}
-    
+
   </div>
 </div>
 {% endfor %}
- 
+

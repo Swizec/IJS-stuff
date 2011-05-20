@@ -1,11 +1,6 @@
 <div id="videoContent">
       <div id="scrollWrapper">
-        <ul>
           <!-- Home Section -->
-          <li id="video" class="section">
-            <h1>Channel: Slo 1</h1>
-
-            <!-- end #home -->
             <p><!-- Activate Plugin -->
 			<!-- Activate Plugin -->
 	<script type="text/javascript">
@@ -16,7 +11,7 @@
 		document.write('name="vlcName"');
 		document.write('id="vlc"');
 		document.write('autoplay="yes" loop="no" width="620" height="380"');
-		document.write('target="/slo1.mpegts.tstream" />');
+		document.write('target="{{ stream }}" />');
 		document.write('</span>');
 	}
 	else
@@ -25,7 +20,7 @@
 		document.write('<object classid="clsid:1800B8AF-4E33-43C0-AFC7-894433C13538" ');
 		document.write('codebase="http://trial.p2p-next.org/download/SwarmPlugin_IE_1.0.2rc17.cab"');
 		document.write('width="620" height="380" id="vlc" name="vlc" events="True" target="">');
-		document.write('<param name="Src" value="/slo1.mpegts.tstream" />');
+		document.write('<param name="Src" value="{{ stream }}" />');
 		document.write('<param name="ShowDisplay" value="True" />');
 		document.write('<param name="Loop" value="False" />');
 		document.write('<param name="AutoPlay" value="True" />');
@@ -96,9 +91,6 @@
 	</script>
             <input value="Play" onclick="document.vlc.playlist.play();" type="button"> <input value="Pause" onclick="document.vlc.playlist.togglePause();" type="button">	<input value="Stop" onclick="document.vlc.playlist.stop();" type="button"> <input value="Fullscreen" onclick="document.vlc.video.toggleFullscreen();" type="button">
             </p>
-          </li>
-        </ul>
-
         <!-- end #scrollWrapper -->
       </div>
       <!-- end #content -->

@@ -165,8 +165,8 @@ function add_list (dir, accordion, tabs) {
 		    if ($panel.find('iframe').size() < 1) {
 			$panel.append($('<iframe></iframe>')
 				      .attr('src', '/preview/?path='+$panel.attr('path'))
-				      .attr('width', 460)
-				      .attr('height', 320));
+				      .attr('width', 620)
+				      .attr('height', 520));
 		    }
 		}
 	    }

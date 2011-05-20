@@ -303,7 +303,12 @@ def preview(request):
 
         path = path.replace(settings.FEED_DIR, "")
 
-        return render_to_response('preview.html', mimetype="text/html")
+        stream =  '/'.join(['', 'tstreams', 'torrents',
+                            info['maps'][item]['torrent']])
+
+        print stream
+
+        return render_to_response('preview.html', {'stream': stream}, mimetype="text/html")
 
         #return HttpResponseRedirect('/content/static/'+path+'/'+info['maps'][item]['content'])
         #return HttpResponse(open(path+'/'+info['maps'][item]['content'], 'r').read())
