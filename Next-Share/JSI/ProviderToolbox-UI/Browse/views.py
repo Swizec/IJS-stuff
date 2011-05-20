@@ -71,11 +71,12 @@ def begin(request):
 def add_feed(request):
   form = AddFeedForm(request.POST)
   if form.is_valid():
-      proc = os.popen(' && '.join(["export PYTHONPATH=$(pwd)/../../",
-                                   "python ../ProviderToolbox/tools/getfeed.py -l '%s'"\
-                                   % form.cleaned_data['url']]))
+      (so,se,rv) = cli.add_feed(form)
 
-      return HttpResponseRedirect('/')
+      if rv == 0:
+          return HttpResponseRedirect('/')
+      else:
+          return HttpResponse("Something went wrong")
   else:
       return HttpResponseBadRequest("Wrong data posted")
 
