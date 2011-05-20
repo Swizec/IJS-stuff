@@ -75,8 +75,7 @@ def add_feed(request):
                                    "python ../ProviderToolbox/tools/getfeed.py -l '%s'"\
                                    % form.cleaned_data['url']]))
 
-      return HttpResponse(proc.read(),
-                          mimetype="text")
+      return HttpResponseRedirect('/')
   else:
       return HttpResponseBadRequest("Wrong data posted")
 
@@ -140,8 +139,10 @@ def delete_item(request):
     if form.is_valid():
         (identifier,se,rv) = cli.get_identifier(form.cleaned_data['path'],
                                                 form.cleaned_data['item'])
+
+        print "IDDDD", identifier
+
         if rv == 0:
-            print 'ID', identifier
             (so,se,rv) = cli.remove_item(form.cleaned_data['path'], identifier)
             if rv == 0:
                 return HttpResponse('OK')
